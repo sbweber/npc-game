@@ -26,19 +26,6 @@
 
   class Tile
   {
-  protected:
-    int x;  // tiles now know where they are in a terrain.
-    int y;
-    tileType type;
-    bool isPassable;
-            // tile can be entered. May change later to enterable from each side.
-    Sprite* sprite;  // Sprite currently on the tile
-    Tile* E;
-    Tile* N;  // adjacent tiles
-    Tile* S;  // to the North, South, West, and East
-    Tile* W;  // aka Up, Down, Left, Right
-    double angle;  // for sprite rotation
-    SDL_RendererFlip flip;  // for sprite flipping
   public:
     Tile(tileType t = VOID);
     void connectTile(dir d, Tile* t);
@@ -56,6 +43,19 @@
     void setPos(int xPos, int yPos);
     void setSprite(Sprite* u);
     void setType(tileType t);
+  protected:
+    int x;  // tiles now know where they are in a terrain.
+    int y;
+    tileType type;
+    bool isPassable;
+            // tile can be entered. May change later to enterable from each side.
+    Sprite* sprite;  // Sprite currently on the tile
+    Tile* E;
+    Tile* N;  // adjacent tiles
+    Tile* S;  // to the North, South, West, and East
+    Tile* W;  // aka Up, Down, Left, Right
+    double angle;  // for sprite rotation
+    SDL_RendererFlip flip;  // for sprite flipping
   };
 
 #endif

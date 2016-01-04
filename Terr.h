@@ -10,9 +10,6 @@
 
   class Terr
   {  // note: all maps currently must be rectangles.
-    vector< vector<Tile*> > map;
-    int w;  // map width (in tiles)
-    int h;  // map height (in tiles)
   public:
     Terr(const string &str = "");
             // calls loadMap unless the string has length 0
@@ -22,6 +19,10 @@
             // returns a pointer to the tile in position map[i][j]
     int getWidth();
     void loadMap(const string &str);
+  protected:
+    vector< vector<Tile*> > map;
+    int w;  // map width (in tiles)
+    int h;  // map height (in tiles)
   };  // class Terr
 
 #endif

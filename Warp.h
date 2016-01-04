@@ -7,6 +7,7 @@
 
   class Warp : public Tile
   {
+  protected:
     string newTerr;
             // Important information: Name of new Terr to load, position on
             // new Terr to place character

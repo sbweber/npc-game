@@ -20,11 +20,6 @@
 
   class Sprite
   {
-    SDL_Texture *spriteSheet;
-    spriteType sprite;
-    Tile* pos;  // pointer to the tile currently containing this Unit
-    string type;
-    dir facing;  // direction the unit/sprite is currently facing
   public:
     Sprite(SDL_Renderer *ren, const string &spriteFile);
             // all units MUST have a spritesheet specified
@@ -37,6 +32,12 @@
     void setSprite(spriteType st);
     void setTile(Tile* tile);
     void setType(const string &str);
+  protected:
+    SDL_Texture *spriteSheet;
+    spriteType sprite;
+    Tile* pos;  // pointer to the tile currently containing this Unit
+    string type;
+    dir facing;  // direction the unit/sprite is currently facing
   };
 
 #endif
