@@ -1,8 +1,9 @@
-//Samuel Weber
+// Samuel Weber
 
 #include "Button.h"
 
-Button::Button(SDL_Renderer *ren, const string &file, int x, int y, int w, int h, TTF_Font *font, const string &str)
+Button::Button(SDL_Renderer *ren, const string &file, int x, int y, int w,
+        int h, TTF_Font *font, const string &str)
 {
   button.x = x;
   button.y = y;
@@ -13,13 +14,13 @@ Button::Button(SDL_Renderer *ren, const string &file, int x, int y, int w, int h
     text = renderText(ren, font, str);
   else
     text = NULL;
-}//Button::Button(const string &str, int x, int y, int w, int h)
+}  // Button constructor
 
 Button::~Button()
 {
   SDL_DestroyTexture(pic);
   SDL_DestroyTexture(text);
-}//Button::~Button()
+}  // Button::~Button()
 
 bool Button::buttonClick(SDL_MouseButtonEvent &click)
 {
@@ -28,7 +29,8 @@ bool Button::buttonClick(SDL_MouseButtonEvent &click)
   SDL_MouseButtonEvent release;
   if (click.state == SDL_RELEASED)
     return false;
-  if ((click.x >= button.x) && (click.x <= (button.x + button.w)) && (click.y >= button.y) && (click.y <= (button.y + button.h)))
+  if ((click.x >= button.x) && (click.x <= (button.x + button.w)) &&
+          (click.y >= button.y) && (click.y <= (button.y + button.h)))
   {
     while (cont)
     {
@@ -38,21 +40,22 @@ bool Button::buttonClick(SDL_MouseButtonEvent &click)
         {
           release = e.button;
           cont = false;
-        }//wait for event == mousebuttonup
-      }//wait for event
-    }//loop while waiting
-  }//if mousebuttondown on button
+        }  // wait for event == mousebuttonup
+      }  // wait for event
+    }  // loop while waiting
+  }  // if mousebuttondown on button
   else
     return false; //did not click on button
-  if ((release.x >= button.x) && (release.x <= (button.x + button.w)) && (release.y >= button.y) && (release.y <= (button.y + button.h)))
+  if ((release.x >= button.x) && (release.x <= (button.x + button.w)) &&
+          (release.y >= button.y) && (release.y <= (button.y + button.h)))
     return true;
   return false;
-}//bool buttonClick(SDL_Rect &button, SDL_MouseButtonEvent &click)
+}  // bool buttonClick(SDL_Rect &button, SDL_MouseButtonEvent &click)
 
 SDL_Texture* Button::getPic()
 {
   return pic;
-}//SDL_Texture* Button::getPic()
+}  // SDL_Texture* Button::getPic()
 
 void Button::render(SDL_Renderer *ren)
 {
@@ -61,5 +64,5 @@ void Button::render(SDL_Renderer *ren)
   renderTexture(pic, ren, SCREEN_WIDTH / 2 - 120, 300, &clips[0]);
   if (text)
     renderTexture(text, ren, button);
-}//void Button::render(SDL_Renderer *ren)
+}  // void Button::render(SDL_Renderer *ren)
 

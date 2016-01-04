@@ -1,14 +1,14 @@
-//Samuel Weber
+// Samuel Weber
 
 #include "Keybind.h"
 
-//debug key commands
+// debug key commands
 SDL_Keysym stateBattle;
 SDL_Keysym stateMap1;
 SDL_Keysym stateMap2;
 SDL_Keysym stateRebind;
 SDL_Keysym stateTitle;
-//permanent key commands
+// permanent key commands
 SDL_Keysym stateQuit;
 SDL_Keysym back;
 SDL_Keysym dirUp;
@@ -22,17 +22,17 @@ bool operator==(const SDL_Keysym &lhs, const SDL_Keysym &rhs)
   if (lhs.sym == rhs.sym /*&& lhs.mod == rhs.mod*/)
     return true; //only checks keycode and keymod, and currently ignores keymod
   return false;
-}//bool operator==(const SDL_Keysym &lhs, const SDL_Keysym &rhs)
+}  // bool operator==(const SDL_Keysym &lhs, const SDL_Keysym &rhs)
 
 void loadKeys()
 {
-  //debug key commands
+  // debug key commands
   stateBattle.sym = SDLK_f;
   stateMap1.sym = SDLK_1;
   stateMap2.sym = SDLK_2;
   stateRebind.sym = SDLK_9;
   stateTitle.sym = SDLK_0;
-  //permanent key commands
+  // permanent key commands
   stateQuit.sym = SDLK_F4;
   stateQuit.mod = KMOD_ALT;
   back.sym = SDLK_ESCAPE;
@@ -41,10 +41,10 @@ void loadKeys()
   dirLeft.sym = SDLK_LEFT;
   dirRight.sym = SDLK_RIGHT;
   interact.sym = SDLK_z;
-}//void loadKeys()
+}  // void loadKeys()
 
 void rebind(SDL_Keysym &keytype, SDL_Keysym newkey)
 {
   keytype = newkey;
-}//void rebind(SDL_Keycode &keytype, SDL_Keycode newkey)
+}  // void rebind(SDL_Keycode &keytype, SDL_Keycode newkey)
 

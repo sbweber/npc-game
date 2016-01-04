@@ -1,4 +1,4 @@
-//Samuel Weber
+// Samuel Weber
 
 #include "Tile.h"
 
@@ -14,7 +14,7 @@ Tile::Tile(tileType t)
   E = NULL;
   angle = 0;
   flip = SDL_FLIP_NONE;
-}//Tile::Tile(tileType t)
+}  // Tile::Tile(tileType t)
 
 void Tile::connectTile(dir d, Tile* t)
 {
@@ -34,28 +34,28 @@ void Tile::connectTile(dir d, Tile* t)
     break;
   default:
     break;
-  }//set tile pointer for correct direction
-}//void Tile::connectTile(dir d, Tile* t)
+  }  // set tile pointer for correct direction
+}  // void Tile::connectTile(dir d, Tile* t)
 
 double Tile::getAngle()
 {
   return angle;
-}//double Tile::getAngle()
+}  // double Tile::getAngle()
 
 SDL_RendererFlip Tile::getFlip()
 {
   return flip;
-}//SDL_RendererFlip Tile::getFlip()
+}  // SDL_RendererFlip Tile::getFlip()
 
 bool Tile::getIsPassable()
 {
   return isPassable;
-}//bool Tile::getIsPassable()
+}  // bool Tile::getIsPassable()
 
 Sprite* Tile::getSprite()
 {
   return sprite;
-}//Sprite* Tile::getSprite()
+}  // Sprite* Tile::getSprite()
 
 Tile* Tile::getTile(dir d)
 {
@@ -76,59 +76,61 @@ Tile* Tile::getTile(dir d)
   default:
     break;
   }
-  return NULL; //should be impossible to get here
-}//Tile* Tile::getTile(dir d)
+  return NULL;  // should be impossible to get here
+}  // Tile* Tile::getTile(dir d)
 
 tileType Tile::getType()
 {
   return type;
-}//tileType Tile::getType()
+}  // tileType Tile::getType()
 
 int Tile::getX()
 {
   return x;
-}//int Tile::getX()
+}  // int Tile::getX()
 
 int Tile::getY()
 {
   return y;
-}//int Tile::getY()
+}  // int Tile::getY()
 
 bool Tile::isOccupied()
 {
   if (sprite)
     return true;
   return false;
-}//bool Tile::isOccupied()
+}  // bool Tile::isOccupied()
 
 void Tile::setAngle(double a)
 {
   angle = a;
-}//void Tile::setAngle(double a)
+}  // void Tile::setAngle(double a)
 
 void Tile::setFlip(SDL_RendererFlip f)
 {
   flip = f;
-}//void Tile::setFlip(SDL_RendererFlip f)
+}  // void Tile::setFlip(SDL_RendererFlip f)
 
 void Tile::setPos(int xPos, int yPos)
 {
   x = xPos;
   y = yPos;
-}//void Tile::setPos(int xPos, int yPos)
+}  // void Tile::setPos(int xPos, int yPos)
 
 void Tile::setSprite(Sprite* u)
 {
-  sprite = u; //tile thinks the unit is there, but unit may not know it's on that tile!
-}//void Tile::setUnit(Unit* u)
+  sprite = u;
+  // tile thinks the unit is there, but unit may not know it's on that tile!
+}  // void Tile::setUnit(Unit* u)
 
 void Tile::setType(tileType t)
 {
   type = t;
-  //move the following into a resource file with information about the various tile types eventually
+  // move the following into a resource file with information about the
+  // various tile types eventually
   if (type == VOID)
     isPassable = false;
   else
     isPassable = true;
-}//void Tile::setType(tileType t)
+}  // void Tile::setType(tileType t)
 

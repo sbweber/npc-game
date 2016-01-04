@@ -1,4 +1,4 @@
-//Samuel Weber
+// Samuel Weber
 
 #ifndef SPRITE_H
   #define SPRITE_H
@@ -15,17 +15,19 @@
     DOWN,
     LEFT,
     RIGHT
-  };//spritesheets for characters always arranged in the same manner, although some may end sooner than others
+  };  // spritesheets for characters always arranged in the same manner,
+      // although some may end sooner than others
 
   class Sprite
   {
     SDL_Texture *spriteSheet;
     spriteType sprite;
-    Tile* pos; //pointer to the tile currently containing this Unit
+    Tile* pos;  // pointer to the tile currently containing this Unit
     string type;
-    dir facing; //direction the unit/sprite is currently facing
+    dir facing;  // direction the unit/sprite is currently facing
   public:
-    Sprite(SDL_Renderer *ren, const string &spriteFile); //all units MUST have a spritesheet specified
+    Sprite(SDL_Renderer *ren, const string &spriteFile);
+            // all units MUST have a spritesheet specified
     ~Sprite();
     Tile* getPos();
     spriteType getSprite();

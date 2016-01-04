@@ -1,10 +1,11 @@
-//Samuel Weber
+// Samuel Weber
 
 #ifndef INCLUDE_H
   #define INCLUDE_H
 
-  //c++ core includes
-  #include <cstddef> //implicitly added on non-windows machines, doesn't hurt to manually add
+  // c++ core includes
+  #include <cstddef>
+  // implicitly added on non-windows machines, doesn't hurt to manually add
   #include <ctime>
   #include <iostream>
   #include <fstream>
@@ -12,12 +13,12 @@
   #include <string>
   #include <vector>
 
-  //SDL includes
+  // SDL includes
   #include <SDL2/SDL.h>
   #include <SDL2_image/SDL_image.h>
   #include <SDL2_ttf/SDL_ttf.h>
 
-  //global constants
+  // global constants
   const int SCREEN_WIDTH = 640;
   const int SCREEN_HEIGHT = 480;
   const int TILE_SIZE = 32;
@@ -44,11 +45,12 @@
     TITLE
   };
 
-  //Globals.cpp
+  // Globals.cpp
   void logSDLError(const string &msg, ostream &os = cerr);
   void pressAnyKey();
   const long int rng(long int min, long int max);
-  void quit(const string err = "", int errtype = -1, SDL_Renderer *ren = nullptr, SDL_Window *win = nullptr);
+  void quit(const string err = "", int errtype = -1,
+          SDL_Renderer *ren = nullptr, SDL_Window *win = nullptr);
 
 #endif
 

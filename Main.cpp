@@ -1,3 +1,4 @@
+// Samuel Weber
 
   #include "Draw.h"
   #include "EventLoops.h"
@@ -8,13 +9,15 @@
 
 int main(int argc, char **argv)
 {
-  //Create window, do basic setup
+  // Create window, do basic setup
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     quit("SDL_Init", 1);
-  SDL_Window *win = SDL_CreateWindow("NPC-Game", 10, 30, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+  SDL_Window *win = SDL_CreateWindow("NPC-Game", 10, 30, SCREEN_WIDTH,
+          SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
   if (win == nullptr)
     quit("SDL_CreateWindow", 2);
-  SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  SDL_Renderer *ren = SDL_CreateRenderer(win, -1,
+          SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (ren == nullptr)
     quit("SDL_CreateRenderer", 3);
   if (TTF_Init() != 0)
@@ -23,11 +26,11 @@ int main(int argc, char **argv)
   if (font == nullptr)
     quit("TTF_OpenFont", 5);
 
-  //SDL vars
+  // SDL vars
   SDL_Event e;
   bool quit = false;
 
-  //backend vars
+  // backend vars
   Terr* terr = new Terr("");
   Party* party = new Party(ren);
   Sprite* npc = new Sprite(ren, "npc.png");
@@ -35,7 +38,7 @@ int main(int argc, char **argv)
   npc->setType("test");
   gameState state = TITLE;
 
-  //spritesheets
+  // spritesheets
   SDL_Texture *tiles = loadTexture("tiles.png", ren);
 
   loadKeys();
@@ -56,5 +59,5 @@ int main(int argc, char **argv)
   IMG_Quit();
   SDL_Quit();
   return 0;
-}//int main(int argc, char **argv)
+}  // int main(int argc, char **argv)
 
