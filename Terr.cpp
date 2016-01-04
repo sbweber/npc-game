@@ -36,7 +36,7 @@ void Terr::loadMap(const string &str)
 {
   ifstream file;
   char c;
-  file.open(str, ifstream::in);
+  file.open(("resources/"+str), ifstream::in);
   if (!file.good())
     logSDLError("Map not found."); //error, probably bad filename
 

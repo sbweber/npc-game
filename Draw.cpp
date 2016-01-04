@@ -143,7 +143,7 @@ void getClips(SDL_Rect* clips, int numClips, int rows, int cWidth, int cHeight)
 
 SDL_Texture* loadTexture(const string &file, SDL_Renderer *ren)
 {
-  SDL_Texture *tex = IMG_LoadTexture(ren, file.c_str());
+  SDL_Texture *tex = IMG_LoadTexture(ren, ("resources/"+file).c_str());
   if (tex == nullptr)
     quit("LoadTexture");
   return tex;
