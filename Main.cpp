@@ -14,7 +14,7 @@ int main(int argc, char **argv)
     quit("SDL_CreateRenderer", 3);
   if (TTF_Init() != 0)
     quit("TTF_Init", 4);
-  TTF_Font *font = TTF_OpenFont("ClearSans-Light.ttf", 20);
+  TTF_Font *font = TTF_OpenFont("resources/ClearSans-Light.ttf", 20);
   if (font == nullptr)
     quit("TTF_OpenFont", 5);
 
