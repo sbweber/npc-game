@@ -1,4 +1,4 @@
-//Samuel Weber
+// Samuel Weber
 
 #ifndef UNIT_H
   #define UNIT_H

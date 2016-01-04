@@ -1,4 +1,4 @@
-//Samuel Weber
+// Samuel Weber
 
 #include "Terr.h"
 
@@ -7,43 +7,44 @@ Terr::Terr(const string &str)
   w = 0;
   h = 0;
   if (str.length())
-    loadMap(str); //if string length is 0, there's no map to load.
-}//Terr::Terr(string str)
+    loadMap(str);  // if string length is 0, there's no map to load.
+}  // Terr::Terr(string str)
 
 Terr::~Terr()
 {
   for (int i = 0; i < w; i++)
     for (int j = 0; j < h; j++)
       delete(map[i][j]);
-}//Terr::~Terr()
+}  // Terr::~Terr()
 
 int Terr::getHeight()
 {
   return h;
-}//int Terr::getHeight()
+}  // int Terr::getHeight()
 
 Tile* Terr::getTile(int i, int j)
 {
   return map[i][j];
-}//Tile* Terr::getTile(int i, int j)
+}  // Tile* Terr::getTile(int i, int j)
 
 int Terr::getWidth()
 {
   return w;
-}//int Terr::getWidth()
+}  // int Terr::getWidth()
 
 void Terr::loadMap(const string &str)
 {
   ifstream file;
   char c;
-  file.open(str, ifstream::in);
+  file.open(("resources/"+str), ifstream::in);
   if (!file.good())
-    logSDLError("Map not found."); //error, probably bad filename
+    logSDLError("Map not found.");  // error, probably bad filename
 
   file >> w;
   file >> h;
   map.resize(w);
-  for (vector <vector<Tile*> >::iterator itr = map.begin(); itr != map.end(); itr++)
+  for (vector <vector<Tile*> >::iterator itr = map.begin(); itr != map.end();
+          itr++)
     itr->resize(h);
   for (int i = 0; i < w; i++)
     for (int j = 0; j < h; j++)
@@ -60,14 +61,17 @@ void Terr::loadMap(const string &str)
         map[i][j]->connectTile(NORTH, map[i][j - 1]);
       if (j < (h - 1))
         map[i][j]->connectTile(SOUTH, map[i][j + 1]);
-    }//assumes a rectangular map
+    }  // assumes a rectangular map
 
-  for (int j = 0; j < h; j++) //intentionally nesting like this, despite slower loop, because map is currently read in that manner.
+  // intentionally nesting like this, despite slower loop, because map is
+  // currently read in that manner. Due to small maps, ease of understanding
+  // is more valuable than efficient memory parsing.
+  for (int j = 0; j < h; j++)
     for (int i = 0; i < w; i++)
     {
       c = file.get();
       if (!file.good())
-        return; //file read error
+        return;  // file read error
       switch (c)
       {
       case 'x':
@@ -77,7 +81,9 @@ void Terr::loadMap(const string &str)
         map[i][j]->setType(OPEN);
         break;
       case 'c':
-        map[i][j]->setType(CARPET_CORE); //first pass: specify all carpets as core. Determine Flip status on next pass.
+        map[i][j]->setType(CARPET_CORE);
+        // first pass: specify all carpets as core.
+        // Determine Flip status on next pass through the map's tiles, below.
         break;
       case 't':
         map[i][j]->setType(THRONE);
@@ -93,7 +99,8 @@ void Terr::loadMap(const string &str)
       }
     }
 
-    //intelligent sprite selection from correct spritesheet, based on adjacent tiles (corner piece? edge? etc)
+    // intelligent sprite selection from correct spritesheet,
+    // based on adjacent tiles (corner piece? edge? etc)
     bool N = false, S = false, E = false, W = false;
     int adjacent = 0;
     for (int i = 0; i < w; i++)
@@ -104,22 +111,30 @@ void Terr::loadMap(const string &str)
         switch (map[i][j]->getType())
         {
         case CARPET_CORE:
-          if (map[i][j]->getTile(NORTH) && map[i][j]->getTile(NORTH)->getType() >= CARPET_CORE && map[i][j]->getTile(NORTH)->getType() <= CARPET_EDGE_S)
+          if (map[i][j]->getTile(NORTH) &&
+                  (map[i][j]->getTile(NORTH)->getType() >= CARPET_CORE) &&
+                  (map[i][j]->getTile(NORTH)->getType() <= CARPET_EDGE_S))
           {
             N = true;
             adjacent++;
-          }//range check, only works if all carpet types are consecutive
-          if (map[i][j]->getTile(SOUTH) && map[i][j]->getTile(SOUTH)->getType() >= CARPET_CORE && map[i][j]->getTile(SOUTH)->getType() <= CARPET_EDGE_S)
+          }  // range check, only works if all carpet types are consecutive
+          if (map[i][j]->getTile(SOUTH) &&
+                  (map[i][j]->getTile(SOUTH)->getType() >= CARPET_CORE) &&
+                  (map[i][j]->getTile(SOUTH)->getType() <= CARPET_EDGE_S))
           {
             S = true;
             adjacent++;
           }
-          if (map[i][j]->getTile(EAST) && map[i][j]->getTile(EAST)->getType() >= CARPET_CORE && map[i][j]->getTile(EAST)->getType() <= CARPET_EDGE_S)
+          if (map[i][j]->getTile(EAST) &&
+                  (map[i][j]->getTile(EAST)->getType() >= CARPET_CORE) &&
+                  (map[i][j]->getTile(EAST)->getType() <= CARPET_EDGE_S))
           {
             E = true;
             adjacent++;
           }
-          if (map[i][j]->getTile(WEST) && map[i][j]->getTile(WEST)->getType() >= CARPET_CORE && map[i][j]->getTile(WEST)->getType() <= CARPET_EDGE_S)
+          if (map[i][j]->getTile(WEST) &&
+                  (map[i][j]->getTile(WEST)->getType() >= CARPET_CORE) &&
+                  (map[i][j]->getTile(WEST)->getType() <= CARPET_EDGE_S))
           {
             W = true;
             adjacent++;
@@ -151,5 +166,5 @@ void Terr::loadMap(const string &str)
           break;
         }
       }
-}//void Terr::loadMap(string str)
+}  // void Terr::loadMap(string str)
 

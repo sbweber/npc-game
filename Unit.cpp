@@ -1,4 +1,4 @@
-//Samuel Weber
+// Samuel Weber
 
 #include "Unit.h"
 
