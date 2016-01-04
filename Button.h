@@ -4,7 +4,7 @@
   #define BUTTON_H
 
   #include "Draw.h"
-  #include "Include.h"
+  #include "Globals.h"
 
   class Button
   {

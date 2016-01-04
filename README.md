@@ -1,7 +1,7 @@
 # npc-game
-Final Fantasy-style RPG about the NPCs in a Final Fantasy-style RPG. Multiplatform via Simple Directmedia Layer (SDL2) C++ Library.
+Final Fantasy-style Role-Playing Game about the unimportant non-player characters inhabiting the world in a traditional example of such a game. Multiplatform via Simple Directmedia Layer (SDL2) C++ Library.  
 
-Code by Samuel Weber (siflux, sbweber).
+Code by Samuel Weber (siflux, sbweber).  
 
 Default keys:  
 Arrow keys: Move around the map.  

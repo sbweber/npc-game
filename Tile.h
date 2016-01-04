@@ -3,7 +3,7 @@
 #ifndef TILE_H
   #define TILE_H
 
-  #include "Include.h"
+  #include "Globals.h"
   #include "Sprite.h"
 
   class Sprite;

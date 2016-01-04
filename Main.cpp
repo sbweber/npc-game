@@ -2,7 +2,7 @@
   #include "Draw.h"
   #include "EventLoops.h"
   #include "Keybind.h"
-  #include "Include.h"
+  #include "Globals.h"
   #include "Party.h"
   #include "Terr.h"
 

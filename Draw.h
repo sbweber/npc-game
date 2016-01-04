@@ -5,7 +5,7 @@
 
   #include "Button.h"
   #include "Keybind.h" //this probably shouldn't be here in the long run. Need to seperate the keybinding logic and drawing routines (call the draws from keybind logic)
-  #include "Include.h"
+  #include "Globals.h"
   #include "Terr.h"
 
   class Button;

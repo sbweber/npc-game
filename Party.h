@@ -3,7 +3,7 @@
 #ifndef PARTY_H
   #define PARTY_H
 
-  #include "Include.h"
+  #include "Globals.h"
   #include "Sprite.h"
   #include "Unit.h"
 

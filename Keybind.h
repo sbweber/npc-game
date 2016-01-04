@@ -3,7 +3,7 @@
 #ifndef KEYBIND_H
   #define KEYBIND_H
 
-  #include "Include.h"
+  #include "Globals.h"
 
   //debug key commands
   extern SDL_Keysym stateBattle;

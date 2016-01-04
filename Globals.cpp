@@ -1,6 +1,6 @@
 //Samuel Weber
 
-#include "Include.h"
+#include "Globals.h"
 
 void logSDLError(const string &msg, ostream &os)
 {

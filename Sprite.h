@@ -5,7 +5,7 @@
 
   #include "Draw.h"
   #include "Tile.h"
-  #include "Include.h"
+  #include "Globals.h"
 
   class Tile;
 

@@ -44,7 +44,7 @@
     TITLE
   };
 
-  //UtilityFunctions.cpp
+  //Globals.cpp
   void logSDLError(const string &msg, ostream &os = cerr);
   void pressAnyKey();
   const long int rng(long int min, long int max);

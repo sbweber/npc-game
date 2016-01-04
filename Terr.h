@@ -3,7 +3,7 @@
 #ifndef TERR_H
   #define TERR_H
 
-  #include "Include.h"
+  #include "Globals.h"
   #include "Tile.h"
 
   class Tile;
