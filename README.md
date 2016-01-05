@@ -1,7 +1,7 @@
 # npc-game
-Final Fantasy-style Role-Playing Game about the unimportant non-player characters inhabiting the world in a traditional example of such a game. Multiplatform via Simple Directmedia Layer (SDL2) C++ Library.  
+Final Fantasy-style Role-Playing Game about the non-heroic non-player characters inhabiting the world in a traditional example of such a game. Multiplatform via Simple Directmedia Layer (SDL2) C++ Library.  
 
-No build tool currently included, please use your own. Sorry. Will add one later.  
+No build tool currently included, please use your own.
 
 Code by Samuel Weber (siflux, sbweber).  
 
