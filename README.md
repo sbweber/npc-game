@@ -1,9 +1,7 @@
 # npc-game
 Final Fantasy-style Role-Playing Game about the non-heroic non-player characters inhabiting the world in a traditional example of such a game. Multiplatform via Simple Directmedia Layer (SDL2) C++ Library.  
 
-No build tool currently included, please use your own.
-
-Code by Samuel Weber (siflux, sbweber).  
+Code by Samuel Weber (sbweber).  
 
 Default keys:  
 Arrow keys: Move around the map.  
@@ -17,3 +15,8 @@ Debug keys:
 9: Go to the key rebind menu.  
 0: Go to the title screen.  
 f: Go to the test case for drawing a text box.  
+
+Explanation of Licenses:  
+LICENSE is the (MIT) license for this project itself.  
+LICENSE-SDL2 is the (zlib) license for the SDL2 library.  
+LICENSE.md is the (MIT) license for the FindSDL2*.cmake files, the CMakeLists.txt (further modified from its original version), and some scattered code throughout the project (this project began its life by following the TwinklebearDev SDL 2.0 Lessons, from here https://github.com/Twinklebear/TwinklebearDev-Lessons).  
