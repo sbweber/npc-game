@@ -26,10 +26,4 @@ include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2_TTF_INC
 
 set(SOURCES Button.cpp Draw.cpp EventLoops.cpp Globals.cpp Keybind.cpp Main.cpp Party.cpp Sprite.cpp Terr.cpp Tile.cpp Unit.cpp)
 add_executable(npc-game ${SOURCES})
-if (APPLE)
-	target_link_libraries(npc-game "-framework SDL2")
-	target_link_libraries(npc-game "-framework SDL2_image")
-	target_link_libraries(npc-game "-framework SDL2_ttf")
-else()
-	target_link_libraries(npc-game ${SDL2_LIBRARY} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2_TTF_INCLUDE_DIR})
-endif()
+target_link_libraries(npc-game ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY})
