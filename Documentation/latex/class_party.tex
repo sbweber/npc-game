@@ -1,30 +1,43 @@
 \hypertarget{class_party}{}\section{Party Class Reference}
 \label{class_party}\index{Party@{Party}}
+
+
+{\ttfamily \#include $<$Party.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Party} (S\+D\+L\+\_\+\+Renderer $\ast$ren)\hypertarget{class_party_a950ef19c74b4ff434064d909145b4190}{}\label{class_party_a950ef19c74b4ff434064d909145b4190}
+\hyperlink{class_party_a31d77f763e1dc9549532653a4a0dfde5}{Party} ()\hypertarget{class_party_a31d77f763e1dc9549532653a4a0dfde5}{}\label{class_party_a31d77f763e1dc9549532653a4a0dfde5}
 
-\item 
-\hyperlink{class_sprite}{Sprite} $\ast$ {\bfseries get\+Sprite} ()\hypertarget{class_party_a79d7e55a83b66a41146679deb3b4c533}{}\label{class_party_a79d7e55a83b66a41146679deb3b4c533}
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_party_a950ef19c74b4ff434064d909145b4190}{Party} (S\+D\+L\+\_\+\+Renderer $\ast$ren)\hypertarget{class_party_a950ef19c74b4ff434064d909145b4190}{}\label{class_party_a950ef19c74b4ff434064d909145b4190}
 
-\item 
-void {\bfseries set\+Sprite} (S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&str)\hypertarget{class_party_abe069ffbbf3352f6b39246c8382dd26b}{}\label{class_party_abe069ffbbf3352f6b39246c8382dd26b}
+\begin{DoxyCompactList}\small\item\em Constructs the class, setting the sprite as the ‘\+Hero’ sprite. \end{DoxyCompactList}\item 
+\hyperlink{class_party_a85aa837e38a06690e6fee5087d7c7ad7}{$\sim$\+Party} ()\hypertarget{class_party_a85aa837e38a06690e6fee5087d7c7ad7}{}\label{class_party_a85aa837e38a06690e6fee5087d7c7ad7}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Default destructor. \end{DoxyCompactList}\item 
+\hyperlink{class_sprite}{Sprite} $\ast$ \hyperlink{class_party_a79d7e55a83b66a41146679deb3b4c533}{get\+Sprite} ()\hypertarget{class_party_a79d7e55a83b66a41146679deb3b4c533}{}\label{class_party_a79d7e55a83b66a41146679deb3b4c533}
+
+\begin{DoxyCompactList}\small\item\em Returns the \hyperlink{class_sprite}{Sprite} representing the party by reference. \end{DoxyCompactList}\item 
+void \hyperlink{class_party_abe069ffbbf3352f6b39246c8382dd26b}{set\+Sprite} (S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&str)\hypertarget{class_party_abe069ffbbf3352f6b39246c8382dd26b}{}\label{class_party_abe069ffbbf3352f6b39246c8382dd26b}
+
+\begin{DoxyCompactList}\small\item\em Resets the party’s \hyperlink{class_sprite}{Sprite} to the one in the file named by str. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_unit}{Unit} $\ast$ {\bfseries active} \mbox{[}4\mbox{]}\hypertarget{class_party_aca0245ec21a99d76c4f1d00b7299629a}{}\label{class_party_aca0245ec21a99d76c4f1d00b7299629a}
+\hyperlink{class_unit}{Unit} $\ast$ \hyperlink{class_party_aca0245ec21a99d76c4f1d00b7299629a}{active} \mbox{[}4\mbox{]}\hypertarget{class_party_aca0245ec21a99d76c4f1d00b7299629a}{}\label{class_party_aca0245ec21a99d76c4f1d00b7299629a}
 
-\item 
-vector$<$ \hyperlink{class_unit}{Unit} $\ast$ $>$ {\bfseries passive}\hypertarget{class_party_ab1e00e761df6f415ed72a920d4aa9ec6}{}\label{class_party_ab1e00e761df6f415ed72a920d4aa9ec6}
+\begin{DoxyCompactList}\small\item\em Pointers to the up to four active party members. \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{class_unit}{Unit} $\ast$ $>$ \hyperlink{class_party_ab1e00e761df6f415ed72a920d4aa9ec6}{passive}\hypertarget{class_party_ab1e00e761df6f415ed72a920d4aa9ec6}{}\label{class_party_ab1e00e761df6f415ed72a920d4aa9ec6}
 
-\item 
-\hyperlink{class_sprite}{Sprite} $\ast$ {\bfseries sprite}\hypertarget{class_party_ae71ba8a78bc7da8b16ff861412b30adb}{}\label{class_party_ae71ba8a78bc7da8b16ff861412b30adb}
+\begin{DoxyCompactList}\small\item\em Vector of pointers to non-\/active party members. \end{DoxyCompactList}\item 
+\hyperlink{class_sprite}{Sprite} $\ast$ \hyperlink{class_party_ae71ba8a78bc7da8b16ff861412b30adb}{sprite}\hypertarget{class_party_ae71ba8a78bc7da8b16ff861412b30adb}{}\label{class_party_ae71ba8a78bc7da8b16ff861412b30adb}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_sprite}{Sprite} representing the player\textquotesingle{}s party. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+Defines the playable party Describes the hero\textquotesingle{}s party, directly controlled by the player 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

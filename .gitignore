@@ -26,6 +26,13 @@
 *.exe
 *.out
 *.app
+bin/*
+
+# CMake Files
+CMakeFiles/*
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
 
 # Netbeans Subfolders
 build/*

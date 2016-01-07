@@ -53,10 +53,14 @@
 
   // Globals.cpp
   void logSDLError(const string &msg, ostream &os = cerr);
+  //!< Logs an error to the output of choice, cerr by default.
   void pressAnyKey();
-  const long int rng(long int min, long int max);
+  //!< Make the program wait for a key (any key) to be pressed.
   void quit(const string err = "", int errtype = -1,
           SDL_Renderer *ren = nullptr, SDL_Window *win = nullptr);
+  //!< Quits the program, logging an error if given one.
+  const long int rng(long int min, long int max);
+  //!< My wrapper for rand(). Better than a naked call, still flawed.
 
 #endif
 

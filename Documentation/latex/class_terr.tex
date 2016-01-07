@@ -1,36 +1,51 @@
 \hypertarget{class_terr}{}\section{Terr Class Reference}
 \label{class_terr}\index{Terr@{Terr}}
+
+
+Describes an overworld map. All maps currently must be rectangles.  
+
+
+
+
+{\ttfamily \#include $<$Terr.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Terr} (const string \&str=\char`\"{}\char`\"{})\hypertarget{class_terr_a947a7229cb37a0e87d340f6b88f46994}{}\label{class_terr_a947a7229cb37a0e87d340f6b88f46994}
+\hyperlink{class_terr_a947a7229cb37a0e87d340f6b88f46994}{Terr} (const string \&str=\char`\"{}\char`\"{})\hypertarget{class_terr_a947a7229cb37a0e87d340f6b88f46994}{}\label{class_terr_a947a7229cb37a0e87d340f6b88f46994}
 
-\item 
-int {\bfseries get\+Height} ()\hypertarget{class_terr_a0ef7c8147e12a2291fc84d9ebc67a8df}{}\label{class_terr_a0ef7c8147e12a2291fc84d9ebc67a8df}
+\begin{DoxyCompactList}\small\item\em Calls load\+Map unless the string is empty. \end{DoxyCompactList}\item 
+\hyperlink{class_terr_a8b68000bbfdc821e364bdb89f4465c17}{$\sim$\+Terr} ()\hypertarget{class_terr_a8b68000bbfdc821e364bdb89f4465c17}{}\label{class_terr_a8b68000bbfdc821e364bdb89f4465c17}
 
-\item 
-\hyperlink{class_tile}{Tile} $\ast$ {\bfseries get\+Tile} (int i, int j)\hypertarget{class_terr_a1ca3548cb10880ae8ac01362d1f3116a}{}\label{class_terr_a1ca3548cb10880ae8ac01362d1f3116a}
+\begin{DoxyCompactList}\small\item\em Default destructor. Because Tiles use new, they must be destroyed after use. \end{DoxyCompactList}\item 
+int \hyperlink{class_terr_a0ef7c8147e12a2291fc84d9ebc67a8df}{get\+Height} ()\hypertarget{class_terr_a0ef7c8147e12a2291fc84d9ebc67a8df}{}\label{class_terr_a0ef7c8147e12a2291fc84d9ebc67a8df}
 
-\item 
-int {\bfseries get\+Width} ()\hypertarget{class_terr_a397fdbbeb3fe3eb8989d9da77af42f57}{}\label{class_terr_a397fdbbeb3fe3eb8989d9da77af42f57}
+\begin{DoxyCompactList}\small\item\em Returns the height (h) of \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
+\hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_terr_a1ca3548cb10880ae8ac01362d1f3116a}{get\+Tile} (int i, int j)\hypertarget{class_terr_a1ca3548cb10880ae8ac01362d1f3116a}{}\label{class_terr_a1ca3548cb10880ae8ac01362d1f3116a}
 
-\item 
-void {\bfseries load\+Map} (const string \&str)\hypertarget{class_terr_af53f4fdf0e1605b1536bde8c3fb77c9d}{}\label{class_terr_af53f4fdf0e1605b1536bde8c3fb77c9d}
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the tile in position map\mbox{[}i\mbox{]}\mbox{[}j\mbox{]}. \end{DoxyCompactList}\item 
+int \hyperlink{class_terr_a397fdbbeb3fe3eb8989d9da77af42f57}{get\+Width} ()\hypertarget{class_terr_a397fdbbeb3fe3eb8989d9da77af42f57}{}\label{class_terr_a397fdbbeb3fe3eb8989d9da77af42f57}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns the width (w) of \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
+void \hyperlink{class_terr_af53f4fdf0e1605b1536bde8c3fb77c9d}{load\+Map} (const string \&str)\hypertarget{class_terr_af53f4fdf0e1605b1536bde8c3fb77c9d}{}\label{class_terr_af53f4fdf0e1605b1536bde8c3fb77c9d}
+
+\begin{DoxyCompactList}\small\item\em Loads a map described in filename str. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-vector$<$ vector$<$ \hyperlink{class_tile}{Tile} $\ast$ $>$ $>$ {\bfseries map}\hypertarget{class_terr_a35de374972704b3d92e76b4bc8e67a9c}{}\label{class_terr_a35de374972704b3d92e76b4bc8e67a9c}
+vector$<$ vector$<$ \hyperlink{class_tile}{Tile} $\ast$ $>$ $>$ \hyperlink{class_terr_a35de374972704b3d92e76b4bc8e67a9c}{map}\hypertarget{class_terr_a35de374972704b3d92e76b4bc8e67a9c}{}\label{class_terr_a35de374972704b3d92e76b4bc8e67a9c}
 
-\item 
-int {\bfseries w}\hypertarget{class_terr_af1d43d8b2b20b19d005626831c1335fb}{}\label{class_terr_af1d43d8b2b20b19d005626831c1335fb}
+\begin{DoxyCompactList}\small\item\em 2D dyanmically resized array of Tiles defining \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
+int \hyperlink{class_terr_af1d43d8b2b20b19d005626831c1335fb}{w}\hypertarget{class_terr_af1d43d8b2b20b19d005626831c1335fb}{}\label{class_terr_af1d43d8b2b20b19d005626831c1335fb}
 
-\item 
-int {\bfseries h}\hypertarget{class_terr_aa2f06b09cb8abd0fda4abb2b696f6885}{}\label{class_terr_aa2f06b09cb8abd0fda4abb2b696f6885}
+\begin{DoxyCompactList}\small\item\em map width (in Tiles) \end{DoxyCompactList}\item 
+int \hyperlink{class_terr_aa2f06b09cb8abd0fda4abb2b696f6885}{h}\hypertarget{class_terr_aa2f06b09cb8abd0fda4abb2b696f6885}{}\label{class_terr_aa2f06b09cb8abd0fda4abb2b696f6885}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em map height (in Tiles) \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+Describes an overworld map. All maps currently must be rectangles. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
