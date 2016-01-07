@@ -8,21 +8,29 @@
 
   class Tile;
 
+  //! Describes an overworld map. All maps currently must be rectangles.
   class Terr
-  {  // note: all maps currently must be rectangles.
+  {
   public:
     Terr(const string &str = "");
-            // calls loadMap unless the string has length 0
-    ~Terr();  // because Tiles use New, they must be destroyed after use
+    //!< Calls loadMap unless the string is empty.
+    ~Terr();
+    //!< Default destructor. Because Tiles use new, they must be destroyed after use.
     int getHeight();
+    //!< Returns the height (h) of Terr.
     Tile* getTile(int i, int j);
-            // returns a pointer to the tile in position map[i][j]
+    //!< Returns a pointer to the tile in position map[i][j].
     int getWidth();
+    //!< Returns the width (w) of Terr.
     void loadMap(const string &str);
+    //!< Loads a map described in filename str
   protected:
     vector< vector<Tile*> > map;
-    int w;  // map width (in tiles)
-    int h;  // map height (in tiles)
+    //!< 2D dyanmically resized array of Tiles defining Terr.
+    int w;
+    //!< map width (in Tiles)
+    int h;
+    //!< map height (in Tiles)
   };  // class Terr
 
 #endif

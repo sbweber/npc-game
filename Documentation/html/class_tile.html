@@ -64,6 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -90,104 +91,138 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Tile Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Data about individual tiles from a <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>.  
+ <a href="class_tile.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_tile_8h_source.html">Tile.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for Tile:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="class_tile.png" usemap="#Tile_map" alt=""/>
   <map id="Tile_map" name="Tile_map">
-<area href="class_warp.html" alt="Warp" shape="rect" coords="0,56,42,80"/>
+<area href="class_warp.html" title="Warp is a kind of Tile that loads a new Terr (e.g. leaving a building). " alt="Warp" shape="rect" coords="0,56,42,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae8839483d411c1324a0c89327a557194"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8839483d411c1324a0c89327a557194"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Tile</b> (tileType t=VOID)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ae8839483d411c1324a0c89327a557194">Tile</a> (tileType t=VOID)</td></tr>
+<tr class="memdesc:ae8839483d411c1324a0c89327a557194"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> constructor. Makes a VOID <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> by default. <br /></td></tr>
 <tr class="separator:ae8839483d411c1324a0c89327a557194"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab29acce6f4bf7ea4617213269e8c3716"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab29acce6f4bf7ea4617213269e8c3716"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>connectTile</b> (dir d, <a class="el" href="class_tile.html">Tile</a> *t)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ab29acce6f4bf7ea4617213269e8c3716">connectTile</a> (dir d, <a class="el" href="class_tile.html">Tile</a> *t)</td></tr>
+<tr class="memdesc:ab29acce6f4bf7ea4617213269e8c3716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies an adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a>. Not reciprocal &ndash; may be one-way! <br /></td></tr>
 <tr class="separator:ab29acce6f4bf7ea4617213269e8c3716"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a947b6692bfcdd7b1adc59fcbee16c1fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a947b6692bfcdd7b1adc59fcbee16c1fc"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>getAngle</b> ()</td></tr>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a947b6692bfcdd7b1adc59fcbee16c1fc">getAngle</a> ()</td></tr>
+<tr class="memdesc:a947b6692bfcdd7b1adc59fcbee16c1fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current angle of sprite rotation for the Tile’s art. <br /></td></tr>
 <tr class="separator:a947b6692bfcdd7b1adc59fcbee16c1fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2d2b3bd012d3a54ccb51f6eb986115a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2d2b3bd012d3a54ccb51f6eb986115a"></a>
-SDL_RendererFlip&#160;</td><td class="memItemRight" valign="bottom"><b>getFlip</b> ()</td></tr>
+SDL_RendererFlip&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ad2d2b3bd012d3a54ccb51f6eb986115a">getFlip</a> ()</td></tr>
+<tr class="memdesc:ad2d2b3bd012d3a54ccb51f6eb986115a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets current flip status of Tile’s sprite. <br /></td></tr>
 <tr class="separator:ad2d2b3bd012d3a54ccb51f6eb986115a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaddc2d065a537489c31de4a566bb0bd5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaddc2d065a537489c31de4a566bb0bd5"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>getIsPassable</b> ()</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#aaddc2d065a537489c31de4a566bb0bd5">getIsPassable</a> ()</td></tr>
+<tr class="memdesc:aaddc2d065a537489c31de4a566bb0bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> may be entered by a <a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>. <br /></td></tr>
 <tr class="separator:aaddc2d065a537489c31de4a566bb0bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42f98bf8592783e96f42d6889a8d7e4f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42f98bf8592783e96f42d6889a8d7e4f"></a>
-<a class="el" href="class_sprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getSprite</b> ()</td></tr>
+<a class="el" href="class_sprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a42f98bf8592783e96f42d6889a8d7e4f">getSprite</a> ()</td></tr>
+<tr class="memdesc:a42f98bf8592783e96f42d6889a8d7e4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> on the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a>. NULL if none. <br /></td></tr>
 <tr class="separator:a42f98bf8592783e96f42d6889a8d7e4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5038e62f2a4c28150f6abb4deb31433"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5038e62f2a4c28150f6abb4deb31433"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getTile</b> (dir d)</td></tr>
+<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ae5038e62f2a4c28150f6abb4deb31433">getTile</a> (dir d)</td></tr>
+<tr class="memdesc:ae5038e62f2a4c28150f6abb4deb31433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to the adjacent tile in specified direction. May be NULL. <br /></td></tr>
 <tr class="separator:ae5038e62f2a4c28150f6abb4deb31433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36871de25627c7483c31807da1c28706"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36871de25627c7483c31807da1c28706"></a>
-tileType&#160;</td><td class="memItemRight" valign="bottom"><b>getType</b> ()</td></tr>
+tileType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a36871de25627c7483c31807da1c28706">getType</a> ()</td></tr>
+<tr class="memdesc:a36871de25627c7483c31807da1c28706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Tile’s type. <br /></td></tr>
 <tr class="separator:a36871de25627c7483c31807da1c28706"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25b90e07fd9cdaba1df3ac2a9b6d032b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a25b90e07fd9cdaba1df3ac2a9b6d032b"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getX</b> ()</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a25b90e07fd9cdaba1df3ac2a9b6d032b">getX</a> ()</td></tr>
+<tr class="memdesc:a25b90e07fd9cdaba1df3ac2a9b6d032b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Tile’s x position on its <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a25b90e07fd9cdaba1df3ac2a9b6d032b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf97bff4aac74cc8d7e09bc8ca5afa68"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf97bff4aac74cc8d7e09bc8ca5afa68"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getY</b> ()</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#acf97bff4aac74cc8d7e09bc8ca5afa68">getY</a> ()</td></tr>
+<tr class="memdesc:acf97bff4aac74cc8d7e09bc8ca5afa68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Tile’s y position on its <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:acf97bff4aac74cc8d7e09bc8ca5afa68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac556e7bbe293dde62d66b46e3d12bcb7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac556e7bbe293dde62d66b46e3d12bcb7"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isOccupied</b> ()</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ac556e7bbe293dde62d66b46e3d12bcb7">isOccupied</a> ()</td></tr>
+<tr class="memdesc:ac556e7bbe293dde62d66b46e3d12bcb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> has a <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> on it. <br /></td></tr>
 <tr class="separator:ac556e7bbe293dde62d66b46e3d12bcb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94f9e2d35e55c1d1b9f56dbd7816f51a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a94f9e2d35e55c1d1b9f56dbd7816f51a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAngle</b> (double a)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a94f9e2d35e55c1d1b9f56dbd7816f51a">setAngle</a> (double a)</td></tr>
+<tr class="memdesc:a94f9e2d35e55c1d1b9f56dbd7816f51a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the rotational angle of the Tile’s sprite. <br /></td></tr>
 <tr class="separator:a94f9e2d35e55c1d1b9f56dbd7816f51a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a801a349b0e7f7500b60af91e5e821f2e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a801a349b0e7f7500b60af91e5e821f2e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFlip</b> (SDL_RendererFlip f)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a801a349b0e7f7500b60af91e5e821f2e">setFlip</a> (SDL_RendererFlip f)</td></tr>
+<tr class="memdesc:a801a349b0e7f7500b60af91e5e821f2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets whether the Tile’s sprite is flipped. <br /></td></tr>
 <tr class="separator:a801a349b0e7f7500b60af91e5e821f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a6429d2adbe3e45c519d86a57b514c3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a6429d2adbe3e45c519d86a57b514c3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPos</b> (int xPos, int yPos)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a8a6429d2adbe3e45c519d86a57b514c3">setPos</a> (int xPos, int yPos)</td></tr>
+<tr class="memdesc:a8a6429d2adbe3e45c519d86a57b514c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets where <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> thinks it is on a <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a8a6429d2adbe3e45c519d86a57b514c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad85c92ea426639130cc1d0d38641da3c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad85c92ea426639130cc1d0d38641da3c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSprite</b> (<a class="el" href="class_sprite.html">Sprite</a> *u)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ad85c92ea426639130cc1d0d38641da3c">setSprite</a> (<a class="el" href="class_sprite.html">Sprite</a> *u)</td></tr>
+<tr class="memdesc:ad85c92ea426639130cc1d0d38641da3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> currently occupying the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> (NULL for none). <br /></td></tr>
 <tr class="separator:ad85c92ea426639130cc1d0d38641da3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2557595d030a43cf9b5334df3b7264f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2557595d030a43cf9b5334df3b7264f7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setType</b> (tileType t)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a2557595d030a43cf9b5334df3b7264f7">setType</a> (tileType t)</td></tr>
+<tr class="memdesc:a2557595d030a43cf9b5334df3b7264f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets what kind of tile it is. <br /></td></tr>
 <tr class="separator:a2557595d030a43cf9b5334df3b7264f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a47b5eb2072d4b1978923a480043899c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47b5eb2072d4b1978923a480043899c9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>x</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a47b5eb2072d4b1978923a480043899c9">x</a></td></tr>
+<tr class="memdesc:a47b5eb2072d4b1978923a480043899c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">X-position <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> believes it holds on a <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a47b5eb2072d4b1978923a480043899c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d87d8813151af6bbd60811964f047a8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d87d8813151af6bbd60811964f047a8"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>y</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a2d87d8813151af6bbd60811964f047a8">y</a></td></tr>
+<tr class="memdesc:a2d87d8813151af6bbd60811964f047a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y-position <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> believes it holds on a <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a2d87d8813151af6bbd60811964f047a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5aa7ae6350675967edf46400c486a412"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5aa7ae6350675967edf46400c486a412"></a>
-tileType&#160;</td><td class="memItemRight" valign="bottom"><b>type</b></td></tr>
+tileType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a5aa7ae6350675967edf46400c486a412">type</a></td></tr>
+<tr class="memdesc:a5aa7ae6350675967edf46400c486a412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Which type of tile to draw. <br /></td></tr>
 <tr class="separator:a5aa7ae6350675967edf46400c486a412"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa72b458d549b9533f058e2d2fad0f81"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa72b458d549b9533f058e2d2fad0f81"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isPassable</b></td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#afa72b458d549b9533f058e2d2fad0f81">isPassable</a></td></tr>
+<tr class="memdesc:afa72b458d549b9533f058e2d2fad0f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if tile can be entered. May change later to enterable from each side. <br /></td></tr>
 <tr class="separator:afa72b458d549b9533f058e2d2fad0f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af768c5b838f49de5d626880c88b3d515"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af768c5b838f49de5d626880c88b3d515"></a>
-<a class="el" href="class_sprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>sprite</b></td></tr>
+<a class="el" href="class_sprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#af768c5b838f49de5d626880c88b3d515">sprite</a></td></tr>
+<tr class="memdesc:af768c5b838f49de5d626880c88b3d515"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> currently on the tile. NULL if none. <br /></td></tr>
 <tr class="separator:af768c5b838f49de5d626880c88b3d515"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d63c88d4136aecedcb2756d20615b89"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d63c88d4136aecedcb2756d20615b89"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>E</b></td></tr>
+<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a0d63c88d4136aecedcb2756d20615b89">E</a></td></tr>
+<tr class="memdesc:a0d63c88d4136aecedcb2756d20615b89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the East/Right. <br /></td></tr>
 <tr class="separator:a0d63c88d4136aecedcb2756d20615b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1255bd2dba8dfa019fcd65a05805ed1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1255bd2dba8dfa019fcd65a05805ed1"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>N</b></td></tr>
+<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#af1255bd2dba8dfa019fcd65a05805ed1">N</a></td></tr>
+<tr class="memdesc:af1255bd2dba8dfa019fcd65a05805ed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the North/Up. <br /></td></tr>
 <tr class="separator:af1255bd2dba8dfa019fcd65a05805ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc655f39bc82d9b5898b991faea9df42"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adc655f39bc82d9b5898b991faea9df42"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>S</b></td></tr>
+<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#adc655f39bc82d9b5898b991faea9df42">S</a></td></tr>
+<tr class="memdesc:adc655f39bc82d9b5898b991faea9df42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the South/Down. <br /></td></tr>
 <tr class="separator:adc655f39bc82d9b5898b991faea9df42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae992c1605ed059cb9eaff737b99824dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae992c1605ed059cb9eaff737b99824dc"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>W</b></td></tr>
+<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ae992c1605ed059cb9eaff737b99824dc">W</a></td></tr>
+<tr class="memdesc:ae992c1605ed059cb9eaff737b99824dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the West/Left. <br /></td></tr>
 <tr class="separator:ae992c1605ed059cb9eaff737b99824dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33219999fbd38d9c9e8e98d09a9b65a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33219999fbd38d9c9e8e98d09a9b65a5"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><b>angle</b></td></tr>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a33219999fbd38d9c9e8e98d09a9b65a5">angle</a></td></tr>
+<tr class="memdesc:a33219999fbd38d9c9e8e98d09a9b65a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Angle at which Tile’s sprite is rotated. <br /></td></tr>
 <tr class="separator:a33219999fbd38d9c9e8e98d09a9b65a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a815af374aa83cd0be79bb5553056b15e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a815af374aa83cd0be79bb5553056b15e"></a>
-SDL_RendererFlip&#160;</td><td class="memItemRight" valign="bottom"><b>flip</b></td></tr>
+SDL_RendererFlip&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a815af374aa83cd0be79bb5553056b15e">flip</a></td></tr>
+<tr class="memdesc:a815af374aa83cd0be79bb5553056b15e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flip status of Tile’s sprite. <br /></td></tr>
 <tr class="separator:a815af374aa83cd0be79bb5553056b15e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Data about individual tiles from a <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_tile_8h_source.html">Tile.h</a></li>
 <li>Tile.cpp</li>
 </ul>

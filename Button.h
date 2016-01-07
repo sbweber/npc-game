@@ -6,22 +6,30 @@
   #include "Draw.h"
   #include "Globals.h"
 
+  //! Describes a clickable button.
   class Button
   {
   public:
     Button(SDL_Renderer *ren, const string &file, int x, int y, int w, int h,
             TTF_Font *font = NULL, const string &s = "");
-            // no default constructor, must give position, dimensions, and
-            // filename for pic. String and font optional.
+    /*!< Button does not have a default constructor. A Button must have
+     *   a position and dimensions, and the constructor requires a
+     *   filename for the background pic. Text and font are optional.
+     */
     ~Button();
     bool buttonClick(SDL_MouseButtonEvent &click);
-            // true if button was clicked
+    //!< Returns true if Button was clicked
     SDL_Texture* getPic();
+    //!< Returns Button's background picture
     void render(SDL_Renderer *ren);
+    //!< Draws Button on the renderer
   protected:
     SDL_Rect button;
-    SDL_Texture* pic;  // visual for button
-    SDL_Texture* text;  // optional text for button
+    //!< Rectangle describing Button's position and dimensions
+    SDL_Texture* pic;
+    //!< Button's background picture
+    SDL_Texture* text;
+    //!< Button's optional foreground text, as a picture
   };
 
 

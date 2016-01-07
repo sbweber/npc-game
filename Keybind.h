@@ -22,7 +22,11 @@
 
   // Keybind.cpp
   bool operator==(const SDL_Keysym &lhs, const SDL_Keysym &rhs);
+  //!< Returns true if the two keys are the same.
   void loadKeys();
+  //!< Loads the default set of keys.
+  //!< Not yet added: ability to save a set of key bindings.
   void rebind(SDL_Keysym &keytype, SDL_Keysym newKey);
+  //!< Binds a new key to a command.
 
 #endif

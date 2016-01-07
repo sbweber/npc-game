@@ -64,6 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -90,38 +91,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Terr Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Describes an overworld map. All maps currently must be rectangles.  
+ <a href="class_terr.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_terr_8h_source.html">Terr.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a947a7229cb37a0e87d340f6b88f46994"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a947a7229cb37a0e87d340f6b88f46994"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Terr</b> (const string &amp;str=&quot;&quot;)</td></tr>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a947a7229cb37a0e87d340f6b88f46994">Terr</a> (const string &amp;str=&quot;&quot;)</td></tr>
+<tr class="memdesc:a947a7229cb37a0e87d340f6b88f46994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls loadMap unless the string is empty. <br /></td></tr>
 <tr class="separator:a947a7229cb37a0e87d340f6b88f46994"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b68000bbfdc821e364bdb89f4465c17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b68000bbfdc821e364bdb89f4465c17"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a8b68000bbfdc821e364bdb89f4465c17">~Terr</a> ()</td></tr>
+<tr class="memdesc:a8b68000bbfdc821e364bdb89f4465c17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. Because Tiles use new, they must be destroyed after use. <br /></td></tr>
+<tr class="separator:a8b68000bbfdc821e364bdb89f4465c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ef7c8147e12a2291fc84d9ebc67a8df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ef7c8147e12a2291fc84d9ebc67a8df"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getHeight</b> ()</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a0ef7c8147e12a2291fc84d9ebc67a8df">getHeight</a> ()</td></tr>
+<tr class="memdesc:a0ef7c8147e12a2291fc84d9ebc67a8df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the height (h) of <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a0ef7c8147e12a2291fc84d9ebc67a8df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ca3548cb10880ae8ac01362d1f3116a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1ca3548cb10880ae8ac01362d1f3116a"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getTile</b> (int i, int j)</td></tr>
+<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a1ca3548cb10880ae8ac01362d1f3116a">getTile</a> (int i, int j)</td></tr>
+<tr class="memdesc:a1ca3548cb10880ae8ac01362d1f3116a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the tile in position map[i][j]. <br /></td></tr>
 <tr class="separator:a1ca3548cb10880ae8ac01362d1f3116a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a397fdbbeb3fe3eb8989d9da77af42f57"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a397fdbbeb3fe3eb8989d9da77af42f57"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getWidth</b> ()</td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a397fdbbeb3fe3eb8989d9da77af42f57">getWidth</a> ()</td></tr>
+<tr class="memdesc:a397fdbbeb3fe3eb8989d9da77af42f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the width (w) of <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a397fdbbeb3fe3eb8989d9da77af42f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af53f4fdf0e1605b1536bde8c3fb77c9d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af53f4fdf0e1605b1536bde8c3fb77c9d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loadMap</b> (const string &amp;str)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#af53f4fdf0e1605b1536bde8c3fb77c9d">loadMap</a> (const string &amp;str)</td></tr>
+<tr class="memdesc:af53f4fdf0e1605b1536bde8c3fb77c9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a map described in filename str. <br /></td></tr>
 <tr class="separator:af53f4fdf0e1605b1536bde8c3fb77c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a35de374972704b3d92e76b4bc8e67a9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35de374972704b3d92e76b4bc8e67a9c"></a>
-vector&lt; vector&lt; <a class="el" href="class_tile.html">Tile</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>map</b></td></tr>
+vector&lt; vector&lt; <a class="el" href="class_tile.html">Tile</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a35de374972704b3d92e76b4bc8e67a9c">map</a></td></tr>
+<tr class="memdesc:a35de374972704b3d92e76b4bc8e67a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">2D dyanmically resized array of Tiles defining <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a35de374972704b3d92e76b4bc8e67a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1d43d8b2b20b19d005626831c1335fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1d43d8b2b20b19d005626831c1335fb"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>w</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#af1d43d8b2b20b19d005626831c1335fb">w</a></td></tr>
+<tr class="memdesc:af1d43d8b2b20b19d005626831c1335fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">map width (in Tiles) <br /></td></tr>
 <tr class="separator:af1d43d8b2b20b19d005626831c1335fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2f06b09cb8abd0fda4abb2b696f6885"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>h</b></td></tr>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#aa2f06b09cb8abd0fda4abb2b696f6885">h</a></td></tr>
+<tr class="memdesc:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="mdescLeft">&#160;</td><td class="mdescRight">map height (in Tiles) <br /></td></tr>
 <tr class="separator:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Describes an overworld map. All maps currently must be rectangles. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_terr_8h_source.html">Terr.h</a></li>
 <li>Terr.cpp</li>
 </ul>

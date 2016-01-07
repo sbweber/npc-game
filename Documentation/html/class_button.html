@@ -64,6 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -90,34 +91,110 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Button Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Describes a clickable button.  
+ <a href="class_button.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_button_8h_source.html">Button.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5d841cfdfa9ac8d1db10747ecd94dcdd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d841cfdfa9ac8d1db10747ecd94dcdd"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Button</b> (SDL_Renderer *ren, const string &amp;file, int x, int y, int w, int h, TTF_Font *font=NULL, const string &amp;s=&quot;&quot;)</td></tr>
+<tr class="memitem:a5d841cfdfa9ac8d1db10747ecd94dcdd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a5d841cfdfa9ac8d1db10747ecd94dcdd">Button</a> (SDL_Renderer *ren, const string &amp;file, int x, int y, int w, int h, TTF_Font *font=NULL, const string &amp;s=&quot;&quot;)</td></tr>
 <tr class="separator:a5d841cfdfa9ac8d1db10747ecd94dcdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a374d116950c2390f883088c7afb107d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a374d116950c2390f883088c7afb107d6"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>buttonClick</b> (SDL_MouseButtonEvent &amp;click)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a374d116950c2390f883088c7afb107d6">buttonClick</a> (SDL_MouseButtonEvent &amp;click)</td></tr>
+<tr class="memdesc:a374d116950c2390f883088c7afb107d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if <a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a> was clicked. <br /></td></tr>
 <tr class="separator:a374d116950c2390f883088c7afb107d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab22d97c11b0e63f90ef584fc9a5c0f6d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab22d97c11b0e63f90ef584fc9a5c0f6d"></a>
-SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><b>getPic</b> ()</td></tr>
+SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#ab22d97c11b0e63f90ef584fc9a5c0f6d">getPic</a> ()</td></tr>
+<tr class="memdesc:ab22d97c11b0e63f90ef584fc9a5c0f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a>'s background picture. <br /></td></tr>
 <tr class="separator:ab22d97c11b0e63f90ef584fc9a5c0f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a599b95776f845111b8245ff15c13f2f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a599b95776f845111b8245ff15c13f2f1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>render</b> (SDL_Renderer *ren)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a599b95776f845111b8245ff15c13f2f1">render</a> (SDL_Renderer *ren)</td></tr>
+<tr class="memdesc:a599b95776f845111b8245ff15c13f2f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws <a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a> on the renderer. <br /></td></tr>
 <tr class="separator:a599b95776f845111b8245ff15c13f2f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aa552275b84734a66578ab684e51ab64a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa552275b84734a66578ab684e51ab64a"></a>
-SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><b>button</b></td></tr>
+SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#aa552275b84734a66578ab684e51ab64a">button</a></td></tr>
+<tr class="memdesc:aa552275b84734a66578ab684e51ab64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rectangle describing <a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a>'s position and dimensions. <br /></td></tr>
 <tr class="separator:aa552275b84734a66578ab684e51ab64a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf19f779ff118533b103aedcf743b8bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adf19f779ff118533b103aedcf743b8bf"></a>
-SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><b>pic</b></td></tr>
+SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#adf19f779ff118533b103aedcf743b8bf">pic</a></td></tr>
+<tr class="memdesc:adf19f779ff118533b103aedcf743b8bf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a>'s background picture. <br /></td></tr>
 <tr class="separator:adf19f779ff118533b103aedcf743b8bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08d8969454e7a566717d2488a788bd78"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08d8969454e7a566717d2488a788bd78"></a>
-SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><b>text</b></td></tr>
+SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a08d8969454e7a566717d2488a788bd78">text</a></td></tr>
+<tr class="memdesc:a08d8969454e7a566717d2488a788bd78"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a>'s optional foreground text, as a picture. <br /></td></tr>
 <tr class="separator:a08d8969454e7a566717d2488a788bd78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Describes a clickable button. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a5d841cfdfa9ac8d1db10747ecd94dcdd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Button::Button </td>
+          <td>(</td>
+          <td class="paramtype">SDL_Renderer *&#160;</td>
+          <td class="paramname"><em>ren</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TTF_Font *&#160;</td>
+          <td class="paramname"><em>font</em> = <code>NULL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>s</em> = <code>&quot;&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a> does not have a default constructor. A <a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a> must have a position and dimensions, and the constructor requires a filename for the background pic. Text and font are optional. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_button_8h_source.html">Button.h</a></li>
 <li>Button.cpp</li>

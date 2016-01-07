@@ -1,33 +1,61 @@
 \hypertarget{class_button}{}\section{Button Class Reference}
 \label{class_button}\index{Button@{Button}}
+
+
+Describes a clickable button.  
+
+
+
+
+{\ttfamily \#include $<$Button.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Button} (S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&file, int x, int y, int w, int h, T\+T\+F\+\_\+\+Font $\ast$font=N\+U\+LL, const string \&s=\char`\"{}\char`\"{})\hypertarget{class_button_a5d841cfdfa9ac8d1db10747ecd94dcdd}{}\label{class_button_a5d841cfdfa9ac8d1db10747ecd94dcdd}
-
+\hyperlink{class_button_a5d841cfdfa9ac8d1db10747ecd94dcdd}{Button} (S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&file, int x, int y, int w, int h, T\+T\+F\+\_\+\+Font $\ast$font=N\+U\+LL, const string \&s=\char`\"{}\char`\"{})
 \item 
-bool {\bfseries button\+Click} (S\+D\+L\+\_\+\+Mouse\+Button\+Event \&click)\hypertarget{class_button_a374d116950c2390f883088c7afb107d6}{}\label{class_button_a374d116950c2390f883088c7afb107d6}
+bool \hyperlink{class_button_a374d116950c2390f883088c7afb107d6}{button\+Click} (S\+D\+L\+\_\+\+Mouse\+Button\+Event \&click)\hypertarget{class_button_a374d116950c2390f883088c7afb107d6}{}\label{class_button_a374d116950c2390f883088c7afb107d6}
 
-\item 
-S\+D\+L\+\_\+\+Texture $\ast$ {\bfseries get\+Pic} ()\hypertarget{class_button_ab22d97c11b0e63f90ef584fc9a5c0f6d}{}\label{class_button_ab22d97c11b0e63f90ef584fc9a5c0f6d}
+\begin{DoxyCompactList}\small\item\em Returns true if \hyperlink{class_button}{Button} was clicked. \end{DoxyCompactList}\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{class_button_ab22d97c11b0e63f90ef584fc9a5c0f6d}{get\+Pic} ()\hypertarget{class_button_ab22d97c11b0e63f90ef584fc9a5c0f6d}{}\label{class_button_ab22d97c11b0e63f90ef584fc9a5c0f6d}
 
-\item 
-void {\bfseries render} (S\+D\+L\+\_\+\+Renderer $\ast$ren)\hypertarget{class_button_a599b95776f845111b8245ff15c13f2f1}{}\label{class_button_a599b95776f845111b8245ff15c13f2f1}
+\begin{DoxyCompactList}\small\item\em Returns \hyperlink{class_button}{Button}\textquotesingle{}s background picture. \end{DoxyCompactList}\item 
+void \hyperlink{class_button_a599b95776f845111b8245ff15c13f2f1}{render} (S\+D\+L\+\_\+\+Renderer $\ast$ren)\hypertarget{class_button_a599b95776f845111b8245ff15c13f2f1}{}\label{class_button_a599b95776f845111b8245ff15c13f2f1}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Draws \hyperlink{class_button}{Button} on the renderer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-S\+D\+L\+\_\+\+Rect {\bfseries button}\hypertarget{class_button_aa552275b84734a66578ab684e51ab64a}{}\label{class_button_aa552275b84734a66578ab684e51ab64a}
+S\+D\+L\+\_\+\+Rect \hyperlink{class_button_aa552275b84734a66578ab684e51ab64a}{button}\hypertarget{class_button_aa552275b84734a66578ab684e51ab64a}{}\label{class_button_aa552275b84734a66578ab684e51ab64a}
 
-\item 
-S\+D\+L\+\_\+\+Texture $\ast$ {\bfseries pic}\hypertarget{class_button_adf19f779ff118533b103aedcf743b8bf}{}\label{class_button_adf19f779ff118533b103aedcf743b8bf}
+\begin{DoxyCompactList}\small\item\em Rectangle describing \hyperlink{class_button}{Button}\textquotesingle{}s position and dimensions. \end{DoxyCompactList}\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{class_button_adf19f779ff118533b103aedcf743b8bf}{pic}\hypertarget{class_button_adf19f779ff118533b103aedcf743b8bf}{}\label{class_button_adf19f779ff118533b103aedcf743b8bf}
 
-\item 
-S\+D\+L\+\_\+\+Texture $\ast$ {\bfseries text}\hypertarget{class_button_a08d8969454e7a566717d2488a788bd78}{}\label{class_button_a08d8969454e7a566717d2488a788bd78}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_button}{Button}\textquotesingle{}s background picture. \end{DoxyCompactList}\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{class_button_a08d8969454e7a566717d2488a788bd78}{text}\hypertarget{class_button_a08d8969454e7a566717d2488a788bd78}{}\label{class_button_a08d8969454e7a566717d2488a788bd78}
 
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_button}{Button}\textquotesingle{}s optional foreground text, as a picture. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+Describes a clickable button. 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Button@{Button}!Button@{Button}}
+\index{Button@{Button}!Button@{Button}}
+\subsubsection[{\texorpdfstring{Button(\+S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&file, int x, int y, int w, int h, T\+T\+F\+\_\+\+Font $\ast$font=\+N\+U\+L\+L, const string \&s="""")}{Button(SDL_Renderer *ren, const string &file, int x, int y, int w, int h, TTF_Font *font=NULL, const string &s="")}}]{\setlength{\rightskip}{0pt plus 5cm}Button\+::\+Button (
+\begin{DoxyParamCaption}
+\item[{S\+D\+L\+\_\+\+Renderer $\ast$}]{ren, }
+\item[{const string \&}]{file, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{w, }
+\item[{int}]{h, }
+\item[{T\+T\+F\+\_\+\+Font $\ast$}]{font = {\ttfamily NULL}, }
+\item[{const string \&}]{s = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{class_button_a5d841cfdfa9ac8d1db10747ecd94dcdd}{}\label{class_button_a5d841cfdfa9ac8d1db10747ecd94dcdd}
+\hyperlink{class_button}{Button} does not have a default constructor. A \hyperlink{class_button}{Button} must have a position and dimensions, and the constructor requires a filename for the background pic. Text and font are optional. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
