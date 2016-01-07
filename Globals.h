@@ -52,8 +52,11 @@
   };
 
   // Globals.cpp
-  void logSDLError(const string &msg, ostream &os = cerr);
+  void logError(const string &msg, ostream &os = cerr);
   //!< Logs an error to the output of choice, cerr by default.
+  void logSDLError(const string &msg, ostream &os = cerr);
+  //!< Logs an error to the output of choice, cerr by default. Also prints out
+  //!< last error encountered by SDL, which may not be relevant to the problem.
   void pressAnyKey();
   //!< Make the program wait for a key (any key) to be pressed.
   void quit(const string err = "", int errtype = -1,

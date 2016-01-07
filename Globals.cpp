@@ -2,6 +2,12 @@
 
 #include "Globals.h"
 
+void logError(const string &msg, ostream &os)
+{
+	os << msg << endl << endl;
+}  // void logError(const string &msg, ostream &os)
+
+
 void logSDLError(const string &msg, ostream &os)
 {
 	os << msg << endl << " Error: " << SDL_GetError() << endl;
