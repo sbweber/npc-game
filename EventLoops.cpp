@@ -13,7 +13,7 @@ bool loopAnyState(SDL_Renderer *ren, SDL_Event &e, Terr *terr, Party* party,
     if (e.key.keysym == stateMap1)
     {
       delete terr;
-      terr = new Terr("map1.txt");
+      terr = new Terr("Map1.txt");
       state = MAP;
       party->getSprite()->setTile(terr->getTile(4, 3));
       npc->setTile(terr->getTile(5, 4));
@@ -21,7 +21,7 @@ bool loopAnyState(SDL_Renderer *ren, SDL_Event &e, Terr *terr, Party* party,
     if (e.key.keysym == stateMap2)
     {
       delete terr;
-      terr = new Terr("map2.txt");
+      terr = new Terr("Map2.txt");
       state = MAP;
       party->getSprite()->setTile(terr->getTile(1, 1));
     }  // debug command map2
@@ -90,7 +90,7 @@ bool loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
 bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font, Terr *terr,
         gameState &state, Party *party, Sprite *npc, vector<Button *> buttons)
 {
-  Button *toGame = new Button(ren, "button.png",
+  Button *toGame = new Button(ren, "Button.png",
           SCREEN_WIDTH / 2 - 120, 300, 240, 100, font, "To Game");
   drawTitle(ren, toGame);
   switch (e.type)
@@ -102,7 +102,7 @@ bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font, Terr *terr,
     if (toGame->buttonClick(e.button))
     {
       delete terr;
-      terr = new Terr("map1.txt");
+      terr = new Terr("Map1.txt");
       state = MAP;
       party->getSprite()->setTile(terr->getTile(4, 3));
       npc->setTile(terr->getTile(5, 4));

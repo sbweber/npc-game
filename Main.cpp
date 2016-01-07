@@ -33,13 +33,13 @@ int main(int argc, char **argv)
   // backend vars
   Terr* terr = new Terr("");
   Party* party = new Party(ren);
-  Sprite* npc = new Sprite(ren, "npc.png");
+  Sprite* npc = new Sprite(ren, "NPC.png");
   vector<Button *> buttons;
   npc->setType("test");
   gameState state = TITLE;
 
   // spritesheets
-  SDL_Texture *tiles = loadTexture("tiles.png", ren);
+  SDL_Texture *tiles = loadTexture("Tiles.png", ren);
 
   loadKeys();
 

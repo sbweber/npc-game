@@ -116,7 +116,7 @@ void drawScreen(gameState &state, SDL_Renderer *ren, TTF_Font* font,
 void drawTitle(SDL_Renderer *ren, Button *toGame)
 {
   SDL_RenderClear(ren);
-  SDL_Texture *bg = loadTexture("title.png", ren);
+  SDL_Texture *bg = loadTexture("Title.png", ren);
   renderTexture(bg, ren, 0, 0);
   toGame->render(ren);
   SDL_RenderPresent(ren);
