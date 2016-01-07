@@ -1,6 +1,11 @@
 # npc-game
 Final Fantasy-style Role-Playing Game about the non-heroic non-player characters inhabiting the world in a traditional example of such a game. Multiplatform via Simple Directmedia Layer (SDL2) C++ Library.  
 
+Requires the following libraries:  
+SDL2 (https://www.libsdl.org/download-2.0.php)  
+SDL2_Image (https://www.libsdl.org/projects/SDL_image/)  
+SDL2_ttf (https://www.libsdl.org/projects/SDL_ttf/)  
+
 Code by Samuel Weber (sbweber).  
 
 Default keys:  
