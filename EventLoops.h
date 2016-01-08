@@ -10,7 +10,7 @@
   #include "Terr.h"
 
   // EventLoops.cpp
-  bool loopAnyState(SDL_Renderer *ren, SDL_Event &e, Terr *terr, Party *party,
+  bool loopAnyState(SDL_Event &e, Terr *terr, Party *party,
           Sprite *npc, gameState &state);
   //!< Loop to handle input that’s treated the same in all states.
   bool loopBattle(SDL_Event &e);
@@ -27,7 +27,7 @@
   //!< Loop to process inputs on the title screen.
   bool mainLoop(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
           SDL_Texture *tiles, Terr *terr, Party* party, Sprite *npc,
-          gameState &state, vector<Button *> buttons);
+          gameState &state);
   //!< Loop to select which event loop to run.
 
 #endif

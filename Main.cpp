@@ -7,7 +7,7 @@
   #include "Party.h"
   #include "Terr.h"
 
-int main(int argc, char **argv)
+int main()
 {
   // Create window, do basic setup
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
@@ -34,7 +34,6 @@ int main(int argc, char **argv)
   Terr* terr = new Terr("");
   Party* party = new Party(ren);
   Sprite* npc = new Sprite(ren, "NPC.png");
-  vector<Button *> buttons;
   npc->setType("test");
   gameState state = TITLE;
 
@@ -45,7 +44,7 @@ int main(int argc, char **argv)
 
   while (!quit)
     while (SDL_PollEvent(&e))
-      quit = mainLoop(ren, e, font, tiles, terr, party, npc, state, buttons);
+      quit = mainLoop(ren, e, font, tiles, terr, party, npc, state);
 
   SDL_DestroyTexture(tiles);
   SDL_DestroyRenderer(ren);

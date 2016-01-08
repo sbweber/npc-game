@@ -36,10 +36,10 @@
   SDL_Texture* loadTexture(const string &file, SDL_Renderer *ren);
   //!< Loads a texture
   SDL_Texture* renderText(SDL_Renderer *ren, TTF_Font *font, const string &str,
-          SDL_Color color = (SDL_Color){255, 255, 255, 255});
+          SDL_Color color = {255, 255, 255, 255});
   //!< Renders text into a picture. Text is white by default.
   void renderTextbox(SDL_Renderer *ren, TTF_Font *font, const string &str,
-          SDL_Color color = (SDL_Color){255, 255, 255, 255});
+          SDL_Color color = {255, 255, 255, 255});
   //!< Draws a textbox with text on the screen. Text is white by default.
   void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, SDL_Rect dst,
           SDL_Rect *clip = nullptr, const double angle = 0,

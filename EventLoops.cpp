@@ -2,7 +2,7 @@
 
 #include "EventLoops.h"
 
-bool loopAnyState(SDL_Renderer *ren, SDL_Event &e, Terr *terr, Party* party,
+bool loopAnyState(SDL_Event &e, Terr *terr, Party* party,
         Sprite *npc, gameState &state)
 {
   switch (e.type)
@@ -86,7 +86,7 @@ bool loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
 
 
 bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font, Terr *terr,
-        gameState &state, Party *party, Sprite *npc, vector<Button *> buttons)
+        gameState &state, Party *party, Sprite *npc)
 {
   Button *toGame = new Button(ren, "Button.png",
           SCREEN_WIDTH / 2 - 120, 300, 240, 100, font, "To Game");
@@ -124,10 +124,10 @@ bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font, Terr *terr,
 
 bool mainLoop(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
         SDL_Texture *tiles, Terr *terr, Party* party, Sprite *npc,
-        gameState &state, vector<Button *> buttons)
+        gameState &state)
 {
   bool quit = false;
-  quit = loopAnyState(ren, e, terr, party, npc, state);
+  quit = loopAnyState(e, terr, party, npc, state);
   if (quit)
     return true;
   switch (state)
@@ -142,7 +142,7 @@ bool mainLoop(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
     quit = loopRebind(ren, e, font, state);
     break;
   case TITLE:
-    quit = loopTitle(ren, e, font, terr, state, party, npc, buttons);
+    quit = loopTitle(ren, e, font, terr, state, party, npc);
     break;
   default:
     break;
