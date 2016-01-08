@@ -12,16 +12,14 @@ bool loopAnyState(SDL_Renderer *ren, SDL_Event &e, Terr *terr, Party* party,
       state = BATTLE;  // debug command startbattle
     if (e.key.keysym == stateMap1)
     {
-      delete terr;
-      terr = new Terr("Map1.txt");
+      terr->loadMap("Map1.txt");
       state = MAP;
       party->getSprite()->setTile(terr->getTile(4, 3));
       npc->setTile(terr->getTile(5, 4));
     }  // debug command map1
     if (e.key.keysym == stateMap2)
     {
-      delete terr;
-      terr = new Terr("Map2.txt");
+      terr->loadMap("Map2.txt");
       state = MAP;
       party->getSprite()->setTile(terr->getTile(1, 1));
     }  // debug command map2
@@ -101,8 +99,7 @@ bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font, Terr *terr,
   case SDL_MOUSEBUTTONDOWN:
     if (toGame->buttonClick(e.button))
     {
-      delete terr;
-      terr = new Terr("Map1.txt");
+      terr->loadMap("Map1.txt");
       state = MAP;
       party->getSprite()->setTile(terr->getTile(4, 3));
       npc->setTile(terr->getTile(5, 4));
@@ -120,6 +117,7 @@ bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font, Terr *terr,
   default:
     break;
   }
+  delete toGame;
   return false;
 }  // bool loopTitle()
 
