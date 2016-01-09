@@ -18,7 +18,7 @@ void drawBattle(SDL_Renderer *ren, TTF_Font* font)
   SDL_RenderPresent(ren);
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 
-void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Terr *terr, Sprite *party)
+void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
 {  // portion of map to be drawn based on position of hero
   SDL_RenderClear(ren);
   int tileClip = 0;
@@ -26,17 +26,17 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Terr *terr, Sprite *party)
   getClips(tileClips, 16, 4, TILE_WIDTH, TILE_HEIGHT);  // magic number (4): number of rows in the tile spritesheet
 
   // position of unit on which camera is focused
-  int x = party->getPos()->getX();
-  int y = party->getPos()->getY();
+  int x = party->getSprite()->getPos()->getX();
+  int y = party->getSprite()->getPos()->getY();
 
   Tile* tilePtr = NULL;
   Tile* offMap = new Tile();
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
     {
-      if (((x + i - 8) >= 0) && ((x + i - 8) < terr->getWidth()) &&
-              ((y + j - 6) >= 0) && ((y + j - 6) < terr->getHeight()))
-        tilePtr = terr->getTile((x + i - 8), (j + y - 6));
+      if (((x + i - 8) >= 0) && ((x + i - 8) < party->getTerr()->getWidth()) &&
+              ((y + j - 6) >= 0) && ((y + j - 6) < party->getTerr()->getHeight()))
+        tilePtr = party->getTerr()->getTile((x + i - 8), (j + y - 6));
       // if Tile in question exists
       else
         tilePtr = offMap;
@@ -89,7 +89,7 @@ void drawRebind(SDL_Renderer *ren, TTF_Font* font)
 }  // void drawRebind(SDL_Renderer *ren)
 
 void drawScreen(gameState &state, SDL_Renderer *ren, TTF_Font* font,
-        SDL_Texture *tiles, Terr *terr, Sprite *party, Button *toGame)
+        SDL_Texture *tiles, Party *party, Button *toGame)
 {
   // when things change (any event happens): clear the renderer, refill it.
   // Draw the background first, then the chars on top of it.
@@ -100,7 +100,7 @@ void drawScreen(gameState &state, SDL_Renderer *ren, TTF_Font* font,
     drawBattle(ren, font);
     break;
   case MAP:
-    drawMap(ren, tiles, terr, party);
+    drawMap(ren, tiles, party);
     break;
   case REBIND:
     drawRebind(ren, font);

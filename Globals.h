@@ -4,8 +4,8 @@
   #define INCLUDE_H
 
   // c++ core includes
-  #include <cstddef>
-  // implicitly added on non-windows machines, doesn't hurt to manually add
+  #include <cstddef>  // implicitly added on non-windows machines
+  #include <cstdint>
   #include <ctime>
   #include <iostream>
   #include <fstream>

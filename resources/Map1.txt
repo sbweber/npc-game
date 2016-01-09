@@ -12,6 +12,6 @@ x      ccc      x
 x      ccc      x
 x      ccc      x
 xxxxxxxcccxxxxxxx
-7, 12, map2.txt, 4, 3
-8, 12, map2.txt, 4, 3
-9, 12, map2.txt, 4, 3
+7, 12, map2.txt, 6, 4
+8, 12, map2.txt, 6, 4
+9, 12, map2.txt, 6, 4

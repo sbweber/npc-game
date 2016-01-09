@@ -99,72 +99,74 @@ void Terr::loadMap(const string &str)
       }
     }
 
-    // intelligent sprite selection from correct spritesheet,
-    // based on adjacent tiles (corner piece? edge? etc)
-    bool N = false, S = false, E = false, W = false;
-    int adjacent = 0;
-    for (int i = 0; i < w; i++)
-      for (int j = 0; j < h; j++)
+  // intelligent sprite selection from correct spritesheet,
+  // based on adjacent tiles (corner piece? edge? etc)
+  bool N = false, S = false, E = false, W = false;
+  int adjacent = 0;
+  for (int i = 0; i < w; i++)
+    for (int j = 0; j < h; j++)
+    {
+      adjacent = 0;
+      N = S = E = W = false;
+      switch (map[i][j]->getType())
       {
-        adjacent = 0;
-        N = S = E = W = false;
-        switch (map[i][j]->getType())
+      case CARPET_CORE:
+        if (map[i][j]->getTile(NORTH) &&
+                (map[i][j]->getTile(NORTH)->getType() >= CARPET_CORE) &&
+                (map[i][j]->getTile(NORTH)->getType() <= CARPET_EDGE_S))
         {
-        case CARPET_CORE:
-          if (map[i][j]->getTile(NORTH) &&
-                  (map[i][j]->getTile(NORTH)->getType() >= CARPET_CORE) &&
-                  (map[i][j]->getTile(NORTH)->getType() <= CARPET_EDGE_S))
-          {
-            N = true;
-            adjacent++;
-          }  // range check, only works if all carpet types are consecutive
-          if (map[i][j]->getTile(SOUTH) &&
-                  (map[i][j]->getTile(SOUTH)->getType() >= CARPET_CORE) &&
-                  (map[i][j]->getTile(SOUTH)->getType() <= CARPET_EDGE_S))
-          {
-            S = true;
-            adjacent++;
-          }
-          if (map[i][j]->getTile(EAST) &&
-                  (map[i][j]->getTile(EAST)->getType() >= CARPET_CORE) &&
-                  (map[i][j]->getTile(EAST)->getType() <= CARPET_EDGE_S))
-          {
-            E = true;
-            adjacent++;
-          }
-          if (map[i][j]->getTile(WEST) &&
-                  (map[i][j]->getTile(WEST)->getType() >= CARPET_CORE) &&
-                  (map[i][j]->getTile(WEST)->getType() <= CARPET_EDGE_S))
-          {
-            W = true;
-            adjacent++;
-          }
-          if (adjacent == 3)
-          {
-            if (!N)
-              map[i][j]->setType(CARPET_EDGE_N);
-            else if (!E)
-              map[i][j]->setType(CARPET_EDGE_E);
-            else if (!S)
-              map[i][j]->setType(CARPET_EDGE_S);
-            else if (!W)
-              map[i][j]->setType(CARPET_EDGE_W);
-          }
-          else if (adjacent == 2)
-          {
-            if (N && E)
-              map[i][j]->setType(CARPET_CORNER_SW);
-            else if (E && S)
-              map[i][j]->setType(CARPET_CORNER_NW);
-            else if (S && W)
-              map[i][j]->setType(CARPET_CORNER_NE);
-            else if (W && N)
-              map[i][j]->setType(CARPET_CORNER_SE);
-          }
-          break;
-        default:
-          break;
+          N = true;
+          adjacent++;
+        }  // range check, only works if all carpet types are consecutive
+        if (map[i][j]->getTile(SOUTH) &&
+                (map[i][j]->getTile(SOUTH)->getType() >= CARPET_CORE) &&
+                (map[i][j]->getTile(SOUTH)->getType() <= CARPET_EDGE_S))
+        {
+          S = true;
+          adjacent++;
         }
+        if (map[i][j]->getTile(EAST) &&
+                (map[i][j]->getTile(EAST)->getType() >= CARPET_CORE) &&
+                (map[i][j]->getTile(EAST)->getType() <= CARPET_EDGE_S))
+        {
+          E = true;
+          adjacent++;
+        }
+        if (map[i][j]->getTile(WEST) &&
+                (map[i][j]->getTile(WEST)->getType() >= CARPET_CORE) &&
+                (map[i][j]->getTile(WEST)->getType() <= CARPET_EDGE_S))
+        {
+          W = true;
+          adjacent++;
+        }
+        if (adjacent == 3)
+        {
+          if (!N)
+            map[i][j]->setType(CARPET_EDGE_N);
+          else if (!E)
+            map[i][j]->setType(CARPET_EDGE_E);
+          else if (!S)
+            map[i][j]->setType(CARPET_EDGE_S);
+          else if (!W)
+            map[i][j]->setType(CARPET_EDGE_W);
+        }
+        else if (adjacent == 2)
+        {
+          if (N && E)
+            map[i][j]->setType(CARPET_CORNER_SW);
+          else if (E && S)
+            map[i][j]->setType(CARPET_CORNER_NW);
+          else if (S && W)
+            map[i][j]->setType(CARPET_CORNER_NE);
+          else if (W && N)
+            map[i][j]->setType(CARPET_CORNER_SE);
+        }
+        break;
+      default:
+        break;
       }
+    }
+  
+  file.close();
 }  // void Terr::loadMap(string str)
 
