@@ -8,7 +8,8 @@
 
   class Sprite;
 
-  //! Describes the Tiles.png spritesheet in column-major order.  enum tileType
+  //! Describes the Tiles.png spritesheet in column-major order.
+  enum tileType
   {
     VOID,  //!< black, impassable
     OPEN,  //!< white, passable
@@ -41,7 +42,7 @@
     Sprite* getSprite();
     //!< Returns the Sprite on the Tile. NULL if none.
     Tile* getTile(dir d);
-    //!< Returns pointer to the adjacent tile in specified direction. May be NULL.
+    //!< Returns pointer to adjacent tile in specified direction. May be NULL.
     tileType getType();
     //!< Returns the Tile’s type.
     int getX();
@@ -50,6 +51,8 @@
     //!< Returns the Tile’s y position on its Terr.
     bool isOccupied();
     //!< Returns true if the Tile has a Sprite on it.
+    bool isWarp();
+    //!< Returns false. Overloaded version returns true for Warp class.
     void setAngle(double a);
     //!< Sets the rotational angle of the Tile’s sprite.
     void setFlip(SDL_RendererFlip f);
@@ -68,7 +71,8 @@
     tileType type;
     //!< Which type of tile to draw.
     bool isPassable;
-    //!< True if tile can be entered. May change later to enterable from each side.
+    //!< True if tile can be entered.
+    //!< May change later to enterable from each side.
     Sprite* sprite;
     //!< Sprite currently on the tile. NULL if none.
     Tile* E;

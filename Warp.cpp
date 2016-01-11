@@ -34,8 +34,8 @@ Warp::Warp(Tile* tile, string &nT, bool replaceTile)
 }//Warp::Warp(Tile* tile, string &nT)
 
 
-void Warp::setSprite(Sprite* u)
+bool Warp::isWarp()
 {
-  
-}//void Warp::setSprite(Sprite* u)
+  return true;
+}  // bool Warp::isWarp()
 

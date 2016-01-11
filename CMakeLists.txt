@@ -25,6 +25,6 @@ find_package(SDL2_ttf REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2_TTF_INCLUDE_DIR})
 
 set(SOURCES Button.cpp Draw.cpp EventLoops.cpp Globals.cpp Keybind.cpp Main.cpp
-        Party.cpp Sprite.cpp Terr.cpp Tile.cpp Unit.cpp Warp.cpp)
+        Party.cpp Render.cpp Sprite.cpp Terr.cpp Tile.cpp Unit.cpp Warp.cpp)
 add_executable(npc-game ${SOURCES})
 target_link_libraries(npc-game ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY})

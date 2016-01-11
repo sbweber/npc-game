@@ -13,7 +13,7 @@
 
   //! Defines the playable party
   //! Describes the hero's party, directly controlled by the player
-  class Party
+    class Party
   {
   public:
     Party(SDL_Renderer *ren = NULL);
@@ -26,6 +26,8 @@
     //!< Returns the Sprite representing the party by reference.
     Terr* getTerr();
     //!< Returns the current Terr.
+    void move(dir d);
+    //!< Move player's Sprite. Load new Terr if entering a Warp
     void setLocation(uint8_t x, uint8_t y);
     //!< Sets the Party's location on the terr to (x, y).
     void setSprite(SDL_Renderer *ren, const string &str);

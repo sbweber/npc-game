@@ -3,7 +3,7 @@
 #ifndef BUTTON_H
   #define BUTTON_H
 
-  #include "Draw.h"
+  #include "Render.h"
   #include "Globals.h"
 
   //! Describes a clickable button.

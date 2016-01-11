@@ -4,10 +4,9 @@
   #define EVENTLOOPS_H
 
   #include "Draw.h"
-  #include "Keybind.h"
   #include "Globals.h"
+  #include "Keybind.h"
   #include "Party.h"
-  #include "Terr.h"
 
   // EventLoops.cpp
   bool loopAnyState(SDL_Event &e, Party *party, Sprite *npc, gameState &state);

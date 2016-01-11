@@ -52,13 +52,13 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
   {
   case SDL_KEYDOWN:
     if (e.key.keysym == dirUp)
-      party->getSprite()->move(NORTH);
+      party->move(NORTH);
     if (e.key.keysym == dirLeft)
-      party->getSprite()->move(WEST);
+      party->move(WEST);
     if (e.key.keysym == dirDown)
-      party->getSprite()->move(SOUTH);
+      party->move(SOUTH);
     if (e.key.keysym == dirRight)
-      party->getSprite()->move(EAST);
+      party->move(EAST);
     if (e.key.keysym == interact)
       party->getSprite()->interact();
     break;

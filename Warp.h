@@ -11,8 +11,8 @@
   public:
     Warp(Tile* tile, string &nT, bool replaceTile = false);
     //!< Upgrade constructor: copies an existing Tile, adding new functionality
-    void setSprite(Sprite* u);
-    //!< Overloads setSprite to also load a new map.
+    bool isWarp();
+    //!< Returns true. Base version from Tile class returns false.
   protected:
     string newTerr;
     //!< filename of new Terr

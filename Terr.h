@@ -5,6 +5,7 @@
 
   #include "Globals.h"
   #include "Tile.h"
+  #include "Warp.h"
 
   class Tile;
 

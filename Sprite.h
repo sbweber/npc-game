@@ -3,7 +3,7 @@
 #ifndef SPRITE_H
   #define SPRITE_H
 
-  #include "Draw.h"
+  #include "Render.h"
   #include "Tile.h"
   #include "Globals.h"
 
@@ -30,7 +30,8 @@
     Tile* getPos();
     //!< Returns a pointer to the Tile containing this Sprite. NULL if not on a Tile.
     spriteType getSprite();
-    //!< Returns the type of sprite (facing, etc) currently being used.    SDL_Texture* getSpriteSheet();
+    //!< Returns the type of sprite (facing, etc) currently being used.
+    SDL_Texture* getSpriteSheet();
     //!< Returns the spritesheet for this Sprite.
     void interact();
     //!< Intelligently interacts with Sprite being faced, if any.
