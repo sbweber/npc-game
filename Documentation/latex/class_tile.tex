@@ -38,7 +38,7 @@ bool \hyperlink{class_tile_aaddc2d065a537489c31de4a566bb0bd5}{get\+Is\+Passable}
 \begin{DoxyCompactList}\small\item\em Returns the \hyperlink{class_sprite}{Sprite} on the \hyperlink{class_tile}{Tile}. N\+U\+LL if none. \end{DoxyCompactList}\item 
 \hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_tile_ae5038e62f2a4c28150f6abb4deb31433}{get\+Tile} (dir d)\hypertarget{class_tile_ae5038e62f2a4c28150f6abb4deb31433}{}\label{class_tile_ae5038e62f2a4c28150f6abb4deb31433}
 
-\begin{DoxyCompactList}\small\item\em Returns pointer to the adjacent tile in specified direction. May be N\+U\+LL. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Returns pointer to adjacent tile in specified direction. May be N\+U\+LL. \end{DoxyCompactList}\item 
 tile\+Type \hyperlink{class_tile_a36871de25627c7483c31807da1c28706}{get\+Type} ()\hypertarget{class_tile_a36871de25627c7483c31807da1c28706}{}\label{class_tile_a36871de25627c7483c31807da1c28706}
 
 \begin{DoxyCompactList}\small\item\em Returns the Tile’s type. \end{DoxyCompactList}\item 
@@ -51,6 +51,9 @@ int \hyperlink{class_tile_acf97bff4aac74cc8d7e09bc8ca5afa68}{getY} ()\hypertarge
 bool \hyperlink{class_tile_ac556e7bbe293dde62d66b46e3d12bcb7}{is\+Occupied} ()\hypertarget{class_tile_ac556e7bbe293dde62d66b46e3d12bcb7}{}\label{class_tile_ac556e7bbe293dde62d66b46e3d12bcb7}
 
 \begin{DoxyCompactList}\small\item\em Returns true if the \hyperlink{class_tile}{Tile} has a \hyperlink{class_sprite}{Sprite} on it. \end{DoxyCompactList}\item 
+bool \hyperlink{class_tile_a5ef077b74542da250b812bc708920e8a}{is\+Warp} ()\hypertarget{class_tile_a5ef077b74542da250b812bc708920e8a}{}\label{class_tile_a5ef077b74542da250b812bc708920e8a}
+
+\begin{DoxyCompactList}\small\item\em Returns false. Overloaded version returns true for \hyperlink{class_warp}{Warp} class. \end{DoxyCompactList}\item 
 void \hyperlink{class_tile_a94f9e2d35e55c1d1b9f56dbd7816f51a}{set\+Angle} (double a)\hypertarget{class_tile_a94f9e2d35e55c1d1b9f56dbd7816f51a}{}\label{class_tile_a94f9e2d35e55c1d1b9f56dbd7816f51a}
 
 \begin{DoxyCompactList}\small\item\em Sets the rotational angle of the Tile’s sprite. \end{DoxyCompactList}\item 
@@ -78,9 +81,8 @@ int \hyperlink{class_tile_a2d87d8813151af6bbd60811964f047a8}{y}\hypertarget{clas
 tile\+Type \hyperlink{class_tile_a5aa7ae6350675967edf46400c486a412}{type}\hypertarget{class_tile_a5aa7ae6350675967edf46400c486a412}{}\label{class_tile_a5aa7ae6350675967edf46400c486a412}
 
 \begin{DoxyCompactList}\small\item\em Which type of tile to draw. \end{DoxyCompactList}\item 
-bool \hyperlink{class_tile_afa72b458d549b9533f058e2d2fad0f81}{is\+Passable}\hypertarget{class_tile_afa72b458d549b9533f058e2d2fad0f81}{}\label{class_tile_afa72b458d549b9533f058e2d2fad0f81}
-
-\begin{DoxyCompactList}\small\item\em True if tile can be entered. May change later to enterable from each side. \end{DoxyCompactList}\item 
+bool \hyperlink{class_tile_afa72b458d549b9533f058e2d2fad0f81}{is\+Passable}
+\item 
 \hyperlink{class_sprite}{Sprite} $\ast$ \hyperlink{class_tile_af768c5b838f49de5d626880c88b3d515}{sprite}\hypertarget{class_tile_af768c5b838f49de5d626880c88b3d515}{}\label{class_tile_af768c5b838f49de5d626880c88b3d515}
 
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_sprite}{Sprite} currently on the tile. N\+U\+LL if none. \end{DoxyCompactList}\item 
@@ -106,6 +108,12 @@ S\+D\+L\+\_\+\+Renderer\+Flip \hyperlink{class_tile_a815af374aa83cd0be79bb555305
 
 \subsection{Detailed Description}
 Data about individual tiles from a \hyperlink{class_terr}{Terr}. 
+
+\subsection{Member Data Documentation}
+\index{Tile@{Tile}!is\+Passable@{is\+Passable}}
+\index{is\+Passable@{is\+Passable}!Tile@{Tile}}
+\subsubsection[{\texorpdfstring{is\+Passable}{isPassable}}]{\setlength{\rightskip}{0pt plus 5cm}bool Tile\+::is\+Passable\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_tile_afa72b458d549b9533f058e2d2fad0f81}{}\label{class_tile_afa72b458d549b9533f058e2d2fad0f81}
+True if tile can be entered. May change later to enterable from each side. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

@@ -134,7 +134,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <tr class="separator:a42f98bf8592783e96f42d6889a8d7e4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5038e62f2a4c28150f6abb4deb31433"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5038e62f2a4c28150f6abb4deb31433"></a>
 <a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ae5038e62f2a4c28150f6abb4deb31433">getTile</a> (dir d)</td></tr>
-<tr class="memdesc:ae5038e62f2a4c28150f6abb4deb31433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to the adjacent tile in specified direction. May be NULL. <br /></td></tr>
+<tr class="memdesc:ae5038e62f2a4c28150f6abb4deb31433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to adjacent tile in specified direction. May be NULL. <br /></td></tr>
 <tr class="separator:ae5038e62f2a4c28150f6abb4deb31433"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36871de25627c7483c31807da1c28706"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36871de25627c7483c31807da1c28706"></a>
 tileType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a36871de25627c7483c31807da1c28706">getType</a> ()</td></tr>
@@ -152,6 +152,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ac556e7bbe293dde62d66b46e3d12bcb7">isOccupied</a> ()</td></tr>
 <tr class="memdesc:ac556e7bbe293dde62d66b46e3d12bcb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> has a <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> on it. <br /></td></tr>
 <tr class="separator:ac556e7bbe293dde62d66b46e3d12bcb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ef077b74542da250b812bc708920e8a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ef077b74542da250b812bc708920e8a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a5ef077b74542da250b812bc708920e8a">isWarp</a> ()</td></tr>
+<tr class="memdesc:a5ef077b74542da250b812bc708920e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns false. Overloaded version returns true for <a class="el" href="class_warp.html" title="Warp is a kind of Tile that loads a new Terr (e.g. leaving a building). ">Warp</a> class. <br /></td></tr>
+<tr class="separator:a5ef077b74542da250b812bc708920e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94f9e2d35e55c1d1b9f56dbd7816f51a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a94f9e2d35e55c1d1b9f56dbd7816f51a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a94f9e2d35e55c1d1b9f56dbd7816f51a">setAngle</a> (double a)</td></tr>
 <tr class="memdesc:a94f9e2d35e55c1d1b9f56dbd7816f51a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the rotational angle of the Tile’s sprite. <br /></td></tr>
@@ -187,9 +191,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 tileType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a5aa7ae6350675967edf46400c486a412">type</a></td></tr>
 <tr class="memdesc:a5aa7ae6350675967edf46400c486a412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Which type of tile to draw. <br /></td></tr>
 <tr class="separator:a5aa7ae6350675967edf46400c486a412"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa72b458d549b9533f058e2d2fad0f81"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa72b458d549b9533f058e2d2fad0f81"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#afa72b458d549b9533f058e2d2fad0f81">isPassable</a></td></tr>
-<tr class="memdesc:afa72b458d549b9533f058e2d2fad0f81"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if tile can be entered. May change later to enterable from each side. <br /></td></tr>
+<tr class="memitem:afa72b458d549b9533f058e2d2fad0f81"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#afa72b458d549b9533f058e2d2fad0f81">isPassable</a></td></tr>
 <tr class="separator:afa72b458d549b9533f058e2d2fad0f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af768c5b838f49de5d626880c88b3d515"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af768c5b838f49de5d626880c88b3d515"></a>
 <a class="el" href="class_sprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#af768c5b838f49de5d626880c88b3d515">sprite</a></td></tr>
@@ -222,7 +224,29 @@ SDL_RendererFlip&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Data about individual tiles from a <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="afa72b458d549b9533f058e2d2fad0f81"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Tile::isPassable</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>True if tile can be entered. May change later to enterable from each side. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_tile_8h_source.html">Tile.h</a></li>
 <li>Tile.cpp</li>
 </ul>

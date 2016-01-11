@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['text',['text',['../class_button.html#a08d8969454e7a566717d2488a788bd78',1,'Button']]],
-  ['type',['type',['../class_sprite.html#af4ab6cfa8155326b6d8af31f943514f2',1,'Sprite::type()'],['../class_tile.html#a5aa7ae6350675967edf46400c486a412',1,'Tile::type()']]]
+  ['s',['S',['../class_tile.html#adc655f39bc82d9b5898b991faea9df42',1,'Tile']]],
+  ['sprite',['sprite',['../class_party.html#ae71ba8a78bc7da8b16ff861412b30adb',1,'Party::sprite()'],['../class_sprite.html#afbd06de3c7cace1c741bbb609abfa119',1,'Sprite::sprite()'],['../class_tile.html#af768c5b838f49de5d626880c88b3d515',1,'Tile::sprite()']]],
+  ['spritesheet',['spriteSheet',['../class_sprite.html#aec7102885a3ca3fdd5124f8677135013',1,'Sprite']]]
 ];
