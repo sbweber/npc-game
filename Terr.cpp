@@ -12,8 +12,8 @@ Terr::Terr(const string &str)
 
 Terr::~Terr()
 {
-  for (int i = 0; i < w; i++)
-    for (int j = 0; j < h; j++)
+  for (uint32_t i = 0; i < w; i++)
+    for (uint32_t j = 0; j < h; j++)
       delete(map[i][j]);
 }  // Terr::~Terr()
 
@@ -46,11 +46,11 @@ void Terr::loadMap(const string &str)
   for (vector <vector<Tile*> >::iterator itr = map.begin(); itr != map.end();
           itr++)
     itr->resize(h);
-  for (int i = 0; i < w; i++)
-    for (int j = 0; j < h; j++)
+  for (uint32_t i = 0; i < w; i++)
+    for (uint32_t j = 0; j < h; j++)
       map[i][j] = new Tile(VOID);
-  for (int i = 0; i < w; i++)
-    for (int j = 0; j < h; j++)
+  for (uint32_t i = 0; i < w; i++)
+    for (uint32_t j = 0; j < h; j++)
     {
       map[i][j]->setPos(i, j);
       if (i > 0)
@@ -66,8 +66,8 @@ void Terr::loadMap(const string &str)
   // intentionally nesting like this, despite slower loop, because map is
   // currently read in that manner. Due to small maps, ease of understanding
   // is more valuable than efficient memory parsing.
-  for (int j = 0; j < h; j++)
-    for (int i = 0; i < w; i++)
+  for (uint32_t j = 0; j < h; j++)
+    for (uint32_t i = 0; i < w; i++)
     {
       c = file.get();
       if (!file.good())
@@ -103,8 +103,8 @@ void Terr::loadMap(const string &str)
   // based on adjacent tiles (corner piece? edge? etc)
   bool N = false, S = false, E = false, W = false;
   int adjacent = 0;
-  for (int i = 0; i < w; i++)
-    for (int j = 0; j < h; j++)
+  for (uint32_t i = 0; i < w; i++)
+    for (uint32_t j = 0; j < h; j++)
     {
       adjacent = 0;
       N = S = E = W = false;
@@ -166,7 +166,24 @@ void Terr::loadMap(const string &str)
         break;
       }
     }
-  
+
+  while (file.good())
+  {
+    uint32_t sourceX, sourceY, destX, destY;
+    string destTerr;
+    
+    file >> sourceX;
+    file.ignore(numeric_limits<streamsize>::max(), ' ');
+    file >> sourceY;
+    file.ignore(numeric_limits<streamsize>::max(), ' ');
+    file >> destTerr;
+    file.ignore(numeric_limits<streamsize>::max(), ' ');
+    file >> destX;
+    file.ignore(numeric_limits<streamsize>::max(), ' ');
+    file >> destY;
+    map[sourceX][sourceY] = new Warp(map[sourceX][sourceY], destTerr,
+            destX, destY, true);
+  }  // Until EOF hit, all remaining info is warps
   file.close();
 }  // void Terr::loadMap(string str)
 

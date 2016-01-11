@@ -45,7 +45,7 @@ void Party::move(dir d)
   sprite->move(d);
   if (sprite->getPos()->isWarp())
   {
-    Warp* dest = (Warp*)sprite->getPos();
+    Warp* dest = (Warp*)sprite->getPos();  // isWarp() test guarantees safe cast
     string destTerr= dest->getDestTerr();
     uint8_t x = dest->getDestX();
     uint8_t y = dest->getDestY();

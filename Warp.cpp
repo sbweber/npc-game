@@ -3,7 +3,8 @@
 #include "Warp.h"
 
 
-Warp::Warp(Tile* tile, string &nT, bool replaceTile)
+Warp::Warp(Tile* tile, const string &dT, uint8_t dX, uint8_t dY,
+            bool replaceTile)
 {
   x = tile->getX();
   y = tile->getY();
@@ -17,7 +18,9 @@ Warp::Warp(Tile* tile, string &nT, bool replaceTile)
   angle = tile->getAngle();
   flip = tile->getFlip();
   
-  destTerr = nT;
+  destTerr = dT;
+  destX = dX;
+  destY = dY;
   
   if (replaceTile)
   {
