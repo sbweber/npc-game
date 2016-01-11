@@ -31,6 +31,8 @@
   public:
     Tile(tileType t = VOID);
     //!< Tile constructor. Makes a VOID Tile by default.
+    virtual ~Tile();
+    //!< Virtual Tile destructor.
     void connectTile(dir d, Tile* t);
     //!< Specifies an adjacent Tile. Not reciprocal -- may be one-way!
     double getAngle();
@@ -51,7 +53,7 @@
     //!< Returns the Tile’s y position on its Terr.
     bool isOccupied();
     //!< Returns true if the Tile has a Sprite on it.
-    bool isWarp();
+    virtual bool isWarp();
     //!< Returns false. Overloaded version returns true for Warp class.
     void setAngle(double a);
     //!< Sets the rotational angle of the Tile’s sprite.

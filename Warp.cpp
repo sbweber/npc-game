@@ -17,7 +17,7 @@ Warp::Warp(Tile* tile, string &nT, bool replaceTile)
   angle = tile->getAngle();
   flip = tile->getFlip();
   
-  newTerr = nT;
+  destTerr = nT;
   
   if (replaceTile)
   {
@@ -32,6 +32,24 @@ Warp::Warp(Tile* tile, string &nT, bool replaceTile)
     delete tile;
   }  // If I'm replacing a tile, tell the neighbors I'm him and then delete him.
 }//Warp::Warp(Tile* tile, string &nT)
+
+
+uint8_t Warp::getDestX()
+{
+  return destX;
+}  // uint8_t Warp::getDestX()
+
+
+uint8_t Warp::getDestY()
+{
+  return destY;
+}  // uint8_t Warp::getDestY()
+
+
+string Warp::getDestTerr()
+{
+  return destTerr;
+}  // string Warp::getDestTerr()
 
 
 bool Warp::isWarp()

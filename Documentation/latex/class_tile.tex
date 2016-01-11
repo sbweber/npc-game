@@ -21,6 +21,9 @@ Inheritance diagram for Tile\+:\begin{figure}[H]
 \hyperlink{class_tile_ae8839483d411c1324a0c89327a557194}{Tile} (tile\+Type t=V\+O\+ID)\hypertarget{class_tile_ae8839483d411c1324a0c89327a557194}{}\label{class_tile_ae8839483d411c1324a0c89327a557194}
 
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_tile}{Tile} constructor. Makes a V\+O\+ID \hyperlink{class_tile}{Tile} by default. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_tile_a98634abbd93fa13d0578d7103202d03d}{$\sim$\+Tile} ()\hypertarget{class_tile_a98634abbd93fa13d0578d7103202d03d}{}\label{class_tile_a98634abbd93fa13d0578d7103202d03d}
+
+\begin{DoxyCompactList}\small\item\em Virtual \hyperlink{class_tile}{Tile} destructor. \end{DoxyCompactList}\item 
 void \hyperlink{class_tile_ab29acce6f4bf7ea4617213269e8c3716}{connect\+Tile} (dir d, \hyperlink{class_tile}{Tile} $\ast$t)\hypertarget{class_tile_ab29acce6f4bf7ea4617213269e8c3716}{}\label{class_tile_ab29acce6f4bf7ea4617213269e8c3716}
 
 \begin{DoxyCompactList}\small\item\em Specifies an adjacent \hyperlink{class_tile}{Tile}. Not reciprocal -- may be one-\/way! \end{DoxyCompactList}\item 
@@ -51,7 +54,7 @@ int \hyperlink{class_tile_acf97bff4aac74cc8d7e09bc8ca5afa68}{getY} ()\hypertarge
 bool \hyperlink{class_tile_ac556e7bbe293dde62d66b46e3d12bcb7}{is\+Occupied} ()\hypertarget{class_tile_ac556e7bbe293dde62d66b46e3d12bcb7}{}\label{class_tile_ac556e7bbe293dde62d66b46e3d12bcb7}
 
 \begin{DoxyCompactList}\small\item\em Returns true if the \hyperlink{class_tile}{Tile} has a \hyperlink{class_sprite}{Sprite} on it. \end{DoxyCompactList}\item 
-bool \hyperlink{class_tile_a5ef077b74542da250b812bc708920e8a}{is\+Warp} ()\hypertarget{class_tile_a5ef077b74542da250b812bc708920e8a}{}\label{class_tile_a5ef077b74542da250b812bc708920e8a}
+virtual bool \hyperlink{class_tile_a5ef077b74542da250b812bc708920e8a}{is\+Warp} ()\hypertarget{class_tile_a5ef077b74542da250b812bc708920e8a}{}\label{class_tile_a5ef077b74542da250b812bc708920e8a}
 
 \begin{DoxyCompactList}\small\item\em Returns false. Overloaded version returns true for \hyperlink{class_warp}{Warp} class. \end{DoxyCompactList}\item 
 void \hyperlink{class_tile_a94f9e2d35e55c1d1b9f56dbd7816f51a}{set\+Angle} (double a)\hypertarget{class_tile_a94f9e2d35e55c1d1b9f56dbd7816f51a}{}\label{class_tile_a94f9e2d35e55c1d1b9f56dbd7816f51a}

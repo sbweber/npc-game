@@ -9,13 +9,28 @@ Tile::Tile(tileType t)
   y = 0;
   setType(t);
   sprite = NULL;
+  E = NULL;
   N = NULL;
   S = NULL;
   W = NULL;
-  E = NULL;
   angle = 0;
   flip = SDL_FLIP_NONE;
 }  // Tile::Tile(tileType t)
+
+
+Tile::~Tile()
+{
+  if (E)
+    E->W = NULL;
+  if (N)
+    N->S = NULL;
+  if (S)
+    S->N = NULL;
+  if (W)
+    W->E = NULL;
+  if (sprite)
+    sprite->setTile(NULL);
+}  // Tile::~Tile()
 
 
 void Tile::connectTile(dir d, Tile* t)

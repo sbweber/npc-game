@@ -11,14 +11,20 @@
   public:
     Warp(Tile* tile, string &nT, bool replaceTile = false);
     //!< Upgrade constructor: copies an existing Tile, adding new functionality
-    bool isWarp();
+    uint8_t getDestX();
+    //!< Returns the Warp's destination X-position.
+    uint8_t getDestY();
+    //!< Returns the Warp's destination Y-position.
+    string getDestTerr();
+    //!< Returns the filename of the destination Terr.
+    bool isWarp() override;
     //!< Returns true. Base version from Tile class returns false.
   protected:
-    string newTerr;
-    //!< filename of new Terr
-    int destX;
+    string destTerr;
+    //!< filename of destination Terr
+    uint8_t destX;
     //!< X-position of character on new Terr
-    int destY;
+    uint8_t destY;
     //!< Y-position of character on new Terr
   };
 

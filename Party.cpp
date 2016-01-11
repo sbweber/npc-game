@@ -45,7 +45,12 @@ void Party::move(dir d)
   sprite->move(d);
   if (sprite->getPos()->isWarp())
   {
-    
+    Warp* dest = (Warp*)sprite->getPos();
+    string destTerr= dest->getDestTerr();
+    uint8_t x = dest->getDestX();
+    uint8_t y = dest->getDestY();
+    terr->loadMap(destTerr);
+    sprite->setTile(terr->getTile(x, y));
   }  // If the new Tile is a Warp, load the new Terr.
 }  // void Party::move(dir d)
 

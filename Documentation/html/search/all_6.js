@@ -1,6 +1,9 @@
 var searchData=
 [
   ['getangle',['getAngle',['../class_tile.html#a947b6692bfcdd7b1adc59fcbee16c1fc',1,'Tile']]],
+  ['getdestterr',['getDestTerr',['../class_warp.html#a5c61204c5eafbd5dfa8a365c08257eec',1,'Warp']]],
+  ['getdestx',['getDestX',['../class_warp.html#a9d4c56d3be35a5c8b928b3b8acf5006f',1,'Warp']]],
+  ['getdesty',['getDestY',['../class_warp.html#a490f1fee6c3ecd8243847ae63ffa9dbb',1,'Warp']]],
   ['getflip',['getFlip',['../class_tile.html#ad2d2b3bd012d3a54ccb51f6eb986115a',1,'Tile']]],
   ['getheight',['getHeight',['../class_terr.html#a0ef7c8147e12a2291fc84d9ebc67a8df',1,'Terr']]],
   ['getispassable',['getIsPassable',['../class_tile.html#aaddc2d065a537489c31de4a566bb0bd5',1,'Tile']]],
