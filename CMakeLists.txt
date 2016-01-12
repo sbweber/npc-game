@@ -26,5 +26,7 @@ include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2_TTF_INC
 
 set(SOURCES Button.cpp Draw.cpp EventLoops.cpp Globals.cpp Keybind.cpp Main.cpp
         Party.cpp Render.cpp Sprite.cpp Terr.cpp Tile.cpp Unit.cpp Warp.cpp)
-add_executable(npc-game ${SOURCES})
+set(HEADERS Button.h Draw.h EventLoops.h Globals.h Keybind.h
+        Party.h Render.h Sprite.h Terr.h Tile.h Unit.h Warp.h)
+add_executable(npc-game ${SOURCES} ${HEADERS})
 target_link_libraries(npc-game ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY})
