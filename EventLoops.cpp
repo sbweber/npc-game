@@ -38,6 +38,8 @@ bool loopBattle(SDL_Event &e)
 {
   switch (e.type)
   {
+  case SDL_KEYDOWN:
+    break;
   default:
     break;
   }
@@ -75,6 +77,8 @@ bool loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
   drawRebind(ren, font);
   switch (e.type)
   {
+  case SDL_KEYDOWN:
+    break;
   default:
     break;
   }

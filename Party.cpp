@@ -47,8 +47,8 @@ void Party::move(dir d)
   {
     Warp* dest = (Warp*)sprite->getPos();  // isWarp() test guarantees safe cast
     string destTerr= dest->getDestTerr();
-    uint8_t x = dest->getDestX();
-    uint8_t y = dest->getDestY();
+    int32_t x = dest->getDestX();
+    int32_t y = dest->getDestY();
     terr->loadMap(destTerr);
     sprite->setTile(terr->getTile(x, y));
   }  // If the new Tile is a Warp, load the new Terr.

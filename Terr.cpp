@@ -35,7 +35,7 @@ int Terr::getWidth()
 void Terr::loadMap(const string &str)
 {
   ifstream file;
-  char c;
+  int c;
   file.open(("resources/"+str), ifstream::in);
   if (!file.good())
     logSDLError("Map not found.");  // error, probably bad filename
@@ -169,7 +169,7 @@ void Terr::loadMap(const string &str)
 
   while (file.good())
   {
-    uint32_t sourceX, sourceY, destX, destY;
+    int32_t sourceX, sourceY, destX, destY;
     string destTerr;
     
     file >> sourceX;

@@ -1,4 +1,4 @@
-// Samuel Weber
+﻿// Samuel Weber
 
 #ifndef PARTY_H
   #define PARTY_H

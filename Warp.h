@@ -9,12 +9,12 @@
   class Warp : public Tile
   {
   public:
-    Warp(Tile* tile, const string &dT, uint8_t dX, uint8_t dY,
+    Warp(Tile* tile, const string &dT, int32_t dX, int32_t dY,
             bool replaceTile = false);
     //!< Upgrade constructor: copies an existing Tile, adding new functionality
-    uint8_t getDestX();
+    int32_t getDestX();
     //!< Returns the Warp's destination X-position.
-    uint8_t getDestY();
+    int32_t getDestY();
     //!< Returns the Warp's destination Y-position.
     string getDestTerr();
     //!< Returns the filename of the destination Terr.
@@ -23,9 +23,9 @@
   protected:
     string destTerr;
     //!< filename of destination Terr
-    uint32_t destX;
+    int32_t destX;
     //!< X-position of character on new Terr
-    uint32_t destY;
+    int32_t destY;
     //!< Y-position of character on new Terr
   };
 
