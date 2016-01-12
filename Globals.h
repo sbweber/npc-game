@@ -23,6 +23,9 @@
     #include <SDL_image.h>
     #include <SDL_ttf.h>
   #endif
+  #ifdef _WIN32
+    #undef main
+  #endif
 
   // global constants
   const int SCREEN_WIDTH = 640;
