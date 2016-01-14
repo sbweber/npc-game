@@ -6,7 +6,7 @@
 Party::Party(SDL_Renderer *ren)
 {
   for (int i = 0; i < 4; i++)
-    active[i] = NULL;
+    active[i] = nullptr;
   passive.clear();
   if (ren)
     sprite = new Sprite(ren, "Hero.png");

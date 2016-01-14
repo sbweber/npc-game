@@ -13,7 +13,7 @@ Button::Button(SDL_Renderer *ren, const string &file, int x, int y, int w,
   if (font)
     text = renderText(ren, font, str);
   else
-    text = NULL;
+    text = nullptr;
 }  // Button constructor
 
 Button::~Button()

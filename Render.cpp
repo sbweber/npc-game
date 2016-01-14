@@ -49,7 +49,7 @@ void renderTextbox(SDL_Renderer *ren, TTF_Font *font, const string &str,
   SDL_Texture* text;
   line.clear();
   word.clear();
-  SDL_QueryTexture(textbox, NULL, NULL, NULL, &boxH);
+  SDL_QueryTexture(textbox, nullptr, nullptr, nullptr, &boxH);
   renderTexture(textbox, ren, 0, (SCREEN_HEIGHT - boxH));
   for (const char c : str)
   {
@@ -107,7 +107,7 @@ void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y,
     dst.h = clip->h;
   }
   else
-    SDL_QueryTexture(tex, NULL, NULL, &dst.w, &dst.h);
+    SDL_QueryTexture(tex, nullptr, nullptr, &dst.w, &dst.h);
   renderTexture(tex, ren, dst, clip, angle, flip);
 }  // void renderTexture()
 
@@ -115,7 +115,7 @@ void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y,
 void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, SDL_Rect dst,
         SDL_Rect *clip, const double angle, const SDL_RendererFlip flip)
 {
-  SDL_RenderCopyEx(ren, tex, clip, &dst, angle, NULL, flip);
+  SDL_RenderCopyEx(ren, tex, clip, &dst, angle, nullptr, flip);
 }  // void renderTexture()
 
 
@@ -127,7 +127,7 @@ void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w,
   dst.y = y;
   dst.w = w;
   dst.h = h;
-  SDL_RenderCopyEx(ren, tex, NULL, &dst, angle, NULL, flip);
+  SDL_RenderCopyEx(ren, tex, nullptr, &dst, angle, nullptr, flip);
 }  // void renderTexture()
 
 

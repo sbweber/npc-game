@@ -11,7 +11,7 @@
   {
   public:
     Button(SDL_Renderer *ren, const string &file, int x, int y, int w, int h,
-            TTF_Font *font = NULL, const string &s = "");
+            TTF_Font *font = nullptr, const string &s = "");
     /*!< Button does not have a default constructor. A Button must have
      *   a position and dimensions, and the constructor requires a
      *   filename for the background pic. Text and font are optional.

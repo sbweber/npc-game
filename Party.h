@@ -16,7 +16,7 @@
     class Party
   {
   public:
-    Party(SDL_Renderer *ren = NULL);
+    Party(SDL_Renderer *ren = nullptr);
     //!< Constructs the class, setting the sprite as the ‘Hero’ sprite.
     ~Party();
     //!< Default destructor.

@@ -42,9 +42,9 @@
     bool getIsPassable();
     //!< Returns true if the Tile may be entered by a Unit.
     Sprite* getSprite();
-    //!< Returns the Sprite on the Tile. NULL if none.
+    //!< Returns the Sprite on the Tile. nullptr if none.
     Tile* getTile(dir d);
-    //!< Returns pointer to adjacent tile in specified direction. May be NULL.
+    //!< Returns pointer to adjacent tile in specified direction. May be nullptr.
     tileType getType();
     //!< Returns the Tile’s type.
     int getX();
@@ -62,7 +62,7 @@
     void setPos(int xPos, int yPos);
     //!< Sets where Tile thinks it is on a Terr.
     void setSprite(Sprite* u);
-    //!< Sets the Sprite currently occupying the Tile (NULL for none).
+    //!< Sets the Sprite currently occupying the Tile (nullptr for none).
     void setType(tileType t);
     //!< Sets what kind of tile it is.
   protected:
@@ -76,7 +76,7 @@
     //!< True if tile can be entered.
     //!< May change later to enterable from each side.
     Sprite* sprite;
-    //!< Sprite currently on the tile. NULL if none.
+    //!< Sprite currently on the tile. nullptr if none.
     Tile* E;
     //!< Adjacent Tile to the East/Right.
     Tile* N;

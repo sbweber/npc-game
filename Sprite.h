@@ -28,7 +28,7 @@
     ~Sprite();
     //!< Default destructor
     Tile* getPos();
-    //!< Returns a pointer to the Tile containing this Sprite. NULL if not on a Tile.
+    //!< Returns a pointer to the Tile containing this Sprite. nullptr if not on a Tile.
     spriteType getSprite();
     //!< Returns the type of sprite (facing, etc) currently being used.
     SDL_Texture* getSpriteSheet();

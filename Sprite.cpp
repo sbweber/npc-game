@@ -6,7 +6,7 @@ Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile)
 {
   spriteSheet = loadTexture(spriteFile, ren);
   sprite = DOWN;  // default all sprites as facing down
-  pos = NULL;  // default all Units as being off the board
+  pos = nullptr;  // default all Units as being off the board
   facing = SOUTH;
 }  // Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile)
 
@@ -37,9 +37,9 @@ void Sprite::interact()
   if (pos->getTile(facing) && pos->getTile(facing)->getSprite())
     if (pos->getTile(facing)->getSprite()->type == "test")
     {
-      pos->getTile(facing)->getSprite()->setTile(NULL);
+      pos->getTile(facing)->getSprite()->setTile(nullptr);
       // current npc test type: kills self on interaction. Test successful.
-      pos->getTile(facing)->setSprite(NULL);
+      pos->getTile(facing)->setSprite(nullptr);
     }
     // do nothing unless there's a tile in the correct direction with a unit
     // on it (can only ineract with units right now)
@@ -68,7 +68,7 @@ void Sprite::move(dir d)
   if (pos->getTile(d) && pos->getTile(d)->getIsPassable() &&
           !pos->getTile(d)->getSprite())
   {
-    pos->setSprite(NULL);
+    pos->setSprite(nullptr);
     pos = pos->getTile(d);
     pos->setSprite(this);
   }  // move if target tile exists, can be entered, doesn't have a unit in it

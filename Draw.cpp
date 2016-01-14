@@ -31,7 +31,7 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
   int x = party->getSprite()->getPos()->getX();
   int y = party->getSprite()->getPos()->getY();
 
-  Tile* tilePtr = NULL;
+  Tile* tilePtr = nullptr;
   Tile* offMap = new Tile();
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
