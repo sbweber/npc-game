@@ -182,7 +182,7 @@ void Terr::loadMap(const string &str)
     file >> destX;
     file.ignore(numeric_limits<streamsize>::max(), ' ');
     file >> destY;
-    if (sourceX <= w && sourceY <= h)
+    if (sourceX <= w && sourceX >= 0 && sourceY <= h && sourceY >= 0)
       map[sourceX][sourceY] = new Warp(map[sourceX][sourceY], destTerr,
               destX, destY, true);
   }  // Until EOF hit, all remaining info is warps

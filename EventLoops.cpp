@@ -103,7 +103,7 @@ bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
     {
       party->changeTerr("Map1.txt");
       state = MAP;
-      party->setLocation(4, 3);
+      party->setLocation(6, 10);
       npc->setTile(party->getTerr()->getTile(5, 4));
       SDL_Event* wait = new SDL_Event();
       SDL_PushEvent(wait);  // push empty event to cause immediate state update

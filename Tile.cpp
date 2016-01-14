@@ -20,14 +20,6 @@ Tile::Tile(tileType t)
 
 Tile::~Tile()
 {
-  if (E)
-    E->W = NULL;
-  if (N)
-    N->S = NULL;
-  if (S)
-    S->N = NULL;
-  if (W)
-    W->E = NULL;
   if (sprite)
     sprite->setTile(NULL);
 }  // Tile::~Tile()
