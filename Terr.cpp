@@ -12,9 +12,10 @@ Terr::Terr(const string &str)
 
 Terr::~Terr()
 {
-  for (uint32_t i = 0; i < w; i++)
-    for (uint32_t j = 0; j < h; j++)
-      delete(map[i][j]);
+  for (int32_t i = 0; i < w; i++)
+    for (int32_t j = 0; j < h; j++)
+      if (map[i][j])
+        delete(map[i][j]);
 }  // Terr::~Terr()
 
 int Terr::getHeight()
@@ -46,11 +47,11 @@ void Terr::loadMap(const string &str)
   for (vector <vector<Tile*> >::iterator itr = map.begin(); itr != map.end();
           itr++)
     itr->resize(h);
-  for (uint32_t i = 0; i < w; i++)
-    for (uint32_t j = 0; j < h; j++)
+  for (int32_t i = 0; i < w; i++)
+    for (int32_t j = 0; j < h; j++)
       map[i][j] = new Tile(VOID);
-  for (uint32_t i = 0; i < w; i++)
-    for (uint32_t j = 0; j < h; j++)
+  for (int32_t i = 0; i < w; i++)
+    for (int32_t j = 0; j < h; j++)
     {
       map[i][j]->setPos(i, j);
       if (i > 0)
@@ -66,8 +67,8 @@ void Terr::loadMap(const string &str)
   // intentionally nesting like this, despite slower loop, because map is
   // currently read in that manner. Due to small maps, ease of understanding
   // is more valuable than efficient memory parsing.
-  for (uint32_t j = 0; j < h; j++)
-    for (uint32_t i = 0; i < w; i++)
+  for (int32_t j = 0; j < h; j++)
+    for (int32_t i = 0; i < w; i++)
     {
       c = file.get();
       if (!file.good())
@@ -103,8 +104,8 @@ void Terr::loadMap(const string &str)
   // based on adjacent tiles (corner piece? edge? etc)
   bool N = false, S = false, E = false, W = false;
   int adjacent = 0;
-  for (uint32_t i = 0; i < w; i++)
-    for (uint32_t j = 0; j < h; j++)
+  for (int32_t i = 0; i < w; i++)
+    for (int32_t j = 0; j < h; j++)
     {
       adjacent = 0;
       N = S = E = W = false;
@@ -181,8 +182,9 @@ void Terr::loadMap(const string &str)
     file >> destX;
     file.ignore(numeric_limits<streamsize>::max(), ' ');
     file >> destY;
-    map[sourceX][sourceY] = new Warp(map[sourceX][sourceY], destTerr,
-            destX, destY, true);
+    if (sourceX <= w && sourceY <= h)
+      map[sourceX][sourceY] = new Warp(map[sourceX][sourceY], destTerr,
+              destX, destY, true);
   }  // Until EOF hit, all remaining info is warps
   file.close();
 }  // void Terr::loadMap(string str)
