@@ -2,19 +2,28 @@
 
 #include "Tile.h"
 
+
 Tile::Tile(tileType t)
 {
   x = 0;
   y = 0;
   setType(t);
   sprite = NULL;
+  E = NULL;
   N = NULL;
   S = NULL;
   W = NULL;
-  E = NULL;
   angle = 0;
   flip = SDL_FLIP_NONE;
 }  // Tile::Tile(tileType t)
+
+
+Tile::~Tile()
+{
+  if (sprite)
+    sprite->setTile(NULL);
+}  // Tile::~Tile()
+
 
 void Tile::connectTile(dir d, Tile* t)
 {
@@ -37,25 +46,30 @@ void Tile::connectTile(dir d, Tile* t)
   }  // set tile pointer for correct direction
 }  // void Tile::connectTile(dir d, Tile* t)
 
+
 double Tile::getAngle()
 {
   return angle;
 }  // double Tile::getAngle()
+
 
 SDL_RendererFlip Tile::getFlip()
 {
   return flip;
 }  // SDL_RendererFlip Tile::getFlip()
 
+
 bool Tile::getIsPassable()
 {
   return isPassable;
 }  // bool Tile::getIsPassable()
 
+
 Sprite* Tile::getSprite()
 {
   return sprite;
 }  // Sprite* Tile::getSprite()
+
 
 Tile* Tile::getTile(dir d)
 {
@@ -79,10 +93,12 @@ Tile* Tile::getTile(dir d)
   return NULL;  // should be impossible to get here
 }  // Tile* Tile::getTile(dir d)
 
+
 tileType Tile::getType()
 {
   return type;
 }  // tileType Tile::getType()
+
 
 int Tile::getX()
 {
@@ -94,6 +110,7 @@ int Tile::getY()
   return y;
 }  // int Tile::getY()
 
+
 bool Tile::isOccupied()
 {
   if (sprite)
@@ -101,15 +118,24 @@ bool Tile::isOccupied()
   return false;
 }  // bool Tile::isOccupied()
 
+
+bool Tile::isWarp()
+{
+  return false;
+}  // bool Tile::isWarp()
+
+
 void Tile::setAngle(double a)
 {
   angle = a;
 }  // void Tile::setAngle(double a)
 
+
 void Tile::setFlip(SDL_RendererFlip f)
 {
   flip = f;
 }  // void Tile::setFlip(SDL_RendererFlip f)
+
 
 void Tile::setPos(int xPos, int yPos)
 {
@@ -117,11 +143,13 @@ void Tile::setPos(int xPos, int yPos)
   y = yPos;
 }  // void Tile::setPos(int xPos, int yPos)
 
+
 void Tile::setSprite(Sprite* u)
 {
   sprite = u;
   // tile thinks the unit is there, but unit may not know it's on that tile!
 }  // void Tile::setUnit(Unit* u)
+
 
 void Tile::setType(tileType t)
 {

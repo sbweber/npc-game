@@ -40,4 +40,13 @@ dist/*
 nbproject/*
 Makefile
 
+# MSVC Project Files
+*.vcxproj*
+*.sln
+*.sdf
+*.opensdf
+npc-game.dir/*
+x64/*
+Win32/*
+
 .dep.inc

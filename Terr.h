@@ -5,6 +5,7 @@
 
   #include "Globals.h"
   #include "Tile.h"
+  #include "Warp.h"
 
   class Tile;
 
@@ -27,9 +28,9 @@
   protected:
     vector< vector<Tile*> > map;
     //!< 2D dyanmically resized array of Tiles defining Terr.
-    int w;
+    int32_t w;
     //!< map width (in Tiles)
-    int h;
+    int32_t h;
     //!< map height (in Tiles)
   };  // class Terr
 

@@ -40,7 +40,7 @@ void quit(const string err, int errtype, SDL_Renderer *ren, SDL_Window *win)
 }  // void quit()
 
 
-const long int rng(long int min, long int max)
+long int rng(long int min, long int max)
 {
   int randNum;
   if (min > max)

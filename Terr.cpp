@@ -12,9 +12,10 @@ Terr::Terr(const string &str)
 
 Terr::~Terr()
 {
-  for (int i = 0; i < w; i++)
-    for (int j = 0; j < h; j++)
-      delete(map[i][j]);
+  for (int32_t i = 0; i < w; i++)
+    for (int32_t j = 0; j < h; j++)
+      if (map[i][j])
+        delete(map[i][j]);
 }  // Terr::~Terr()
 
 int Terr::getHeight()
@@ -35,7 +36,7 @@ int Terr::getWidth()
 void Terr::loadMap(const string &str)
 {
   ifstream file;
-  char c;
+  int c;
   file.open(("resources/"+str), ifstream::in);
   if (!file.good())
     logSDLError("Map not found.");  // error, probably bad filename
@@ -46,11 +47,11 @@ void Terr::loadMap(const string &str)
   for (vector <vector<Tile*> >::iterator itr = map.begin(); itr != map.end();
           itr++)
     itr->resize(h);
-  for (int i = 0; i < w; i++)
-    for (int j = 0; j < h; j++)
+  for (int32_t i = 0; i < w; i++)
+    for (int32_t j = 0; j < h; j++)
       map[i][j] = new Tile(VOID);
-  for (int i = 0; i < w; i++)
-    for (int j = 0; j < h; j++)
+  for (int32_t i = 0; i < w; i++)
+    for (int32_t j = 0; j < h; j++)
     {
       map[i][j]->setPos(i, j);
       if (i > 0)
@@ -66,8 +67,8 @@ void Terr::loadMap(const string &str)
   // intentionally nesting like this, despite slower loop, because map is
   // currently read in that manner. Due to small maps, ease of understanding
   // is more valuable than efficient memory parsing.
-  for (int j = 0; j < h; j++)
-    for (int i = 0; i < w; i++)
+  for (int32_t j = 0; j < h; j++)
+    for (int32_t i = 0; i < w; i++)
     {
       c = file.get();
       if (!file.good())
@@ -99,72 +100,92 @@ void Terr::loadMap(const string &str)
       }
     }
 
-    // intelligent sprite selection from correct spritesheet,
-    // based on adjacent tiles (corner piece? edge? etc)
-    bool N = false, S = false, E = false, W = false;
-    int adjacent = 0;
-    for (int i = 0; i < w; i++)
-      for (int j = 0; j < h; j++)
+  // intelligent sprite selection from correct spritesheet,
+  // based on adjacent tiles (corner piece? edge? etc)
+  bool N = false, S = false, E = false, W = false;
+  int adjacent = 0;
+  for (int32_t i = 0; i < w; i++)
+    for (int32_t j = 0; j < h; j++)
+    {
+      adjacent = 0;
+      N = S = E = W = false;
+      switch (map[i][j]->getType())
       {
-        adjacent = 0;
-        N = S = E = W = false;
-        switch (map[i][j]->getType())
+      case CARPET_CORE:
+        if (map[i][j]->getTile(NORTH) &&
+                (map[i][j]->getTile(NORTH)->getType() >= CARPET_CORE) &&
+                (map[i][j]->getTile(NORTH)->getType() <= CARPET_EDGE_S))
         {
-        case CARPET_CORE:
-          if (map[i][j]->getTile(NORTH) &&
-                  (map[i][j]->getTile(NORTH)->getType() >= CARPET_CORE) &&
-                  (map[i][j]->getTile(NORTH)->getType() <= CARPET_EDGE_S))
-          {
-            N = true;
-            adjacent++;
-          }  // range check, only works if all carpet types are consecutive
-          if (map[i][j]->getTile(SOUTH) &&
-                  (map[i][j]->getTile(SOUTH)->getType() >= CARPET_CORE) &&
-                  (map[i][j]->getTile(SOUTH)->getType() <= CARPET_EDGE_S))
-          {
-            S = true;
-            adjacent++;
-          }
-          if (map[i][j]->getTile(EAST) &&
-                  (map[i][j]->getTile(EAST)->getType() >= CARPET_CORE) &&
-                  (map[i][j]->getTile(EAST)->getType() <= CARPET_EDGE_S))
-          {
-            E = true;
-            adjacent++;
-          }
-          if (map[i][j]->getTile(WEST) &&
-                  (map[i][j]->getTile(WEST)->getType() >= CARPET_CORE) &&
-                  (map[i][j]->getTile(WEST)->getType() <= CARPET_EDGE_S))
-          {
-            W = true;
-            adjacent++;
-          }
-          if (adjacent == 3)
-          {
-            if (!N)
-              map[i][j]->setType(CARPET_EDGE_N);
-            else if (!E)
-              map[i][j]->setType(CARPET_EDGE_E);
-            else if (!S)
-              map[i][j]->setType(CARPET_EDGE_S);
-            else if (!W)
-              map[i][j]->setType(CARPET_EDGE_W);
-          }
-          else if (adjacent == 2)
-          {
-            if (N && E)
-              map[i][j]->setType(CARPET_CORNER_SW);
-            else if (E && S)
-              map[i][j]->setType(CARPET_CORNER_NW);
-            else if (S && W)
-              map[i][j]->setType(CARPET_CORNER_NE);
-            else if (W && N)
-              map[i][j]->setType(CARPET_CORNER_SE);
-          }
-          break;
-        default:
-          break;
+          N = true;
+          adjacent++;
+        }  // range check, only works if all carpet types are consecutive
+        if (map[i][j]->getTile(SOUTH) &&
+                (map[i][j]->getTile(SOUTH)->getType() >= CARPET_CORE) &&
+                (map[i][j]->getTile(SOUTH)->getType() <= CARPET_EDGE_S))
+        {
+          S = true;
+          adjacent++;
         }
+        if (map[i][j]->getTile(EAST) &&
+                (map[i][j]->getTile(EAST)->getType() >= CARPET_CORE) &&
+                (map[i][j]->getTile(EAST)->getType() <= CARPET_EDGE_S))
+        {
+          E = true;
+          adjacent++;
+        }
+        if (map[i][j]->getTile(WEST) &&
+                (map[i][j]->getTile(WEST)->getType() >= CARPET_CORE) &&
+                (map[i][j]->getTile(WEST)->getType() <= CARPET_EDGE_S))
+        {
+          W = true;
+          adjacent++;
+        }
+        if (adjacent == 3)
+        {
+          if (!N)
+            map[i][j]->setType(CARPET_EDGE_N);
+          else if (!E)
+            map[i][j]->setType(CARPET_EDGE_E);
+          else if (!S)
+            map[i][j]->setType(CARPET_EDGE_S);
+          else if (!W)
+            map[i][j]->setType(CARPET_EDGE_W);
+        }
+        else if (adjacent == 2)
+        {
+          if (N && E)
+            map[i][j]->setType(CARPET_CORNER_SW);
+          else if (E && S)
+            map[i][j]->setType(CARPET_CORNER_NW);
+          else if (S && W)
+            map[i][j]->setType(CARPET_CORNER_NE);
+          else if (W && N)
+            map[i][j]->setType(CARPET_CORNER_SE);
+        }
+        break;
+      default:
+        break;
       }
+    }
+
+  while (file.good())
+  {
+    int32_t sourceX, sourceY, destX, destY;
+    string destTerr;
+    
+    file >> sourceX;
+    file.ignore(numeric_limits<streamsize>::max(), ' ');
+    file >> sourceY;
+    file.ignore(numeric_limits<streamsize>::max(), ' ');
+    file >> destTerr;
+    file.ignore(numeric_limits<streamsize>::max(), ' ');
+    file >> destX;
+    file.ignore(numeric_limits<streamsize>::max(), ' ');
+    file >> destY;
+    if (sourceX <= w && sourceX >= 0 && sourceY <= h && sourceY >= 0)
+      map[sourceX][sourceY] = new Warp(map[sourceX][sourceY], destTerr,
+              destX, destY, true);
+  }  // Until EOF hit, all remaining info is warps
+  file.close();
 }  // void Terr::loadMap(string str)
 

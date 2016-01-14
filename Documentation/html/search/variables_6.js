@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['map',['map',['../class_terr.html#a35de374972704b3d92e76b4bc8e67a9c',1,'Terr']]]
+  ['ispassable',['isPassable',['../class_tile.html#afa72b458d549b9533f058e2d2fad0f81',1,'Tile']]]
 ];

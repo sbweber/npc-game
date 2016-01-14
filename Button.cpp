@@ -24,7 +24,6 @@ Button::~Button()
 
 bool Button::buttonClick(SDL_MouseButtonEvent &click)
 {
-  bool cont = true;
   SDL_Event e;
   SDL_MouseButtonEvent release;
   if (click.state == SDL_RELEASED)
@@ -32,24 +31,25 @@ bool Button::buttonClick(SDL_MouseButtonEvent &click)
   if ((click.x >= button.x) && (click.x <= (button.x + button.w)) &&
           (click.y >= button.y) && (click.y <= (button.y + button.h)))
   {
-    while (cont)
+    while (true)
     {
       if (SDL_PollEvent(&e))
       {
         if (e.type == SDL_MOUSEBUTTONUP)
         {
           release = e.button;
-          cont = false;
+          if ((release.x >= button.x) &&
+                  (release.x <= (button.x + button.w)) &&
+                  (release.y >= button.y) &&
+                  (release.y <= (button.y + button.h)))
+            return true;
+          else
+            return false;
         }  // wait for event == mousebuttonup
       }  // wait for event
     }  // loop while waiting
   }  // if mousebuttondown on button
-  else
-    return false; //did not click on button
-  if ((release.x >= button.x) && (release.x <= (button.x + button.w)) &&
-          (release.y >= button.y) && (release.y <= (button.y + button.h)))
-    return true;
-  return false;
+  return false;  // did not click on button
 }  // bool buttonClick(SDL_Rect &button, SDL_MouseButtonEvent &click)
 
 SDL_Texture* Button::getPic()

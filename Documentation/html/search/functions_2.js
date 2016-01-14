@@ -1,6 +1,9 @@
 var searchData=
 [
   ['getangle',['getAngle',['../class_tile.html#a947b6692bfcdd7b1adc59fcbee16c1fc',1,'Tile']]],
+  ['getdestterr',['getDestTerr',['../class_warp.html#a5c61204c5eafbd5dfa8a365c08257eec',1,'Warp']]],
+  ['getdestx',['getDestX',['../class_warp.html#a9d4c56d3be35a5c8b928b3b8acf5006f',1,'Warp']]],
+  ['getdesty',['getDestY',['../class_warp.html#a490f1fee6c3ecd8243847ae63ffa9dbb',1,'Warp']]],
   ['getflip',['getFlip',['../class_tile.html#ad2d2b3bd012d3a54ccb51f6eb986115a',1,'Tile']]],
   ['getheight',['getHeight',['../class_terr.html#a0ef7c8147e12a2291fc84d9ebc67a8df',1,'Terr']]],
   ['getispassable',['getIsPassable',['../class_tile.html#aaddc2d065a537489c31de4a566bb0bd5',1,'Tile']]],
@@ -8,6 +11,7 @@ var searchData=
   ['getpos',['getPos',['../class_sprite.html#a6c4961079fab937172061be32d654e85',1,'Sprite']]],
   ['getsprite',['getSprite',['../class_party.html#a79d7e55a83b66a41146679deb3b4c533',1,'Party::getSprite()'],['../class_sprite.html#a01742e39c9f18622a094a187d6858912',1,'Sprite::getSprite()'],['../class_tile.html#a42f98bf8592783e96f42d6889a8d7e4f',1,'Tile::getSprite()']]],
   ['getspritesheet',['getSpriteSheet',['../class_sprite.html#abec247d2cd9396834344c3cfe81eddc1',1,'Sprite']]],
+  ['getterr',['getTerr',['../class_party.html#ae0a1a365f425b46efdf315998465503f',1,'Party']]],
   ['gettile',['getTile',['../class_terr.html#a1ca3548cb10880ae8ac01362d1f3116a',1,'Terr::getTile()'],['../class_tile.html#ae5038e62f2a4c28150f6abb4deb31433',1,'Tile::getTile()']]],
   ['gettype',['getType',['../class_tile.html#a36871de25627c7483c31807da1c28706',1,'Tile']]],
   ['getwidth',['getWidth',['../class_terr.html#a397fdbbeb3fe3eb8989d9da77af42f57',1,'Terr']]],

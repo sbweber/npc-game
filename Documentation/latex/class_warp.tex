@@ -15,18 +15,42 @@ Inheritance diagram for Warp\+:\begin{figure}[H]
 \includegraphics[height=2.000000cm]{class_warp}
 \end{center}
 \end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_warp_ab3dc6510e257e6ce5f621c7201430c62}{Warp} (\hyperlink{class_tile}{Tile} $\ast$tile, string \&nT, bool replace\+Tile=false)\hypertarget{class_warp_ab3dc6510e257e6ce5f621c7201430c62}{}\label{class_warp_ab3dc6510e257e6ce5f621c7201430c62}
+
+\begin{DoxyCompactList}\small\item\em Upgrade constructor\+: copies an existing \hyperlink{class_tile}{Tile}, adding new functionality. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_warp_a9d4c56d3be35a5c8b928b3b8acf5006f}{get\+DestX} ()\hypertarget{class_warp_a9d4c56d3be35a5c8b928b3b8acf5006f}{}\label{class_warp_a9d4c56d3be35a5c8b928b3b8acf5006f}
+
+\begin{DoxyCompactList}\small\item\em Returns the \hyperlink{class_warp}{Warp}\textquotesingle{}s destination X-\/position. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_warp_a490f1fee6c3ecd8243847ae63ffa9dbb}{get\+DestY} ()\hypertarget{class_warp_a490f1fee6c3ecd8243847ae63ffa9dbb}{}\label{class_warp_a490f1fee6c3ecd8243847ae63ffa9dbb}
+
+\begin{DoxyCompactList}\small\item\em Returns the \hyperlink{class_warp}{Warp}\textquotesingle{}s destination Y-\/position. \end{DoxyCompactList}\item 
+string \hyperlink{class_warp_a5c61204c5eafbd5dfa8a365c08257eec}{get\+Dest\+Terr} ()\hypertarget{class_warp_a5c61204c5eafbd5dfa8a365c08257eec}{}\label{class_warp_a5c61204c5eafbd5dfa8a365c08257eec}
+
+\begin{DoxyCompactList}\small\item\em Returns the filename of the destination \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
+bool \hyperlink{class_warp_ad747a08d0092f0b7362743b415795054}{is\+Warp} () override\hypertarget{class_warp_ad747a08d0092f0b7362743b415795054}{}\label{class_warp_ad747a08d0092f0b7362743b415795054}
+
+\begin{DoxyCompactList}\small\item\em Returns true. Base version from \hyperlink{class_tile}{Tile} class returns false. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-string \hyperlink{class_warp_abbc0edf4c6a9939e0c39c9eb55b8fb1f}{new\+Terr}\hypertarget{class_warp_abbc0edf4c6a9939e0c39c9eb55b8fb1f}{}\label{class_warp_abbc0edf4c6a9939e0c39c9eb55b8fb1f}
+string \hyperlink{class_warp_a37b259e72467ec5dfe8a6e4c3a137eb3}{dest\+Terr}\hypertarget{class_warp_a37b259e72467ec5dfe8a6e4c3a137eb3}{}\label{class_warp_a37b259e72467ec5dfe8a6e4c3a137eb3}
 
-\begin{DoxyCompactList}\small\item\em filename of new \hyperlink{class_terr}{Terr} \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Additional Inherited Members}
+\begin{DoxyCompactList}\small\item\em filename of destination \hyperlink{class_terr}{Terr} \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_warp_a263818ce83fe48de61f9d9cc99384cba}{destX}\hypertarget{class_warp_a263818ce83fe48de61f9d9cc99384cba}{}\label{class_warp_a263818ce83fe48de61f9d9cc99384cba}
+
+\begin{DoxyCompactList}\small\item\em X-\/position of character on new \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_warp_a6407a57d12ab0c17d6c1f9dce479b635}{destY}\hypertarget{class_warp_a6407a57d12ab0c17d6c1f9dce479b635}{}\label{class_warp_a6407a57d12ab0c17d6c1f9dce479b635}
+
+\begin{DoxyCompactList}\small\item\em Y-\/position of character on new \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 \hyperlink{class_warp}{Warp} is a kind of \hyperlink{class_tile}{Tile} that loads a new \hyperlink{class_terr}{Terr} (e.\+g. leaving a building). 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Warp.\+h\end{DoxyCompactItemize}
+Warp.\+h\item 
+Warp.\+cpp\end{DoxyCompactItemize}
