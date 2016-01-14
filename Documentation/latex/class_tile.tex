@@ -38,10 +38,10 @@ bool \hyperlink{class_tile_aaddc2d065a537489c31de4a566bb0bd5}{get\+Is\+Passable}
 \begin{DoxyCompactList}\small\item\em Returns true if the \hyperlink{class_tile}{Tile} may be entered by a \hyperlink{class_unit}{Unit}. \end{DoxyCompactList}\item 
 \hyperlink{class_sprite}{Sprite} $\ast$ \hyperlink{class_tile_a42f98bf8592783e96f42d6889a8d7e4f}{get\+Sprite} ()\hypertarget{class_tile_a42f98bf8592783e96f42d6889a8d7e4f}{}\label{class_tile_a42f98bf8592783e96f42d6889a8d7e4f}
 
-\begin{DoxyCompactList}\small\item\em Returns the \hyperlink{class_sprite}{Sprite} on the \hyperlink{class_tile}{Tile}. N\+U\+LL if none. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Returns the \hyperlink{class_sprite}{Sprite} on the \hyperlink{class_tile}{Tile}. nullptr if none. \end{DoxyCompactList}\item 
 \hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_tile_ae5038e62f2a4c28150f6abb4deb31433}{get\+Tile} (dir d)\hypertarget{class_tile_ae5038e62f2a4c28150f6abb4deb31433}{}\label{class_tile_ae5038e62f2a4c28150f6abb4deb31433}
 
-\begin{DoxyCompactList}\small\item\em Returns pointer to adjacent tile in specified direction. May be N\+U\+LL. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Returns pointer to adjacent tile in specified direction. May be nullptr. \end{DoxyCompactList}\item 
 tile\+Type \hyperlink{class_tile_a36871de25627c7483c31807da1c28706}{get\+Type} ()\hypertarget{class_tile_a36871de25627c7483c31807da1c28706}{}\label{class_tile_a36871de25627c7483c31807da1c28706}
 
 \begin{DoxyCompactList}\small\item\em Returns the Tile’s type. \end{DoxyCompactList}\item 
@@ -68,7 +68,7 @@ void \hyperlink{class_tile_a8a6429d2adbe3e45c519d86a57b514c3}{set\+Pos} (int x\+
 \begin{DoxyCompactList}\small\item\em Sets where \hyperlink{class_tile}{Tile} thinks it is on a \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
 void \hyperlink{class_tile_ad85c92ea426639130cc1d0d38641da3c}{set\+Sprite} (\hyperlink{class_sprite}{Sprite} $\ast$u)\hypertarget{class_tile_ad85c92ea426639130cc1d0d38641da3c}{}\label{class_tile_ad85c92ea426639130cc1d0d38641da3c}
 
-\begin{DoxyCompactList}\small\item\em Sets the \hyperlink{class_sprite}{Sprite} currently occupying the \hyperlink{class_tile}{Tile} (N\+U\+LL for none). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Sets the \hyperlink{class_sprite}{Sprite} currently occupying the \hyperlink{class_tile}{Tile} (nullptr for none). \end{DoxyCompactList}\item 
 void \hyperlink{class_tile_a2557595d030a43cf9b5334df3b7264f7}{set\+Type} (tile\+Type t)\hypertarget{class_tile_a2557595d030a43cf9b5334df3b7264f7}{}\label{class_tile_a2557595d030a43cf9b5334df3b7264f7}
 
 \begin{DoxyCompactList}\small\item\em Sets what kind of tile it is. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -88,7 +88,7 @@ bool \hyperlink{class_tile_afa72b458d549b9533f058e2d2fad0f81}{is\+Passable}
 \item 
 \hyperlink{class_sprite}{Sprite} $\ast$ \hyperlink{class_tile_af768c5b838f49de5d626880c88b3d515}{sprite}\hypertarget{class_tile_af768c5b838f49de5d626880c88b3d515}{}\label{class_tile_af768c5b838f49de5d626880c88b3d515}
 
-\begin{DoxyCompactList}\small\item\em \hyperlink{class_sprite}{Sprite} currently on the tile. N\+U\+LL if none. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_sprite}{Sprite} currently on the tile. nullptr if none. \end{DoxyCompactList}\item 
 \hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_tile_a0d63c88d4136aecedcb2756d20615b89}{E}\hypertarget{class_tile_a0d63c88d4136aecedcb2756d20615b89}{}\label{class_tile_a0d63c88d4136aecedcb2756d20615b89}
 
 \begin{DoxyCompactList}\small\item\em Adjacent \hyperlink{class_tile}{Tile} to the East/\+Right. \end{DoxyCompactList}\item 
