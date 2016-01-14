@@ -44,7 +44,7 @@ void Terr::loadMap(const string &str)
   file >> w;
   file >> h;
   map.resize(w);
-  for (vector <vector<Tile*> >::iterator itr = map.begin(); itr != map.end();
+  for (vector <vector<Tile*> >::iterator itr = begin(map); itr != end(map);
           itr++)
     itr->resize(h);
   for (int32_t i = 0; i < w; i++)

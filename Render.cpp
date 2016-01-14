@@ -51,9 +51,9 @@ void renderTextbox(SDL_Renderer *ren, TTF_Font *font, const string &str,
   word.clear();
   SDL_QueryTexture(textbox, NULL, NULL, NULL, &boxH);
   renderTexture(textbox, ren, 0, (SCREEN_HEIGHT - boxH));
-  for (string::const_iterator itr = str.cbegin(); itr != str.cend(); itr++)
+  for (const char c : str)
   {
-    if (*itr == ' ')
+    if (c == ' ')
     {
       if ((line.length() + word.length() + 1 <= 70))
         // magic number: at current font size, 70 characters to a line
@@ -70,7 +70,7 @@ void renderTextbox(SDL_Renderer *ren, TTF_Font *font, const string &str,
       word.clear();
     }  // if word completed
     else
-      word += *itr;
+      word += c;
   }
   // problems will occur if more lines of text are needed than
   // will fit in one textbox
