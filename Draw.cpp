@@ -71,7 +71,7 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
         break;
       }
       if (tilePtr->isOccupied())
-        cont = drawUnit(ren, tilePtr, party->getSprite()->getSpline(), i, j);
+        cont = drawUnit(ren, tilePtr, party, i, j);
       // if the tile is occupied, draw the character
       if (!contAny && cont)
         contAny = true;
@@ -159,39 +159,54 @@ void drawTitle(SDL_Renderer *ren, Button *toGame)
 }  // void drawTitle(SDL_Renderer *ren)
 
 
-bool drawUnit(SDL_Renderer *ren, Tile* tile, int pSpline, int i, int j)
+bool drawUnit(SDL_Renderer *ren, Tile* tile, Party *party, int i, int j)
 {
-  spriteType spriteClip = tile->getSprite()->getSprite();
+  int sc = 0, vSpline = 0, hSpline = 0;
   SDL_Rect spriteClips[4];
   getClips(spriteClips, 4, 2, TILE_WIDTH, TILE_HEIGHT);
   // magic number (4): number of unit sprite types
-  switch (spriteClip)
+  switch (tile->getSprite()->getSprite())
   {  // note the order -- clips are taken by column, not by row!
   case UP:
-    renderTexture(tile->getSprite()->getSpriteSheet(), ren, TILE_WIDTH * i,
-            TILE_HEIGHT * j + tile->getSprite()->getSpline() - pSpline,
-            &spriteClips[0]);
+    sc = 0;
+    vSpline += tile->getSprite()->getSpline();
     break;
   case DOWN:
-    renderTexture(tile->getSprite()->getSpriteSheet(), ren, TILE_WIDTH * i,
-            TILE_HEIGHT * j - tile->getSprite()->getSpline() + pSpline,
-            &spriteClips[1]);
+    sc = 1;
+    vSpline -= tile->getSprite()->getSpline();
     break;
   case LEFT:
-    renderTexture(tile->getSprite()->getSpriteSheet(), ren,
-      TILE_WIDTH * i + tile->getSprite()->getSpline() - pSpline,
-      TILE_HEIGHT * j, &spriteClips[2]);
+    sc = 2;
+    hSpline += tile->getSprite()->getSpline();
     break;
   case RIGHT:
-    renderTexture(tile->getSprite()->getSpriteSheet(), ren,
-      TILE_WIDTH * i - tile->getSprite()->getSpline() + pSpline,
-      TILE_HEIGHT * j, &spriteClips[3]);
+    sc = 3;
+    hSpline -= tile->getSprite()->getSpline();
     break;
-  default:
+  default:  // Reaching here should be impossible.
+    break;
+  }
+  switch (party->getSprite()->getFacing())
+  {
+  case EAST:
+    hSpline += party->getSprite()->getSpline();
+    break;
+  case NORTH:
+    vSpline -= party->getSprite()->getSpline();
+    break;
+  case SOUTH:
+    vSpline += party->getSprite()->getSpline();
+    break;
+  case WEST:
+    hSpline -= party->getSprite()->getSpline();
+    break;
+  default:  // Should be impossible to be here.
     break;
   }
   // technically, this switch should be optional so long as the character
   // spritesheet is kept in the same order as the enum
+  renderTexture(tile->getSprite()->getSpriteSheet(), ren, TILE_WIDTH * i + hSpline, TILE_HEIGHT * j + vSpline, &spriteClips[sc]);
+
   return tile->getSprite()->decSpline();
 }//void drawUnit(SDL_Renderer *ren, Tile* tilePtr, int i, int j)
 
