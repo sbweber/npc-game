@@ -27,8 +27,14 @@
     //!< All units MUST have a spritesheet specified
     ~Sprite();
     //!< Default destructor
+    bool decSpline();
+    //!< If spline is non-zero, decrements it and returns true. Else false.
+    dir getFacing();
+    //!< Returns which direction the Sprite is currently facing.
     Tile* getPos();
     //!< Returns a pointer to the Tile containing this Sprite. nullptr if not on a Tile.
+    int getSpline();
+    //!< Returns the number of pixels left to spline.
     spriteType getSprite();
     //!< Returns the type of sprite (facing, etc) currently being used.
     SDL_Texture* getSpriteSheet();
@@ -54,6 +60,8 @@
     //!< String describing the purpose of Sprite.
     dir facing;
     //!< Direction Sprite is currently facing.
+    int spline;
+    //!< Number of pixels left to be splined towards destination.
   };
 
 #endif

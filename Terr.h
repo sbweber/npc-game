@@ -28,9 +28,9 @@
   protected:
     vector< vector<Tile*> > map;
     //!< 2D dyanmically resized array of Tiles defining Terr.
-    int32_t w;
+    int w;
     //!< map width (in Tiles)
-    int32_t h;
+    int h;
     //!< map height (in Tiles)
   };  // class Terr
 

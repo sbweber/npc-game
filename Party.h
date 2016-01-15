@@ -28,7 +28,7 @@
     //!< Returns the current Terr.
     void move(dir d);
     //!< Move player's Sprite. Load new Terr if entering a Warp
-    void setLocation(uint8_t x, uint8_t y);
+    void setLocation(int x, int y);
     //!< Sets the Party's location on the terr to (x, y).
     void setSprite(SDL_Renderer *ren, const string &str);
     //!< Resets the party’s Sprite to the one in the file named by str.

@@ -20,7 +20,15 @@ Tile::Tile(tileType t)
 
 Tile::~Tile()
 {
-  if (sprite)
+  if (E && E->W == this)
+    E->W = nullptr;
+  if (N && N->S == this)
+    N->S = nullptr;
+  if (S && S->N == this)
+    S->N = nullptr;
+  if (W && W->E == this)
+    W->E = nullptr;
+  if (sprite && sprite->getPos() == this)
     sprite->setTile(nullptr);
 }  // Tile::~Tile()
 

@@ -27,7 +27,7 @@
   //!< Chooses what kind of screen to draw based on current gamestate.
   void drawTitle(SDL_Renderer *ren, Button *toGame);
   //!< Draws the title screen.
-  void drawUnit(SDL_Renderer *ren, Tile* tilePtr, int i, int j);
+  bool drawUnit(SDL_Renderer *ren, Tile* tile, int pSpline, int i, int j);
   //!< Draws a single unit on the map without redrawing the map.
 
 #endif
