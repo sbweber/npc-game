@@ -6,7 +6,7 @@
 Party::Party(SDL_Renderer *ren)
 {
   for (int i = 0; i < 4; i++)
-    active[i] = NULL;
+    active[i] = nullptr;
   passive.clear();
   if (ren)
     sprite = new Sprite(ren, "Hero.png");
@@ -47,18 +47,18 @@ void Party::move(dir d)
   {
     Warp* dest = (Warp*)sprite->getPos();  // isWarp() test guarantees safe cast
     string destTerr= dest->getDestTerr();
-    int32_t x = dest->getDestX();
-    int32_t y = dest->getDestY();
+    int x = dest->getDestX();
+    int y = dest->getDestY();
     terr->loadMap(destTerr);
     sprite->setTile(terr->getTile(x, y));
   }  // If the new Tile is a Warp, load the new Terr.
 }  // void Party::move(dir d)
 
 
-void Party::setLocation(uint8_t x, uint8_t y)
+void Party::setLocation(int x, int y)
 {
   sprite->setTile(terr->getTile(x, y));
-}  // void Party::setLocation(uint8_t x, uint8_t y)
+}  // void Party::setLocation(int x, int y)
 
 
 void Party::setSprite(SDL_Renderer *ren, const string &str)

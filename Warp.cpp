@@ -3,7 +3,7 @@
 #include "Warp.h"
 
 
-Warp::Warp(Tile* tile, const string &dT, int32_t dX, int32_t dY,
+Warp::Warp(Tile* tile, const string &dT, int dX, int dY,
             bool replaceTile)
 {
   x = tile->getX();
@@ -37,16 +37,16 @@ Warp::Warp(Tile* tile, const string &dT, int32_t dX, int32_t dY,
 }//Warp::Warp(Tile* tile, string &nT)
 
 
-int32_t Warp::getDestX()
+int Warp::getDestX()
 {
   return destX;
-}  // uint8_t Warp::getDestX()
+}  // int Warp::getDestX()
 
 
-int32_t Warp::getDestY()
+int Warp::getDestY()
 {
   return destY;
-}  // uint8_t Warp::getDestY()
+}  // int Warp::getDestY()
 
 
 string Warp::getDestTerr()

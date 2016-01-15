@@ -12,8 +12,8 @@ Terr::Terr(const string &str)
 
 Terr::~Terr()
 {
-  for (int32_t i = 0; i < w; i++)
-    for (int32_t j = 0; j < h; j++)
+  for (int i = 0; i < w; i++)
+    for (int j = 0; j < h; j++)
       if (map[i][j])
         delete(map[i][j]);
 }  // Terr::~Terr()
@@ -44,14 +44,14 @@ void Terr::loadMap(const string &str)
   file >> w;
   file >> h;
   map.resize(w);
-  for (vector <vector<Tile*> >::iterator itr = map.begin(); itr != map.end();
+  for (vector <vector<Tile*> >::iterator itr = begin(map); itr != end(map);
           itr++)
     itr->resize(h);
-  for (int32_t i = 0; i < w; i++)
-    for (int32_t j = 0; j < h; j++)
+  for (int i = 0; i < w; i++)
+    for (int j = 0; j < h; j++)
       map[i][j] = new Tile(VOID);
-  for (int32_t i = 0; i < w; i++)
-    for (int32_t j = 0; j < h; j++)
+  for (int i = 0; i < w; i++)
+    for (int j = 0; j < h; j++)
     {
       map[i][j]->setPos(i, j);
       if (i > 0)
@@ -67,8 +67,8 @@ void Terr::loadMap(const string &str)
   // intentionally nesting like this, despite slower loop, because map is
   // currently read in that manner. Due to small maps, ease of understanding
   // is more valuable than efficient memory parsing.
-  for (int32_t j = 0; j < h; j++)
-    for (int32_t i = 0; i < w; i++)
+  for (int j = 0; j < h; j++)
+    for (int i = 0; i < w; i++)
     {
       c = file.get();
       if (!file.good())
@@ -104,8 +104,8 @@ void Terr::loadMap(const string &str)
   // based on adjacent tiles (corner piece? edge? etc)
   bool N = false, S = false, E = false, W = false;
   int adjacent = 0;
-  for (int32_t i = 0; i < w; i++)
-    for (int32_t j = 0; j < h; j++)
+  for (int i = 0; i < w; i++)
+    for (int j = 0; j < h; j++)
     {
       adjacent = 0;
       N = S = E = W = false;
@@ -170,7 +170,7 @@ void Terr::loadMap(const string &str)
 
   while (file.good())
   {
-    int32_t sourceX, sourceY, destX, destY;
+    int sourceX, sourceY, destX, destY;
     string destTerr;
     
     file >> sourceX;

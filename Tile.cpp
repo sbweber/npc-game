@@ -8,11 +8,11 @@ Tile::Tile(tileType t)
   x = 0;
   y = 0;
   setType(t);
-  sprite = NULL;
-  E = NULL;
-  N = NULL;
-  S = NULL;
-  W = NULL;
+  sprite = nullptr;
+  E = nullptr;
+  N = nullptr;
+  S = nullptr;
+  W = nullptr;
   angle = 0;
   flip = SDL_FLIP_NONE;
 }  // Tile::Tile(tileType t)
@@ -20,8 +20,16 @@ Tile::Tile(tileType t)
 
 Tile::~Tile()
 {
-  if (sprite)
-    sprite->setTile(NULL);
+  if (E && E->W == this)
+    E->W = nullptr;
+  if (N && N->S == this)
+    N->S = nullptr;
+  if (S && S->N == this)
+    S->N = nullptr;
+  if (W && W->E == this)
+    W->E = nullptr;
+  if (sprite && sprite->getPos() == this)
+    sprite->setTile(nullptr);
 }  // Tile::~Tile()
 
 
@@ -90,7 +98,7 @@ Tile* Tile::getTile(dir d)
   default:
     break;
   }
-  return NULL;  // should be impossible to get here
+  return nullptr;  // should be impossible to get here
 }  // Tile* Tile::getTile(dir d)
 
 
