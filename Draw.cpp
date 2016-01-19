@@ -70,6 +70,16 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
       default:  // Should be impossible to get here
         break;
       }
+    }
+  for (int i = 0; i < (NUM_TILES_WIDTH); i++)
+    for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
+    {
+      if (((x + i - 8) >= 0) && ((x + i - 8) < party->getTerr()->getWidth()) &&
+        ((y + j - 6) >= 0) && ((y + j - 6) < party->getTerr()->getHeight()))
+        tilePtr = party->getTerr()->getTile((x + i - 8), (j + y - 6));
+      // if Tile in question exists
+      else
+        tilePtr = offMap;
       if (tilePtr->isOccupied())
         cont = drawUnit(ren, tilePtr, party, i, j);
       // if the tile is occupied, draw the character
