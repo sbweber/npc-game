@@ -8,7 +8,6 @@ Tile::Tile(tileType t)
   x = 0;
   y = 0;
   setType(t);
-  sprite = nullptr;
   E = nullptr;
   N = nullptr;
   S = nullptr;
@@ -28,8 +27,6 @@ Tile::~Tile()
     S->N = nullptr;
   if (W && W->E == this)
     W->E = nullptr;
-  if (sprite && sprite->getPos() == this)
-    sprite->setTile(nullptr);
 }  // Tile::~Tile()
 
 
@@ -55,6 +52,12 @@ void Tile::connectTile(dir d, Tile* t)
 }  // void Tile::connectTile(dir d, Tile* t)
 
 
+const string Tile::enterTile()
+{
+  return "";
+}  // const string Tile::enterTile()
+
+
 double Tile::getAngle()
 {
   return angle;
@@ -71,12 +74,6 @@ bool Tile::getIsPassable()
 {
   return isPassable;
 }  // bool Tile::getIsPassable()
-
-
-Sprite* Tile::getSprite()
-{
-  return sprite;
-}  // Sprite* Tile::getSprite()
 
 
 Tile* Tile::getTile(dir d)
@@ -121,16 +118,22 @@ int Tile::getY()
 
 bool Tile::isOccupied()
 {
-  if (sprite)
+  if (/*sprite*/ false)
     return true;
   return false;
+  // CURRENTLY NON-FUNCTIONAL -- DON'T ASK TILES IF THEY'RE OCCUPIED; ASK THE TERR IF A TILE IS UNOCCUPIED. TODO: FIX.
 }  // bool Tile::isOccupied()
 
 
-bool Tile::isWarp()
+Tile* Tile::moveSprite(dir d)
 {
-  return false;
-}  // bool Tile::isWarp()
+  if (getTile(d) && getTile(d)->getIsPassable() && !(getTile(d)->isOccupied()))
+  {
+    getTile(d)->enterTile();
+    return getTile(d);
+  }  // move if target tile exists, can be entered, doesn't have a unit in it
+  return this;
+}  // Tile* Tile::moveSprite(dir d)
 
 
 void Tile::setAngle(double a)
@@ -150,13 +153,6 @@ void Tile::setPos(int xPos, int yPos)
   x = xPos;
   y = yPos;
 }  // void Tile::setPos(int xPos, int yPos)
-
-
-void Tile::setSprite(Sprite* u)
-{
-  sprite = u;
-  // tile thinks the unit is there, but unit may not know it's on that tile!
-}  // void Tile::setUnit(Unit* u)
 
 
 void Tile::setType(tileType t)

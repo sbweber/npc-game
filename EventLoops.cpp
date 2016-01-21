@@ -14,7 +14,7 @@ bool loopAnyState(SDL_Event &e, Party* party, Sprite *npc, gameState &state)
       party->changeTerr("Map1.txt");
       state = MAP;
       party->setLocation(4, 3);
-      npc->setTile(party->getTerr()->getTile(5, 4));
+//      npc->setPos(party->getTerr()->getTile(5, 4));
     }  // debug command map1
     if (e.key.keysym == stateMap2)
     {
@@ -61,8 +61,10 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
       party->move(SOUTH);
     if (e.key.keysym == dirRight)
       party->move(EAST);
+    /* TODO: FIX ME
     if (e.key.keysym == interact)
       party->getSprite()->interact();
+      */
     break;
   default:
     break;
@@ -104,7 +106,7 @@ bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
       party->changeTerr("Map1.txt");
       state = MAP;
       party->setLocation(6, 10);
-      npc->setTile(party->getTerr()->getTile(5, 4));
+//      npc->setPos(party->getTerr()->getTile(5, 4));
       SDL_Event* wait = new SDL_Event();
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
     }

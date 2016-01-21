@@ -4,10 +4,14 @@
   #define TERR_H
 
   #include "Globals.h"
+  #include "Sprite.h"
   #include "Tile.h"
   #include "Warp.h"
 
-  class Tile;
+
+  typedef boost::bimap<Sprite*, Tile*> spritelog;
+  typedef spritelog::value_type location;
+
 
   //! Describes an overworld map. All maps currently must be rectangles.
   class Terr
@@ -28,6 +32,8 @@
   protected:
     vector< vector<Tile*> > map;
     //!< 2D dyanmically resized array of Tiles defining Terr.
+    spritelog sprites;
+    //!< bi-directional map relating each Sprite to its Tile (and vice versa).
     int w;
     //!< map width (in Tiles)
     int h;

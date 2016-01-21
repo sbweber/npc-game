@@ -10,7 +10,6 @@ Warp::Warp(Tile* tile, const string &dT, int dX, int dY,
   y = tile->getY();
   type = tile->getType();
   isPassable = tile->getIsPassable();
-  sprite = tile->getSprite();
   E = tile->getTile(EAST);
   N = tile->getTile(NORTH);
   S = tile->getTile(SOUTH);
@@ -34,7 +33,13 @@ Warp::Warp(Tile* tile, const string &dT, int dX, int dY,
       W->connectTile(EAST, this);
     delete tile;
   }  // If I'm replacing a tile, tell the neighbors I'm him and then delete him.
-}//Warp::Warp(Tile* tile, string &nT)
+}  // Warp::Warp(Tile* tile, string &nT)
+
+
+const string Warp::enterTile()
+{
+  return "LOAD-MAP: " + destTerr + " " + to_string(destX) + " " + to_string(destY);
+}  // const string Warp::enterTile()
 
 
 int Warp::getDestX()
@@ -53,10 +58,4 @@ string Warp::getDestTerr()
 {
   return destTerr;
 }  // string Warp::getDestTerr()
-
-
-bool Warp::isWarp()
-{
-  return true;
-}  // bool Warp::isWarp()
 

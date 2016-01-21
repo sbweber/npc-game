@@ -4,10 +4,8 @@
   #define SPRITE_H
 
   #include "Render.h"
-  #include "Tile.h"
   #include "Globals.h"
 
-  class Tile;
 
   //! Spritesheets for characters always arranged in the same manner,
   //! although some may end sooner than others.
@@ -19,6 +17,7 @@
     RIGHT
   };
 
+
   //! Visual half of a Unit. Information on what to draw to put a sprite onscreen.
   class Sprite
   {
@@ -27,26 +26,26 @@
     //!< All units MUST have a spritesheet specified
     ~Sprite();
     //!< Default destructor
+    void changeDir(dir d);
+    //!< Change what direction Sprite is facing. Usuallly part of movement.
     bool decSpline();
     //!< If spline is non-zero, decrements it and returns true. Else false.
     dir getFacing();
     //!< Returns which direction the Sprite is currently facing.
-    Tile* getPos();
-    //!< Returns a pointer to the Tile containing this Sprite. nullptr if not on a Tile.
     int getSpline();
     //!< Returns the number of pixels left to spline.
     spriteType getSprite();
     //!< Returns the type of sprite (facing, etc) currently being used.
     SDL_Texture* getSpriteSheet();
     //!< Returns the spritesheet for this Sprite.
-    void interact();
+    void interact(Sprite* target);
     //!< Intelligently interacts with Sprite being faced, if any.
     void move(dir d);
     //!< Move Sprite to a different Tile, and change facing accordingly.
+    void setSpline(int s);
+    //!< Manually sets the number of pixels to spline.
     void setSprite(spriteType st);
     //!< Manually change sprite type (facing, etc).
-    void setTile(Tile* tile);
-    //!< Set the Tile on which Sprite is located.
     void setType(const string &str);
     //!< Set the descriptive string describing Sprite
   protected:
@@ -54,8 +53,6 @@
     //!< The spritesheet used to draw this Sprite.
     spriteType sprite;
     //!< Which sprite on the spritesheet is currently being used.
-    Tile* pos;
-    //!< Pointer to the tile currently containing Sprite.
     string type;
     //!< String describing the purpose of Sprite.
     dir facing;

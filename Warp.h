@@ -12,14 +12,15 @@
     Warp(Tile* tile, const string &dT, int dX, int dY,
             bool replaceTile = false);
     //!< Upgrade constructor: copies an existing Tile, adding new functionality
+    virtual const string enterTile() override;
+    //!< Loads a new Terr on entry.
     int getDestX();
     //!< Returns the Warp's destination X-position.
     int getDestY();
     //!< Returns the Warp's destination Y-position.
     string getDestTerr();
     //!< Returns the filename of the destination Terr.
-    bool isWarp() override;
-    //!< Returns true. Base version from Tile class returns false.
+    //!< Try to move Sprite in the indicated direction. Return Tile it ends on.
   protected:
     string destTerr;
     //!< filename of destination Terr

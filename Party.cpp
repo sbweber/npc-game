@@ -43,21 +43,13 @@ Terr* Party::getTerr()
 void Party::move(dir d)
 {
   sprite->move(d);
-  if (sprite->getPos()->isWarp())
-  {
-    Warp* dest = (Warp*)sprite->getPos();  // isWarp() test guarantees safe cast
-    string destTerr= dest->getDestTerr();
-    int x = dest->getDestX();
-    int y = dest->getDestY();
-    terr->loadMap(destTerr);
-    sprite->setTile(terr->getTile(x, y));
-  }  // If the new Tile is a Warp, load the new Terr.
 }  // void Party::move(dir d)
 
 
 void Party::setLocation(int x, int y)
 {
-  sprite->setTile(terr->getTile(x, y));
+//  sprite->setPos(terr->getTile(x, y));
+  // TODO: Tracking a Sprite's location is the job of Terr now.
 }  // void Party::setLocation(int x, int y)
 
 

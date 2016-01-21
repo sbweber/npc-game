@@ -8,12 +8,10 @@
   #include "Terr.h"
   #include "Unit.h"
 
-  class Sprite;
-  class Terr;
 
   //! Defines the playable party
   //! Describes the hero's party, directly controlled by the player
-    class Party
+  class Party
   {
   public:
     Party(SDL_Renderer *ren = nullptr);
