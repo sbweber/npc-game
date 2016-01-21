@@ -116,17 +116,6 @@ int Tile::getY()
 }  // int Tile::getY()
 
 
-Tile* Tile::moveSprite(dir d)
-{
-  if (getTile(d) && getTile(d)->getIsPassable())
-  {
-    getTile(d)->enterTile();
-    return getTile(d);
-  }  // move if target tile exists, can be entered.
-  return this;
-}  // Tile* Tile::moveSprite(dir d)
-
-
 void Tile::setAngle(double a)
 {
   angle = a;

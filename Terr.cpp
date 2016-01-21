@@ -221,8 +221,43 @@ void Terr::loadMap(const string &str)
 }  // void Terr::loadMap(string str)
 
 
+void Terr::moveSprite(Sprite* sprite, dir d)
+{
+  if (!sprite)
+  {
+    logError("Asked to move Sprite that doesn't exist!");
+    return;
+  }  // Make sure sprite exists!
+
+  sprite->changeDir(d);
+  Tile *currTile = getTile(sprite);
+  if (!currTile)
+  {
+    logError("Asked to move Sprite that isn't on the map!");
+    return;
+  }  // Make sure sprite has a tile!
+
+  Tile *targetTile = currTile->getTile(d);
+  if (!targetTile || !targetTile->getIsPassable() || isOccupied(targetTile))
+    return;  // Not an error, just an invalid move.
+
+  setSprite(sprite, targetTile);
+  targetTile->enterTile();
+  if (d == NORTH || d == SOUTH)
+    sprite->setSpline(TILE_HEIGHT);
+  else
+    sprite->setSpline(TILE_WIDTH);
+}  // void Terr::moveSprite(Sprite* sprite, dir d)
+
+
 void Terr::setSprite(Sprite* sprite, Tile* tile)
 {
+  if (getSprite(tile))
+  {
+    Sprite* spr = getSprite(tile);
+    sprites.left.erase(spr);
+    sprites.insert(location(spr, nullptr));
+  }  // If there's already a Sprite there, override it.
   sprites.left.erase(sprite);
   sprites.insert(location(sprite, tile));
 }  // void Terr::setSprite(Sprite* sprite, Tile* tile)

@@ -36,6 +36,8 @@
     //!< Return true if the tile* has a Sprite associated with it.
     void loadMap(const string &str);
     //!< Loads a map described in filename str.
+    void moveSprite(Sprite* sprite, dir d);
+    //!< Move specified Sprite in specified direction (if possible).
     void setSprite(Sprite* sprite, Tile* tile);
     //!< Sets a Sprite-Tile relationship.
     void setTile(Tile* tile, Sprite* sprite);

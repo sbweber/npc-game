@@ -40,8 +40,6 @@
     //!< Returns the spritesheet for this Sprite.
     void interact(Sprite* target);
     //!< Intelligently interacts with Sprite being faced, if any.
-    void move(dir d);
-    //!< Move Sprite to a different Tile, and change facing accordingly.
     void setSpline(int s);
     //!< Manually sets the number of pixels to spline.
     void setSprite(spriteType st);

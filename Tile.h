@@ -51,8 +51,6 @@
     //!< Returns the Tile’s x position on its Terr.
     int getY();
     //!< Returns the Tile’s y position on its Terr.
-    Tile* moveSprite(dir d);
-    //!< Try to move Sprite in the indicated direction. Return Tile it ends on.
     void setAngle(double a);
     //!< Sets the rotational angle of the Tile’s sprite.
     void setFlip(SDL_RendererFlip f);

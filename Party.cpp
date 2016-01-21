@@ -42,7 +42,7 @@ Terr* Party::getTerr()
 
 void Party::move(dir d)
 {
-  sprite->move(d);
+  terr->moveSprite(sprite, d);
 }  // void Party::move(dir d)
 
 
