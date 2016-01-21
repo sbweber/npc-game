@@ -48,8 +48,7 @@ void Party::move(dir d)
 
 void Party::setLocation(int x, int y)
 {
-//  sprite->setPos(terr->getTile(x, y));
-  // TODO: Tracking a Sprite's location is the job of Terr now.
+  terr->setSprite(sprite, terr->getTile(x, y));
 }  // void Party::setLocation(int x, int y)
 
 

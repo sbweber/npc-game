@@ -29,11 +29,8 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
   getClips(tileClips, 16, 4, TILE_WIDTH, TILE_HEIGHT);  // magic number (4): number of rows in the tile spritesheet
 
   // position of unit on which camera is focused
-  /* TODO: getPos
-  int x = party->getSprite()->getPos()->getX();
-  int y = party->getSprite()->getPos()->getY();
-  */
-  int x = 0, y = 0;
+  int x = party->getTerr()->getTile(party->getSprite())->getX();
+  int y = party->getTerr()->getTile(party->getSprite())->getY();
 
   Tile* tilePtr = nullptr;
   Tile* offMap = new Tile();
@@ -74,7 +71,7 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
         break;
       }
     }
-    /* TODO: For all Sprites onscreen on the Terr, draw them! Accomplish by checking all the tiles onscreen and, if they have a paired Sprite, draw it there!
+    // TODO: For all Sprites onscreen on the Terr, draw them! Accomplish by checking all the tiles onscreen and, if they have a paired Sprite, draw it there!
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
     {
@@ -84,13 +81,12 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
       // if Tile in question exists
       else
         tilePtr = offMap;
-      if (tilePtr->isOccupied())
+      if (party->getTerr()->isOccupied(tilePtr))
         cont = drawUnit(ren, tilePtr, party, i, j);
       // if the tile is occupied, draw the character
       if (!contAny && cont)
         contAny = true;
     }
-    */
   if (contAny)
   {
     SDL_Event* wait = new SDL_Event();
@@ -174,11 +170,12 @@ void drawTitle(SDL_Renderer *ren, Button *toGame)
 }  // void drawTitle(SDL_Renderer *ren)
 
 
-bool drawUnit(SDL_Renderer *ren, Sprite* sprite, Party *party, int i, int j)
+bool drawUnit(SDL_Renderer *ren, Tile* tile, Party *party, int i, int j)
 {
   int sc = 0, vSpline = 0, hSpline = 0;
   SDL_Rect spriteClips[4];
   getClips(spriteClips, 4, 2, TILE_WIDTH, TILE_HEIGHT);
+  Sprite* sprite = party->getTerr()->getSprite(tile);
   // magic number (4): number of unit sprite types
   switch (sprite->getSprite())
   {  // note the order -- clips are taken by column, not by row!
@@ -223,5 +220,5 @@ bool drawUnit(SDL_Renderer *ren, Sprite* sprite, Party *party, int i, int j)
   renderTexture(sprite->getSpriteSheet(), ren, TILE_WIDTH * i + hSpline, TILE_HEIGHT * j + vSpline, &spriteClips[sc]);
 
   return sprite->decSpline();
-}//void drawUnit(SDL_Renderer *ren, Sprite* sprite, int i, int j)
+}//void drawUnit(SDL_Renderer *ren, Tile* tile, int i, int j)
 

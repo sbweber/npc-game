@@ -29,7 +29,9 @@ int Terr::getHeight()
 
 Sprite* Terr::getSprite(Tile* tile)
 {
-  return sprites.right.find(tile)->second;
+  if (sprites.right.find(tile) != sprites.right.end())
+    return sprites.right.find(tile)->second;
+  return nullptr;
 }  // Sprite* Terr::getSprite(Tile* tile)
 
 
@@ -41,7 +43,9 @@ Tile* Terr::getTile(int i, int j)
 
 Tile* Terr::getTile(Sprite* sprite)
 {
-  return sprites.left.find(sprite)->second;
+  if (sprites.left.find(sprite) != sprites.left.end())
+    return sprites.left.find(sprite)->second;
+  return nullptr;
 }  // Tile* Terr::getTile(Sprite* sprite)
 
 
@@ -49,6 +53,14 @@ int Terr::getWidth()
 {
   return w;
 }  // int Terr::getWidth()
+
+
+bool Terr::isOccupied(Tile* tile)
+{
+  if (getSprite(tile))
+    return true;
+  return false;
+}  // bool Terr::isOccupied(Tile* tile)
 
 
 void Terr::loadMap(const string &str)

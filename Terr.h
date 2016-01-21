@@ -32,6 +32,8 @@
     //!< Returns the Tile under the given Sprite.
     int getWidth();
     //!< Returns the width (w) of Terr.
+    bool isOccupied(Tile* tile);
+    //!< Return true if the tile* has a Sprite associated with it.
     void loadMap(const string &str);
     //!< Loads a map described in filename str.
     void setSprite(Sprite* sprite, Tile* tile);

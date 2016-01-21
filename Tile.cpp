@@ -116,22 +116,13 @@ int Tile::getY()
 }  // int Tile::getY()
 
 
-bool Tile::isOccupied()
-{
-  if (/*sprite*/ false)
-    return true;
-  return false;
-  // CURRENTLY NON-FUNCTIONAL -- DON'T ASK TILES IF THEY'RE OCCUPIED; ASK THE TERR IF A TILE IS UNOCCUPIED. TODO: FIX.
-}  // bool Tile::isOccupied()
-
-
 Tile* Tile::moveSprite(dir d)
 {
-  if (getTile(d) && getTile(d)->getIsPassable() && !(getTile(d)->isOccupied()))
+  if (getTile(d) && getTile(d)->getIsPassable())
   {
     getTile(d)->enterTile();
     return getTile(d);
-  }  // move if target tile exists, can be entered, doesn't have a unit in it
+  }  // move if target tile exists, can be entered.
   return this;
 }  // Tile* Tile::moveSprite(dir d)
 

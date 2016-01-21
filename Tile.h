@@ -51,8 +51,6 @@
     //!< Returns the Tile’s x position on its Terr.
     int getY();
     //!< Returns the Tile’s y position on its Terr.
-    bool isOccupied();
-    //!< Returns true if the Tile has a Sprite on it.
     Tile* moveSprite(dir d);
     //!< Try to move Sprite in the indicated direction. Return Tile it ends on.
     void setAngle(double a);
