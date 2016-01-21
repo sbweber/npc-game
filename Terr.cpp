@@ -2,6 +2,7 @@
 
 #include "Terr.h"
 
+
 Terr::Terr(const string &str)
 {
   w = 0;
@@ -9,6 +10,7 @@ Terr::Terr(const string &str)
   if (str.length())
     loadMap(str);  // if string length is 0, there's no map to load.
 }  // Terr::Terr(string str)
+
 
 Terr::~Terr()
 {
@@ -18,20 +20,36 @@ Terr::~Terr()
         delete(map[i][j]);
 }  // Terr::~Terr()
 
+
 int Terr::getHeight()
 {
   return h;
 }  // int Terr::getHeight()
+
+
+Sprite* Terr::getSprite(Tile* tile)
+{
+  return sprites.right.find(tile)->second;
+}  // Sprite* Terr::getSprite(Tile* tile)
+
 
 Tile* Terr::getTile(int i, int j)
 {
   return map[i][j];
 }  // Tile* Terr::getTile(int i, int j)
 
+
+Tile* Terr::getTile(Sprite* sprite)
+{
+  return sprites.left.find(sprite)->second;
+}  // Tile* Terr::getTile(Sprite* sprite)
+
+
 int Terr::getWidth()
 {
   return w;
 }  // int Terr::getWidth()
+
 
 void Terr::loadMap(const string &str)
 {
@@ -168,6 +186,7 @@ void Terr::loadMap(const string &str)
       }
     }
 
+  // Set up Warp Tiles
   while (file.good())
   {
     int sourceX, sourceY, destX, destY;
@@ -188,4 +207,17 @@ void Terr::loadMap(const string &str)
   }  // Until EOF hit, all remaining info is warps
   file.close();
 }  // void Terr::loadMap(string str)
+
+
+void Terr::setSprite(Sprite* sprite, Tile* tile)
+{
+  sprites.left.erase(sprite);
+  sprites.insert(location(sprite, tile));
+}  // void Terr::setSprite(Sprite* sprite, Tile* tile)
+
+
+void Terr::setTile(Tile* tile, Sprite* sprite)
+{
+  setSprite(sprite, tile);
+}  // void Terr::setTile(Tile* tile, Sprite* sprite)
 

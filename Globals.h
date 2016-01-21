@@ -25,6 +25,8 @@
 
   // Boost includes
   #include <boost/bimap.hpp>
+  #include <boost/bimap/unordered_set_of.hpp>
+  #include <boost/bimap/list_of.hpp>
 
 
   // global constants
