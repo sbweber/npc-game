@@ -28,8 +28,12 @@
     //!< Move player's Sprite. Load new Terr if entering a Warp
     void setLocation(int x, int y);
     //!< Sets the Party's location on the terr to (x, y).
+    void setLocation(Tile* tile);
+    //!< Sets the Party's location on the terr to the specified Tile.
     void setSprite(SDL_Renderer *ren, const string &str);
     //!< Resets the party’s Sprite to the one in the file named by str.
+    Tile* tileClick(SDL_MouseButtonEvent &click);
+    //!< Used when clicking on the map. Returns a pointer to the Tile clicked.
   protected:
     Unit* active[4];
     //!< Pointers to the up to four active party members.

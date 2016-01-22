@@ -24,6 +24,12 @@ SDL_Texture* loadTexture(const string &file, SDL_Renderer *ren)
 }  // SDL_Texture* loadTexture(const string file, SDL_Renderer *ren)
 
 
+void renderBackground(SDL_Texture *tex, SDL_Renderer *ren)
+{
+  SDL_RenderCopy(ren, tex, nullptr, nullptr);
+}  // void renderBackground(SDL_Texture *tex, SDL_Renderer *ren)
+
+
 SDL_Texture* renderText(SDL_Renderer *ren, TTF_Font *font, const string &str,
         SDL_Color color)
 {
@@ -112,13 +118,6 @@ void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y,
 }  // void renderTexture()
 
 
-void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, SDL_Rect dst,
-        SDL_Rect *clip, const double angle, const SDL_RendererFlip flip)
-{
-  SDL_RenderCopyEx(ren, tex, clip, &dst, angle, nullptr, flip);
-}  // void renderTexture()
-
-
 void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w,
         int h, const double angle, const SDL_RendererFlip flip)
 {
@@ -128,6 +127,13 @@ void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w,
   dst.w = w;
   dst.h = h;
   SDL_RenderCopyEx(ren, tex, nullptr, &dst, angle, nullptr, flip);
+}  // void renderTexture()
+
+
+void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, SDL_Rect dst,
+  SDL_Rect *clip, const double angle, const SDL_RendererFlip flip)
+{
+  SDL_RenderCopyEx(ren, tex, clip, &dst, angle, nullptr, flip);
 }  // void renderTexture()
 
 

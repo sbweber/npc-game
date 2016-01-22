@@ -318,3 +318,9 @@ void Terr::setTile(Tile* tile, Sprite* sprite)
   setSprite(sprite, tile);
 }  // void Terr::setTile(Tile* tile, Sprite* sprite)
 
+
+Tile* Terr::tileClick(SDL_MouseButtonEvent &click, Sprite* sprite)
+{
+  return nullptr;
+}  // Tile* Terr::tileClick(SDL_MouseButtonEvent &click, Sprite* sprite)
+

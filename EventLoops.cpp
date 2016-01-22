@@ -49,6 +49,7 @@ bool loopBattle(SDL_Event &e)
 
 bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
 {
+  Tile* tile;
   while(drawMap(ren, tiles, party));
   switch (e.type)
   {
@@ -65,6 +66,8 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
       party->getTerr()->interactSprite(party->getSprite());
     break;
   case SDL_MOUSEBUTTONDOWN:
+    tile = party->tileClick(e.button);
+    party->setLocation(tile);
     break;
   default:
     break;

@@ -52,10 +52,22 @@ void Party::setLocation(int x, int y)
 }  // void Party::setLocation(int x, int y)
 
 
+void Party::setLocation(Tile* tile)
+{
+  terr->setSprite(sprite, tile);
+}  // void Party::setLocation(Tile* tile)
+
+
 void Party::setSprite(SDL_Renderer *ren, const string &str)
 {
   if (sprite)
     delete sprite;
   sprite = new Sprite(ren, str);
 }  // void Party::setSprite(SDL_Renderer *ren, const string &str)
+
+
+Tile* Party::tileClick(SDL_MouseButtonEvent &click)
+{
+  return terr->tileClick(click, sprite);
+}  // Tile* Party::tileClick(SDL_MouseButtonEvent &click)
 

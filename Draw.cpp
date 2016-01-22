@@ -31,15 +31,17 @@ bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
   // position of unit on which camera is focused
   int x = party->getTerr()->getTile(party->getSprite())->getX();
   int y = party->getTerr()->getTile(party->getSprite())->getY();
+  int hsw = NUM_TILES_WIDTH / 2;  //half screen width (in tiles)
+  int hsh = NUM_TILES_HEIGHT / 2;  // half screen height
 
   Tile* tilePtr = nullptr;
   Tile* offMap = new Tile();
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
     {
-      if (((x + i - 8) >= 0) && ((x + i - 8) < party->getTerr()->getWidth()) &&
-              ((y + j - 6) >= 0) && ((y + j - 6) < party->getTerr()->getHeight()))
-        tilePtr = party->getTerr()->getTile((x + i - 8), (j + y - 6));
+      if (((x + i - hsw) >= 0) && ((x + i - hsw) < party->getTerr()->getWidth()) &&
+              ((y + j - hsh) >= 0) && ((y + j - hsh) < party->getTerr()->getHeight()))
+        tilePtr = party->getTerr()->getTile((x + i - hsw), (j + y - hsh));
       // if Tile in question exists
       else
         tilePtr = offMap;
@@ -78,9 +80,9 @@ bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
     {
-      if (((x + i - 8) >= 0) && ((x + i - 8) < party->getTerr()->getWidth()) &&
-        ((y + j - 6) >= 0) && ((y + j - 6) < party->getTerr()->getHeight()))
-        tilePtr = party->getTerr()->getTile((x + i - 8), (j + y - 6));
+      if (((x + i - hsw) >= 0) && ((x + i - hsw) < party->getTerr()->getWidth()) &&
+        ((y + j - hsh) >= 0) && ((y + j - hsh) < party->getTerr()->getHeight()))
+        tilePtr = party->getTerr()->getTile((x + i - hsw), (j + y - hsh));
       // if Tile in question exists
       else
         tilePtr = offMap;
@@ -163,7 +165,7 @@ void drawTitle(SDL_Renderer *ren, Button *toGame)
 {
   SDL_RenderClear(ren);
   SDL_Texture *bg = loadTexture("Title.png", ren);
-  renderTexture(bg, ren, 0, 0);
+  renderBackground(bg, ren);
   toGame->render(ren);
   SDL_RenderPresent(ren);
 }  // void drawTitle(SDL_Renderer *ren)

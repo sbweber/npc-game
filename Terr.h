@@ -48,6 +48,8 @@
     //!< Sets a Sprite-Tile relationship.
     void setTile(Tile* tile, Sprite* sprite);
     //!< Sets a Sprite-Tile relationship. Alias for setSprite.
+    Tile* tileClick(SDL_MouseButtonEvent &click, Sprite* sprite);
+    //!< Returns pointer to the Tile clicked. Needs Sprite the map is watching.
   protected:
     vector< vector<Tile*> > map;
     //!< 2D dyanmically resized array of Tiles defining Terr.
