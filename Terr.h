@@ -32,6 +32,10 @@
     //!< Returns the Tile under the given Sprite.
     int getWidth();
     //!< Returns the width (w) of Terr.
+    void interactSprite(Sprite* sprite);
+    //!< Intelligently interact with Sprite being faced, if any.
+    void interactSprites(Sprite* sprite, Sprite* target);
+    //!< Intelligently interact between two sprites.
     bool isOccupied(Tile* tile);
     //!< Return true if the tile* has a Sprite associated with it.
     void loadMap(const string &str);

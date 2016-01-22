@@ -55,6 +55,31 @@ int Terr::getWidth()
 }  // int Terr::getWidth()
 
 
+void Terr::interactSprite(Sprite* sprite)
+{
+  Tile* tile = getTile(sprite);
+  if (!tile)
+  {
+    logError("Sprite not on map!");
+    return;
+  }  // Sprite must be on map.
+  tile = tile->getTile(sprite->getFacing());
+  if (!tile)
+    return;  // not an error, just invalid. Interacting with edge of map.
+  if (isOccupied(tile))
+    interactSprites(sprite, getSprite(tile));
+}  // void Terr::interactSprite(Sprite* sprite)
+
+
+void Terr::interactSprites(Sprite* sprite, Sprite* target)
+{
+  if (sprite->getType() == "Hero" && target->getType() == "test")
+  {
+    setSprite(target, nullptr);
+  }  // Test interaction: Hero kills test NPC (removes from map).
+}  // void Terr::interactSprites(Sprite* sprite, Sprite* sprite)
+
+
 bool Terr::isOccupied(Tile* tile)
 {
   if (getSprite(tile))

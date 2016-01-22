@@ -22,8 +22,8 @@
   class Sprite
   {
   public:
-    Sprite(SDL_Renderer *ren, const string &spriteFile);
-    //!< All units MUST have a spritesheet specified
+    Sprite(SDL_Renderer *ren, const string &spriteFile, const string &t = "");
+    //!< All units MUST have a spritesheet specified. type string optional.
     ~Sprite();
     //!< Default destructor
     void changeDir(dir d);
@@ -34,12 +34,12 @@
     //!< Returns which direction the Sprite is currently facing.
     int getSpline();
     //!< Returns the number of pixels left to spline.
+    const string getType();
+    //!< Returns the type descriptor string for this NPC.
     spriteType getSprite();
     //!< Returns the type of sprite (facing, etc) currently being used.
     SDL_Texture* getSpriteSheet();
     //!< Returns the spritesheet for this Sprite.
-    void interact(Sprite* target);
-    //!< Intelligently interacts with Sprite being faced, if any.
     void setSpline(int s);
     //!< Manually sets the number of pixels to spline.
     void setSprite(spriteType st);

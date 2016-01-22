@@ -3,12 +3,13 @@
 #include "Sprite.h"
 
 
-Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile)
+Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile, const string &t)
 {
   spriteSheet = loadTexture(spriteFile, ren);
   sprite = DOWN;  // default all sprites as facing down
   facing = SOUTH;
   spline = 0;
+  type = t;
 }  // Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile)
 
 
@@ -81,13 +82,10 @@ SDL_Texture* Sprite::getSpriteSheet()
 }  // SDL_Texture* Sprite::getSpriteSheet()
 
 
-void Sprite::interact(Sprite* target)
+const string Sprite::getType()
 {
-  if (target->type == "test")
-  {
-    // TODO: Do Something. Previous interaction: Kill target.
-  }
-}  // void Sprite::interact(Sprite* target)
+  return type;
+}  // const string Sprite::getType()
 
 
 void Sprite::setSpline(int s)
