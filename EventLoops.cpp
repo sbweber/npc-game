@@ -61,10 +61,8 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
       party->move(SOUTH);
     if (e.key.keysym == dirRight)
       party->move(EAST);
-    /* TODO: FIX ME
     if (e.key.keysym == interact)
-      party->getSprite()->interact();
-      */
+      party->getTerr()->interactSprite(party->getSprite());
     break;
   default:
     break;
