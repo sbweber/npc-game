@@ -49,7 +49,7 @@ bool loopBattle(SDL_Event &e)
 
 bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
 {
-  drawMap(ren, tiles, party);
+  while(drawMap(ren, tiles, party));
   switch (e.type)
   {
   case SDL_KEYDOWN:
@@ -63,6 +63,8 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
       party->move(EAST);
     if (e.key.keysym == interact)
       party->getTerr()->interactSprite(party->getSprite());
+    break;
+  case SDL_MOUSEBUTTONDOWN:
     break;
   default:
     break;

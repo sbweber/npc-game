@@ -137,8 +137,8 @@ void tileBackground(SDL_Texture *tile, SDL_Renderer *ren)
   {
     int x = i % NUM_TILES_WIDTH;
     int y = i / NUM_TILES_WIDTH;
-    renderTexture(tile, ren, x * TILE_SIZE, y * TILE_SIZE,
-            TILE_SIZE, TILE_SIZE);
+    renderTexture(tile, ren, x * TILE_WIDTH, y * TILE_HEIGHT,
+            TILE_WIDTH, TILE_HEIGHT);
   }
 }  // void tileBackground(SDL_Texture *tile, SDL_Renderer *ren)
 

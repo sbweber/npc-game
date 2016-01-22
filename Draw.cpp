@@ -20,7 +20,7 @@ void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 
 
-void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
+bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
 {  // portion of map to be drawn based on position of hero
   SDL_RenderClear(ren);
   int tileClip = 0;
@@ -90,13 +90,9 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
       if (!contAny && cont)
         contAny = true;
     }
-  if (contAny)
-  {
-    SDL_Event* wait = new SDL_Event();
-    SDL_PushEvent(wait);
-  }
   delete offMap;
   SDL_RenderPresent(ren);
+  return contAny;
 }  // void drawMap()
 
 
