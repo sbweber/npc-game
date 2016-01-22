@@ -67,8 +67,11 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = party->tileClick(e.button);
-    if (tile)
-      party->setLocation(tile);
+    if (tile && tile->getIsPassable() && !party->getTerr()->isOccupied(tile))
+    {
+      party->getTerr()->setSprite(party->getSprite(), tile);
+      party->getTerr()->enterTileMessageHandler(tile->enterTile(), tile);
+    }  // If tile can be legally entered, warp to it
     break;
   default:
     break;
