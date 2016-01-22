@@ -9,7 +9,7 @@ Party::Party(SDL_Renderer *ren)
     active[i] = nullptr;
   passive.clear();
   if (ren)
-    sprite = new Sprite(ren, "Hero.png");
+    sprite = new Sprite(ren, "Hero.png", "Hero");
   terr = new Terr("");
 }  // Party::Party(SDL_Renderer *ren)
 
@@ -42,22 +42,13 @@ Terr* Party::getTerr()
 
 void Party::move(dir d)
 {
-  sprite->move(d);
-  if (sprite->getPos()->isWarp())
-  {
-    Warp* dest = (Warp*)sprite->getPos();  // isWarp() test guarantees safe cast
-    string destTerr= dest->getDestTerr();
-    int x = dest->getDestX();
-    int y = dest->getDestY();
-    terr->loadMap(destTerr);
-    sprite->setTile(terr->getTile(x, y));
-  }  // If the new Tile is a Warp, load the new Terr.
+  terr->moveSprite(sprite, d);
 }  // void Party::move(dir d)
 
 
 void Party::setLocation(int x, int y)
 {
-  sprite->setTile(terr->getTile(x, y));
+  terr->setSprite(sprite, terr->getTile(x, y));
 }  // void Party::setLocation(int x, int y)
 
 

@@ -4,9 +4,7 @@
   #define TILE_H
 
   #include "Globals.h"
-  #include "Sprite.h"
 
-  class Sprite;
 
   //! Describes the Tiles.png spritesheet in column-major order.
   enum tileType
@@ -25,6 +23,7 @@
     THRONE  //!< royal golden throne
   };
 
+
   //! Data about individual tiles from a Terr.
   class Tile
   {
@@ -35,14 +34,15 @@
     //!< Virtual Tile destructor.
     void connectTile(dir d, Tile* t);
     //!< Specifies an adjacent Tile. Not reciprocal -- may be one-way!
+    virtual const string enterTile();
+    //!< Overridable base function for derived tiles doing something special
+    //!< when entered. Base functionality just sets Sprite.
     double getAngle();
     //!< Get the current angle of sprite rotation for the Tile’s art.
     SDL_RendererFlip getFlip();
     //!< Gets current flip status of Tile’s sprite.
     bool getIsPassable();
     //!< Returns true if the Tile may be entered by a Unit.
-    Sprite* getSprite();
-    //!< Returns the Sprite on the Tile. nullptr if none.
     Tile* getTile(dir d);
     //!< Returns pointer to adjacent tile in specified direction. May be nullptr.
     tileType getType();
@@ -51,18 +51,12 @@
     //!< Returns the Tile’s x position on its Terr.
     int getY();
     //!< Returns the Tile’s y position on its Terr.
-    bool isOccupied();
-    //!< Returns true if the Tile has a Sprite on it.
-    virtual bool isWarp();
-    //!< Returns false. Overloaded version returns true for Warp class.
     void setAngle(double a);
     //!< Sets the rotational angle of the Tile’s sprite.
     void setFlip(SDL_RendererFlip f);
     //!< Sets whether the Tile’s sprite is flipped.
     void setPos(int xPos, int yPos);
     //!< Sets where Tile thinks it is on a Terr.
-    void setSprite(Sprite* u);
-    //!< Sets the Sprite currently occupying the Tile (nullptr for none).
     void setType(tileType t);
     //!< Sets what kind of tile it is.
   protected:
@@ -75,8 +69,6 @@
     bool isPassable;
     //!< True if tile can be entered.
     //!< May change later to enterable from each side.
-    Sprite* sprite;
-    //!< Sprite currently on the tile. nullptr if none.
     Tile* E;
     //!< Adjacent Tile to the East/Right.
     Tile* N;

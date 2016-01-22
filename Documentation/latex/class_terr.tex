@@ -17,29 +17,59 @@ Describes an overworld map. All maps currently must be rectangles.
 \begin{DoxyCompactList}\small\item\em Calls load\+Map unless the string is empty. \end{DoxyCompactList}\item 
 \hyperlink{class_terr_a8b68000bbfdc821e364bdb89f4465c17}{$\sim$\+Terr} ()\hypertarget{class_terr_a8b68000bbfdc821e364bdb89f4465c17}{}\label{class_terr_a8b68000bbfdc821e364bdb89f4465c17}
 
-\begin{DoxyCompactList}\small\item\em Default destructor. Because Tiles use new, they must be destroyed after use. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Default destructor. Because Tiles use new, they must be deleted. \end{DoxyCompactList}\item 
+void \hyperlink{class_terr_ad082e4ae9fa5527df4dbfca775a33945}{enter\+Tile\+Message\+Handler} (const string \&message, \hyperlink{class_tile}{Tile} $\ast$tile)\hypertarget{class_terr_ad082e4ae9fa5527df4dbfca775a33945}{}\label{class_terr_ad082e4ae9fa5527df4dbfca775a33945}
+
+\begin{DoxyCompactList}\small\item\em Takes in a message from a \hyperlink{class_tile}{Tile} being entered, reacts accordingly. \end{DoxyCompactList}\item 
 int \hyperlink{class_terr_a0ef7c8147e12a2291fc84d9ebc67a8df}{get\+Height} ()\hypertarget{class_terr_a0ef7c8147e12a2291fc84d9ebc67a8df}{}\label{class_terr_a0ef7c8147e12a2291fc84d9ebc67a8df}
 
 \begin{DoxyCompactList}\small\item\em Returns the height (h) of \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
+\hyperlink{class_sprite}{Sprite} $\ast$ \hyperlink{class_terr_a556536114490c30cfa5b8c51bcd5c4a0}{get\+Sprite} (\hyperlink{class_tile}{Tile} $\ast$tile)\hypertarget{class_terr_a556536114490c30cfa5b8c51bcd5c4a0}{}\label{class_terr_a556536114490c30cfa5b8c51bcd5c4a0}
+
+\begin{DoxyCompactList}\small\item\em Returns the Sprite$\ast$ on the given \hyperlink{class_tile}{Tile}. \end{DoxyCompactList}\item 
 \hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_terr_a1ca3548cb10880ae8ac01362d1f3116a}{get\+Tile} (int i, int j)\hypertarget{class_terr_a1ca3548cb10880ae8ac01362d1f3116a}{}\label{class_terr_a1ca3548cb10880ae8ac01362d1f3116a}
 
 \begin{DoxyCompactList}\small\item\em Returns a pointer to the tile in position map\mbox{[}i\mbox{]}\mbox{[}j\mbox{]}. \end{DoxyCompactList}\item 
+\hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_terr_a31e8adf3ea4f593e0add333c3160942f}{get\+Tile} (\hyperlink{class_sprite}{Sprite} $\ast$sprite)\hypertarget{class_terr_a31e8adf3ea4f593e0add333c3160942f}{}\label{class_terr_a31e8adf3ea4f593e0add333c3160942f}
+
+\begin{DoxyCompactList}\small\item\em Returns the \hyperlink{class_tile}{Tile} under the given \hyperlink{class_sprite}{Sprite}. \end{DoxyCompactList}\item 
 int \hyperlink{class_terr_a397fdbbeb3fe3eb8989d9da77af42f57}{get\+Width} ()\hypertarget{class_terr_a397fdbbeb3fe3eb8989d9da77af42f57}{}\label{class_terr_a397fdbbeb3fe3eb8989d9da77af42f57}
 
 \begin{DoxyCompactList}\small\item\em Returns the width (w) of \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
+void \hyperlink{class_terr_a8e248d8aa2c992345bce55c6ad7d10ff}{interact\+Sprite} (\hyperlink{class_sprite}{Sprite} $\ast$sprite)\hypertarget{class_terr_a8e248d8aa2c992345bce55c6ad7d10ff}{}\label{class_terr_a8e248d8aa2c992345bce55c6ad7d10ff}
+
+\begin{DoxyCompactList}\small\item\em Intelligently interact with \hyperlink{class_sprite}{Sprite} being faced, if any. \end{DoxyCompactList}\item 
+void \hyperlink{class_terr_af02d1d579ee4e18f06d6c84f370179d3}{interact\+Sprites} (\hyperlink{class_sprite}{Sprite} $\ast$sprite, \hyperlink{class_sprite}{Sprite} $\ast$target)\hypertarget{class_terr_af02d1d579ee4e18f06d6c84f370179d3}{}\label{class_terr_af02d1d579ee4e18f06d6c84f370179d3}
+
+\begin{DoxyCompactList}\small\item\em Intelligently interact between two sprites. \end{DoxyCompactList}\item 
+bool \hyperlink{class_terr_ab207b5e04cea6d9e52592786098d464a}{is\+Occupied} (\hyperlink{class_tile}{Tile} $\ast$tile)\hypertarget{class_terr_ab207b5e04cea6d9e52592786098d464a}{}\label{class_terr_ab207b5e04cea6d9e52592786098d464a}
+
+\begin{DoxyCompactList}\small\item\em Return true if the tile$\ast$ has a \hyperlink{class_sprite}{Sprite} associated with it. \end{DoxyCompactList}\item 
 void \hyperlink{class_terr_af53f4fdf0e1605b1536bde8c3fb77c9d}{load\+Map} (const string \&str)\hypertarget{class_terr_af53f4fdf0e1605b1536bde8c3fb77c9d}{}\label{class_terr_af53f4fdf0e1605b1536bde8c3fb77c9d}
 
-\begin{DoxyCompactList}\small\item\em Loads a map described in filename str. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Loads a map described in filename str. \end{DoxyCompactList}\item 
+void \hyperlink{class_terr_a1b298d5b387f2db5fe78b877d757591f}{move\+Sprite} (\hyperlink{class_sprite}{Sprite} $\ast$sprite, dir d)\hypertarget{class_terr_a1b298d5b387f2db5fe78b877d757591f}{}\label{class_terr_a1b298d5b387f2db5fe78b877d757591f}
+
+\begin{DoxyCompactList}\small\item\em Move specified \hyperlink{class_sprite}{Sprite} in specified direction (if possible). \end{DoxyCompactList}\item 
+void \hyperlink{class_terr_af750c3de5bc44381a3597b2a24895118}{set\+Sprite} (\hyperlink{class_sprite}{Sprite} $\ast$sprite, \hyperlink{class_tile}{Tile} $\ast$tile)\hypertarget{class_terr_af750c3de5bc44381a3597b2a24895118}{}\label{class_terr_af750c3de5bc44381a3597b2a24895118}
+
+\begin{DoxyCompactList}\small\item\em Sets a Sprite-\/\+Tile relationship. \end{DoxyCompactList}\item 
+void \hyperlink{class_terr_ad1bfd1e758bb709e1ab096d3a1853497}{set\+Tile} (\hyperlink{class_tile}{Tile} $\ast$tile, \hyperlink{class_sprite}{Sprite} $\ast$sprite)\hypertarget{class_terr_ad1bfd1e758bb709e1ab096d3a1853497}{}\label{class_terr_ad1bfd1e758bb709e1ab096d3a1853497}
+
+\begin{DoxyCompactList}\small\item\em Sets a Sprite-\/\+Tile relationship. Alias for set\+Sprite. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 vector$<$ vector$<$ \hyperlink{class_tile}{Tile} $\ast$ $>$ $>$ \hyperlink{class_terr_a35de374972704b3d92e76b4bc8e67a9c}{map}\hypertarget{class_terr_a35de374972704b3d92e76b4bc8e67a9c}{}\label{class_terr_a35de374972704b3d92e76b4bc8e67a9c}
 
 \begin{DoxyCompactList}\small\item\em 2D dyanmically resized array of Tiles defining \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
-int32\+\_\+t \hyperlink{class_terr_aa5b7180529bfccda59cacab949dd5fce}{w}\hypertarget{class_terr_aa5b7180529bfccda59cacab949dd5fce}{}\label{class_terr_aa5b7180529bfccda59cacab949dd5fce}
+spritelog \hyperlink{class_terr_a633f21d6e20c549f8006104ae4363bea}{sprites}\hypertarget{class_terr_a633f21d6e20c549f8006104ae4363bea}{}\label{class_terr_a633f21d6e20c549f8006104ae4363bea}
+
+\begin{DoxyCompactList}\small\item\em bi-\/directional map relating each \hyperlink{class_sprite}{Sprite} to its \hyperlink{class_tile}{Tile} (and vice versa). \end{DoxyCompactList}\item 
+int \hyperlink{class_terr_af1d43d8b2b20b19d005626831c1335fb}{w}\hypertarget{class_terr_af1d43d8b2b20b19d005626831c1335fb}{}\label{class_terr_af1d43d8b2b20b19d005626831c1335fb}
 
 \begin{DoxyCompactList}\small\item\em map width (in Tiles) \end{DoxyCompactList}\item 
-int32\+\_\+t \hyperlink{class_terr_a577c745cd566dffc023befc91e427a8d}{h}\hypertarget{class_terr_a577c745cd566dffc023befc91e427a8d}{}\label{class_terr_a577c745cd566dffc023befc91e427a8d}
+int \hyperlink{class_terr_aa2f06b09cb8abd0fda4abb2b696f6885}{h}\hypertarget{class_terr_aa2f06b09cb8abd0fda4abb2b696f6885}{}\label{class_terr_aa2f06b09cb8abd0fda4abb2b696f6885}
 
 \begin{DoxyCompactList}\small\item\em map height (in Tiles) \end{DoxyCompactList}\end{DoxyCompactItemize}
 

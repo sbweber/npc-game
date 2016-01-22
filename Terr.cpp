@@ -2,6 +2,7 @@
 
 #include "Terr.h"
 
+
 Terr::Terr(const string &str)
 {
   w = 0;
@@ -9,6 +10,7 @@ Terr::Terr(const string &str)
   if (str.length())
     loadMap(str);  // if string length is 0, there's no map to load.
 }  // Terr::Terr(string str)
+
 
 Terr::~Terr()
 {
@@ -18,20 +20,98 @@ Terr::~Terr()
         delete(map[i][j]);
 }  // Terr::~Terr()
 
+
+void Terr::enterTileMessageHandler(const string &message, Tile* tile)
+{
+  size_t strpos = message.find(':');
+  if (strpos != string::npos)
+  {
+    if (message.substr(0, strpos) == "LOAD-MAP")
+    {
+      getSprite(tile)->setSpline(0);
+      strpos = message.find(' ', strpos);
+      size_t strposnew = message.find(' ', strpos + 1);
+      string destTerr = message.substr(strpos + 1, strposnew - strpos - 1);
+      strpos = strposnew;
+      strposnew = message.find(' ', strpos + 1);
+      int destX = stoi(message.substr(strpos + 1, strposnew - strpos - 1));
+      strpos = strposnew;
+      strposnew = message.find(' ', strpos + 1);
+      int destY = stoi(message.substr(strpos + 1, strposnew - strpos - 1));
+      loadMap(destTerr);
+      setSprite(getSprite(tile), getTile(destX, destY));
+    }
+  }  // No colon found: do default behavior (nothing)
+}  // void Terr::enterTileMessageHandler(const string &message, Tile* tile)
+
+
+
 int Terr::getHeight()
 {
   return h;
 }  // int Terr::getHeight()
+
+
+Sprite* Terr::getSprite(Tile* tile)
+{
+  if (sprites.right.find(tile) != sprites.right.end())
+    return sprites.right.find(tile)->second;
+  return nullptr;
+}  // Sprite* Terr::getSprite(Tile* tile)
+
 
 Tile* Terr::getTile(int i, int j)
 {
   return map[i][j];
 }  // Tile* Terr::getTile(int i, int j)
 
+
+Tile* Terr::getTile(Sprite* sprite)
+{
+  if (sprites.left.find(sprite) != sprites.left.end())
+    return sprites.left.find(sprite)->second;
+  return nullptr;
+}  // Tile* Terr::getTile(Sprite* sprite)
+
+
 int Terr::getWidth()
 {
   return w;
 }  // int Terr::getWidth()
+
+
+void Terr::interactSprite(Sprite* sprite)
+{
+  Tile* tile = getTile(sprite);
+  if (!tile)
+  {
+    logError("Sprite not on map!");
+    return;
+  }  // Sprite must be on map.
+  tile = tile->getTile(sprite->getFacing());
+  if (!tile)
+    return;  // not an error, just invalid. Interacting with edge of map.
+  if (isOccupied(tile))
+    interactSprites(sprite, getSprite(tile));
+}  // void Terr::interactSprite(Sprite* sprite)
+
+
+void Terr::interactSprites(Sprite* sprite, Sprite* target)
+{
+  if (sprite->getType() == "Hero" && target->getType() == "test")
+  {
+    setSprite(target, nullptr);
+  }  // Test interaction: Hero kills test NPC (removes from map).
+}  // void Terr::interactSprites(Sprite* sprite, Sprite* sprite)
+
+
+bool Terr::isOccupied(Tile* tile)
+{
+  if (getSprite(tile))
+    return true;
+  return false;
+}  // bool Terr::isOccupied(Tile* tile)
+
 
 void Terr::loadMap(const string &str)
 {
@@ -168,6 +248,7 @@ void Terr::loadMap(const string &str)
       }
     }
 
+  // Set up Warp Tiles
   while (file.good())
   {
     int sourceX, sourceY, destX, destY;
@@ -188,4 +269,52 @@ void Terr::loadMap(const string &str)
   }  // Until EOF hit, all remaining info is warps
   file.close();
 }  // void Terr::loadMap(string str)
+
+
+void Terr::moveSprite(Sprite* sprite, dir d)
+{
+  if (!sprite)
+  {
+    logError("Asked to move Sprite that doesn't exist!");
+    return;
+  }  // Make sure sprite exists!
+
+  sprite->changeDir(d);
+  Tile *currTile = getTile(sprite);
+  if (!currTile)
+  {
+    logError("Asked to move Sprite that isn't on the map!");
+    return;
+  }  // Make sure sprite has a tile!
+
+  Tile *targetTile = currTile->getTile(d);
+  if (!targetTile || !targetTile->getIsPassable() || isOccupied(targetTile))
+    return;  // Not an error, just an invalid move.
+
+  setSprite(sprite, targetTile);
+  if (d == NORTH || d == SOUTH)
+    sprite->setSpline(TILE_HEIGHT);
+  else
+    sprite->setSpline(TILE_WIDTH);
+  enterTileMessageHandler(targetTile->enterTile(), targetTile);
+}  // void Terr::moveSprite(Sprite* sprite, dir d)
+
+
+void Terr::setSprite(Sprite* sprite, Tile* tile)
+{
+  if (getSprite(tile))
+  {
+    Sprite* spr = getSprite(tile);
+    sprites.left.erase(spr);
+    sprites.insert(location(spr, nullptr));
+  }  // If there's already a Sprite there, override it.
+  sprites.left.erase(sprite);
+  sprites.insert(location(sprite, tile));
+}  // void Terr::setSprite(Sprite* sprite, Tile* tile)
+
+
+void Terr::setTile(Tile* tile, Sprite* sprite)
+{
+  setSprite(sprite, tile);
+}  // void Terr::setTile(Tile* tile, Sprite* sprite)
 

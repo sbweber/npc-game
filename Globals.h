@@ -23,6 +23,12 @@
     #include <SDL_ttf.h>
   #endif
 
+  // Boost includes
+  #include <boost/bimap.hpp>
+  #include <boost/bimap/unordered_set_of.hpp>
+  #include <boost/bimap/list_of.hpp>
+
+
   // global constants
   const int SCREEN_WIDTH = 640;
   const int SCREEN_HEIGHT = 480;

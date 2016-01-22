@@ -29,8 +29,8 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
   getClips(tileClips, 16, 4, TILE_WIDTH, TILE_HEIGHT);  // magic number (4): number of rows in the tile spritesheet
 
   // position of unit on which camera is focused
-  int x = party->getSprite()->getPos()->getX();
-  int y = party->getSprite()->getPos()->getY();
+  int x = party->getTerr()->getTile(party->getSprite())->getX();
+  int y = party->getTerr()->getTile(party->getSprite())->getY();
 
   Tile* tilePtr = nullptr;
   Tile* offMap = new Tile();
@@ -70,7 +70,21 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
       default:  // Should be impossible to get here
         break;
       }
-      if (tilePtr->isOccupied())
+    }
+  // For all Sprites onscreen on the Terr, draw them! Accomplish by checking
+  // all the tiles onscreen and, if they have a paired Sprite, draw it there.
+  // Done as a second layer, after all the tiles have been drawn so no tiles
+  // are drawn on top of Sprites.
+  for (int i = 0; i < (NUM_TILES_WIDTH); i++)
+    for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
+    {
+      if (((x + i - 8) >= 0) && ((x + i - 8) < party->getTerr()->getWidth()) &&
+        ((y + j - 6) >= 0) && ((y + j - 6) < party->getTerr()->getHeight()))
+        tilePtr = party->getTerr()->getTile((x + i - 8), (j + y - 6));
+      // if Tile in question exists
+      else
+        tilePtr = offMap;
+      if (party->getTerr()->isOccupied(tilePtr))
         cont = drawUnit(ren, tilePtr, party, i, j);
       // if the tile is occupied, draw the character
       if (!contAny && cont)
@@ -164,24 +178,25 @@ bool drawUnit(SDL_Renderer *ren, Tile* tile, Party *party, int i, int j)
   int sc = 0, vSpline = 0, hSpline = 0;
   SDL_Rect spriteClips[4];
   getClips(spriteClips, 4, 2, TILE_WIDTH, TILE_HEIGHT);
+  Sprite* sprite = party->getTerr()->getSprite(tile);
   // magic number (4): number of unit sprite types
-  switch (tile->getSprite()->getSprite())
+  switch (sprite->getSprite())
   {  // note the order -- clips are taken by column, not by row!
   case UP:
     sc = 0;
-    vSpline += tile->getSprite()->getSpline();
+    vSpline += sprite->getSpline();
     break;
   case DOWN:
     sc = 1;
-    vSpline -= tile->getSprite()->getSpline();
+    vSpline -= sprite->getSpline();
     break;
   case LEFT:
     sc = 2;
-    hSpline += tile->getSprite()->getSpline();
+    hSpline += sprite->getSpline();
     break;
   case RIGHT:
     sc = 3;
-    hSpline -= tile->getSprite()->getSpline();
+    hSpline -= sprite->getSpline();
     break;
   default:  // Reaching here should be impossible.
     break;
@@ -205,8 +220,8 @@ bool drawUnit(SDL_Renderer *ren, Tile* tile, Party *party, int i, int j)
   }
   // technically, this switch should be optional so long as the character
   // spritesheet is kept in the same order as the enum
-  renderTexture(tile->getSprite()->getSpriteSheet(), ren, TILE_WIDTH * i + hSpline, TILE_HEIGHT * j + vSpline, &spriteClips[sc]);
+  renderTexture(sprite->getSpriteSheet(), ren, TILE_WIDTH * i + hSpline, TILE_HEIGHT * j + vSpline, &spriteClips[sc]);
 
-  return tile->getSprite()->decSpline();
-}//void drawUnit(SDL_Renderer *ren, Tile* tilePtr, int i, int j)
+  return sprite->decSpline();
+}//void drawUnit(SDL_Renderer *ren, Tile* tile, int i, int j)
 

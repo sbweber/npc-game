@@ -17,16 +17,18 @@ elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
   else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
   endif()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4512")
 endif()
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
-include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2_TTF_INCLUDE_DIR})
+find_package(Boost REQUIRED)
+include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2_TTF_INCLUDE_DIR} ${Boost_INCLUDE_DIR})
 
 set(SOURCES Button.cpp Draw.cpp EventLoops.cpp Globals.cpp Keybind.cpp Main.cpp
         Party.cpp Render.cpp Sprite.cpp Terr.cpp Tile.cpp Unit.cpp Warp.cpp)
 set(HEADERS Button.h Draw.h EventLoops.h Globals.h Keybind.h
         Party.h Render.h Sprite.h Terr.h Tile.h Unit.h Warp.h)
 add_executable(npc-game ${SOURCES} ${HEADERS})
-target_link_libraries(npc-game ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY})
+target_link_libraries(npc-game ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY} ${Boost_LIBRARIES})

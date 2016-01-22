@@ -11,9 +11,6 @@
   #include "Party.h"
   #include "Render.h"
 
-  class Button;
-  class Party;
-  class Tile;
 
   // Draw.cpp
   void drawBattle(SDL_Renderer *ren, TTF_Font* font);

@@ -32,8 +32,7 @@ int main(int argc, char **argv)
 
   // backend vars
   Party* party = new Party(ren);
-  Sprite* npc = new Sprite(ren, "NPC.png");
-  npc->setType("test");
+  Sprite* npc = new Sprite(ren, "NPC.png", "test");
   gameState state = TITLE;
 
   // spritesheets

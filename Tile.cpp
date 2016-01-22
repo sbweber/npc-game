@@ -8,7 +8,6 @@ Tile::Tile(tileType t)
   x = 0;
   y = 0;
   setType(t);
-  sprite = nullptr;
   E = nullptr;
   N = nullptr;
   S = nullptr;
@@ -28,8 +27,6 @@ Tile::~Tile()
     S->N = nullptr;
   if (W && W->E == this)
     W->E = nullptr;
-  if (sprite && sprite->getPos() == this)
-    sprite->setTile(nullptr);
 }  // Tile::~Tile()
 
 
@@ -55,6 +52,12 @@ void Tile::connectTile(dir d, Tile* t)
 }  // void Tile::connectTile(dir d, Tile* t)
 
 
+const string Tile::enterTile()
+{
+  return "";
+}  // const string Tile::enterTile()
+
+
 double Tile::getAngle()
 {
   return angle;
@@ -71,12 +74,6 @@ bool Tile::getIsPassable()
 {
   return isPassable;
 }  // bool Tile::getIsPassable()
-
-
-Sprite* Tile::getSprite()
-{
-  return sprite;
-}  // Sprite* Tile::getSprite()
 
 
 Tile* Tile::getTile(dir d)
@@ -119,20 +116,6 @@ int Tile::getY()
 }  // int Tile::getY()
 
 
-bool Tile::isOccupied()
-{
-  if (sprite)
-    return true;
-  return false;
-}  // bool Tile::isOccupied()
-
-
-bool Tile::isWarp()
-{
-  return false;
-}  // bool Tile::isWarp()
-
-
 void Tile::setAngle(double a)
 {
   angle = a;
@@ -150,13 +133,6 @@ void Tile::setPos(int xPos, int yPos)
   x = xPos;
   y = yPos;
 }  // void Tile::setPos(int xPos, int yPos)
-
-
-void Tile::setSprite(Sprite* u)
-{
-  sprite = u;
-  // tile thinks the unit is there, but unit may not know it's on that tile!
-}  // void Tile::setUnit(Unit* u)
 
 
 void Tile::setType(tileType t)

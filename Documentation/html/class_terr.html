@@ -105,24 +105,60 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a947a7229cb37a0e87d340f6b88f46994"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b68000bbfdc821e364bdb89f4465c17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b68000bbfdc821e364bdb89f4465c17"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a8b68000bbfdc821e364bdb89f4465c17">~Terr</a> ()</td></tr>
-<tr class="memdesc:a8b68000bbfdc821e364bdb89f4465c17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. Because Tiles use new, they must be destroyed after use. <br /></td></tr>
+<tr class="memdesc:a8b68000bbfdc821e364bdb89f4465c17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. Because Tiles use new, they must be deleted. <br /></td></tr>
 <tr class="separator:a8b68000bbfdc821e364bdb89f4465c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad082e4ae9fa5527df4dbfca775a33945"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad082e4ae9fa5527df4dbfca775a33945"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#ad082e4ae9fa5527df4dbfca775a33945">enterTileMessageHandler</a> (const string &amp;message, <a class="el" href="class_tile.html">Tile</a> *tile)</td></tr>
+<tr class="memdesc:ad082e4ae9fa5527df4dbfca775a33945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes in a message from a <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> being entered, reacts accordingly. <br /></td></tr>
+<tr class="separator:ad082e4ae9fa5527df4dbfca775a33945"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ef7c8147e12a2291fc84d9ebc67a8df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ef7c8147e12a2291fc84d9ebc67a8df"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a0ef7c8147e12a2291fc84d9ebc67a8df">getHeight</a> ()</td></tr>
 <tr class="memdesc:a0ef7c8147e12a2291fc84d9ebc67a8df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the height (h) of <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a0ef7c8147e12a2291fc84d9ebc67a8df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a556536114490c30cfa5b8c51bcd5c4a0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a556536114490c30cfa5b8c51bcd5c4a0"></a>
+<a class="el" href="class_sprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a556536114490c30cfa5b8c51bcd5c4a0">getSprite</a> (<a class="el" href="class_tile.html">Tile</a> *tile)</td></tr>
+<tr class="memdesc:a556536114490c30cfa5b8c51bcd5c4a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Sprite* on the given <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a>. <br /></td></tr>
+<tr class="separator:a556536114490c30cfa5b8c51bcd5c4a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ca3548cb10880ae8ac01362d1f3116a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1ca3548cb10880ae8ac01362d1f3116a"></a>
 <a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a1ca3548cb10880ae8ac01362d1f3116a">getTile</a> (int i, int j)</td></tr>
 <tr class="memdesc:a1ca3548cb10880ae8ac01362d1f3116a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the tile in position map[i][j]. <br /></td></tr>
 <tr class="separator:a1ca3548cb10880ae8ac01362d1f3116a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31e8adf3ea4f593e0add333c3160942f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a31e8adf3ea4f593e0add333c3160942f"></a>
+<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a31e8adf3ea4f593e0add333c3160942f">getTile</a> (<a class="el" href="class_sprite.html">Sprite</a> *sprite)</td></tr>
+<tr class="memdesc:a31e8adf3ea4f593e0add333c3160942f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> under the given <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a>. <br /></td></tr>
+<tr class="separator:a31e8adf3ea4f593e0add333c3160942f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a397fdbbeb3fe3eb8989d9da77af42f57"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a397fdbbeb3fe3eb8989d9da77af42f57"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a397fdbbeb3fe3eb8989d9da77af42f57">getWidth</a> ()</td></tr>
 <tr class="memdesc:a397fdbbeb3fe3eb8989d9da77af42f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the width (w) of <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a397fdbbeb3fe3eb8989d9da77af42f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e248d8aa2c992345bce55c6ad7d10ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e248d8aa2c992345bce55c6ad7d10ff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a8e248d8aa2c992345bce55c6ad7d10ff">interactSprite</a> (<a class="el" href="class_sprite.html">Sprite</a> *sprite)</td></tr>
+<tr class="memdesc:a8e248d8aa2c992345bce55c6ad7d10ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intelligently interact with <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> being faced, if any. <br /></td></tr>
+<tr class="separator:a8e248d8aa2c992345bce55c6ad7d10ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af02d1d579ee4e18f06d6c84f370179d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af02d1d579ee4e18f06d6c84f370179d3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#af02d1d579ee4e18f06d6c84f370179d3">interactSprites</a> (<a class="el" href="class_sprite.html">Sprite</a> *sprite, <a class="el" href="class_sprite.html">Sprite</a> *target)</td></tr>
+<tr class="memdesc:af02d1d579ee4e18f06d6c84f370179d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intelligently interact between two sprites. <br /></td></tr>
+<tr class="separator:af02d1d579ee4e18f06d6c84f370179d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab207b5e04cea6d9e52592786098d464a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab207b5e04cea6d9e52592786098d464a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#ab207b5e04cea6d9e52592786098d464a">isOccupied</a> (<a class="el" href="class_tile.html">Tile</a> *tile)</td></tr>
+<tr class="memdesc:ab207b5e04cea6d9e52592786098d464a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the tile* has a <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> associated with it. <br /></td></tr>
+<tr class="separator:ab207b5e04cea6d9e52592786098d464a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af53f4fdf0e1605b1536bde8c3fb77c9d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af53f4fdf0e1605b1536bde8c3fb77c9d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#af53f4fdf0e1605b1536bde8c3fb77c9d">loadMap</a> (const string &amp;str)</td></tr>
 <tr class="memdesc:af53f4fdf0e1605b1536bde8c3fb77c9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a map described in filename str. <br /></td></tr>
 <tr class="separator:af53f4fdf0e1605b1536bde8c3fb77c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b298d5b387f2db5fe78b877d757591f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b298d5b387f2db5fe78b877d757591f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a1b298d5b387f2db5fe78b877d757591f">moveSprite</a> (<a class="el" href="class_sprite.html">Sprite</a> *sprite, dir d)</td></tr>
+<tr class="memdesc:a1b298d5b387f2db5fe78b877d757591f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move specified <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> in specified direction (if possible). <br /></td></tr>
+<tr class="separator:a1b298d5b387f2db5fe78b877d757591f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af750c3de5bc44381a3597b2a24895118"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af750c3de5bc44381a3597b2a24895118"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#af750c3de5bc44381a3597b2a24895118">setSprite</a> (<a class="el" href="class_sprite.html">Sprite</a> *sprite, <a class="el" href="class_tile.html">Tile</a> *tile)</td></tr>
+<tr class="memdesc:af750c3de5bc44381a3597b2a24895118"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a Sprite-Tile relationship. <br /></td></tr>
+<tr class="separator:af750c3de5bc44381a3597b2a24895118"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1bfd1e758bb709e1ab096d3a1853497"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad1bfd1e758bb709e1ab096d3a1853497"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#ad1bfd1e758bb709e1ab096d3a1853497">setTile</a> (<a class="el" href="class_tile.html">Tile</a> *tile, <a class="el" href="class_sprite.html">Sprite</a> *sprite)</td></tr>
+<tr class="memdesc:ad1bfd1e758bb709e1ab096d3a1853497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a Sprite-Tile relationship. Alias for setSprite. <br /></td></tr>
+<tr class="separator:ad1bfd1e758bb709e1ab096d3a1853497"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -130,14 +166,18 @@ Protected Attributes</h2></td></tr>
 vector&lt; vector&lt; <a class="el" href="class_tile.html">Tile</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a35de374972704b3d92e76b4bc8e67a9c">map</a></td></tr>
 <tr class="memdesc:a35de374972704b3d92e76b4bc8e67a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">2D dyanmically resized array of Tiles defining <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a35de374972704b3d92e76b4bc8e67a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5b7180529bfccda59cacab949dd5fce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa5b7180529bfccda59cacab949dd5fce"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#aa5b7180529bfccda59cacab949dd5fce">w</a></td></tr>
-<tr class="memdesc:aa5b7180529bfccda59cacab949dd5fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">map width (in Tiles) <br /></td></tr>
-<tr class="separator:aa5b7180529bfccda59cacab949dd5fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a577c745cd566dffc023befc91e427a8d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a577c745cd566dffc023befc91e427a8d"></a>
-int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a577c745cd566dffc023befc91e427a8d">h</a></td></tr>
-<tr class="memdesc:a577c745cd566dffc023befc91e427a8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">map height (in Tiles) <br /></td></tr>
-<tr class="separator:a577c745cd566dffc023befc91e427a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a633f21d6e20c549f8006104ae4363bea"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a633f21d6e20c549f8006104ae4363bea"></a>
+spritelog&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a633f21d6e20c549f8006104ae4363bea">sprites</a></td></tr>
+<tr class="memdesc:a633f21d6e20c549f8006104ae4363bea"><td class="mdescLeft">&#160;</td><td class="mdescRight">bi-directional map relating each <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> to its <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> (and vice versa). <br /></td></tr>
+<tr class="separator:a633f21d6e20c549f8006104ae4363bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1d43d8b2b20b19d005626831c1335fb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1d43d8b2b20b19d005626831c1335fb"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#af1d43d8b2b20b19d005626831c1335fb">w</a></td></tr>
+<tr class="memdesc:af1d43d8b2b20b19d005626831c1335fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">map width (in Tiles) <br /></td></tr>
+<tr class="separator:af1d43d8b2b20b19d005626831c1335fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2f06b09cb8abd0fda4abb2b696f6885"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#aa2f06b09cb8abd0fda4abb2b696f6885">h</a></td></tr>
+<tr class="memdesc:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="mdescLeft">&#160;</td><td class="mdescRight">map height (in Tiles) <br /></td></tr>
+<tr class="separator:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Describes an overworld map. All maps currently must be rectangles. </p>

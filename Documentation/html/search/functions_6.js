@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['party',['Party',['../class_party.html#a2ac633ed4c5b4171c463a6db02048291',1,'Party']]]
+  ['loadmap',['loadMap',['../class_terr.html#af53f4fdf0e1605b1536bde8c3fb77c9d',1,'Terr']]]
 ];
