@@ -71,7 +71,10 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
         break;
       }
     }
-    // TODO: For all Sprites onscreen on the Terr, draw them! Accomplish by checking all the tiles onscreen and, if they have a paired Sprite, draw it there!
+  // For all Sprites onscreen on the Terr, draw them! Accomplish by checking
+  // all the tiles onscreen and, if they have a paired Sprite, draw it there.
+  // Done as a second layer, after all the tiles have been drawn so no tiles
+  // are drawn on top of Sprites.
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
     {

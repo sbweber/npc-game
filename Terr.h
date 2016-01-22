@@ -22,6 +22,8 @@
     //!< Calls loadMap unless the string is empty.
     ~Terr();
     //!< Default destructor. Because Tiles use new, they must be deleted.
+    void enterTileMessageHandler(const string &message, Tile* tile);
+    //!< Takes in a message from a Tile being entered, reacts accordingly.
     int getHeight();
     //!< Returns the height (h) of Terr.
     Sprite* getSprite(Tile* tile);

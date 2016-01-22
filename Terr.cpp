@@ -21,6 +21,31 @@ Terr::~Terr()
 }  // Terr::~Terr()
 
 
+void Terr::enterTileMessageHandler(const string &message, Tile* tile)
+{
+  size_t strpos = message.find(':');
+  if (strpos != string::npos)
+  {
+    if (message.substr(0, strpos) == "LOAD-MAP")
+    {
+      getSprite(tile)->setSpline(0);
+      strpos = message.find(' ', strpos);
+      size_t strposnew = message.find(' ', strpos + 1);
+      string destTerr = message.substr(strpos + 1, strposnew - strpos - 1);
+      strpos = strposnew;
+      strposnew = message.find(' ', strpos + 1);
+      int destX = stoi(message.substr(strpos + 1, strposnew - strpos - 1));
+      strpos = strposnew;
+      strposnew = message.find(' ', strpos + 1);
+      int destY = stoi(message.substr(strpos + 1, strposnew - strpos - 1));
+      loadMap(destTerr);
+      setSprite(getSprite(tile), getTile(destX, destY));
+    }
+  }  // No colon found: do default behavior (nothing)
+}  // void Terr::enterTileMessageHandler(const string &message, Tile* tile)
+
+
+
 int Terr::getHeight()
 {
   return h;
@@ -267,11 +292,11 @@ void Terr::moveSprite(Sprite* sprite, dir d)
     return;  // Not an error, just an invalid move.
 
   setSprite(sprite, targetTile);
-  targetTile->enterTile();
   if (d == NORTH || d == SOUTH)
     sprite->setSpline(TILE_HEIGHT);
   else
     sprite->setSpline(TILE_WIDTH);
+  enterTileMessageHandler(targetTile->enterTile(), targetTile);
 }  // void Terr::moveSprite(Sprite* sprite, dir d)
 
 

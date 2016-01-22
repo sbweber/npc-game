@@ -23,16 +23,16 @@ Warp::Warp(Tile* tile, const string &dT, int dX, int dY,
   
   if (replaceTile)
   {
-    if (E)
+    if (E && E->getTile(WEST) == tile)
       E->connectTile(WEST, this);
-    if (N)
+    if (N && N->getTile(SOUTH) == tile)
       N->connectTile(SOUTH, this);
-    if (S)
+    if (S && S->getTile(NORTH) == tile)
       S->connectTile(NORTH, this);
-    if (W)
+    if (W && W->getTile(EAST) == tile)
       W->connectTile(EAST, this);
     delete tile;
-  }  // If I'm replacing a tile, tell the neighbors I'm him and then delete him.
+  }  // If I'm replacing a tile, tell the neighbors I'm him, then delete him.
 }  // Warp::Warp(Tile* tile, string &nT)
 
 
