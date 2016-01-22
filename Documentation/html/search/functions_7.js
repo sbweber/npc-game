@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['render',['render',['../class_button.html#a599b95776f845111b8245ff15c13f2f1',1,'Button']]]
+  ['move',['move',['../class_party.html#a6260aeac8da674bc894709ad392c1360',1,'Party']]],
+  ['movesprite',['moveSprite',['../class_terr.html#a1b298d5b387f2db5fe78b877d757591f',1,'Terr']]]
 ];

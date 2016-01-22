@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['interact',['interact',['../class_sprite.html#a5ca2adc18eeb5290160a5d035992d937',1,'Sprite']]],
-  ['isoccupied',['isOccupied',['../class_tile.html#ac556e7bbe293dde62d66b46e3d12bcb7',1,'Tile']]],
-  ['ispassable',['isPassable',['../class_tile.html#afa72b458d549b9533f058e2d2fad0f81',1,'Tile']]],
-  ['iswarp',['isWarp',['../class_tile.html#a5ef077b74542da250b812bc708920e8a',1,'Tile::isWarp()'],['../class_warp.html#ad747a08d0092f0b7362743b415795054',1,'Warp::isWarp()']]]
+  ['interactsprite',['interactSprite',['../class_terr.html#a8e248d8aa2c992345bce55c6ad7d10ff',1,'Terr']]],
+  ['interactsprites',['interactSprites',['../class_terr.html#af02d1d579ee4e18f06d6c84f370179d3',1,'Terr']]],
+  ['isoccupied',['isOccupied',['../class_terr.html#ab207b5e04cea6d9e52592786098d464a',1,'Terr']]],
+  ['ispassable',['isPassable',['../class_tile.html#afa72b458d549b9533f058e2d2fad0f81',1,'Tile']]]
 ];
