@@ -321,6 +321,11 @@ void Terr::setTile(Tile* tile, Sprite* sprite)
 
 Tile* Terr::tileClick(SDL_MouseButtonEvent &click, Sprite* sprite)
 {
-  return nullptr;
+  Tile* tile = nullptr;
+  int x = click.x / TILE_WIDTH - NUM_TILES_WIDTH / 2 + getTile(sprite)->getX();
+  int y = click.y / TILE_HEIGHT - NUM_TILES_HEIGHT / 2 + getTile(sprite)->getY();
+  if (x >= 0 && x < w && y >= 0 && y < h)
+    tile = getTile(x, y);
+  return tile;
 }  // Tile* Terr::tileClick(SDL_MouseButtonEvent &click, Sprite* sprite)
 

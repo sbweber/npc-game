@@ -67,7 +67,8 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = party->tileClick(e.button);
-    party->setLocation(tile);
+    if (tile)
+      party->setLocation(tile);
     break;
   default:
     break;
