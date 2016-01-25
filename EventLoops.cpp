@@ -72,16 +72,16 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
     {
       party->getTerr()->findPath(party->getTerr()->getTile(party->getSprite()),
               tile, party->getSprite());
-      while (d != UNDEFINED_DIRECTION)
-      {
-        d = party->getSprite()->popMove();
-        if (d != UNDEFINED_DIRECTION)
-          party->move(d);
-        while (drawMap(ren, tiles, party));
-      }
     }  // If tile can be legally entered, warp to it
     break;
   default:
+    d = party->getSprite()->popMove();
+    if (d != UNDEFINED_DIRECTION)
+    {
+      party->move(d, false);
+      SDL_Event* wait = new SDL_Event();
+      SDL_PushEvent(wait);  // push empty event to cause immediate state update
+    }
     break;
   }
   return false;

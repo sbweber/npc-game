@@ -40,8 +40,10 @@ Terr* Party::getTerr()
 }  // Terr* Party::getTerr()
 
 
-void Party::move(dir d)
+void Party::move(dir d, bool interrupt)
 {
+  if (interrupt)
+    sprite->clearMoves();
   terr->moveSprite(sprite, d);
 }  // void Party::move(dir d)
 

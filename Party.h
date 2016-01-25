@@ -24,7 +24,7 @@
     //!< Returns the Sprite representing the party by reference.
     Terr* getTerr();
     //!< Returns the current Terr.
-    void move(dir d);
+    void move(dir d, bool interrupt = true);
     //!< Move player's Sprite. Load new Terr if entering a Warp
     void setLocation(int x, int y);
     //!< Sets the Party's location on the terr to (x, y).
