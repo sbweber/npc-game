@@ -5,11 +5,15 @@
 
   // c++ core includes
   #include <cstddef>  // implicitly added on non-windows machines
+  #include <cstdlib>
   #include <ctime>
   #include <iostream>
   #include <fstream>
   #include <new>
+  #include <queue>
   #include <string>
+  #include <tuple>
+  #include <unordered_map>
   #include <vector>
 
   // SDL includes
@@ -45,7 +49,8 @@
     NORTH,
     SOUTH,
     WEST,
-    EAST
+    EAST,
+    UNDEFINED_DIRECTION
   };
 
   enum gameState

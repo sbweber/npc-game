@@ -45,6 +45,107 @@ void Terr::enterTileMessageHandler(const string &message, Tile* tile)
 }  // void Terr::enterTileMessageHandler(const string &message, Tile* tile)
 
 
+bool Terr::findCheckRoute(dir d, unordered_map<Tile*, int> *tiles, Tile* tile)
+{
+  if (tile->getTile(d) &&
+          tiles->find(tile->getTile(d)) != tiles->end() &&
+          (tiles->find(tile->getTile(d))->second <
+          tiles->find(tile)->second))
+    return true;
+  return false;
+}  // if tile in dir exists, might be on a route, and is closer, return true.
+
+
+void Terr::findEnqueue(dir d, queue<tuple<Tile*, int> > *searchQ,
+  unordered_map<Tile*, int> *tiles, tuple<Tile*, int> t)
+{
+  Tile* tile = get<0>(t);
+  if (tile->getTile(d) && tiles->find(tile->getTile(d)) == tiles->end() &&
+    tile->getTile(d)->getIsPassable())
+  {
+    searchQ->emplace(tile->getTile(d), get<1>(t) +1);
+    tiles->emplace(tile->getTile(d), get<1>(t)+1);
+  }
+}  // Enqueues unused tile in a direction from current tile
+
+
+dir Terr::findHint(Tile* start, Tile* dest)
+{
+  int sx = start->getX();
+  int sy = start->getX();
+  int dx = dest->getX();
+  int dy = dest->getY();
+  if (start == dest || (dx == sx && dy == sy))
+    return UNDEFINED_DIRECTION;  // same tile
+  if (abs(dx - sx) > abs(dy - sy))
+  {
+    if (dx > sx)
+      return EAST;
+    return WEST;
+  }  // if horizontal distance greater than vertical
+  else
+  {
+    if (dy > sy)
+      return NORTH;
+    return SOUTH;
+  }
+}  // void Terr::findHint(Tile* start, Tile* dest)
+
+
+void Terr::findPath(Tile* start, Tile* dest, Sprite* sprite)
+{
+  if (!start || !dest || !sprite)
+    return;  // Function assumes non-null start/dest/sprite
+  queue<tuple<Tile*, int> > searchQ;
+  unordered_map<Tile*, int> tiles;
+  searchQ.emplace(dest, 0);
+  tiles.emplace(dest, 0);
+  bool found = false;
+  tuple<Tile*, int> t;
+  while (!searchQ.empty() && !found)
+  {
+    t = searchQ.front();
+    searchQ.pop();
+    if (get<0>(t) == start)
+      found = true;
+    else
+    {
+      findEnqueue(EAST, &searchQ, &tiles, t);
+      findEnqueue(NORTH, &searchQ, &tiles, t);
+      findEnqueue(SOUTH, &searchQ, &tiles, t);
+      findEnqueue(WEST, &searchQ, &tiles, t);
+    }  // enqueue tile's neighbors with a distance 1 greater if valid and new
+  }  // While search queue not empty and element not found
+
+  if (!found)
+    return;
+  sprite->clearMoves();
+  Tile* tile = start;
+  while (tile != dest)
+  {
+    if (findCheckRoute(EAST, &tiles, tile))
+    {
+      sprite->pushMove(EAST);
+      tile = tile->getTile(EAST);
+    }
+    else if (findCheckRoute(NORTH, &tiles, tile))
+    {
+      sprite->pushMove(NORTH);
+      tile = tile->getTile(NORTH);
+    }
+    else if (findCheckRoute(SOUTH, &tiles, tile))
+    {
+      sprite->pushMove(SOUTH);
+      tile = tile->getTile(SOUTH);
+    }
+    else if (findCheckRoute(WEST, &tiles, tile))
+    {
+      sprite->pushMove(WEST);
+      tile = tile->getTile(WEST);
+    }
+  }  // while you haven't gotten back to dest
+}  // void Terr::findPath(Tile* start, Tile* dest, Sprite* sprite)
+
 
 int Terr::getHeight()
 {

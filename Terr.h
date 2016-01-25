@@ -24,6 +24,8 @@
     //!< Default destructor. Because Tiles use new, they must be deleted.
     void enterTileMessageHandler(const string &message, Tile* tile);
     //!< Takes in a message from a Tile being entered, reacts accordingly.
+    void findPath(Tile* start, Tile* dest, Sprite* sprite);
+    //!< A* to find a path from start to dest, then enqueue in sprite.
     int getHeight();
     //!< Returns the height (h) of Terr.
     Sprite* getSprite(Tile* tile);
@@ -51,14 +53,20 @@
     Tile* tileClick(SDL_MouseButtonEvent &click, Sprite* sprite);
     //!< Returns pointer to the Tile clicked. Needs Sprite the map is watching.
   protected:
+    int h;
+    //!< map height (in Tiles)
     vector< vector<Tile*> > map;
     //!< 2D dyanmically resized array of Tiles defining Terr.
     spritelog sprites;
     //!< bi-directional map relating each Sprite to its Tile (and vice versa).
     int w;
     //!< map width (in Tiles)
-    int h;
-    //!< map height (in Tiles)
+    bool findCheckRoute(dir d, unordered_map<Tile*, int> *tiles, Tile* tile);
+    void findEnqueue(dir d, queue<tuple<Tile*, int> > *searchQ,
+            unordered_map<Tile*, int> *tiles, tuple<Tile*, int> t);
+    //!< Utility function for findPath(): marks/enqueues tiles.
+    dir findHint(Tile* start, Tile* end);
+    //!< Returns closest direction to get to end. Optional barred direction.
   };  // class Terr
 
 #endif

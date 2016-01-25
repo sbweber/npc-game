@@ -24,7 +24,7 @@ bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
 {  // portion of map to be drawn based on position of hero
   SDL_RenderClear(ren);
   int tileClip = 0;
-  bool contAny = false, cont = false;
+  bool partyMoved = false, cont = false;
   SDL_Rect tileClips[16];  // magic number (16): number of tile types. Currently five (black/impassable, white/passable, etc)
   getClips(tileClips, 16, 4, TILE_WIDTH, TILE_HEIGHT);  // magic number (4): number of rows in the tile spritesheet
 
@@ -89,12 +89,13 @@ bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
       if (party->getTerr()->isOccupied(tilePtr))
         cont = drawUnit(ren, tilePtr, party, i, j);
       // if the tile is occupied, draw the character
-      if (!contAny && cont)
-        contAny = true;
+      if (!partyMoved && cont &&
+              party->getSprite() == party->getTerr()->getSprite(tilePtr))
+        partyMoved = true;
     }
   delete offMap;
   SDL_RenderPresent(ren);
-  return contAny;
+  return partyMoved;
 }  // void drawMap()
 
 

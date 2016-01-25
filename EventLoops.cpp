@@ -50,6 +50,7 @@ bool loopBattle(SDL_Event &e)
 bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
 {
   Tile* tile;
+  dir d = NORTH;
   while(drawMap(ren, tiles, party));
   switch (e.type)
   {
@@ -69,8 +70,15 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
     tile = party->tileClick(e.button);
     if (tile && tile->getIsPassable() && !party->getTerr()->isOccupied(tile))
     {
-      party->getTerr()->setSprite(party->getSprite(), tile);
-      party->getTerr()->enterTileMessageHandler(tile->enterTile(), tile);
+      party->getTerr()->findPath(party->getTerr()->getTile(party->getSprite()),
+              tile, party->getSprite());
+      while (d != UNDEFINED_DIRECTION)
+      {
+        d = party->getSprite()->popMove();
+        if (d != UNDEFINED_DIRECTION)
+          party->move(d);
+        while (drawMap(ren, tiles, party));
+      }
     }  // If tile can be legally entered, warp to it
     break;
   default:
