@@ -19,6 +19,12 @@ Sprite::~Sprite()
 }  // Sprite::~Sprite()
 
 
+void Sprite::clearMoves()
+{
+  while (popMove() != UNDEFINED_DIRECTION);
+}  // void Sprite::clearMoves()
+
+
 bool Sprite::decSpline()
 {
   if (spline > 0)
@@ -86,6 +92,24 @@ const string Sprite::getType()
 {
   return type;
 }  // const string Sprite::getType()
+
+
+const dir Sprite::popMove()
+{
+  if (!moves.empty())
+  {
+    dir retval = moves.front();
+    moves.pop();
+    return retval;
+  }  // If the queue isn't empty, pop the front off and return it.
+  return UNDEFINED_DIRECTION;
+}  // const dir Sprite::popMove()
+
+
+void Sprite::pushMove(dir move)
+{
+  moves.push(move);
+}  // void Sprite::pushMove()
 
 
 void Sprite::setSpline(int s)

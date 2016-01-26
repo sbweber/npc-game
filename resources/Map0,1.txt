@@ -1,0 +1,17 @@
+16
+12
+xxxxxxxxcccxxxxx
+xxxxxxxxcccxxxxx
+xxxxxxxx    xxxx
+xxxx     xx xxxx
+xxxx     xx xxxx
+xxxx x   xx xxxx
+xxxx     xx xxxx
+xxxx xxxxxx xxxx
+xxxx xxxxxx xxxx
+xxxx        xxxx
+xxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxx
+8 0 Map0,0.txt 7 10
+9 0 Map0,0.txt 8 10
+10 0 Map0,0.txt 9 10

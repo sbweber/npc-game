@@ -11,14 +11,14 @@ bool loopAnyState(SDL_Event &e, Party* party, Sprite *npc, gameState &state)
       state = BATTLE;  // debug command startbattle
     if (e.key.keysym == stateMap1)
     {
-      party->changeTerr("Map1.txt");
+      party->changeTerr("Map0,0.txt");
       state = MAP;
       party->setLocation(4, 3);
       party->getTerr()->setSprite(npc, party->getTerr()->getTile(5, 4));
     }  // debug command map1
     if (e.key.keysym == stateMap2)
     {
-      party->changeTerr("Map2.txt");
+      party->changeTerr("Map0,1.txt");
       state = MAP;
       party->setLocation(1, 1);
     }  // debug command map2
@@ -49,7 +49,9 @@ bool loopBattle(SDL_Event &e)
 
 bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
 {
-  drawMap(ren, tiles, party);
+  Tile* tile;
+  dir d = NORTH;
+  while(drawMap(ren, tiles, party));
   switch (e.type)
   {
   case SDL_KEYDOWN:
@@ -64,7 +66,22 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
     if (e.key.keysym == interact)
       party->getTerr()->interactSprite(party->getSprite());
     break;
+  case SDL_MOUSEBUTTONDOWN:
+    tile = party->tileClick(e.button);
+    if (tile && tile->getIsPassable() && !party->getTerr()->isOccupied(tile))
+    {
+      party->getTerr()->findPath(party->getTerr()->getTile(party->getSprite()),
+              tile, party->getSprite());
+    }  // If tile can be legally entered, warp to it
+    break;
   default:
+    d = party->getSprite()->popMove();
+    if (d != UNDEFINED_DIRECTION)
+    {
+      party->move(d, false);
+      SDL_Event* wait = new SDL_Event();
+      SDL_PushEvent(wait);  // push empty event to cause immediate state update
+    }
     break;
   }
   return false;
@@ -101,7 +118,7 @@ bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
   case SDL_MOUSEBUTTONDOWN:
     if (toGame->buttonClick(e.button))
     {
-      party->changeTerr("Map1.txt");
+      party->changeTerr("Map0,0.txt");
       state = MAP;
       party->setLocation(6, 10);
       party->getTerr()->setSprite(npc, party->getTerr()->getTile(5, 4));

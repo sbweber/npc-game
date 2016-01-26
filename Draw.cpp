@@ -20,26 +20,28 @@ void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 
 
-void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
+bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
 {  // portion of map to be drawn based on position of hero
   SDL_RenderClear(ren);
   int tileClip = 0;
-  bool contAny = false, cont = false;
+  bool partyMoved = false, cont = false;
   SDL_Rect tileClips[16];  // magic number (16): number of tile types. Currently five (black/impassable, white/passable, etc)
   getClips(tileClips, 16, 4, TILE_WIDTH, TILE_HEIGHT);  // magic number (4): number of rows in the tile spritesheet
 
   // position of unit on which camera is focused
   int x = party->getTerr()->getTile(party->getSprite())->getX();
   int y = party->getTerr()->getTile(party->getSprite())->getY();
+  int hsw = NUM_TILES_WIDTH / 2;  //half screen width (in tiles)
+  int hsh = NUM_TILES_HEIGHT / 2;  // half screen height
 
   Tile* tilePtr = nullptr;
   Tile* offMap = new Tile();
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
     {
-      if (((x + i - 8) >= 0) && ((x + i - 8) < party->getTerr()->getWidth()) &&
-              ((y + j - 6) >= 0) && ((y + j - 6) < party->getTerr()->getHeight()))
-        tilePtr = party->getTerr()->getTile((x + i - 8), (j + y - 6));
+      if (((x + i - hsw) >= 0) && ((x + i - hsw) < party->getTerr()->getWidth()) &&
+              ((y + j - hsh) >= 0) && ((y + j - hsh) < party->getTerr()->getHeight()))
+        tilePtr = party->getTerr()->getTile((x + i - hsw), (j + y - hsh));
       // if Tile in question exists
       else
         tilePtr = offMap;
@@ -78,25 +80,22 @@ void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
     {
-      if (((x + i - 8) >= 0) && ((x + i - 8) < party->getTerr()->getWidth()) &&
-        ((y + j - 6) >= 0) && ((y + j - 6) < party->getTerr()->getHeight()))
-        tilePtr = party->getTerr()->getTile((x + i - 8), (j + y - 6));
+      if (((x + i - hsw) >= 0) && ((x + i - hsw) < party->getTerr()->getWidth()) &&
+        ((y + j - hsh) >= 0) && ((y + j - hsh) < party->getTerr()->getHeight()))
+        tilePtr = party->getTerr()->getTile((x + i - hsw), (j + y - hsh));
       // if Tile in question exists
       else
         tilePtr = offMap;
       if (party->getTerr()->isOccupied(tilePtr))
         cont = drawUnit(ren, tilePtr, party, i, j);
       // if the tile is occupied, draw the character
-      if (!contAny && cont)
-        contAny = true;
+      if (!partyMoved && cont &&
+              party->getSprite() == party->getTerr()->getSprite(tilePtr))
+        partyMoved = true;
     }
-  if (contAny)
-  {
-    SDL_Event* wait = new SDL_Event();
-    SDL_PushEvent(wait);
-  }
   delete offMap;
   SDL_RenderPresent(ren);
+  return partyMoved;
 }  // void drawMap()
 
 
@@ -167,7 +166,7 @@ void drawTitle(SDL_Renderer *ren, Button *toGame)
 {
   SDL_RenderClear(ren);
   SDL_Texture *bg = loadTexture("Title.png", ren);
-  renderTexture(bg, ren, 0, 0);
+  renderBackground(bg, ren);
   toGame->render(ren);
   SDL_RenderPresent(ren);
 }  // void drawTitle(SDL_Renderer *ren)

@@ -9,13 +9,14 @@ Boost (http://sourceforge.net/projects/boost/files/latest/download?source=files)
 
 Code by Samuel Weber (sbweber).  
 
-Default keys:  
+Default Controls:  
 Arrow keys: Move around the map.  
 z: Interact with things on the map.  
 esc: Go back/up a layer. Currently unused.  
-alt-f4: Quit the program from anywhere.  
+f4: Quit the program from anywhere.  
+Click on a tile on the map to move to it.  
 
-Debug keys:  
+Debug Controls:  
 1: Load "map1.txt".  
 2: Load "map2.txt".  
 9: Go to the key rebind menu.  

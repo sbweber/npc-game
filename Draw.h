@@ -15,8 +15,8 @@
   // Draw.cpp
   void drawBattle(SDL_Renderer *ren, TTF_Font* font);
   //!< Draws the battle screen. Currently stubbed.
-  void drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party);
-  //!< Draws the overworld map for exploration.
+  bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party);
+  //!< Draws the overworld map for exploration. Returns true if splining.
   void drawRebind(SDL_Renderer *ren, TTF_Font* font);
   //!< Draws the screen for rebinding keys.
   void drawScreen(gameState &state, SDL_Renderer *ren, TTF_Font* font,

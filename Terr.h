@@ -24,6 +24,8 @@
     //!< Default destructor. Because Tiles use new, they must be deleted.
     void enterTileMessageHandler(const string &message, Tile* tile);
     //!< Takes in a message from a Tile being entered, reacts accordingly.
+    void findPath(Tile* start, Tile* dest, Sprite* sprite);
+    //!< A* to find a path from start to dest, then enqueue in sprite.
     int getHeight();
     //!< Returns the height (h) of Terr.
     Sprite* getSprite(Tile* tile);
@@ -48,15 +50,28 @@
     //!< Sets a Sprite-Tile relationship.
     void setTile(Tile* tile, Sprite* sprite);
     //!< Sets a Sprite-Tile relationship. Alias for setSprite.
+    Tile* tileClick(SDL_MouseButtonEvent &click, Sprite* sprite);
+    //!< Returns pointer to the Tile clicked. Needs Sprite the map is watching.
   protected:
+    int h;
+    //!< map height (in Tiles)
     vector< vector<Tile*> > map;
     //!< 2D dyanmically resized array of Tiles defining Terr.
     spritelog sprites;
     //!< bi-directional map relating each Sprite to its Tile (and vice versa).
     int w;
     //!< map width (in Tiles)
-    int h;
-    //!< map height (in Tiles)
+    bool findCheckRoute(dir d, unordered_map<Tile*, int> *tiles, Tile* tile);
+    //!< Returns true if a tile in dir d exists and gets you closer on your
+    //!< route. Requires a fully loaded table of tuples showing how close the
+    //!< tiles are on potential routes.
+    void findEnqueue(dir d, priority_queue<tuple<int, Tile*>,
+            vector<tuple<int, Tile*> >, greater<tuple<int, Tile*> > > *searchQ,
+            unordered_map<Tile*, int> *tiles, tuple<int, Tile*> t,
+            Tile* target);
+    //!< Utility function for findPath(): marks/enqueues tiles.
+    int findDistance(Tile* start, Tile* end);
+    //!< Returns taxicab distance to get to end.
   };  // class Terr
 
 #endif

@@ -29,6 +29,7 @@ void Terr::enterTileMessageHandler(const string &message, Tile* tile)
     if (message.substr(0, strpos) == "LOAD-MAP")
     {
       getSprite(tile)->setSpline(0);
+      getSprite(tile)->clearMoves();
       strpos = message.find(' ', strpos);
       size_t strposnew = message.find(' ', strpos + 1);
       string destTerr = message.substr(strpos + 1, strposnew - strpos - 1);
@@ -44,6 +45,92 @@ void Terr::enterTileMessageHandler(const string &message, Tile* tile)
   }  // No colon found: do default behavior (nothing)
 }  // void Terr::enterTileMessageHandler(const string &message, Tile* tile)
 
+
+bool Terr::findCheckRoute(dir d, unordered_map<Tile*, int> *tiles, Tile* tile)
+{
+  if (tile->getTile(d) &&
+          tiles->find(tile->getTile(d)) != tiles->end() &&
+          (tiles->find(tile->getTile(d))->second <
+          tiles->find(tile)->second))
+    return true;
+  return false;
+}  // if tile in dir exists, might be on a route, and is closer, return true.
+
+
+void Terr::findEnqueue(dir d, priority_queue<tuple<int, Tile*>,
+        vector<tuple<int, Tile*> >, greater<tuple<int, Tile*> > > *searchQ,
+        unordered_map<Tile*, int> *tiles, tuple<int, Tile*> t, Tile* target)
+{
+  Tile* tile = get<1>(t);
+  if (tile->getTile(d) && tiles->find(tile->getTile(d)) == tiles->end() &&
+          tile->getTile(d)->getIsPassable() &&
+          (!isOccupied(tile->getTile(d)) || tile->getTile(d) == target))
+  {
+    searchQ->emplace(get<0>(t) + 1 + findDistance(tile->getTile(d), target), tile->getTile(d));
+    tiles->emplace(tile->getTile(d), get<0>(t) + 1);
+  }
+}  // Enqueues unused tile in a direction from current tile
+
+
+int Terr::findDistance(Tile* start, Tile* dest)
+{
+  return (abs(dest->getX() - start->getX()) + abs(dest->getY() - start->getY()));
+}  // int Terr::findDistance(Tile* start, Tile* dest)
+
+
+void Terr::findPath(Tile* start, Tile* dest, Sprite* sprite)
+{
+  if (!start || !dest || !sprite)
+    return;  // Function assumes non-null start/dest/sprite
+  priority_queue<tuple<int, Tile*>, vector<tuple<int, Tile*> >, greater<tuple<int, Tile*> > > searchQ;
+  unordered_map<Tile*, int> tiles;
+  searchQ.emplace(0 + findDistance(dest, start), dest);
+  tiles.emplace(dest, 0 + findDistance(dest, start));
+  bool found = false;
+  tuple<int, Tile*> t;
+  while (!searchQ.empty() && !found)
+  {
+    t = searchQ.top();
+    searchQ.pop();
+    if (get<1>(t) == start)
+      found = true;
+    else
+    {
+      findEnqueue(EAST, &searchQ, &tiles, t, start);
+      findEnqueue(NORTH, &searchQ, &tiles, t, start);
+      findEnqueue(SOUTH, &searchQ, &tiles, t, start);
+      findEnqueue(WEST, &searchQ, &tiles, t, start);
+    }  // enqueue tile's neighbors with a distance 1 greater if valid and new
+  }  // While search queue not empty and element not found
+
+  if (!found)
+    return;
+  sprite->clearMoves();
+  Tile* tile = start;
+  while (tile != dest)
+  {
+    if (findCheckRoute(EAST, &tiles, tile))
+    {
+      sprite->pushMove(EAST);
+      tile = tile->getTile(EAST);
+    }
+    else if (findCheckRoute(NORTH, &tiles, tile))
+    {
+      sprite->pushMove(NORTH);
+      tile = tile->getTile(NORTH);
+    }
+    else if (findCheckRoute(SOUTH, &tiles, tile))
+    {
+      sprite->pushMove(SOUTH);
+      tile = tile->getTile(SOUTH);
+    }
+    else if (findCheckRoute(WEST, &tiles, tile))
+    {
+      sprite->pushMove(WEST);
+      tile = tile->getTile(WEST);
+    }
+  }  // while you haven't gotten back to dest
+}  // void Terr::findPath(Tile* start, Tile* dest, Sprite* sprite)
 
 
 int Terr::getHeight()
@@ -119,7 +206,7 @@ void Terr::loadMap(const string &str)
   int c;
   file.open(("resources/"+str), ifstream::in);
   if (!file.good())
-    logSDLError("Map not found.");  // error, probably bad filename
+    logSDLError("Map not found: " + str);  // error, probably bad filename
 
   file >> w;
   file >> h;
@@ -317,4 +404,15 @@ void Terr::setTile(Tile* tile, Sprite* sprite)
 {
   setSprite(sprite, tile);
 }  // void Terr::setTile(Tile* tile, Sprite* sprite)
+
+
+Tile* Terr::tileClick(SDL_MouseButtonEvent &click, Sprite* sprite)
+{
+  Tile* tile = nullptr;
+  int x = click.x / TILE_WIDTH - NUM_TILES_WIDTH / 2 + getTile(sprite)->getX();
+  int y = click.y / TILE_HEIGHT - NUM_TILES_HEIGHT / 2 + getTile(sprite)->getY();
+  if (x >= 0 && x < w && y >= 0 && y < h)
+    tile = getTile(x, y);
+  return tile;
+}  // Tile* Terr::tileClick(SDL_MouseButtonEvent &click, Sprite* sprite)
 
