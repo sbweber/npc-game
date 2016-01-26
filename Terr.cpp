@@ -29,6 +29,7 @@ void Terr::enterTileMessageHandler(const string &message, Tile* tile)
     if (message.substr(0, strpos) == "LOAD-MAP")
     {
       getSprite(tile)->setSpline(0);
+      getSprite(tile)->clearMoves();
       strpos = message.find(' ', strpos);
       size_t strposnew = message.find(' ', strpos + 1);
       string destTerr = message.substr(strpos + 1, strposnew - strpos - 1);
@@ -56,64 +57,49 @@ bool Terr::findCheckRoute(dir d, unordered_map<Tile*, int> *tiles, Tile* tile)
 }  // if tile in dir exists, might be on a route, and is closer, return true.
 
 
-void Terr::findEnqueue(dir d, queue<tuple<Tile*, int> > *searchQ,
-  unordered_map<Tile*, int> *tiles, tuple<Tile*, int> t)
+void Terr::findEnqueue(dir d, priority_queue<tuple<int, Tile*>,
+        vector<tuple<int, Tile*> >, greater<tuple<int, Tile*> > > *searchQ,
+        unordered_map<Tile*, int> *tiles, tuple<int, Tile*> t, Tile* target)
 {
-  Tile* tile = get<0>(t);
+  Tile* tile = get<1>(t);
   if (tile->getTile(d) && tiles->find(tile->getTile(d)) == tiles->end() &&
-    tile->getTile(d)->getIsPassable())
+          tile->getTile(d)->getIsPassable() &&
+          (!isOccupied(tile->getTile(d)) || tile->getTile(d) == target))
   {
-    searchQ->emplace(tile->getTile(d), get<1>(t) +1);
-    tiles->emplace(tile->getTile(d), get<1>(t)+1);
+    searchQ->emplace(get<0>(t) + 1 + findDistance(tile->getTile(d), target), tile->getTile(d));
+    tiles->emplace(tile->getTile(d), get<0>(t) + 1);
   }
 }  // Enqueues unused tile in a direction from current tile
 
 
-dir Terr::findHint(Tile* start, Tile* dest)
+int Terr::findDistance(Tile* start, Tile* dest)
 {
-  int sx = start->getX();
-  int sy = start->getX();
-  int dx = dest->getX();
-  int dy = dest->getY();
-  if (start == dest || (dx == sx && dy == sy))
-    return UNDEFINED_DIRECTION;  // same tile
-  if (abs(dx - sx) > abs(dy - sy))
-  {
-    if (dx > sx)
-      return EAST;
-    return WEST;
-  }  // if horizontal distance greater than vertical
-  else
-  {
-    if (dy > sy)
-      return NORTH;
-    return SOUTH;
-  }
-}  // void Terr::findHint(Tile* start, Tile* dest)
+  return (abs(dest->getX() - start->getX()) + abs(dest->getY() - start->getY()));
+}  // int Terr::findDistance(Tile* start, Tile* dest)
 
 
 void Terr::findPath(Tile* start, Tile* dest, Sprite* sprite)
 {
   if (!start || !dest || !sprite)
     return;  // Function assumes non-null start/dest/sprite
-  queue<tuple<Tile*, int> > searchQ;
+  priority_queue<tuple<int, Tile*>, vector<tuple<int, Tile*> >, greater<tuple<int, Tile*> > > searchQ;
   unordered_map<Tile*, int> tiles;
-  searchQ.emplace(dest, 0);
-  tiles.emplace(dest, 0);
+  searchQ.emplace(0 + findDistance(dest, start), dest);
+  tiles.emplace(dest, 0 + findDistance(dest, start));
   bool found = false;
-  tuple<Tile*, int> t;
+  tuple<int, Tile*> t;
   while (!searchQ.empty() && !found)
   {
-    t = searchQ.front();
+    t = searchQ.top();
     searchQ.pop();
-    if (get<0>(t) == start)
+    if (get<1>(t) == start)
       found = true;
     else
     {
-      findEnqueue(EAST, &searchQ, &tiles, t);
-      findEnqueue(NORTH, &searchQ, &tiles, t);
-      findEnqueue(SOUTH, &searchQ, &tiles, t);
-      findEnqueue(WEST, &searchQ, &tiles, t);
+      findEnqueue(EAST, &searchQ, &tiles, t, start);
+      findEnqueue(NORTH, &searchQ, &tiles, t, start);
+      findEnqueue(SOUTH, &searchQ, &tiles, t, start);
+      findEnqueue(WEST, &searchQ, &tiles, t, start);
     }  // enqueue tile's neighbors with a distance 1 greater if valid and new
   }  // While search queue not empty and element not found
 
@@ -220,7 +206,7 @@ void Terr::loadMap(const string &str)
   int c;
   file.open(("resources/"+str), ifstream::in);
   if (!file.good())
-    logSDLError("Map not found.");  // error, probably bad filename
+    logSDLError("Map not found: " + str);  // error, probably bad filename
 
   file >> w;
   file >> h;
