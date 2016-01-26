@@ -85,6 +85,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_terr-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -111,6 +112,10 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#ad082e4ae9fa5527df4dbfca775a33945">enterTileMessageHandler</a> (const string &amp;message, <a class="el" href="class_tile.html">Tile</a> *tile)</td></tr>
 <tr class="memdesc:ad082e4ae9fa5527df4dbfca775a33945"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes in a message from a <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> being entered, reacts accordingly. <br /></td></tr>
 <tr class="separator:ad082e4ae9fa5527df4dbfca775a33945"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7ae6f4b2857459afc5eac1ae83391c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7ae6f4b2857459afc5eac1ae83391c9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#ac7ae6f4b2857459afc5eac1ae83391c9">findPath</a> (<a class="el" href="class_tile.html">Tile</a> *start, <a class="el" href="class_tile.html">Tile</a> *dest, <a class="el" href="class_sprite.html">Sprite</a> *sprite)</td></tr>
+<tr class="memdesc:ac7ae6f4b2857459afc5eac1ae83391c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">A* to find a path from start to dest, then enqueue in sprite. <br /></td></tr>
+<tr class="separator:ac7ae6f4b2857459afc5eac1ae83391c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ef7c8147e12a2291fc84d9ebc67a8df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ef7c8147e12a2291fc84d9ebc67a8df"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a0ef7c8147e12a2291fc84d9ebc67a8df">getHeight</a> ()</td></tr>
 <tr class="memdesc:a0ef7c8147e12a2291fc84d9ebc67a8df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the height (h) of <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
@@ -159,9 +164,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#ad1bfd1e758bb709e1ab096d3a1853497">setTile</a> (<a class="el" href="class_tile.html">Tile</a> *tile, <a class="el" href="class_sprite.html">Sprite</a> *sprite)</td></tr>
 <tr class="memdesc:ad1bfd1e758bb709e1ab096d3a1853497"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a Sprite-Tile relationship. Alias for setSprite. <br /></td></tr>
 <tr class="separator:ad1bfd1e758bb709e1ab096d3a1853497"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89310ff118d264049bc5bc2da98f2b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa89310ff118d264049bc5bc2da98f2b3"></a>
+<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#aa89310ff118d264049bc5bc2da98f2b3">tileClick</a> (SDL_MouseButtonEvent &amp;click, <a class="el" href="class_sprite.html">Sprite</a> *sprite)</td></tr>
+<tr class="memdesc:aa89310ff118d264049bc5bc2da98f2b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> clicked. Needs <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> the map is watching. <br /></td></tr>
+<tr class="separator:aa89310ff118d264049bc5bc2da98f2b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a820922b38b4c78c6eb0acb6a9a5d986f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a820922b38b4c78c6eb0acb6a9a5d986f">findCheckRoute</a> (dir d, unordered_map&lt; <a class="el" href="class_tile.html">Tile</a> *, int &gt; *tiles, <a class="el" href="class_tile.html">Tile</a> *tile)</td></tr>
+<tr class="separator:a820922b38b4c78c6eb0acb6a9a5d986f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5821492c7a16f90399a64d74c26e2599"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5821492c7a16f90399a64d74c26e2599"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a5821492c7a16f90399a64d74c26e2599">findEnqueue</a> (dir d, priority_queue&lt; tuple&lt; int, <a class="el" href="class_tile.html">Tile</a> * &gt;, vector&lt; tuple&lt; int, <a class="el" href="class_tile.html">Tile</a> * &gt; &gt;, greater&lt; tuple&lt; int, <a class="el" href="class_tile.html">Tile</a> * &gt; &gt; &gt; *searchQ, unordered_map&lt; <a class="el" href="class_tile.html">Tile</a> *, int &gt; *tiles, tuple&lt; int, <a class="el" href="class_tile.html">Tile</a> * &gt; t, <a class="el" href="class_tile.html">Tile</a> *target)</td></tr>
+<tr class="memdesc:a5821492c7a16f90399a64d74c26e2599"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function for <a class="el" href="class_terr.html#ac7ae6f4b2857459afc5eac1ae83391c9" title="A* to find a path from start to dest, then enqueue in sprite. ">findPath()</a>: marks/enqueues tiles. <br /></td></tr>
+<tr class="separator:a5821492c7a16f90399a64d74c26e2599"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad74fdf998ebc38b3f38f8e0030f81c6d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad74fdf998ebc38b3f38f8e0030f81c6d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#ad74fdf998ebc38b3f38f8e0030f81c6d">findDistance</a> (<a class="el" href="class_tile.html">Tile</a> *start, <a class="el" href="class_tile.html">Tile</a> *end)</td></tr>
+<tr class="memdesc:ad74fdf998ebc38b3f38f8e0030f81c6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns taxicab distance to get to end. <br /></td></tr>
+<tr class="separator:ad74fdf998ebc38b3f38f8e0030f81c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2f06b09cb8abd0fda4abb2b696f6885"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#aa2f06b09cb8abd0fda4abb2b696f6885">h</a></td></tr>
+<tr class="memdesc:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="mdescLeft">&#160;</td><td class="mdescRight">map height (in Tiles) <br /></td></tr>
+<tr class="separator:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35de374972704b3d92e76b4bc8e67a9c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35de374972704b3d92e76b4bc8e67a9c"></a>
 vector&lt; vector&lt; <a class="el" href="class_tile.html">Tile</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a35de374972704b3d92e76b4bc8e67a9c">map</a></td></tr>
 <tr class="memdesc:a35de374972704b3d92e76b4bc8e67a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">2D dyanmically resized array of Tiles defining <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
@@ -174,14 +200,52 @@ spritelog&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#af1d43d8b2b20b19d005626831c1335fb">w</a></td></tr>
 <tr class="memdesc:af1d43d8b2b20b19d005626831c1335fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">map width (in Tiles) <br /></td></tr>
 <tr class="separator:af1d43d8b2b20b19d005626831c1335fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2f06b09cb8abd0fda4abb2b696f6885"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#aa2f06b09cb8abd0fda4abb2b696f6885">h</a></td></tr>
-<tr class="memdesc:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="mdescLeft">&#160;</td><td class="mdescRight">map height (in Tiles) <br /></td></tr>
-<tr class="separator:aa2f06b09cb8abd0fda4abb2b696f6885"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Describes an overworld map. All maps currently must be rectangles. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a820922b38b4c78c6eb0acb6a9a5d986f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Terr::findCheckRoute </td>
+          <td>(</td>
+          <td class="paramtype">dir&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unordered_map&lt; <a class="el" href="class_tile.html">Tile</a> *, int &gt; *&#160;</td>
+          <td class="paramname"><em>tiles</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_tile.html">Tile</a> *&#160;</td>
+          <td class="paramname"><em>tile</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns true if a tile in dir d exists and gets you closer on your route. Requires a fully loaded table of tuples showing how close the tiles are on potential routes. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_terr_8h_source.html">Terr.h</a></li>
 <li>Terr.cpp</li>
 </ul>

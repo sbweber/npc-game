@@ -62,6 +62,9 @@
     int w;
     //!< map width (in Tiles)
     bool findCheckRoute(dir d, unordered_map<Tile*, int> *tiles, Tile* tile);
+    //!< Returns true if a tile in dir d exists and gets you closer on your
+    //!< route. Requires a fully loaded table of tuples showing how close the
+    //!< tiles are on potential routes.
     void findEnqueue(dir d, priority_queue<tuple<int, Tile*>,
             vector<tuple<int, Tile*> >, greater<tuple<int, Tile*> > > *searchQ,
             unordered_map<Tile*, int> *tiles, tuple<int, Tile*> t,

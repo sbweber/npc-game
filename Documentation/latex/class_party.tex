@@ -22,15 +22,21 @@ void \hyperlink{class_party_a5b4e7bc4d910ad64722629b2fe365240}{change\+Terr} (co
 \hyperlink{class_terr}{Terr} $\ast$ \hyperlink{class_party_ae0a1a365f425b46efdf315998465503f}{get\+Terr} ()\hypertarget{class_party_ae0a1a365f425b46efdf315998465503f}{}\label{class_party_ae0a1a365f425b46efdf315998465503f}
 
 \begin{DoxyCompactList}\small\item\em Returns the current \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
-void \hyperlink{class_party_a6260aeac8da674bc894709ad392c1360}{move} (dir d)\hypertarget{class_party_a6260aeac8da674bc894709ad392c1360}{}\label{class_party_a6260aeac8da674bc894709ad392c1360}
+void \hyperlink{class_party_a729f2e7fd90ec533a9173a5468b046fa}{move} (dir d, bool interrupt=true)\hypertarget{class_party_a729f2e7fd90ec533a9173a5468b046fa}{}\label{class_party_a729f2e7fd90ec533a9173a5468b046fa}
 
 \begin{DoxyCompactList}\small\item\em Move player\textquotesingle{}s \hyperlink{class_sprite}{Sprite}. Load new \hyperlink{class_terr}{Terr} if entering a \hyperlink{class_warp}{Warp}. \end{DoxyCompactList}\item 
 void \hyperlink{class_party_a2efe239264b319d3b50e1a5957fcd859}{set\+Location} (int x, int y)\hypertarget{class_party_a2efe239264b319d3b50e1a5957fcd859}{}\label{class_party_a2efe239264b319d3b50e1a5957fcd859}
 
 \begin{DoxyCompactList}\small\item\em Sets the \hyperlink{class_party}{Party}\textquotesingle{}s location on the terr to (x, y). \end{DoxyCompactList}\item 
+void \hyperlink{class_party_aa4090eed5abc44d79c5ff91b81b23d2b}{set\+Location} (\hyperlink{class_tile}{Tile} $\ast$tile)\hypertarget{class_party_aa4090eed5abc44d79c5ff91b81b23d2b}{}\label{class_party_aa4090eed5abc44d79c5ff91b81b23d2b}
+
+\begin{DoxyCompactList}\small\item\em Sets the \hyperlink{class_party}{Party}\textquotesingle{}s location on the terr to the specified \hyperlink{class_tile}{Tile}. \end{DoxyCompactList}\item 
 void \hyperlink{class_party_abe069ffbbf3352f6b39246c8382dd26b}{set\+Sprite} (S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&str)\hypertarget{class_party_abe069ffbbf3352f6b39246c8382dd26b}{}\label{class_party_abe069ffbbf3352f6b39246c8382dd26b}
 
-\begin{DoxyCompactList}\small\item\em Resets the party’s \hyperlink{class_sprite}{Sprite} to the one in the file named by str. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Resets the party’s \hyperlink{class_sprite}{Sprite} to the one in the file named by str. \end{DoxyCompactList}\item 
+\hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_party_a5ab0f256d2d95b231dd6ae53c1f8a2f4}{tile\+Click} (S\+D\+L\+\_\+\+Mouse\+Button\+Event \&click)\hypertarget{class_party_a5ab0f256d2d95b231dd6ae53c1f8a2f4}{}\label{class_party_a5ab0f256d2d95b231dd6ae53c1f8a2f4}
+
+\begin{DoxyCompactList}\small\item\em Used when clicking on the map. Returns a pointer to the \hyperlink{class_tile}{Tile} clicked. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
