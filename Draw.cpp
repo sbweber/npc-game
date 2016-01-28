@@ -20,7 +20,7 @@ void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 
 
-bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
+bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, unique_ptr<Party> &party)
 {  // portion of map to be drawn based on position of hero
   SDL_RenderClear(ren);
   int tileClip = 0;
@@ -87,7 +87,7 @@ bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
       else
         tilePtr = offMap;
       if (party->getTerr()->isOccupied(tilePtr))
-        cont = drawUnit(ren, tilePtr, party, i, j);
+        cont = drawSprite(ren, tilePtr, party, i, j);
       // if the tile is occupied, draw the character
       if (!partyMoved && cont &&
               party->getSprite() == party->getTerr()->getSprite(tilePtr))
@@ -136,7 +136,7 @@ void drawRebind(SDL_Renderer *ren, TTF_Font* font)
 
 
 void drawScreen(gameState &state, SDL_Renderer *ren, TTF_Font* font,
-        SDL_Texture *tiles, Party *party, Button *toGame)
+        SDL_Texture *tiles, unique_ptr<Party> &party, unique_ptr<Button> &toGame)
 {
   // when things change (any event happens): clear the renderer, refill it.
   // Draw the background first, then the chars on top of it.
@@ -161,22 +161,12 @@ void drawScreen(gameState &state, SDL_Renderer *ren, TTF_Font* font,
 }  // void drawScreen()
 
 
-void drawTitle(SDL_Renderer *ren, Button *toGame)
-{
-  SDL_RenderClear(ren);
-  SDL_Texture *bg = loadTexture("Title.png", ren);
-  renderBackground(bg, ren);
-  toGame->render(ren);
-  SDL_RenderPresent(ren);
-}  // void drawTitle(SDL_Renderer *ren)
-
-
-bool drawUnit(SDL_Renderer *ren, shared_ptr<Tile> tile, Party *party, int i, int j)
+bool drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, unique_ptr<Party> &party, int i, int j)
 {
   int sc = 0, vSpline = 0, hSpline = 0;
   SDL_Rect spriteClips[4];
   getClips(spriteClips, 4, 2, TILE_WIDTH, TILE_HEIGHT);
-  Sprite* sprite = party->getTerr()->getSprite(tile);
+  shared_ptr<Sprite> sprite = party->getTerr()->getSprite(tile);
   // magic number (4): number of unit sprite types
   switch (sprite->getSprite())
   {  // note the order -- clips are taken by column, not by row!
@@ -218,8 +208,18 @@ bool drawUnit(SDL_Renderer *ren, shared_ptr<Tile> tile, Party *party, int i, int
   }
   // technically, this switch should be optional so long as the character
   // spritesheet is kept in the same order as the enum
-  renderTexture(sprite->getSpriteSheet(), ren, TILE_WIDTH * i + hSpline, TILE_HEIGHT * j + vSpline, &spriteClips[sc]);
-
+  renderTexture(sprite->getSpriteSheet(), ren, TILE_WIDTH * i + hSpline,
+          TILE_HEIGHT * j + vSpline, &spriteClips[sc]);
   return sprite->decSpline();
-}//void drawUnit(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
+}//void drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
+
+
+void drawTitle(SDL_Renderer *ren, unique_ptr<Button> &toGame)
+{
+  SDL_RenderClear(ren);
+  SDL_Texture *bg = loadTexture("Title.png", ren);
+  renderBackground(bg, ren);
+  toGame->render(ren);
+  SDL_RenderPresent(ren);
+}  // void drawTitle(SDL_Renderer *ren)
 

@@ -20,9 +20,9 @@
     //!< Default destructor.
     void changeTerr(const string &newTerr);
     //!< Changes the active Terr.
-    Sprite* getSprite();
+    shared_ptr<Sprite> getSprite();
     //!< Returns the Sprite representing the party by reference.
-    Terr* getTerr();
+    unique_ptr<Terr>& getTerr();
     //!< Returns the current Terr.
     void move(dir d, bool interrupt = true);
     //!< Move player's Sprite. Load new Terr if entering a Warp
@@ -35,13 +35,13 @@
     shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click);
     //!< Used when clicking on the map. Returns a pointer to the Tile clicked.
   protected:
-    Unit* active[4];
+    unique_ptr<Unit> active[4];
     //!< Pointers to the up to four active party members.
-    vector<Unit*> passive;
+    vector<unique_ptr<Unit>> passive;
     //!< Vector of pointers to non-active party members.
-    Sprite* sprite;
+    shared_ptr<Sprite> sprite;
     //!< Sprite representing the player's party.
-    Terr* terr;
+    unique_ptr<Terr> terr;
     //!< Terr where the player's party currently is.
   };
 #endif

@@ -31,8 +31,8 @@ int main(int argc, char **argv)
   bool quit = false;
 
   // backend vars
-  Party* party = new Party(ren);
-  Sprite* npc = new Sprite(ren, "NPC.png", "test");
+  unique_ptr<Party> party(new Party(ren));
+  shared_ptr<Sprite> npc(new Sprite(ren, "NPC.png", "test"));
   gameState state = TITLE;
 
   // spritesheets
@@ -48,8 +48,6 @@ int main(int argc, char **argv)
   SDL_DestroyRenderer(ren);
   SDL_DestroyWindow(win);
   TTF_CloseFont(font);
-  delete party;
-  delete npc;
 
   TTF_Quit();
   IMG_Quit();

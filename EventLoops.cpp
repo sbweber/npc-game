@@ -2,7 +2,7 @@
 
 #include "EventLoops.h"
 
-bool loopAnyState(SDL_Event &e, Party* party, Sprite *npc, gameState &state)
+bool loopAnyState(SDL_Event &e, unique_ptr<Party> &party, shared_ptr<Sprite> npc, gameState &state)
 {
   switch (e.type)
   {
@@ -47,7 +47,7 @@ bool loopBattle(SDL_Event &e)
 }  // bool loopBattle(SDL_Event &e)
 
 
-bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
+bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, unique_ptr<Party> &party)
 {
   shared_ptr<Tile> tile;
   dir d = NORTH;
@@ -85,7 +85,7 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
     break;
   }
   return false;
-}  // bool loopMap(SDL_Event &e, Party* party)
+}  // bool loopMap(SDL_Event &e, unique_ptr<Party> &party)
 
 
 bool loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
@@ -105,10 +105,10 @@ bool loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
 
 
 bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
-        gameState &state, Party *party, Sprite *npc)
+        gameState &state, unique_ptr<Party> &party, shared_ptr<Sprite> npc)
 {
-  Button *toGame = new Button(ren, "Button.png",
-          SCREEN_WIDTH / 2 - 120, 300, 240, 100, font, "To Game");
+  unique_ptr<Button> toGame(new Button(ren, "Button.png",
+          SCREEN_WIDTH / 2 - 120, 300, 240, 100, font, "To Game"));
   drawTitle(ren, toGame);
   switch (e.type)
   {
@@ -136,13 +136,12 @@ bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
   default:
     break;
   }
-  delete toGame;
   return false;
 }  // bool loopTitle()
 
 
 bool mainLoop(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
-        SDL_Texture *tiles, Party* party, Sprite *npc,
+        SDL_Texture *tiles, unique_ptr<Party> &party, shared_ptr<Sprite> npc,
         gameState &state)
 {
   bool quit = false;
