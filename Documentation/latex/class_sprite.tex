@@ -21,9 +21,9 @@ Visual half of a \hyperlink{class_unit}{Unit}. Information on what to draw to pu
 void \hyperlink{class_sprite_a3eadf6ba2634a886862b6e2d9ca93b17}{change\+Dir} (dir d)\hypertarget{class_sprite_a3eadf6ba2634a886862b6e2d9ca93b17}{}\label{class_sprite_a3eadf6ba2634a886862b6e2d9ca93b17}
 
 \begin{DoxyCompactList}\small\item\em Change what direction \hyperlink{class_sprite}{Sprite} is facing. Usuallly part of movement. \end{DoxyCompactList}\item 
-void \hyperlink{class_sprite_a1e3c2b2d0d846db9cc8bd948a804dd10}{clear\+Moves} ()\hypertarget{class_sprite_a1e3c2b2d0d846db9cc8bd948a804dd10}{}\label{class_sprite_a1e3c2b2d0d846db9cc8bd948a804dd10}
+void \hyperlink{class_sprite_ad22d9f033c1414853cc3063ceae24598}{clear\+Acts} ()\hypertarget{class_sprite_ad22d9f033c1414853cc3063ceae24598}{}\label{class_sprite_ad22d9f033c1414853cc3063ceae24598}
 
-\begin{DoxyCompactList}\small\item\em Removes all elements from the moves queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Removes all elements from the action queue. \end{DoxyCompactList}\item 
 bool \hyperlink{class_sprite_af880e3cfcd03b6de68171eef82dc6a69}{dec\+Spline} ()\hypertarget{class_sprite_af880e3cfcd03b6de68171eef82dc6a69}{}\label{class_sprite_af880e3cfcd03b6de68171eef82dc6a69}
 
 \begin{DoxyCompactList}\small\item\em If spline is non-\/zero, decrements it and returns true. Else false. \end{DoxyCompactList}\item 
@@ -42,12 +42,12 @@ sprite\+Type \hyperlink{class_sprite_a01742e39c9f18622a094a187d6858912}{get\+Spr
 S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{class_sprite_abec247d2cd9396834344c3cfe81eddc1}{get\+Sprite\+Sheet} ()\hypertarget{class_sprite_abec247d2cd9396834344c3cfe81eddc1}{}\label{class_sprite_abec247d2cd9396834344c3cfe81eddc1}
 
 \begin{DoxyCompactList}\small\item\em Returns the spritesheet for this \hyperlink{class_sprite}{Sprite}. \end{DoxyCompactList}\item 
-const dir \hyperlink{class_sprite_a8dde7dfa8e056ce518aed58e4800b890}{pop\+Move} ()\hypertarget{class_sprite_a8dde7dfa8e056ce518aed58e4800b890}{}\label{class_sprite_a8dde7dfa8e056ce518aed58e4800b890}
+const action \hyperlink{class_sprite_a1b5ac18ba8c0a4e4245d1ed49b9a48aa}{pop\+Act} ()\hypertarget{class_sprite_a1b5ac18ba8c0a4e4245d1ed49b9a48aa}{}\label{class_sprite_a1b5ac18ba8c0a4e4245d1ed49b9a48aa}
 
-\begin{DoxyCompactList}\small\item\em Returns the next move in the queue and pops it off the queue. \end{DoxyCompactList}\item 
-void \hyperlink{class_sprite_acf3e37d27ca2bed1901e182144a64400}{push\+Move} (dir move)\hypertarget{class_sprite_acf3e37d27ca2bed1901e182144a64400}{}\label{class_sprite_acf3e37d27ca2bed1901e182144a64400}
+\begin{DoxyCompactList}\small\item\em Returns the next action in the queue and pops it off the queue. \end{DoxyCompactList}\item 
+void \hyperlink{class_sprite_a25d3b1c4533e8aa9e530d7025dc5365b}{push\+Act} (action act)\hypertarget{class_sprite_a25d3b1c4533e8aa9e530d7025dc5365b}{}\label{class_sprite_a25d3b1c4533e8aa9e530d7025dc5365b}
 
-\begin{DoxyCompactList}\small\item\em Pushes a move into the moves queue. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Pushes an action into the action queue. \end{DoxyCompactList}\item 
 void \hyperlink{class_sprite_a1ce4def2f83442fd086e38568f93c6cd}{set\+Spline} (int s)\hypertarget{class_sprite_a1ce4def2f83442fd086e38568f93c6cd}{}\label{class_sprite_a1ce4def2f83442fd086e38568f93c6cd}
 
 \begin{DoxyCompactList}\small\item\em Manually sets the number of pixels to spline. \end{DoxyCompactList}\item 
@@ -63,7 +63,7 @@ void \hyperlink{class_sprite_a0c2efc62131a56a1c81405527a930b71}{set\+Type} (cons
 dir \hyperlink{class_sprite_a40357a4e61f454decf1970929e9d2d0c}{facing}\hypertarget{class_sprite_a40357a4e61f454decf1970929e9d2d0c}{}\label{class_sprite_a40357a4e61f454decf1970929e9d2d0c}
 
 \begin{DoxyCompactList}\small\item\em Direction \hyperlink{class_sprite}{Sprite} is currently facing. \end{DoxyCompactList}\item 
-queue$<$ dir $>$ \hyperlink{class_sprite_a2ef470094b583e087a71779632aaefb6}{moves}\hypertarget{class_sprite_a2ef470094b583e087a71779632aaefb6}{}\label{class_sprite_a2ef470094b583e087a71779632aaefb6}
+queue$<$ action $>$ \hyperlink{class_sprite_a8b183d19c55c1f0928075bd2cb926f68}{actionQ}\hypertarget{class_sprite_a8b183d19c55c1f0928075bd2cb926f68}{}\label{class_sprite_a8b183d19c55c1f0928075bd2cb926f68}
 
 \begin{DoxyCompactList}\small\item\em Queue of upcoming moves to make. \end{DoxyCompactList}\item 
 int \hyperlink{class_sprite_aa3a18aaf97a12edfced1b31f2323ae01}{spline}\hypertarget{class_sprite_aa3a18aaf97a12edfced1b31f2323ae01}{}\label{class_sprite_aa3a18aaf97a12edfced1b31f2323ae01}
