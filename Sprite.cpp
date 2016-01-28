@@ -19,9 +19,9 @@ Sprite::~Sprite()
 }  // Sprite::~Sprite()
 
 
-void Sprite::clearMoves()
+void Sprite::clearActs()
 {
-  while (popMove() != UNDEFINED_DIRECTION);
+  while (get<1>(popAct()) != BAD_ACTION);
 }  // void Sprite::clearMoves()
 
 
@@ -94,21 +94,21 @@ const string Sprite::getType()
 }  // const string Sprite::getType()
 
 
-const dir Sprite::popMove()
+const action Sprite::popAct()
 {
-  if (!moves.empty())
+  if (!actionQ.empty())
   {
-    dir retval = moves.front();
-    moves.pop();
+    action retval = actionQ.front();
+    actionQ.pop();
     return retval;
   }  // If the queue isn't empty, pop the front off and return it.
-  return UNDEFINED_DIRECTION;
+  return action(UNDEFINED_DIRECTION, BAD_ACTION);
 }  // const dir Sprite::popMove()
 
 
-void Sprite::pushMove(dir move)
+void Sprite::pushAct(action act)
 {
-  moves.push(move);
+  actionQ.push(act);
 }  // void Sprite::pushMove()
 
 

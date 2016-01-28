@@ -18,6 +18,19 @@
   };
 
 
+  //! Action type. Movement, interaction, etc.
+  enum actType
+  {
+    MOVE,
+    INTERACT,
+    BAD_ACTION
+  };
+
+
+  //! Action direction and type.
+  typedef tuple<dir, actType> action;
+
+
   //! Visual half of a Unit. Information on what to draw to put a sprite onscreen.
   class Sprite
   {
@@ -28,8 +41,8 @@
     //!< Default destructor
     void changeDir(dir d);
     //!< Change what direction Sprite is facing. Usuallly part of movement.
-    void clearMoves();
-    //!< Removes all elements from the moves queue.
+    void clearActs();
+    //!< Removes all elements from the action queue.
     bool decSpline();
     //!< If spline is non-zero, decrements it and returns true. Else false.
     dir getFacing();
@@ -42,10 +55,10 @@
     //!< Returns the type of sprite (facing, etc) currently being used.
     SDL_Texture* getSpriteSheet();
     //!< Returns the spritesheet for this Sprite.
-    const dir popMove();
-    //!< Returns the next move in the queue and pops it off the queue.
-    void pushMove(dir move);
-    //!< Pushes a move into the moves queue.
+    const action popAct();
+    //!< Returns the next action in the queue and pops it off the queue.
+    void pushAct(action act);
+    //!< Pushes an action into the action queue.
     void setSpline(int s);
     //!< Manually sets the number of pixels to spline.
     void setSprite(spriteType st);
@@ -55,7 +68,7 @@
   protected:
     dir facing;
     //!< Direction Sprite is currently facing.
-    queue<dir> moves;
+    queue<action> actionQ;
     //!< Queue of upcoming moves to make.
     int spline;
     //!< Number of pixels left to be splined towards destination.

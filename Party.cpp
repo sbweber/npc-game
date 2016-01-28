@@ -46,7 +46,7 @@ unique_ptr<Terr>& Party::getTerr()
 void Party::move(dir d, bool interrupt)
 {
   if (interrupt)
-    sprite->clearMoves();
+    sprite->clearActs();
   terr->moveSprite(sprite, d);
 }  // void Party::move(dir d)
 

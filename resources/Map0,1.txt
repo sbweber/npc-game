@@ -12,6 +12,7 @@ xxxx xxxxxx xxxx
 xxxx        xxxx
 xxxxxxxxxxxxxxxx
 xxxxxxxxxxxxxxxx
+
 W 8 0 Map0,0.txt 7 10
 W 9 0 Map0,0.txt 8 10
 W 10 0 Map0,0.txt 9 10

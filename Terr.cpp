@@ -27,7 +27,7 @@ void Terr::enterTileMessageHandler(const string &message,
     if (message.substr(0, strpos) == "LOAD-MAP")
     {
       getSprite(tile)->setSpline(0);
-      getSprite(tile)->clearMoves();
+      getSprite(tile)->clearActs();
       strpos = message.find(' ', strpos);
       size_t strposnew = message.find(' ', strpos + 1);
       string destTerr = message.substr(strpos + 1, strposnew - strpos - 1);
@@ -103,31 +103,33 @@ void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest, shared_ptr<Sp
 
   if (!found)
     return;
-  sprite->clearMoves();
+  sprite->clearActs();
   shared_ptr<Tile> tile = start;
   while (tile != dest)
   {
     if (findCheckRoute(EAST, &tiles, tile))
     {
-      sprite->pushMove(EAST);
+      sprite->pushAct(action(EAST, MOVE));
       tile = tile->getTile(EAST);
     }
     else if (findCheckRoute(NORTH, &tiles, tile))
     {
-      sprite->pushMove(NORTH);
+      sprite->pushAct(action(NORTH, MOVE));
       tile = tile->getTile(NORTH);
     }
     else if (findCheckRoute(SOUTH, &tiles, tile))
     {
-      sprite->pushMove(SOUTH);
+      sprite->pushAct(action(SOUTH, MOVE));
       tile = tile->getTile(SOUTH);
     }
     else if (findCheckRoute(WEST, &tiles, tile))
     {
-      sprite->pushMove(WEST);
+      sprite->pushAct(action(WEST, MOVE));
       tile = tile->getTile(WEST);
     }
   }  // while you haven't gotten back to dest
+  if (getSprite(dest))
+    sprite->pushAct(action(UNDEFINED_DIRECTION, INTERACT));
 }  // void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest, shared_ptr<Sprite> sprite)
 
 
@@ -342,7 +344,7 @@ void Terr::loadMap(const string &str)
   // Set up special Tiles
   while (file.good())
   {
-    char instruction;
+    char instruction = ' ';
     file >> instruction;
     switch (instruction)
     {

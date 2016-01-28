@@ -49,7 +49,8 @@ bool loopBattle(SDL_Event &e)
 bool loopMap(SDL_Texture* tiles, SDL_Event &e, unique_ptr<Party> &party)
 {
   shared_ptr<Tile> tile;
-  dir d = NORTH;
+  action act(UNDEFINED_DIRECTION, BAD_ACTION);
+  SDL_Event* wait = new SDL_Event();
   while(drawMap(party->getRen(), tiles, party));
   switch (e.type)
   {
@@ -67,19 +68,27 @@ bool loopMap(SDL_Texture* tiles, SDL_Event &e, unique_ptr<Party> &party)
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = party->tileClick(e.button);
-    if (tile && tile->getIsPassable() && !party->getTerr()->isOccupied(tile))
+    if (tile && tile->getIsPassable())
     {
       party->getTerr()->findPath(party->getTerr()->getTile(party->getSprite()),
               tile, party->getSprite());
-    }  // If tile can be legally entered, warp to it
+    }  // If tile can be legally entered, path to it
     break;
   default:
-    d = party->getSprite()->popMove();
-    if (d != UNDEFINED_DIRECTION)
+    act = party->getSprite()->popAct();
+    switch (get<1>(act))
     {
-      party->move(d, false);
-      SDL_Event* wait = new SDL_Event();
+    case MOVE:
+      party->move(get<0>(act), false);
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
+      break;
+    case INTERACT:
+      party->getTerr()->interactSprite(party->getSprite());
+      SDL_PushEvent(wait);  // push empty event to cause immediate state update
+      break;
+    case BAD_ACTION:
+    default:
+      break;
     }
     break;
   }

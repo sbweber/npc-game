@@ -8,6 +8,7 @@ SDL2_ttf (https://www.libsdl.org/projects/SDL_ttf/)
 Boost (http://sourceforge.net/projects/boost/files/latest/download?source=files)  
 
 Code by Samuel Weber (sbweber).  
+npc-game.rar contains a playable, self-contained, current Windows release build of the game.  
 
 Default Controls:  
 Arrow keys: Move around the map.  
