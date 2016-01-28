@@ -32,7 +32,6 @@ int main(int argc, char **argv)
 
   // backend vars
   unique_ptr<Party> party(new Party(ren));
-  shared_ptr<Sprite> npc(new Sprite(ren, "NPC.png", "test"));
   gameState state = TITLE;
 
   // spritesheets
@@ -42,7 +41,7 @@ int main(int argc, char **argv)
 
   while (!quit)
     while (SDL_PollEvent(&e))
-      quit = mainLoop(ren, e, font, tiles, party, npc, state);
+      quit = mainLoop(e, font, tiles, party, state);
 
   SDL_DestroyTexture(tiles);
   SDL_DestroyRenderer(ren);

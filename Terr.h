@@ -18,17 +18,20 @@
   class Terr
   {
   public:
-    Terr(const string &str = "");
+    Terr(SDL_Renderer *r, const string &str = "");
     //!< Calls loadMap unless the string is empty.
     ~Terr();
     //!< Default destructor. Because Tiles use new, they must be deleted.
-    void enterTileMessageHandler(const string &message, shared_ptr<Tile> tile);
+    void enterTileMessageHandler(const string &message,
+            shared_ptr<Tile> tile);
     //!< Takes in a message from a Tile being entered, reacts accordingly.
     void findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest,
             shared_ptr<Sprite> sprite);
     //!< A* to find a path from start to dest, then enqueue in sprite.
     int getHeight();
     //!< Returns the height (h) of Terr.
+    SDL_Renderer* getRen();
+    //!< Returns the Renderer.
     shared_ptr<Sprite> getSprite(shared_ptr<Tile> tile);
     //!< Returns the shared_ptr<Sprite> on the given Tile.
     shared_ptr<Tile> getTile(int i, int j);
@@ -59,10 +62,12 @@
     //!< map height (in Tiles)
     vector<vector<shared_ptr<Tile> > > map;
     //!< 2D dyanmically resized array of Tiles defining Terr.
+    SDL_Renderer *ren;
     spritelog sprites;
     //!< bi-directional map relating each Sprite to its Tile (and vice versa).
     int w;
     //!< map width (in Tiles)
+
     bool findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> *tiles, shared_ptr<Tile> tile);
     //!< Returns true if a tile in dir d exists and gets you closer on your
     //!< route. Requires a fully loaded table of tuples showing how close the
@@ -74,6 +79,10 @@
     //!< Utility function for findPath(): marks/enqueues tiles.
     int findDistance(shared_ptr<Tile> start, shared_ptr<Tile> end);
     //!< Returns taxicab distance to get to end.
+    void loadSprite(ifstream &file);
+    //!< Loads a Sprite to the map.
+    void loadWarpTile(ifstream &file);
+    //!< Loads a Warp Tile to the map.
   };  // class Terr
 
 #endif

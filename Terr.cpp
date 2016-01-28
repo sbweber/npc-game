@@ -3,10 +3,11 @@
 #include "Terr.h"
 
 
-Terr::Terr(const string &str)
+Terr::Terr(SDL_Renderer *r, const string &str)
 {
   w = 0;
   h = 0;
+  ren = r;
   if (str.length())
     loadMap(str);  // if string length is 0, there's no map to load.
 }  // Terr::Terr(string str)
@@ -17,7 +18,8 @@ Terr::~Terr()
 }  // Terr::~Terr()
 
 
-void Terr::enterTileMessageHandler(const string &message, shared_ptr<Tile> tile)
+void Terr::enterTileMessageHandler(const string &message,
+        shared_ptr<Tile> tile)
 {
   size_t strpos = message.find(':');
   if (strpos != string::npos)
@@ -39,7 +41,7 @@ void Terr::enterTileMessageHandler(const string &message, shared_ptr<Tile> tile)
       setSprite(getSprite(tile), getTile(destX, destY));
     }
   }  // No colon found: do default behavior (nothing)
-}  // void Terr::enterTileMessageHandler(const string &message, shared_ptr<Tile> tile)
+}  // Message Handler for entering a tile
 
 
 bool Terr::findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> *tiles, shared_ptr<Tile> tile)
@@ -133,6 +135,12 @@ int Terr::getHeight()
 {
   return h;
 }  // int Terr::getHeight()
+
+
+SDL_Renderer* Terr::getRen()
+{
+  return ren;
+}  // SDL_Renderer* Terr::getRen()
 
 
 shared_ptr<Sprite> Terr::getSprite(shared_ptr<Tile> tile)
@@ -331,45 +339,72 @@ void Terr::loadMap(const string &str)
       }
     }
 
-  // Set up Warp Tiles
+  // Set up special Tiles
   while (file.good())
   {
-    int sourceX, sourceY, destX, destY;
-    string destTerr;
-    file >> sourceX;
-    file.ignore(numeric_limits<streamsize>::max(), ' ');
-    file >> sourceY;
-    file.ignore(numeric_limits<streamsize>::max(), ' ');
-    file >> destTerr;
-    file.ignore(numeric_limits<streamsize>::max(), ' ');
-    file >> destX;
-    file.ignore(numeric_limits<streamsize>::max(), ' ');
-    file >> destY;
-    if (sourceX <= w && sourceX >= 0 && sourceY <= h && sourceY >= 0)
+    char instruction;
+    file >> instruction;
+    switch (instruction)
     {
-      shared_ptr<Tile> tile = map[sourceX][sourceY];
-      map[sourceX][sourceY].reset(new Warp(map[sourceX][sourceY], destTerr,
-              destX, destY));
-      if (map[sourceX][sourceY]->getTile(EAST) &&
-              map[sourceX][sourceY]->getTile(EAST)->getTile(WEST) == tile)
-        map[sourceX][sourceY]->getTile(EAST)->connectTile(WEST,
-              map[sourceX][sourceY]);
-      if (map[sourceX][sourceY]->getTile(NORTH) &&
-              map[sourceX][sourceY]->getTile(NORTH)->getTile(SOUTH) == tile)
-        map[sourceX][sourceY]->getTile(NORTH)->connectTile(SOUTH,
-              map[sourceX][sourceY]);
-      if (map[sourceX][sourceY]->getTile(SOUTH) &&
-              map[sourceX][sourceY]->getTile(SOUTH)->getTile(NORTH) == tile)
-        map[sourceX][sourceY]->getTile(SOUTH)->connectTile(NORTH,
-              map[sourceX][sourceY]);
-      if (map[sourceX][sourceY]->getTile(WEST) &&
-              map[sourceX][sourceY]->getTile(WEST)->getTile(EAST) == tile)
-        map[sourceX][sourceY]->getTile(WEST)->connectTile(EAST,
-              map[sourceX][sourceY]);
+    case 'N':
+      loadSprite(file);
+      break;
+    case 'W':
+      loadWarpTile(file);
+      break;
+    default:
+      break;  // default: do nothing
     }
   }  // Until EOF hit, all remaining info is warps
   file.close();
 }  // void Terr::loadMap(string str)
+
+
+void Terr::loadSprite(ifstream &file)
+{
+  int x, y;
+  string spriteFile = "NPC.png", spriteType = "test";
+  file >> x;
+  file >> y;
+  file >> spriteFile;
+  file >> spriteType;
+  shared_ptr<Sprite> sprite(new Sprite(ren, spriteFile, spriteType));
+  setSprite(sprite, getTile(x, y));
+}  // void Terr::loadSprite(ifstream &file)
+
+
+void Terr::loadWarpTile(ifstream &file)
+{
+  int sourceX, sourceY, destX, destY;
+  string destTerr;
+  file >> sourceX;
+  file >> sourceY;
+  file >> destTerr;
+  file >> destX;
+  file >> destY;
+  if (sourceX <= w && sourceX >= 0 && sourceY <= h && sourceY >= 0)
+  {
+    shared_ptr<Tile> tile = map[sourceX][sourceY];
+    map[sourceX][sourceY].reset(new Warp(map[sourceX][sourceY], destTerr,
+            destX, destY));
+    if (map[sourceX][sourceY]->getTile(EAST) &&
+            map[sourceX][sourceY]->getTile(EAST)->getTile(WEST) == tile)
+            map[sourceX][sourceY]->getTile(EAST)->connectTile(WEST,
+            map[sourceX][sourceY]);
+    if (map[sourceX][sourceY]->getTile(NORTH) &&
+            map[sourceX][sourceY]->getTile(NORTH)->getTile(SOUTH) == tile)
+            map[sourceX][sourceY]->getTile(NORTH)->connectTile(SOUTH,
+            map[sourceX][sourceY]);
+    if (map[sourceX][sourceY]->getTile(SOUTH) &&
+            map[sourceX][sourceY]->getTile(SOUTH)->getTile(NORTH) == tile)
+            map[sourceX][sourceY]->getTile(SOUTH)->connectTile(NORTH,
+            map[sourceX][sourceY]);
+    if (map[sourceX][sourceY]->getTile(WEST) &&
+            map[sourceX][sourceY]->getTile(WEST)->getTile(EAST) == tile)
+            map[sourceX][sourceY]->getTile(WEST)->connectTile(EAST,
+            map[sourceX][sourceY]);
+  }
+}  // void Terr::loadWarpTile(ifstream &file)
 
 
 void Terr::moveSprite(shared_ptr<Sprite> sprite, dir d)

@@ -20,6 +20,8 @@
     //!< Default destructor.
     void changeTerr(const string &newTerr);
     //!< Changes the active Terr.
+    SDL_Renderer* getRen();
+    //!< Calls Terr's getRen().
     shared_ptr<Sprite> getSprite();
     //!< Returns the Sprite representing the party by reference.
     unique_ptr<Terr>& getTerr();
@@ -37,7 +39,7 @@
   protected:
     unique_ptr<Unit> active[4];
     //!< Pointers to the up to four active party members.
-    vector<unique_ptr<Unit>> passive;
+    vector<unique_ptr<Unit> > passive;
     //!< Vector of pointers to non-active party members.
     shared_ptr<Sprite> sprite;
     //!< Sprite representing the player's party.

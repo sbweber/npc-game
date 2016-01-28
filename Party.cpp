@@ -10,7 +10,7 @@ Party::Party(SDL_Renderer *ren)
   passive.clear();
   if (ren)
     sprite.reset(new Sprite(ren, "Hero.png", "Hero"));
-  terr.reset(new Terr(""));
+  terr.reset(new Terr(ren, ""));
 }  // Party::Party(SDL_Renderer *ren)
 
 
@@ -23,6 +23,12 @@ void Party::changeTerr(const string& newTerr)
 {
   terr->loadMap(newTerr);
 }  // void Party::changeTerr(string& newTerr)
+
+
+SDL_Renderer* Party::getRen()
+{
+  return terr->getRen();
+}  // SDL_Renderer* Party::getRen()
 
 
 shared_ptr<Sprite> Party::getSprite()
