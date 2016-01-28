@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['terr',['terr',['../class_party.html#ad70099b7cc106ac51c3db1d1c90812fc',1,'Party']]],
-  ['text',['text',['../class_button.html#a08d8969454e7a566717d2488a788bd78',1,'Button']]],
-  ['type',['type',['../class_sprite.html#af4ab6cfa8155326b6d8af31f943514f2',1,'Sprite::type()'],['../class_tile.html#a5aa7ae6350675967edf46400c486a412',1,'Tile::type()']]]
+  ['s',['S',['../class_tile.html#abf033f1e7b26d12afacad32dd5f44ea5',1,'Tile']]],
+  ['spline',['spline',['../class_sprite.html#aa3a18aaf97a12edfced1b31f2323ae01',1,'Sprite']]],
+  ['sprite',['sprite',['../class_party.html#ae063baa6bfa6fe247ade34a135eb3552',1,'Party::sprite()'],['../class_sprite.html#afbd06de3c7cace1c741bbb609abfa119',1,'Sprite::sprite()']]],
+  ['sprites',['sprites',['../class_terr.html#a633f21d6e20c549f8006104ae4363bea',1,'Terr']]],
+  ['spritesheet',['spriteSheet',['../class_sprite.html#aec7102885a3ca3fdd5124f8677135013',1,'Sprite']]]
 ];

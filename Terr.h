@@ -63,6 +63,7 @@
     vector<vector<shared_ptr<Tile> > > map;
     //!< 2D dyanmically resized array of Tiles defining Terr.
     SDL_Renderer *ren;
+    //!< The SDL_Renderer to which everything is drawn.
     spritelog sprites;
     //!< bi-directional map relating each Sprite to its Tile (and vice versa).
     int w;
