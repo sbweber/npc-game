@@ -32,7 +32,7 @@
     //!< Tile constructor. Makes a VOID Tile by default.
     virtual ~Tile();
     //!< Virtual Tile destructor.
-    void connectTile(dir d, Tile* t);
+    void connectTile(dir d, shared_ptr<Tile> t);
     //!< Specifies an adjacent Tile. Not reciprocal -- may be one-way!
     virtual const string enterTile();
     //!< Overridable base function for derived tiles doing something special
@@ -43,7 +43,7 @@
     //!< Gets current flip status of Tile’s sprite.
     bool getIsPassable();
     //!< Returns true if the Tile may be entered by a Unit.
-    Tile* getTile(dir d);
+    shared_ptr<Tile> getTile(dir d);
     //!< Returns pointer to adjacent tile in specified direction. May be nullptr.
     tileType getType();
     //!< Returns the Tile’s type.
@@ -69,13 +69,13 @@
     bool isPassable;
     //!< True if tile can be entered.
     //!< May change later to enterable from each side.
-    Tile* E;
+    weak_ptr<Tile> E;
     //!< Adjacent Tile to the East/Right.
-    Tile* N;
+    weak_ptr<Tile> N;
     //!< Adjacent Tile to the North/Up.
-    Tile* S;
+    weak_ptr<Tile> S;
     //!< Adjacent Tile to the South/Down.
-    Tile* W;
+    weak_ptr<Tile> W;
     //!< Adjacent Tile to the West/Left.
     double angle;
     //!< Angle at which Tile’s sprite is rotated

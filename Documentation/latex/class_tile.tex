@@ -24,7 +24,7 @@ Inheritance diagram for Tile\+:\begin{figure}[H]
 virtual \hyperlink{class_tile_a98634abbd93fa13d0578d7103202d03d}{$\sim$\+Tile} ()\hypertarget{class_tile_a98634abbd93fa13d0578d7103202d03d}{}\label{class_tile_a98634abbd93fa13d0578d7103202d03d}
 
 \begin{DoxyCompactList}\small\item\em Virtual \hyperlink{class_tile}{Tile} destructor. \end{DoxyCompactList}\item 
-void \hyperlink{class_tile_ab29acce6f4bf7ea4617213269e8c3716}{connect\+Tile} (dir d, \hyperlink{class_tile}{Tile} $\ast$t)\hypertarget{class_tile_ab29acce6f4bf7ea4617213269e8c3716}{}\label{class_tile_ab29acce6f4bf7ea4617213269e8c3716}
+void \hyperlink{class_tile_a211578d3919d82229a23197a4467b099}{connect\+Tile} (dir d, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ t)\hypertarget{class_tile_a211578d3919d82229a23197a4467b099}{}\label{class_tile_a211578d3919d82229a23197a4467b099}
 
 \begin{DoxyCompactList}\small\item\em Specifies an adjacent \hyperlink{class_tile}{Tile}. Not reciprocal -- may be one-\/way! \end{DoxyCompactList}\item 
 virtual const string \hyperlink{class_tile_ae04dfcac010592c1ef0aaae031f31b6a}{enter\+Tile} ()
@@ -38,7 +38,7 @@ S\+D\+L\+\_\+\+Renderer\+Flip \hyperlink{class_tile_ad2d2b3bd012d3a54ccb51f6eb98
 bool \hyperlink{class_tile_aaddc2d065a537489c31de4a566bb0bd5}{get\+Is\+Passable} ()\hypertarget{class_tile_aaddc2d065a537489c31de4a566bb0bd5}{}\label{class_tile_aaddc2d065a537489c31de4a566bb0bd5}
 
 \begin{DoxyCompactList}\small\item\em Returns true if the \hyperlink{class_tile}{Tile} may be entered by a \hyperlink{class_unit}{Unit}. \end{DoxyCompactList}\item 
-\hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_tile_ae5038e62f2a4c28150f6abb4deb31433}{get\+Tile} (dir d)\hypertarget{class_tile_ae5038e62f2a4c28150f6abb4deb31433}{}\label{class_tile_ae5038e62f2a4c28150f6abb4deb31433}
+shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_tile_ac8d11748dbf9b8f57dd2a56f4a733065}{get\+Tile} (dir d)\hypertarget{class_tile_ac8d11748dbf9b8f57dd2a56f4a733065}{}\label{class_tile_ac8d11748dbf9b8f57dd2a56f4a733065}
 
 \begin{DoxyCompactList}\small\item\em Returns pointer to adjacent tile in specified direction. May be nullptr. \end{DoxyCompactList}\item 
 tile\+Type \hyperlink{class_tile_a36871de25627c7483c31807da1c28706}{get\+Type} ()\hypertarget{class_tile_a36871de25627c7483c31807da1c28706}{}\label{class_tile_a36871de25627c7483c31807da1c28706}
@@ -76,16 +76,16 @@ tile\+Type \hyperlink{class_tile_a5aa7ae6350675967edf46400c486a412}{type}\hypert
 \begin{DoxyCompactList}\small\item\em Which type of tile to draw. \end{DoxyCompactList}\item 
 bool \hyperlink{class_tile_afa72b458d549b9533f058e2d2fad0f81}{is\+Passable}
 \item 
-\hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_tile_a0d63c88d4136aecedcb2756d20615b89}{E}\hypertarget{class_tile_a0d63c88d4136aecedcb2756d20615b89}{}\label{class_tile_a0d63c88d4136aecedcb2756d20615b89}
+weak\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_tile_af8130191ee5d094e7505fd26f676393c}{E}\hypertarget{class_tile_af8130191ee5d094e7505fd26f676393c}{}\label{class_tile_af8130191ee5d094e7505fd26f676393c}
 
 \begin{DoxyCompactList}\small\item\em Adjacent \hyperlink{class_tile}{Tile} to the East/\+Right. \end{DoxyCompactList}\item 
-\hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_tile_af1255bd2dba8dfa019fcd65a05805ed1}{N}\hypertarget{class_tile_af1255bd2dba8dfa019fcd65a05805ed1}{}\label{class_tile_af1255bd2dba8dfa019fcd65a05805ed1}
+weak\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_tile_a4c0be3e9600a9694e7e91d54090b37d4}{N}\hypertarget{class_tile_a4c0be3e9600a9694e7e91d54090b37d4}{}\label{class_tile_a4c0be3e9600a9694e7e91d54090b37d4}
 
 \begin{DoxyCompactList}\small\item\em Adjacent \hyperlink{class_tile}{Tile} to the North/\+Up. \end{DoxyCompactList}\item 
-\hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_tile_adc655f39bc82d9b5898b991faea9df42}{S}\hypertarget{class_tile_adc655f39bc82d9b5898b991faea9df42}{}\label{class_tile_adc655f39bc82d9b5898b991faea9df42}
+weak\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_tile_abf033f1e7b26d12afacad32dd5f44ea5}{S}\hypertarget{class_tile_abf033f1e7b26d12afacad32dd5f44ea5}{}\label{class_tile_abf033f1e7b26d12afacad32dd5f44ea5}
 
 \begin{DoxyCompactList}\small\item\em Adjacent \hyperlink{class_tile}{Tile} to the South/\+Down. \end{DoxyCompactList}\item 
-\hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_tile_ae992c1605ed059cb9eaff737b99824dc}{W}\hypertarget{class_tile_ae992c1605ed059cb9eaff737b99824dc}{}\label{class_tile_ae992c1605ed059cb9eaff737b99824dc}
+weak\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_tile_ae204f0d7ecc0da698dba11c9c33c3deb}{W}\hypertarget{class_tile_ae204f0d7ecc0da698dba11c9c33c3deb}{}\label{class_tile_ae204f0d7ecc0da698dba11c9c33c3deb}
 
 \begin{DoxyCompactList}\small\item\em Adjacent \hyperlink{class_tile}{Tile} to the West/\+Left. \end{DoxyCompactList}\item 
 double \hyperlink{class_tile_a33219999fbd38d9c9e8e98d09a9b65a5}{angle}\hypertarget{class_tile_a33219999fbd38d9c9e8e98d09a9b65a5}{}\label{class_tile_a33219999fbd38d9c9e8e98d09a9b65a5}

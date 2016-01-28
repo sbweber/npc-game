@@ -108,14 +108,18 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#a5b4e7bc4d910ad64722629b2fe365240">changeTerr</a> (const string &amp;newTerr)</td></tr>
 <tr class="memdesc:a5b4e7bc4d910ad64722629b2fe365240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the active <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a5b4e7bc4d910ad64722629b2fe365240"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79d7e55a83b66a41146679deb3b4c533"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79d7e55a83b66a41146679deb3b4c533"></a>
-<a class="el" href="class_sprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#a79d7e55a83b66a41146679deb3b4c533">getSprite</a> ()</td></tr>
-<tr class="memdesc:a79d7e55a83b66a41146679deb3b4c533"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> representing the party by reference. <br /></td></tr>
-<tr class="separator:a79d7e55a83b66a41146679deb3b4c533"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0a1a365f425b46efdf315998465503f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0a1a365f425b46efdf315998465503f"></a>
-<a class="el" href="class_terr.html">Terr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#ae0a1a365f425b46efdf315998465503f">getTerr</a> ()</td></tr>
-<tr class="memdesc:ae0a1a365f425b46efdf315998465503f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
-<tr class="separator:ae0a1a365f425b46efdf315998465503f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd791a319c74dcc757fc13c961795688"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd791a319c74dcc757fc13c961795688"></a>
+SDL_Renderer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#acd791a319c74dcc757fc13c961795688">getRen</a> ()</td></tr>
+<tr class="memdesc:acd791a319c74dcc757fc13c961795688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calls <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>'s <a class="el" href="class_party.html#acd791a319c74dcc757fc13c961795688" title="Calls Terr&#39;s getRen(). ">getRen()</a>. <br /></td></tr>
+<tr class="separator:acd791a319c74dcc757fc13c961795688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f8bf409daa7750d0ce103841c437f27"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f8bf409daa7750d0ce103841c437f27"></a>
+shared_ptr&lt; <a class="el" href="class_sprite.html">Sprite</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#a7f8bf409daa7750d0ce103841c437f27">getSprite</a> ()</td></tr>
+<tr class="memdesc:a7f8bf409daa7750d0ce103841c437f27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> representing the party by reference. <br /></td></tr>
+<tr class="separator:a7f8bf409daa7750d0ce103841c437f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adde2e05d8910f1882e112ddc74576a9e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adde2e05d8910f1882e112ddc74576a9e"></a>
+unique_ptr&lt; <a class="el" href="class_terr.html">Terr</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#adde2e05d8910f1882e112ddc74576a9e">getTerr</a> ()</td></tr>
+<tr class="memdesc:adde2e05d8910f1882e112ddc74576a9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
+<tr class="separator:adde2e05d8910f1882e112ddc74576a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a729f2e7fd90ec533a9173a5468b046fa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a729f2e7fd90ec533a9173a5468b046fa"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#a729f2e7fd90ec533a9173a5468b046fa">move</a> (dir d, bool interrupt=true)</td></tr>
 <tr class="memdesc:a729f2e7fd90ec533a9173a5468b046fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move player's <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a>. Load new <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a> if entering a <a class="el" href="class_warp.html" title="Warp is a kind of Tile that loads a new Terr (e.g. leaving a building). ">Warp</a>. <br /></td></tr>
@@ -124,37 +128,37 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#a2efe239264b319d3b50e1a5957fcd859">setLocation</a> (int x, int y)</td></tr>
 <tr class="memdesc:a2efe239264b319d3b50e1a5957fcd859"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the <a class="el" href="class_party.html">Party</a>'s location on the terr to (x, y). <br /></td></tr>
 <tr class="separator:a2efe239264b319d3b50e1a5957fcd859"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4090eed5abc44d79c5ff91b81b23d2b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa4090eed5abc44d79c5ff91b81b23d2b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#aa4090eed5abc44d79c5ff91b81b23d2b">setLocation</a> (<a class="el" href="class_tile.html">Tile</a> *tile)</td></tr>
-<tr class="memdesc:aa4090eed5abc44d79c5ff91b81b23d2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the <a class="el" href="class_party.html">Party</a>'s location on the terr to the specified <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a>. <br /></td></tr>
-<tr class="separator:aa4090eed5abc44d79c5ff91b81b23d2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba5ff3d67efb8c61a9cfa8f6b3bbf7b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aba5ff3d67efb8c61a9cfa8f6b3bbf7b3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#aba5ff3d67efb8c61a9cfa8f6b3bbf7b3">setLocation</a> (shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; tile)</td></tr>
+<tr class="memdesc:aba5ff3d67efb8c61a9cfa8f6b3bbf7b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the <a class="el" href="class_party.html">Party</a>'s location on the terr to the specified <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a>. <br /></td></tr>
+<tr class="separator:aba5ff3d67efb8c61a9cfa8f6b3bbf7b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe069ffbbf3352f6b39246c8382dd26b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abe069ffbbf3352f6b39246c8382dd26b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#abe069ffbbf3352f6b39246c8382dd26b">setSprite</a> (SDL_Renderer *ren, const string &amp;str)</td></tr>
 <tr class="memdesc:abe069ffbbf3352f6b39246c8382dd26b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the party’s <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> to the one in the file named by str. <br /></td></tr>
 <tr class="separator:abe069ffbbf3352f6b39246c8382dd26b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ab0f256d2d95b231dd6ae53c1f8a2f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ab0f256d2d95b231dd6ae53c1f8a2f4"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#a5ab0f256d2d95b231dd6ae53c1f8a2f4">tileClick</a> (SDL_MouseButtonEvent &amp;click)</td></tr>
-<tr class="memdesc:a5ab0f256d2d95b231dd6ae53c1f8a2f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used when clicking on the map. Returns a pointer to the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> clicked. <br /></td></tr>
-<tr class="separator:a5ab0f256d2d95b231dd6ae53c1f8a2f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af38511e79b486f468c4f3d8e7be0cd1a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af38511e79b486f468c4f3d8e7be0cd1a"></a>
+shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#af38511e79b486f468c4f3d8e7be0cd1a">tileClick</a> (SDL_MouseButtonEvent &amp;click)</td></tr>
+<tr class="memdesc:af38511e79b486f468c4f3d8e7be0cd1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used when clicking on the map. Returns a pointer to the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> clicked. <br /></td></tr>
+<tr class="separator:af38511e79b486f468c4f3d8e7be0cd1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:aca0245ec21a99d76c4f1d00b7299629a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aca0245ec21a99d76c4f1d00b7299629a"></a>
-<a class="el" href="class_unit.html">Unit</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#aca0245ec21a99d76c4f1d00b7299629a">active</a> [4]</td></tr>
-<tr class="memdesc:aca0245ec21a99d76c4f1d00b7299629a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointers to the up to four active party members. <br /></td></tr>
-<tr class="separator:aca0245ec21a99d76c4f1d00b7299629a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1e00e761df6f415ed72a920d4aa9ec6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1e00e761df6f415ed72a920d4aa9ec6"></a>
-vector&lt; <a class="el" href="class_unit.html">Unit</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#ab1e00e761df6f415ed72a920d4aa9ec6">passive</a></td></tr>
-<tr class="memdesc:ab1e00e761df6f415ed72a920d4aa9ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to non-active party members. <br /></td></tr>
-<tr class="separator:ab1e00e761df6f415ed72a920d4aa9ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae71ba8a78bc7da8b16ff861412b30adb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae71ba8a78bc7da8b16ff861412b30adb"></a>
-<a class="el" href="class_sprite.html">Sprite</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#ae71ba8a78bc7da8b16ff861412b30adb">sprite</a></td></tr>
-<tr class="memdesc:ae71ba8a78bc7da8b16ff861412b30adb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> representing the player's party. <br /></td></tr>
-<tr class="separator:ae71ba8a78bc7da8b16ff861412b30adb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad70099b7cc106ac51c3db1d1c90812fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad70099b7cc106ac51c3db1d1c90812fc"></a>
-<a class="el" href="class_terr.html">Terr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#ad70099b7cc106ac51c3db1d1c90812fc">terr</a></td></tr>
-<tr class="memdesc:ad70099b7cc106ac51c3db1d1c90812fc"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a> where the player's party currently is. <br /></td></tr>
-<tr class="separator:ad70099b7cc106ac51c3db1d1c90812fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec6e42afb906b261b4d367922a1c0d33"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec6e42afb906b261b4d367922a1c0d33"></a>
+unique_ptr&lt; <a class="el" href="class_unit.html">Unit</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#aec6e42afb906b261b4d367922a1c0d33">active</a> [4]</td></tr>
+<tr class="memdesc:aec6e42afb906b261b4d367922a1c0d33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointers to the up to four active party members. <br /></td></tr>
+<tr class="separator:aec6e42afb906b261b4d367922a1c0d33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6dd68ad949efb33afd401d26de7ba2a4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6dd68ad949efb33afd401d26de7ba2a4"></a>
+vector&lt; unique_ptr&lt; <a class="el" href="class_unit.html">Unit</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#a6dd68ad949efb33afd401d26de7ba2a4">passive</a></td></tr>
+<tr class="memdesc:a6dd68ad949efb33afd401d26de7ba2a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pointers to non-active party members. <br /></td></tr>
+<tr class="separator:a6dd68ad949efb33afd401d26de7ba2a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae063baa6bfa6fe247ade34a135eb3552"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae063baa6bfa6fe247ade34a135eb3552"></a>
+shared_ptr&lt; <a class="el" href="class_sprite.html">Sprite</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#ae063baa6bfa6fe247ade34a135eb3552">sprite</a></td></tr>
+<tr class="memdesc:ae063baa6bfa6fe247ade34a135eb3552"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> representing the player's party. <br /></td></tr>
+<tr class="separator:ae063baa6bfa6fe247ade34a135eb3552"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50fdc449d05dd04c217ebb380e98a955"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50fdc449d05dd04c217ebb380e98a955"></a>
+unique_ptr&lt; <a class="el" href="class_terr.html">Terr</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_party.html#a50fdc449d05dd04c217ebb380e98a955">terr</a></td></tr>
+<tr class="memdesc:a50fdc449d05dd04c217ebb380e98a955"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a> where the player's party currently is. <br /></td></tr>
+<tr class="separator:a50fdc449d05dd04c217ebb380e98a955"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines the playable party Describes the hero's party, directly controlled by the player </p>

@@ -9,16 +9,13 @@ Party::Party(SDL_Renderer *ren)
     active[i] = nullptr;
   passive.clear();
   if (ren)
-    sprite = new Sprite(ren, "Hero.png", "Hero");
-  terr = new Terr("");
+    sprite.reset(new Sprite(ren, "Hero.png", "Hero"));
+  terr.reset(new Terr(ren, ""));
 }  // Party::Party(SDL_Renderer *ren)
 
 
 Party::~Party()
 {
-  for (int i = 0; i < 4; i++)
-    delete active[i];
-  delete terr;
 }  // Party destructor
 
 
@@ -28,22 +25,28 @@ void Party::changeTerr(const string& newTerr)
 }  // void Party::changeTerr(string& newTerr)
 
 
-Sprite* Party::getSprite()
+SDL_Renderer* Party::getRen()
+{
+  return terr->getRen();
+}  // SDL_Renderer* Party::getRen()
+
+
+shared_ptr<Sprite> Party::getSprite()
 {
   return sprite;
-}  // Sprite* Party::getSprite()
+}  // shared_ptr<Sprite> Party::getSprite()
 
 
-Terr* Party::getTerr()
+unique_ptr<Terr>& Party::getTerr()
 {
   return terr;
-}  // Terr* Party::getTerr()
+}  // unique_ptr<Terr> Party::getTerr()
 
 
 void Party::move(dir d, bool interrupt)
 {
   if (interrupt)
-    sprite->clearMoves();
+    sprite->clearActs();
   terr->moveSprite(sprite, d);
 }  // void Party::move(dir d)
 
@@ -54,22 +57,20 @@ void Party::setLocation(int x, int y)
 }  // void Party::setLocation(int x, int y)
 
 
-void Party::setLocation(Tile* tile)
+void Party::setLocation(shared_ptr<Tile> tile)
 {
   terr->setSprite(sprite, tile);
-}  // void Party::setLocation(Tile* tile)
+}  // void Party::setLocation(shared_ptr<Tile> tile)
 
 
 void Party::setSprite(SDL_Renderer *ren, const string &str)
 {
-  if (sprite)
-    delete sprite;
-  sprite = new Sprite(ren, str);
+  sprite.reset(new Sprite(ren, str));
 }  // void Party::setSprite(SDL_Renderer *ren, const string &str)
 
 
-Tile* Party::tileClick(SDL_MouseButtonEvent &click)
+shared_ptr<Tile> Party::tileClick(SDL_MouseButtonEvent &click)
 {
   return terr->tileClick(click, sprite);
-}  // Tile* Party::tileClick(SDL_MouseButtonEvent &click)
+}  // shared_ptr<Tile> Party::tileClick(SDL_MouseButtonEvent &click)
 

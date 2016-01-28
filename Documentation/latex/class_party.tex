@@ -16,10 +16,13 @@
 void \hyperlink{class_party_a5b4e7bc4d910ad64722629b2fe365240}{change\+Terr} (const string \&new\+Terr)\hypertarget{class_party_a5b4e7bc4d910ad64722629b2fe365240}{}\label{class_party_a5b4e7bc4d910ad64722629b2fe365240}
 
 \begin{DoxyCompactList}\small\item\em Changes the active \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
-\hyperlink{class_sprite}{Sprite} $\ast$ \hyperlink{class_party_a79d7e55a83b66a41146679deb3b4c533}{get\+Sprite} ()\hypertarget{class_party_a79d7e55a83b66a41146679deb3b4c533}{}\label{class_party_a79d7e55a83b66a41146679deb3b4c533}
+S\+D\+L\+\_\+\+Renderer $\ast$ \hyperlink{class_party_acd791a319c74dcc757fc13c961795688}{get\+Ren} ()\hypertarget{class_party_acd791a319c74dcc757fc13c961795688}{}\label{class_party_acd791a319c74dcc757fc13c961795688}
+
+\begin{DoxyCompactList}\small\item\em Calls \hyperlink{class_terr}{Terr}\textquotesingle{}s \hyperlink{class_party_acd791a319c74dcc757fc13c961795688}{get\+Ren()}. \end{DoxyCompactList}\item 
+shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ \hyperlink{class_party_a7f8bf409daa7750d0ce103841c437f27}{get\+Sprite} ()\hypertarget{class_party_a7f8bf409daa7750d0ce103841c437f27}{}\label{class_party_a7f8bf409daa7750d0ce103841c437f27}
 
 \begin{DoxyCompactList}\small\item\em Returns the \hyperlink{class_sprite}{Sprite} representing the party by reference. \end{DoxyCompactList}\item 
-\hyperlink{class_terr}{Terr} $\ast$ \hyperlink{class_party_ae0a1a365f425b46efdf315998465503f}{get\+Terr} ()\hypertarget{class_party_ae0a1a365f425b46efdf315998465503f}{}\label{class_party_ae0a1a365f425b46efdf315998465503f}
+unique\+\_\+ptr$<$ \hyperlink{class_terr}{Terr} $>$ \& \hyperlink{class_party_adde2e05d8910f1882e112ddc74576a9e}{get\+Terr} ()\hypertarget{class_party_adde2e05d8910f1882e112ddc74576a9e}{}\label{class_party_adde2e05d8910f1882e112ddc74576a9e}
 
 \begin{DoxyCompactList}\small\item\em Returns the current \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
 void \hyperlink{class_party_a729f2e7fd90ec533a9173a5468b046fa}{move} (dir d, bool interrupt=true)\hypertarget{class_party_a729f2e7fd90ec533a9173a5468b046fa}{}\label{class_party_a729f2e7fd90ec533a9173a5468b046fa}
@@ -28,28 +31,28 @@ void \hyperlink{class_party_a729f2e7fd90ec533a9173a5468b046fa}{move} (dir d, boo
 void \hyperlink{class_party_a2efe239264b319d3b50e1a5957fcd859}{set\+Location} (int x, int y)\hypertarget{class_party_a2efe239264b319d3b50e1a5957fcd859}{}\label{class_party_a2efe239264b319d3b50e1a5957fcd859}
 
 \begin{DoxyCompactList}\small\item\em Sets the \hyperlink{class_party}{Party}\textquotesingle{}s location on the terr to (x, y). \end{DoxyCompactList}\item 
-void \hyperlink{class_party_aa4090eed5abc44d79c5ff91b81b23d2b}{set\+Location} (\hyperlink{class_tile}{Tile} $\ast$tile)\hypertarget{class_party_aa4090eed5abc44d79c5ff91b81b23d2b}{}\label{class_party_aa4090eed5abc44d79c5ff91b81b23d2b}
+void \hyperlink{class_party_aba5ff3d67efb8c61a9cfa8f6b3bbf7b3}{set\+Location} (shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ tile)\hypertarget{class_party_aba5ff3d67efb8c61a9cfa8f6b3bbf7b3}{}\label{class_party_aba5ff3d67efb8c61a9cfa8f6b3bbf7b3}
 
 \begin{DoxyCompactList}\small\item\em Sets the \hyperlink{class_party}{Party}\textquotesingle{}s location on the terr to the specified \hyperlink{class_tile}{Tile}. \end{DoxyCompactList}\item 
 void \hyperlink{class_party_abe069ffbbf3352f6b39246c8382dd26b}{set\+Sprite} (S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&str)\hypertarget{class_party_abe069ffbbf3352f6b39246c8382dd26b}{}\label{class_party_abe069ffbbf3352f6b39246c8382dd26b}
 
 \begin{DoxyCompactList}\small\item\em Resets the party’s \hyperlink{class_sprite}{Sprite} to the one in the file named by str. \end{DoxyCompactList}\item 
-\hyperlink{class_tile}{Tile} $\ast$ \hyperlink{class_party_a5ab0f256d2d95b231dd6ae53c1f8a2f4}{tile\+Click} (S\+D\+L\+\_\+\+Mouse\+Button\+Event \&click)\hypertarget{class_party_a5ab0f256d2d95b231dd6ae53c1f8a2f4}{}\label{class_party_a5ab0f256d2d95b231dd6ae53c1f8a2f4}
+shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_party_af38511e79b486f468c4f3d8e7be0cd1a}{tile\+Click} (S\+D\+L\+\_\+\+Mouse\+Button\+Event \&click)\hypertarget{class_party_af38511e79b486f468c4f3d8e7be0cd1a}{}\label{class_party_af38511e79b486f468c4f3d8e7be0cd1a}
 
 \begin{DoxyCompactList}\small\item\em Used when clicking on the map. Returns a pointer to the \hyperlink{class_tile}{Tile} clicked. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_unit}{Unit} $\ast$ \hyperlink{class_party_aca0245ec21a99d76c4f1d00b7299629a}{active} \mbox{[}4\mbox{]}\hypertarget{class_party_aca0245ec21a99d76c4f1d00b7299629a}{}\label{class_party_aca0245ec21a99d76c4f1d00b7299629a}
+unique\+\_\+ptr$<$ \hyperlink{class_unit}{Unit} $>$ \hyperlink{class_party_aec6e42afb906b261b4d367922a1c0d33}{active} \mbox{[}4\mbox{]}\hypertarget{class_party_aec6e42afb906b261b4d367922a1c0d33}{}\label{class_party_aec6e42afb906b261b4d367922a1c0d33}
 
 \begin{DoxyCompactList}\small\item\em Pointers to the up to four active party members. \end{DoxyCompactList}\item 
-vector$<$ \hyperlink{class_unit}{Unit} $\ast$ $>$ \hyperlink{class_party_ab1e00e761df6f415ed72a920d4aa9ec6}{passive}\hypertarget{class_party_ab1e00e761df6f415ed72a920d4aa9ec6}{}\label{class_party_ab1e00e761df6f415ed72a920d4aa9ec6}
+vector$<$ unique\+\_\+ptr$<$ \hyperlink{class_unit}{Unit} $>$ $>$ \hyperlink{class_party_a6dd68ad949efb33afd401d26de7ba2a4}{passive}\hypertarget{class_party_a6dd68ad949efb33afd401d26de7ba2a4}{}\label{class_party_a6dd68ad949efb33afd401d26de7ba2a4}
 
 \begin{DoxyCompactList}\small\item\em Vector of pointers to non-\/active party members. \end{DoxyCompactList}\item 
-\hyperlink{class_sprite}{Sprite} $\ast$ \hyperlink{class_party_ae71ba8a78bc7da8b16ff861412b30adb}{sprite}\hypertarget{class_party_ae71ba8a78bc7da8b16ff861412b30adb}{}\label{class_party_ae71ba8a78bc7da8b16ff861412b30adb}
+shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ \hyperlink{class_party_ae063baa6bfa6fe247ade34a135eb3552}{sprite}\hypertarget{class_party_ae063baa6bfa6fe247ade34a135eb3552}{}\label{class_party_ae063baa6bfa6fe247ade34a135eb3552}
 
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_sprite}{Sprite} representing the player\textquotesingle{}s party. \end{DoxyCompactList}\item 
-\hyperlink{class_terr}{Terr} $\ast$ \hyperlink{class_party_ad70099b7cc106ac51c3db1d1c90812fc}{terr}\hypertarget{class_party_ad70099b7cc106ac51c3db1d1c90812fc}{}\label{class_party_ad70099b7cc106ac51c3db1d1c90812fc}
+unique\+\_\+ptr$<$ \hyperlink{class_terr}{Terr} $>$ \hyperlink{class_party_a50fdc449d05dd04c217ebb380e98a955}{terr}\hypertarget{class_party_a50fdc449d05dd04c217ebb380e98a955}{}\label{class_party_a50fdc449d05dd04c217ebb380e98a955}
 
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_terr}{Terr} where the player\textquotesingle{}s party currently is. \end{DoxyCompactList}\end{DoxyCompactItemize}
 

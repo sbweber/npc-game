@@ -116,10 +116,10 @@ Public Member Functions</h2></td></tr>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a98634abbd93fa13d0578d7103202d03d">~Tile</a> ()</td></tr>
 <tr class="memdesc:a98634abbd93fa13d0578d7103202d03d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> destructor. <br /></td></tr>
 <tr class="separator:a98634abbd93fa13d0578d7103202d03d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab29acce6f4bf7ea4617213269e8c3716"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab29acce6f4bf7ea4617213269e8c3716"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ab29acce6f4bf7ea4617213269e8c3716">connectTile</a> (dir d, <a class="el" href="class_tile.html">Tile</a> *t)</td></tr>
-<tr class="memdesc:ab29acce6f4bf7ea4617213269e8c3716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies an adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a>. Not reciprocal &ndash; may be one-way! <br /></td></tr>
-<tr class="separator:ab29acce6f4bf7ea4617213269e8c3716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a211578d3919d82229a23197a4467b099"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a211578d3919d82229a23197a4467b099"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a211578d3919d82229a23197a4467b099">connectTile</a> (dir d, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; t)</td></tr>
+<tr class="memdesc:a211578d3919d82229a23197a4467b099"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specifies an adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a>. Not reciprocal &ndash; may be one-way! <br /></td></tr>
+<tr class="separator:a211578d3919d82229a23197a4467b099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae04dfcac010592c1ef0aaae031f31b6a"><td class="memItemLeft" align="right" valign="top">virtual const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ae04dfcac010592c1ef0aaae031f31b6a">enterTile</a> ()</td></tr>
 <tr class="separator:ae04dfcac010592c1ef0aaae031f31b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a947b6692bfcdd7b1adc59fcbee16c1fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a947b6692bfcdd7b1adc59fcbee16c1fc"></a>
@@ -134,10 +134,10 @@ SDL_RendererFlip&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#aaddc2d065a537489c31de4a566bb0bd5">getIsPassable</a> ()</td></tr>
 <tr class="memdesc:aaddc2d065a537489c31de4a566bb0bd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> may be entered by a <a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>. <br /></td></tr>
 <tr class="separator:aaddc2d065a537489c31de4a566bb0bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae5038e62f2a4c28150f6abb4deb31433"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5038e62f2a4c28150f6abb4deb31433"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ae5038e62f2a4c28150f6abb4deb31433">getTile</a> (dir d)</td></tr>
-<tr class="memdesc:ae5038e62f2a4c28150f6abb4deb31433"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to adjacent tile in specified direction. May be nullptr. <br /></td></tr>
-<tr class="separator:ae5038e62f2a4c28150f6abb4deb31433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8d11748dbf9b8f57dd2a56f4a733065"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8d11748dbf9b8f57dd2a56f4a733065"></a>
+shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ac8d11748dbf9b8f57dd2a56f4a733065">getTile</a> (dir d)</td></tr>
+<tr class="memdesc:ac8d11748dbf9b8f57dd2a56f4a733065"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to adjacent tile in specified direction. May be nullptr. <br /></td></tr>
+<tr class="separator:ac8d11748dbf9b8f57dd2a56f4a733065"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a36871de25627c7483c31807da1c28706"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a36871de25627c7483c31807da1c28706"></a>
 tileType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a36871de25627c7483c31807da1c28706">getType</a> ()</td></tr>
 <tr class="memdesc:a36871de25627c7483c31807da1c28706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Tile’s type. <br /></td></tr>
@@ -183,22 +183,22 @@ tileType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="separator:a5aa7ae6350675967edf46400c486a412"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa72b458d549b9533f058e2d2fad0f81"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#afa72b458d549b9533f058e2d2fad0f81">isPassable</a></td></tr>
 <tr class="separator:afa72b458d549b9533f058e2d2fad0f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d63c88d4136aecedcb2756d20615b89"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d63c88d4136aecedcb2756d20615b89"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a0d63c88d4136aecedcb2756d20615b89">E</a></td></tr>
-<tr class="memdesc:a0d63c88d4136aecedcb2756d20615b89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the East/Right. <br /></td></tr>
-<tr class="separator:a0d63c88d4136aecedcb2756d20615b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1255bd2dba8dfa019fcd65a05805ed1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af1255bd2dba8dfa019fcd65a05805ed1"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#af1255bd2dba8dfa019fcd65a05805ed1">N</a></td></tr>
-<tr class="memdesc:af1255bd2dba8dfa019fcd65a05805ed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the North/Up. <br /></td></tr>
-<tr class="separator:af1255bd2dba8dfa019fcd65a05805ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc655f39bc82d9b5898b991faea9df42"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adc655f39bc82d9b5898b991faea9df42"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#adc655f39bc82d9b5898b991faea9df42">S</a></td></tr>
-<tr class="memdesc:adc655f39bc82d9b5898b991faea9df42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the South/Down. <br /></td></tr>
-<tr class="separator:adc655f39bc82d9b5898b991faea9df42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae992c1605ed059cb9eaff737b99824dc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae992c1605ed059cb9eaff737b99824dc"></a>
-<a class="el" href="class_tile.html">Tile</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ae992c1605ed059cb9eaff737b99824dc">W</a></td></tr>
-<tr class="memdesc:ae992c1605ed059cb9eaff737b99824dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the West/Left. <br /></td></tr>
-<tr class="separator:ae992c1605ed059cb9eaff737b99824dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8130191ee5d094e7505fd26f676393c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8130191ee5d094e7505fd26f676393c"></a>
+weak_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#af8130191ee5d094e7505fd26f676393c">E</a></td></tr>
+<tr class="memdesc:af8130191ee5d094e7505fd26f676393c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the East/Right. <br /></td></tr>
+<tr class="separator:af8130191ee5d094e7505fd26f676393c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c0be3e9600a9694e7e91d54090b37d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c0be3e9600a9694e7e91d54090b37d4"></a>
+weak_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a4c0be3e9600a9694e7e91d54090b37d4">N</a></td></tr>
+<tr class="memdesc:a4c0be3e9600a9694e7e91d54090b37d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the North/Up. <br /></td></tr>
+<tr class="separator:a4c0be3e9600a9694e7e91d54090b37d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf033f1e7b26d12afacad32dd5f44ea5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf033f1e7b26d12afacad32dd5f44ea5"></a>
+weak_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#abf033f1e7b26d12afacad32dd5f44ea5">S</a></td></tr>
+<tr class="memdesc:abf033f1e7b26d12afacad32dd5f44ea5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the South/Down. <br /></td></tr>
+<tr class="separator:abf033f1e7b26d12afacad32dd5f44ea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae204f0d7ecc0da698dba11c9c33c3deb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae204f0d7ecc0da698dba11c9c33c3deb"></a>
+weak_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ae204f0d7ecc0da698dba11c9c33c3deb">W</a></td></tr>
+<tr class="memdesc:ae204f0d7ecc0da698dba11c9c33c3deb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the West/Left. <br /></td></tr>
+<tr class="separator:ae204f0d7ecc0da698dba11c9c33c3deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33219999fbd38d9c9e8e98d09a9b65a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33219999fbd38d9c9e8e98d09a9b65a5"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a33219999fbd38d9c9e8e98d09a9b65a5">angle</a></td></tr>
 <tr class="memdesc:a33219999fbd38d9c9e8e98d09a9b65a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Angle at which Tile’s sprite is rotated. <br /></td></tr>

@@ -8,10 +8,6 @@ Tile::Tile(tileType t)
   x = 0;
   y = 0;
   setType(t);
-  E = nullptr;
-  N = nullptr;
-  S = nullptr;
-  W = nullptr;
   angle = 0;
   flip = SDL_FLIP_NONE;
 }  // Tile::Tile(tileType t)
@@ -19,18 +15,10 @@ Tile::Tile(tileType t)
 
 Tile::~Tile()
 {
-  if (E && E->W == this)
-    E->W = nullptr;
-  if (N && N->S == this)
-    N->S = nullptr;
-  if (S && S->N == this)
-    S->N = nullptr;
-  if (W && W->E == this)
-    W->E = nullptr;
 }  // Tile::~Tile()
 
 
-void Tile::connectTile(dir d, Tile* t)
+void Tile::connectTile(dir d, shared_ptr<Tile> t)
 {
   switch (d)
   {
@@ -49,7 +37,7 @@ void Tile::connectTile(dir d, Tile* t)
   default:
     break;
   }  // set tile pointer for correct direction
-}  // void Tile::connectTile(dir d, Tile* t)
+}  // void Tile::connectTile(dir d, shared_ptr<Tile> t)
 
 
 const string Tile::enterTile()
@@ -76,27 +64,27 @@ bool Tile::getIsPassable()
 }  // bool Tile::getIsPassable()
 
 
-Tile* Tile::getTile(dir d)
+shared_ptr<Tile> Tile::getTile(dir d)
 {
   switch (d)
   {
   case NORTH:
-    return N;
+    return N.lock();
     break;
   case SOUTH:
-    return S;
+    return S.lock();
     break;
   case WEST:
-    return W;
+    return W.lock();
     break;
   case EAST:
-    return E;
+    return E.lock();
     break;
   default:
     break;
   }
   return nullptr;  // should be impossible to get here
-}  // Tile* Tile::getTile(dir d)
+}  // shared_ptr<Tile> Tile::getTile(dir d)
 
 
 tileType Tile::getType()

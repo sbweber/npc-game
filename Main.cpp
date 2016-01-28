@@ -31,8 +31,7 @@ int main(int argc, char **argv)
   bool quit = false;
 
   // backend vars
-  Party* party = new Party(ren);
-  Sprite* npc = new Sprite(ren, "NPC.png", "test");
+  unique_ptr<Party> party(new Party(ren));
   gameState state = TITLE;
 
   // spritesheets
@@ -42,14 +41,12 @@ int main(int argc, char **argv)
 
   while (!quit)
     while (SDL_PollEvent(&e))
-      quit = mainLoop(ren, e, font, tiles, party, npc, state);
+      quit = mainLoop(e, font, tiles, party, state);
 
   SDL_DestroyTexture(tiles);
   SDL_DestroyRenderer(ren);
   SDL_DestroyWindow(win);
   TTF_CloseFont(font);
-  delete party;
-  delete npc;
 
   TTF_Quit();
   IMG_Quit();

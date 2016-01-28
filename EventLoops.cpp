@@ -2,7 +2,7 @@
 
 #include "EventLoops.h"
 
-bool loopAnyState(SDL_Event &e, Party* party, Sprite *npc, gameState &state)
+bool loopAnyState(SDL_Event &e, unique_ptr<Party> &party, gameState &state)
 {
   switch (e.type)
   {
@@ -14,7 +14,6 @@ bool loopAnyState(SDL_Event &e, Party* party, Sprite *npc, gameState &state)
       party->changeTerr("Map0,0.txt");
       state = MAP;
       party->setLocation(4, 3);
-      party->getTerr()->setSprite(npc, party->getTerr()->getTile(5, 4));
     }  // debug command map1
     if (e.key.keysym == stateMap2)
     {
@@ -47,11 +46,12 @@ bool loopBattle(SDL_Event &e)
 }  // bool loopBattle(SDL_Event &e)
 
 
-bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
+bool loopMap(SDL_Texture* tiles, SDL_Event &e, unique_ptr<Party> &party)
 {
-  Tile* tile;
-  dir d = NORTH;
-  while(drawMap(ren, tiles, party));
+  shared_ptr<Tile> tile;
+  action act(UNDEFINED_DIRECTION, BAD_ACTION);
+  SDL_Event* wait = new SDL_Event();
+  while(drawMap(party->getRen(), tiles, party));
   switch (e.type)
   {
   case SDL_KEYDOWN:
@@ -68,24 +68,32 @@ bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = party->tileClick(e.button);
-    if (tile && tile->getIsPassable() && !party->getTerr()->isOccupied(tile))
+    if (tile && tile->getIsPassable())
     {
       party->getTerr()->findPath(party->getTerr()->getTile(party->getSprite()),
               tile, party->getSprite());
-    }  // If tile can be legally entered, warp to it
+    }  // If tile can be legally entered, path to it
     break;
   default:
-    d = party->getSprite()->popMove();
-    if (d != UNDEFINED_DIRECTION)
+    act = party->getSprite()->popAct();
+    switch (get<1>(act))
     {
-      party->move(d, false);
-      SDL_Event* wait = new SDL_Event();
+    case MOVE:
+      party->move(get<0>(act), false);
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
+      break;
+    case INTERACT:
+      party->getTerr()->interactSprite(party->getSprite());
+      SDL_PushEvent(wait);  // push empty event to cause immediate state update
+      break;
+    case BAD_ACTION:
+    default:
+      break;
     }
     break;
   }
   return false;
-}  // bool loopMap(SDL_Event &e, Party* party)
+}  // bool loopMap(SDL_Event &e, unique_ptr<Party> &party)
 
 
 bool loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
@@ -104,12 +112,12 @@ bool loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
 }  // bool loopRebind()
 
 
-bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
-        gameState &state, Party *party, Sprite *npc)
+bool loopTitle(SDL_Event &e, TTF_Font *font,
+        gameState &state, unique_ptr<Party> &party)
 {
-  Button *toGame = new Button(ren, "Button.png",
-          SCREEN_WIDTH / 2 - 120, 300, 240, 100, font, "To Game");
-  drawTitle(ren, toGame);
+  unique_ptr<Button> toGame(new Button(party->getRen(), "Button.png",
+          SCREEN_WIDTH / 2 - 120, 300, 240, 100, font, "To Game"));
+  drawTitle(party->getRen(), toGame);
   switch (e.type)
   {
   case SDL_KEYDOWN:
@@ -121,7 +129,6 @@ bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
       party->changeTerr("Map0,0.txt");
       state = MAP;
       party->setLocation(6, 10);
-      party->getTerr()->setSprite(npc, party->getTerr()->getTile(5, 4));
       SDL_Event* wait = new SDL_Event();
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
     }
@@ -136,17 +143,15 @@ bool loopTitle(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
   default:
     break;
   }
-  delete toGame;
   return false;
 }  // bool loopTitle()
 
 
-bool mainLoop(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
-        SDL_Texture *tiles, Party* party, Sprite *npc,
-        gameState &state)
+bool mainLoop(SDL_Event &e, TTF_Font *font, SDL_Texture *tiles,
+        unique_ptr<Party> &party, gameState &state)
 {
   bool quit = false;
-  quit = loopAnyState(e, party, npc, state);
+  quit = loopAnyState(e, party, state);
   if (quit)
     return true;
   switch (state)
@@ -155,13 +160,13 @@ bool mainLoop(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
     quit = loopBattle(e);
     break;
   case MAP:
-    quit = loopMap(ren, tiles, e, party);
+    quit = loopMap(tiles, e, party);
     break;
   case REBIND:
-    quit = loopRebind(ren, e, font, state);
+    quit = loopRebind(party->getRen(), e, font, state);
     break;
   case TITLE:
-    quit = loopTitle(ren, e, font, state, party, npc);
+    quit = loopTitle(e, font, state, party);
     break;
   default:
     break;

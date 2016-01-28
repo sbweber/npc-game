@@ -3,8 +3,7 @@
 #include "Warp.h"
 
 
-Warp::Warp(Tile* tile, const string &dT, int dX, int dY,
-            bool replaceTile)
+Warp::Warp(shared_ptr<Tile> tile, const string &dT, int dX, int dY)
 {
   x = tile->getX();
   y = tile->getY();
@@ -20,20 +19,7 @@ Warp::Warp(Tile* tile, const string &dT, int dX, int dY,
   destTerr = dT;
   destX = dX;
   destY = dY;
-  
-  if (replaceTile)
-  {
-    if (E && E->getTile(WEST) == tile)
-      E->connectTile(WEST, this);
-    if (N && N->getTile(SOUTH) == tile)
-      N->connectTile(SOUTH, this);
-    if (S && S->getTile(NORTH) == tile)
-      S->connectTile(NORTH, this);
-    if (W && W->getTile(EAST) == tile)
-      W->connectTile(EAST, this);
-    delete tile;
-  }  // If I'm replacing a tile, tell the neighbors I'm him, then delete him.
-}  // Warp::Warp(Tile* tile, string &nT)
+}  // Warp::Warp(shared_ptr<Tile> tile, string &nT)
 
 
 const string Warp::enterTile()
