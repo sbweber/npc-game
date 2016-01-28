@@ -346,8 +346,27 @@ void Terr::loadMap(const string &str)
     file.ignore(numeric_limits<streamsize>::max(), ' ');
     file >> destY;
     if (sourceX <= w && sourceX >= 0 && sourceY <= h && sourceY >= 0)
+    {
+      shared_ptr<Tile> tile = map[sourceX][sourceY];
       map[sourceX][sourceY].reset(new Warp(map[sourceX][sourceY], destTerr,
-              destX, destY, true));
+              destX, destY));
+      if (map[sourceX][sourceY]->getTile(EAST) &&
+              map[sourceX][sourceY]->getTile(EAST)->getTile(WEST) == tile)
+        map[sourceX][sourceY]->getTile(EAST)->connectTile(WEST,
+              map[sourceX][sourceY]);
+      if (map[sourceX][sourceY]->getTile(NORTH) &&
+              map[sourceX][sourceY]->getTile(NORTH)->getTile(SOUTH) == tile)
+        map[sourceX][sourceY]->getTile(NORTH)->connectTile(SOUTH,
+              map[sourceX][sourceY]);
+      if (map[sourceX][sourceY]->getTile(SOUTH) &&
+              map[sourceX][sourceY]->getTile(SOUTH)->getTile(NORTH) == tile)
+        map[sourceX][sourceY]->getTile(SOUTH)->connectTile(NORTH,
+              map[sourceX][sourceY]);
+      if (map[sourceX][sourceY]->getTile(WEST) &&
+              map[sourceX][sourceY]->getTile(WEST)->getTile(EAST) == tile)
+        map[sourceX][sourceY]->getTile(WEST)->connectTile(EAST,
+              map[sourceX][sourceY]);
+    }
   }  // Until EOF hit, all remaining info is warps
   file.close();
 }  // void Terr::loadMap(string str)

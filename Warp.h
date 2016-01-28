@@ -9,8 +9,7 @@
   class Warp : public Tile
   {
   public:
-    Warp(shared_ptr<Tile> tile, const string &dT, int dX, int dY,
-            bool replaceTile = false);
+    Warp(shared_ptr<Tile> tile, const string &dT, int dX, int dY);
     //!< Upgrade constructor: copies an existing Tile, adding new functionality
     virtual const string enterTile() override;
     //!< Loads a new Terr on entry.
