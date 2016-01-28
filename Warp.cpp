@@ -3,7 +3,7 @@
 #include "Warp.h"
 
 
-Warp::Warp(Tile* tile, const string &dT, int dX, int dY,
+Warp::Warp(shared_ptr<Tile> tile, const string &dT, int dX, int dY,
             bool replaceTile)
 {
   x = tile->getX();
@@ -20,20 +20,24 @@ Warp::Warp(Tile* tile, const string &dT, int dX, int dY,
   destTerr = dT;
   destX = dX;
   destY = dY;
-  
+  /*
   if (replaceTile)
   {
-    if (E && E->getTile(WEST) == tile)
-      E->connectTile(WEST, this);
-    if (N && N->getTile(SOUTH) == tile)
-      N->connectTile(SOUTH, this);
-    if (S && S->getTile(NORTH) == tile)
-      S->connectTile(NORTH, this);
-    if (W && W->getTile(EAST) == tile)
-      W->connectTile(EAST, this);
-    delete tile;
-  }  // If I'm replacing a tile, tell the neighbors I'm him, then delete him.
-}  // Warp::Warp(Tile* tile, string &nT)
+    if (E.lock() && (E.lock()->getTile(WEST) == tile))
+      E.lock()->connectTile(WEST, shared_ptr<Tile>(this));
+    if (N.lock() && (N.lock()->getTile(SOUTH) == tile))
+      N.lock()->connectTile(SOUTH, shared_ptr<Tile>(this));
+    if (S.lock() && (S.lock()->getTile(NORTH) == tile))
+      S.lock()->connectTile(NORTH, shared_ptr<Tile>(this));
+    if (W.lock() && (W.lock()->getTile(EAST) == tile))
+      W.lock()->connectTile(EAST, shared_ptr<Tile>(this));
+  }  // If I'm replacing a tile, tell the neighbors I'm him.
+  */
+  E.lock()->connectTile(WEST, shared_ptr<Tile>(this));
+  N.lock()->connectTile(SOUTH, shared_ptr<Tile>(this));
+  S.lock()->connectTile(NORTH, shared_ptr<Tile>(this));
+  W.lock()->connectTile(EAST, shared_ptr<Tile>(this));
+}  // Warp::Warp(shared_ptr<Tile> tile, string &nT)
 
 
 const string Warp::enterTile()

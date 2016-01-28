@@ -9,7 +9,7 @@
   #include <ctime>
   #include <iostream>
   #include <fstream>
-  #include <new>
+  #include <memory>
   #include <queue>
   #include <string>
   #include <tuple>

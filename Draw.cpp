@@ -34,8 +34,8 @@ bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
   int hsw = NUM_TILES_WIDTH / 2;  //half screen width (in tiles)
   int hsh = NUM_TILES_HEIGHT / 2;  // half screen height
 
-  Tile* tilePtr = nullptr;
-  Tile* offMap = new Tile();
+  shared_ptr<Tile> tilePtr = nullptr;
+  shared_ptr<Tile> offMap (new Tile());
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
     {
@@ -93,7 +93,6 @@ bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, Party *party)
               party->getSprite() == party->getTerr()->getSprite(tilePtr))
         partyMoved = true;
     }
-  delete offMap;
   SDL_RenderPresent(ren);
   return partyMoved;
 }  // void drawMap()
@@ -172,7 +171,7 @@ void drawTitle(SDL_Renderer *ren, Button *toGame)
 }  // void drawTitle(SDL_Renderer *ren)
 
 
-bool drawUnit(SDL_Renderer *ren, Tile* tile, Party *party, int i, int j)
+bool drawUnit(SDL_Renderer *ren, shared_ptr<Tile> tile, Party *party, int i, int j)
 {
   int sc = 0, vSpline = 0, hSpline = 0;
   SDL_Rect spriteClips[4];
@@ -222,5 +221,5 @@ bool drawUnit(SDL_Renderer *ren, Tile* tile, Party *party, int i, int j)
   renderTexture(sprite->getSpriteSheet(), ren, TILE_WIDTH * i + hSpline, TILE_HEIGHT * j + vSpline, &spriteClips[sc]);
 
   return sprite->decSpline();
-}//void drawUnit(SDL_Renderer *ren, Tile* tile, int i, int j)
+}//void drawUnit(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
 

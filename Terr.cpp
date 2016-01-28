@@ -14,14 +14,10 @@ Terr::Terr(const string &str)
 
 Terr::~Terr()
 {
-  for (int i = 0; i < w; i++)
-    for (int j = 0; j < h; j++)
-      if (map[i][j])
-        delete(map[i][j]);
 }  // Terr::~Terr()
 
 
-void Terr::enterTileMessageHandler(const string &message, Tile* tile)
+void Terr::enterTileMessageHandler(const string &message, shared_ptr<Tile> tile)
 {
   size_t strpos = message.find(':');
   if (strpos != string::npos)
@@ -43,10 +39,10 @@ void Terr::enterTileMessageHandler(const string &message, Tile* tile)
       setSprite(getSprite(tile), getTile(destX, destY));
     }
   }  // No colon found: do default behavior (nothing)
-}  // void Terr::enterTileMessageHandler(const string &message, Tile* tile)
+}  // void Terr::enterTileMessageHandler(const string &message, shared_ptr<Tile> tile)
 
 
-bool Terr::findCheckRoute(dir d, unordered_map<Tile*, int> *tiles, Tile* tile)
+bool Terr::findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> *tiles, shared_ptr<Tile> tile)
 {
   if (tile->getTile(d) &&
           tiles->find(tile->getTile(d)) != tiles->end() &&
@@ -57,11 +53,11 @@ bool Terr::findCheckRoute(dir d, unordered_map<Tile*, int> *tiles, Tile* tile)
 }  // if tile in dir exists, might be on a route, and is closer, return true.
 
 
-void Terr::findEnqueue(dir d, priority_queue<tuple<int, Tile*>,
-        vector<tuple<int, Tile*> >, greater<tuple<int, Tile*> > > *searchQ,
-        unordered_map<Tile*, int> *tiles, tuple<int, Tile*> t, Tile* target)
+void Terr::findEnqueue(dir d, priority_queue<tuple<int, shared_ptr<Tile>>,
+        vector<tuple<int, shared_ptr<Tile>> >, greater<tuple<int, shared_ptr<Tile>> > > *searchQ,
+        unordered_map<shared_ptr<Tile>, int> *tiles, tuple<int, shared_ptr<Tile>> t, shared_ptr<Tile> target)
 {
-  Tile* tile = get<1>(t);
+  shared_ptr<Tile> tile = get<1>(t);
   if (tile->getTile(d) && tiles->find(tile->getTile(d)) == tiles->end() &&
           tile->getTile(d)->getIsPassable() &&
           (!isOccupied(tile->getTile(d)) || tile->getTile(d) == target))
@@ -72,22 +68,22 @@ void Terr::findEnqueue(dir d, priority_queue<tuple<int, Tile*>,
 }  // Enqueues unused tile in a direction from current tile
 
 
-int Terr::findDistance(Tile* start, Tile* dest)
+int Terr::findDistance(shared_ptr<Tile> start, shared_ptr<Tile> dest)
 {
   return (abs(dest->getX() - start->getX()) + abs(dest->getY() - start->getY()));
-}  // int Terr::findDistance(Tile* start, Tile* dest)
+}  // int Terr::findDistance(shared_ptr<Tile> start, shared_ptr<Tile> dest)
 
 
-void Terr::findPath(Tile* start, Tile* dest, Sprite* sprite)
+void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest, Sprite* sprite)
 {
   if (!start || !dest || !sprite)
     return;  // Function assumes non-null start/dest/sprite
-  priority_queue<tuple<int, Tile*>, vector<tuple<int, Tile*> >, greater<tuple<int, Tile*> > > searchQ;
-  unordered_map<Tile*, int> tiles;
+  priority_queue<tuple<int, shared_ptr<Tile>>, vector<tuple<int, shared_ptr<Tile>> >, greater<tuple<int, shared_ptr<Tile>> > > searchQ;
+  unordered_map<shared_ptr<Tile>, int> tiles;
   searchQ.emplace(0 + findDistance(dest, start), dest);
   tiles.emplace(dest, 0 + findDistance(dest, start));
   bool found = false;
-  tuple<int, Tile*> t;
+  tuple<int, shared_ptr<Tile>> t;
   while (!searchQ.empty() && !found)
   {
     t = searchQ.top();
@@ -106,7 +102,7 @@ void Terr::findPath(Tile* start, Tile* dest, Sprite* sprite)
   if (!found)
     return;
   sprite->clearMoves();
-  Tile* tile = start;
+  shared_ptr<Tile> tile = start;
   while (tile != dest)
   {
     if (findCheckRoute(EAST, &tiles, tile))
@@ -130,7 +126,7 @@ void Terr::findPath(Tile* start, Tile* dest, Sprite* sprite)
       tile = tile->getTile(WEST);
     }
   }  // while you haven't gotten back to dest
-}  // void Terr::findPath(Tile* start, Tile* dest, Sprite* sprite)
+}  // void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest, Sprite* sprite)
 
 
 int Terr::getHeight()
@@ -139,26 +135,26 @@ int Terr::getHeight()
 }  // int Terr::getHeight()
 
 
-Sprite* Terr::getSprite(Tile* tile)
+Sprite* Terr::getSprite(shared_ptr<Tile> tile)
 {
   if (sprites.right.find(tile) != sprites.right.end())
     return sprites.right.find(tile)->second;
   return nullptr;
-}  // Sprite* Terr::getSprite(Tile* tile)
+}  // Sprite* Terr::getSprite(shared_ptr<Tile> tile)
 
 
-Tile* Terr::getTile(int i, int j)
+shared_ptr<Tile> Terr::getTile(int i, int j)
 {
   return map[i][j];
-}  // Tile* Terr::getTile(int i, int j)
+}  // shared_ptr<Tile> Terr::getTile(int i, int j)
 
 
-Tile* Terr::getTile(Sprite* sprite)
+shared_ptr<Tile> Terr::getTile(Sprite* sprite)
 {
   if (sprites.left.find(sprite) != sprites.left.end())
     return sprites.left.find(sprite)->second;
   return nullptr;
-}  // Tile* Terr::getTile(Sprite* sprite)
+}  // shared_ptr<Tile> Terr::getTile(Sprite* sprite)
 
 
 int Terr::getWidth()
@@ -169,7 +165,7 @@ int Terr::getWidth()
 
 void Terr::interactSprite(Sprite* sprite)
 {
-  Tile* tile = getTile(sprite);
+  shared_ptr<Tile> tile = getTile(sprite);
   if (!tile)
   {
     logError("Sprite not on map!");
@@ -192,12 +188,12 @@ void Terr::interactSprites(Sprite* sprite, Sprite* target)
 }  // void Terr::interactSprites(Sprite* sprite, Sprite* sprite)
 
 
-bool Terr::isOccupied(Tile* tile)
+bool Terr::isOccupied(shared_ptr<Tile> tile)
 {
   if (getSprite(tile))
     return true;
   return false;
-}  // bool Terr::isOccupied(Tile* tile)
+}  // bool Terr::isOccupied(shared_ptr<Tile> tile)
 
 
 void Terr::loadMap(const string &str)
@@ -211,12 +207,12 @@ void Terr::loadMap(const string &str)
   file >> w;
   file >> h;
   map.resize(w);
-  for (vector <vector<Tile*> >::iterator itr = begin(map); itr != end(map);
+  for (vector <vector<shared_ptr<Tile>> >::iterator itr = begin(map); itr != end(map);
           itr++)
     itr->resize(h);
   for (int i = 0; i < w; i++)
     for (int j = 0; j < h; j++)
-      map[i][j] = new Tile(VOID);
+      map[i][j].reset(new Tile(VOID));
   for (int i = 0; i < w; i++)
     for (int j = 0; j < h; j++)
     {
@@ -340,7 +336,6 @@ void Terr::loadMap(const string &str)
   {
     int sourceX, sourceY, destX, destY;
     string destTerr;
-    
     file >> sourceX;
     file.ignore(numeric_limits<streamsize>::max(), ' ');
     file >> sourceY;
@@ -351,8 +346,8 @@ void Terr::loadMap(const string &str)
     file.ignore(numeric_limits<streamsize>::max(), ' ');
     file >> destY;
     if (sourceX <= w && sourceX >= 0 && sourceY <= h && sourceY >= 0)
-      map[sourceX][sourceY] = new Warp(map[sourceX][sourceY], destTerr,
-              destX, destY, true);
+      map[sourceX][sourceY].reset(new Warp(map[sourceX][sourceY], destTerr,
+              destX, destY, true));
   }  // Until EOF hit, all remaining info is warps
   file.close();
 }  // void Terr::loadMap(string str)
@@ -367,14 +362,14 @@ void Terr::moveSprite(Sprite* sprite, dir d)
   }  // Make sure sprite exists!
 
   sprite->changeDir(d);
-  Tile *currTile = getTile(sprite);
+  shared_ptr <Tile> currTile(getTile(sprite));
   if (!currTile)
   {
     logError("Asked to move Sprite that isn't on the map!");
     return;
   }  // Make sure sprite has a tile!
 
-  Tile *targetTile = currTile->getTile(d);
+  shared_ptr <Tile> targetTile(currTile->getTile(d));
   if (!targetTile || !targetTile->getIsPassable() || isOccupied(targetTile))
     return;  // Not an error, just an invalid move.
 
@@ -387,7 +382,7 @@ void Terr::moveSprite(Sprite* sprite, dir d)
 }  // void Terr::moveSprite(Sprite* sprite, dir d)
 
 
-void Terr::setSprite(Sprite* sprite, Tile* tile)
+void Terr::setSprite(Sprite* sprite, shared_ptr<Tile> tile)
 {
   if (getSprite(tile))
   {
@@ -397,22 +392,22 @@ void Terr::setSprite(Sprite* sprite, Tile* tile)
   }  // If there's already a Sprite there, override it.
   sprites.left.erase(sprite);
   sprites.insert(location(sprite, tile));
-}  // void Terr::setSprite(Sprite* sprite, Tile* tile)
+}  // void Terr::setSprite(Sprite* sprite, shared_ptr<Tile> tile)
 
 
-void Terr::setTile(Tile* tile, Sprite* sprite)
+void Terr::setTile(shared_ptr<Tile> tile, Sprite* sprite)
 {
   setSprite(sprite, tile);
-}  // void Terr::setTile(Tile* tile, Sprite* sprite)
+}  // void Terr::setTile(shared_ptr<Tile> tile, Sprite* sprite)
 
 
-Tile* Terr::tileClick(SDL_MouseButtonEvent &click, Sprite* sprite)
+shared_ptr<Tile> Terr::tileClick(SDL_MouseButtonEvent &click, Sprite* sprite)
 {
-  Tile* tile = nullptr;
+  shared_ptr<Tile> tile = nullptr;
   int x = click.x / TILE_WIDTH - NUM_TILES_WIDTH / 2 + getTile(sprite)->getX();
   int y = click.y / TILE_HEIGHT - NUM_TILES_HEIGHT / 2 + getTile(sprite)->getY();
   if (x >= 0 && x < w && y >= 0 && y < h)
     tile = getTile(x, y);
   return tile;
-}  // Tile* Terr::tileClick(SDL_MouseButtonEvent &click, Sprite* sprite)
+}  // shared_ptr<Tile> Terr::tileClick(SDL_MouseButtonEvent &click, Sprite* sprite)
 

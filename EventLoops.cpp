@@ -49,7 +49,7 @@ bool loopBattle(SDL_Event &e)
 
 bool loopMap(SDL_Renderer *ren, SDL_Texture* tiles, SDL_Event &e, Party* party)
 {
-  Tile* tile;
+  shared_ptr<Tile> tile;
   dir d = NORTH;
   while(drawMap(ren, tiles, party));
   switch (e.type)

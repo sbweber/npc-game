@@ -54,10 +54,10 @@ void Party::setLocation(int x, int y)
 }  // void Party::setLocation(int x, int y)
 
 
-void Party::setLocation(Tile* tile)
+void Party::setLocation(shared_ptr<Tile> tile)
 {
   terr->setSprite(sprite, tile);
-}  // void Party::setLocation(Tile* tile)
+}  // void Party::setLocation(shared_ptr<Tile> tile)
 
 
 void Party::setSprite(SDL_Renderer *ren, const string &str)
@@ -68,8 +68,8 @@ void Party::setSprite(SDL_Renderer *ren, const string &str)
 }  // void Party::setSprite(SDL_Renderer *ren, const string &str)
 
 
-Tile* Party::tileClick(SDL_MouseButtonEvent &click)
+shared_ptr<Tile> Party::tileClick(SDL_MouseButtonEvent &click)
 {
   return terr->tileClick(click, sprite);
-}  // Tile* Party::tileClick(SDL_MouseButtonEvent &click)
+}  // shared_ptr<Tile> Party::tileClick(SDL_MouseButtonEvent &click)
 
