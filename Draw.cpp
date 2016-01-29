@@ -20,9 +20,9 @@ void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 
 
-bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, unique_ptr<Party> &party)
+bool drawMap(unique_ptr<Party> &party)
 {  // portion of map to be drawn based on position of hero
-  SDL_RenderClear(ren);
+  SDL_RenderClear(party->getRen());
   int tileClip = 0;
   bool partyMoved = false, cont = false;
   SDL_Rect tileClips[16];  // magic number (16): number of tile types. Currently five (black/impassable, white/passable, etc)
@@ -35,7 +35,6 @@ bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, unique_ptr<Party> &party)
   int hsh = NUM_TILES_HEIGHT / 2;  // half screen height
 
   shared_ptr<Tile> tilePtr = nullptr;
-  shared_ptr<Tile> offMap (new Tile());
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
     {
@@ -44,33 +43,38 @@ bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, unique_ptr<Party> &party)
         tilePtr = party->getTerr()->getTile((x + i - hsw), (j + y - hsh));
       // if Tile in question exists
       else
-        tilePtr = offMap;
-      tileClip = tilePtr->getType();
-      // tile spritesheet MUST be kept in the same order as the tileType enum
-      switch (party->getSprite()->getFacing())
+        tilePtr = nullptr;
+      if (tilePtr)
       {
-      case EAST:
-        renderTexture(tiles, ren,
-                TILE_WIDTH * i + party->getSprite()->getSpline(),
-                TILE_HEIGHT * j, &tileClips[tileClip], tilePtr->getAngle());
-        break;
-      case NORTH:
-        renderTexture(tiles, ren, TILE_WIDTH * i,
-               TILE_HEIGHT * j - party->getSprite()->getSpline(),
-                &tileClips[tileClip], tilePtr->getAngle());
-        break;
-      case SOUTH:
-        renderTexture(tiles, ren, TILE_WIDTH * i,
-                TILE_HEIGHT * j + party->getSprite()->getSpline(),
-                &tileClips[tileClip], tilePtr->getAngle());
-        break;
-      case WEST:
-        renderTexture(tiles, ren,
-                TILE_WIDTH * i - party->getSprite()->getSpline(),
-                TILE_HEIGHT * j, &tileClips[tileClip], tilePtr->getAngle());
-        break;
-      default:  // Should be impossible to get here
-        break;
+        tileClip = tilePtr->getType();
+        // tile spritesheet MUST be kept in the same order as the tileType enum
+        switch (party->getSprite()->getFacing())
+        {
+        case EAST:
+          renderTexture(tilePtr->getTex(), party->getRen(),
+                  TILE_WIDTH * i + party->getSprite()->getSpline(),
+                  TILE_HEIGHT * j, &tileClips[tileClip], tilePtr->getAngle());
+          break;
+        case NORTH:
+          renderTexture(tilePtr->getTex(), party->getRen(),
+                  TILE_WIDTH * i,
+                  TILE_HEIGHT * j - party->getSprite()->getSpline(),
+                  &tileClips[tileClip], tilePtr->getAngle());
+          break;
+        case SOUTH:
+          renderTexture(tilePtr->getTex(), party->getRen(),
+                  TILE_WIDTH * i,
+                  TILE_HEIGHT * j + party->getSprite()->getSpline(),
+                  &tileClips[tileClip], tilePtr->getAngle());
+          break;
+        case WEST:
+          renderTexture(tilePtr->getTex(), party->getRen(),
+                  TILE_WIDTH * i - party->getSprite()->getSpline(),
+                  TILE_HEIGHT * j, &tileClips[tileClip], tilePtr->getAngle());
+          break;
+        default:  // Should be impossible to get here
+          break;
+        }
       }
     }
   // For all Sprites onscreen on the Terr, draw them! Accomplish by checking
@@ -85,15 +89,18 @@ bool drawMap(SDL_Renderer *ren, SDL_Texture *tiles, unique_ptr<Party> &party)
         tilePtr = party->getTerr()->getTile((x + i - hsw), (j + y - hsh));
       // if Tile in question exists
       else
-        tilePtr = offMap;
-      if (party->getTerr()->isOccupied(tilePtr))
-        cont = drawSprite(ren, tilePtr, party, i, j);
-      // if the tile is occupied, draw the character
-      if (!partyMoved && cont &&
-              party->getSprite() == party->getTerr()->getSprite(tilePtr))
-        partyMoved = true;
+        tilePtr = nullptr;
+      if (tilePtr)
+      {
+        if (party->getTerr()->isOccupied(tilePtr))
+          cont = drawSprite(tilePtr, party, i, j);
+        // if the tile is occupied, draw the character
+        if (!partyMoved && cont &&
+                party->getSprite() == party->getTerr()->getSprite(tilePtr))
+          partyMoved = true;
+      }
     }
-  SDL_RenderPresent(ren);
+  SDL_RenderPresent(party->getRen());
   return partyMoved;
 }  // void drawMap()
 
@@ -135,25 +142,25 @@ void drawRebind(SDL_Renderer *ren, TTF_Font* font)
 }  // void drawRebind(SDL_Renderer *ren)
 
 
-void drawScreen(gameState &state, SDL_Renderer *ren, TTF_Font* font,
-        SDL_Texture *tiles, unique_ptr<Party> &party, unique_ptr<Button> &toGame)
+void drawScreen(gameState &state, TTF_Font* font, unique_ptr<Party> &party,
+        unique_ptr<Button> &toGame)
 {
   // when things change (any event happens): clear the renderer, refill it.
   // Draw the background first, then the chars on top of it.
-  SDL_RenderClear(ren);
+  SDL_RenderClear(party->getRen());
   switch (state)
   {
   case BATTLE:
-    drawBattle(ren, font);
+    drawBattle(party->getRen(), font);
     break;
   case MAP:
-    drawMap(ren, tiles, party);
+    drawMap(party);
     break;
   case REBIND:
-    drawRebind(ren, font);
+    drawRebind(party->getRen(), font);
     break;
   case TITLE:
-    drawTitle(ren, toGame);
+    drawTitle(party->getRen(), toGame);
     break;
   default:
     break;
@@ -161,7 +168,7 @@ void drawScreen(gameState &state, SDL_Renderer *ren, TTF_Font* font,
 }  // void drawScreen()
 
 
-bool drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, unique_ptr<Party> &party, int i, int j)
+bool drawSprite(shared_ptr<Tile> tile, unique_ptr<Party> &party, int i, int j)
 {
   int sc = 0, vSpline = 0, hSpline = 0;
   SDL_Rect spriteClips[4];
@@ -208,8 +215,9 @@ bool drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, unique_ptr<Party> &par
   }
   // technically, this switch should be optional so long as the character
   // spritesheet is kept in the same order as the enum
-  renderTexture(sprite->getSpriteSheet(), ren, TILE_WIDTH * i + hSpline,
-          TILE_HEIGHT * j + vSpline, &spriteClips[sc]);
+  renderTexture(sprite->getSpriteSheet(), party->getRen(),
+          TILE_WIDTH * i + hSpline, TILE_HEIGHT * j + vSpline,
+          &spriteClips[sc]);
   return sprite->decSpline();
 }//void drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
 
@@ -217,7 +225,7 @@ bool drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, unique_ptr<Party> &par
 void drawTitle(SDL_Renderer *ren, unique_ptr<Button> &toGame)
 {
   SDL_RenderClear(ren);
-  SDL_Texture *bg = loadTexture("Title.png", ren);
+  SDL_Texture* bg = loadTexture("Title.png", ren);
   renderBackground(bg, ren);
   toGame->render(ren);
   SDL_RenderPresent(ren);

@@ -13,8 +13,7 @@
   //!< Loop to handle input that’s treated the same in all states.
   bool loopBattle(SDL_Event &e);
   //!< Loop to process actions in battle state.
-  bool loopMap(SDL_Texture *tiles, SDL_Event &e,
-          unique_ptr<Party> &party);
+  bool loopMap(SDL_Event &e, unique_ptr<Party> &party);
   //!< Loop to process inputs while on overworld map.
   bool loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font,
           gameState &state);
@@ -23,8 +22,8 @@
           gameState &state, unique_ptr<Party> &party,
           vector<unique_ptr<Button> > buttons);
   //!< Loop to process inputs on the title screen.
-  bool mainLoop(SDL_Event &e, TTF_Font *font,
-          SDL_Texture *tiles, unique_ptr<Party> &party, gameState &state);
+  bool mainLoop(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party,
+          gameState &state);
   //!< Loop to select which event loop to run.
 
 #endif

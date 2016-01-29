@@ -46,12 +46,12 @@ bool loopBattle(SDL_Event &e)
 }  // bool loopBattle(SDL_Event &e)
 
 
-bool loopMap(SDL_Texture* tiles, SDL_Event &e, unique_ptr<Party> &party)
+bool loopMap(SDL_Event &e, unique_ptr<Party> &party)
 {
   shared_ptr<Tile> tile;
   action act(UNDEFINED_DIRECTION, BAD_ACTION);
   SDL_Event* wait = new SDL_Event();
-  while(drawMap(party->getRen(), tiles, party));
+  while(drawMap(party));
   switch (e.type)
   {
   case SDL_KEYDOWN:
@@ -147,8 +147,8 @@ bool loopTitle(SDL_Event &e, TTF_Font *font,
 }  // bool loopTitle()
 
 
-bool mainLoop(SDL_Event &e, TTF_Font *font, SDL_Texture *tiles,
-        unique_ptr<Party> &party, gameState &state)
+bool mainLoop(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party,
+        gameState &state)
 {
   bool quit = false;
   quit = loopAnyState(e, party, state);
@@ -160,7 +160,7 @@ bool mainLoop(SDL_Event &e, TTF_Font *font, SDL_Texture *tiles,
     quit = loopBattle(e);
     break;
   case MAP:
-    quit = loopMap(tiles, e, party);
+    quit = loopMap(e, party);
     break;
   case REBIND:
     quit = loopRebind(party->getRen(), e, font, state);

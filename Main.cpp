@@ -34,16 +34,12 @@ int main(int argc, char **argv)
   unique_ptr<Party> party(new Party(ren));
   gameState state = TITLE;
 
-  // spritesheets
-  SDL_Texture *tiles = loadTexture("Tiles.png", ren);
-
   loadKeys();
 
   while (!quit)
     while (SDL_PollEvent(&e))
-      quit = mainLoop(e, font, tiles, party, state);
+      quit = mainLoop(e, font, party, state);
 
-  SDL_DestroyTexture(tiles);
   SDL_DestroyRenderer(ren);
   SDL_DestroyWindow(win);
   TTF_CloseFont(font);
