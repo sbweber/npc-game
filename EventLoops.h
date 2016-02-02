@@ -11,7 +11,7 @@
   // EventLoops.cpp
   bool loopAnyState(SDL_Event &e, unique_ptr<Party> &party);
   //!< Loop to handle input that’s treated the same in all states.
-  bool loopBattle(SDL_Event &e);
+  bool loopBattle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party);
   //!< Loop to process actions in battle state.
   bool loopMap(SDL_Event &e, unique_ptr<Party> &party);
   //!< Loop to process inputs while on overworld map.

@@ -16,13 +16,15 @@ z: Interact with things on the map.
 esc: Go back/up a layer. Currently unused.  
 f4: Quit the program from anywhere.  
 Click on a tile on the map to move to it.  
+Click on a sprite to interact with it.  
+To advance text, press any key or click anywhere in the window.  
 
 Debug Controls:  
-1: Load "map1.txt".  
-2: Load "map2.txt".  
+1: Load map "0,0.txt".  
+2: Load map "0,1.txt".  
 9: Go to the key rebind menu.  
 0: Go to the title screen.  
-f: Go to the test case for drawing a text box.  
+f: Go to the test case for battles. Currently locks you into the battle state with no way out except the debug controls.  
 
 Explanation of Licenses:  
 LICENSE is the (MIT) license for this project itself.  

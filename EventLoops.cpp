@@ -33,8 +33,9 @@ bool loopAnyState(SDL_Event &e, unique_ptr<Party> &party)
 }  // bool loopAnyState()
 
 
-bool loopBattle(SDL_Event &e)
+bool loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party)
 {
+  drawBattle(party->getRen(), font);
   switch (e.type)
   {
   case SDL_KEYDOWN:
@@ -153,7 +154,7 @@ bool mainLoop(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
   switch (party->getState())
   {
   case BATTLE:
-    quit = loopBattle(e);
+    quit = loopBattle(e, font, party);
     break;
   case MAP:
     quit = loopMap(e, party);
