@@ -12,7 +12,7 @@ Visual half of a \hyperlink{class_unit}{Unit}. Information on what to draw to pu
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_sprite_a874648e9628df9ca42f3672693adf3a3}{Sprite} (S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&sprite\+File, const string \&t=\char`\"{}\char`\"{})\hypertarget{class_sprite_a874648e9628df9ca42f3672693adf3a3}{}\label{class_sprite_a874648e9628df9ca42f3672693adf3a3}
+\hyperlink{class_sprite_a1806d04dfca4c8989df24fd5436e4e78}{Sprite} (S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&sprite\+File, const string \&n=\char`\"{}\char`\"{}, const string \&p=\char`\"{}\char`\"{}, const string \&script\+File=\char`\"{}\char`\"{})\hypertarget{class_sprite_a1806d04dfca4c8989df24fd5436e4e78}{}\label{class_sprite_a1806d04dfca4c8989df24fd5436e4e78}
 
 \begin{DoxyCompactList}\small\item\em All units M\+U\+ST have a spritesheet specified. type string optional. \end{DoxyCompactList}\item 
 \hyperlink{class_sprite_a8accab430f9d90ae5117b57d67e32b84}{$\sim$\+Sprite} ()\hypertarget{class_sprite_a8accab430f9d90ae5117b57d67e32b84}{}\label{class_sprite_a8accab430f9d90ae5117b57d67e32b84}
@@ -33,9 +33,9 @@ dir \hyperlink{class_sprite_a6bf9e87449da385e99c02586eadf5de6}{get\+Facing} ()\h
 int \hyperlink{class_sprite_aad5e5beb45ec5eae6fe8d096d5ebef68}{get\+Spline} ()\hypertarget{class_sprite_aad5e5beb45ec5eae6fe8d096d5ebef68}{}\label{class_sprite_aad5e5beb45ec5eae6fe8d096d5ebef68}
 
 \begin{DoxyCompactList}\small\item\em Returns the number of pixels left to spline. \end{DoxyCompactList}\item 
-const string \hyperlink{class_sprite_a58c0213b779c1174473852a090efaa72}{get\+Type} ()\hypertarget{class_sprite_a58c0213b779c1174473852a090efaa72}{}\label{class_sprite_a58c0213b779c1174473852a090efaa72}
+const string \hyperlink{class_sprite_ab130d27f349a15e736e2f60c9a20ca0d}{get\+Purpose} ()\hypertarget{class_sprite_ab130d27f349a15e736e2f60c9a20ca0d}{}\label{class_sprite_ab130d27f349a15e736e2f60c9a20ca0d}
 
-\begin{DoxyCompactList}\small\item\em Returns the type descriptor string for this N\+PC. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Returns the purpose string for this N\+PC. \end{DoxyCompactList}\item 
 sprite\+Type \hyperlink{class_sprite_a01742e39c9f18622a094a187d6858912}{get\+Sprite} ()\hypertarget{class_sprite_a01742e39c9f18622a094a187d6858912}{}\label{class_sprite_a01742e39c9f18622a094a187d6858912}
 
 \begin{DoxyCompactList}\small\item\em Returns the type of sprite (facing, etc) currently being used. \end{DoxyCompactList}\item 
@@ -48,24 +48,42 @@ const action \hyperlink{class_sprite_a1b5ac18ba8c0a4e4245d1ed49b9a48aa}{pop\+Act
 void \hyperlink{class_sprite_a25d3b1c4533e8aa9e530d7025dc5365b}{push\+Act} (action act)\hypertarget{class_sprite_a25d3b1c4533e8aa9e530d7025dc5365b}{}\label{class_sprite_a25d3b1c4533e8aa9e530d7025dc5365b}
 
 \begin{DoxyCompactList}\small\item\em Pushes an action into the action queue. \end{DoxyCompactList}\item 
+void \hyperlink{class_sprite_a602e995adde51d155e2d0e83285f0643}{render\+Speech} (S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&str, S\+D\+L\+\_\+\+Color color=\{255, 255, 255, 255\})\hypertarget{class_sprite_a602e995adde51d155e2d0e83285f0643}{}\label{class_sprite_a602e995adde51d155e2d0e83285f0643}
+
+\begin{DoxyCompactList}\small\item\em Draws a series of textboxes with text until str has been displayed. \end{DoxyCompactList}\item 
+void \hyperlink{class_sprite_a14a138e5acf82b97c052673dffb744f6}{say} (S\+D\+L\+\_\+\+Renderer $\ast$ren)\hypertarget{class_sprite_a14a138e5acf82b97c052673dffb744f6}{}\label{class_sprite_a14a138e5acf82b97c052673dffb744f6}
+
+\begin{DoxyCompactList}\small\item\em Make the \hyperlink{class_sprite}{Sprite} output text to the screen in its font. \end{DoxyCompactList}\item 
+void \hyperlink{class_sprite_ac5cdeb3206d89719fc10af1146ebbaf6}{set\+Purpose} (const string \&p)\hypertarget{class_sprite_ac5cdeb3206d89719fc10af1146ebbaf6}{}\label{class_sprite_ac5cdeb3206d89719fc10af1146ebbaf6}
+
+\begin{DoxyCompactList}\small\item\em Set the descriptive string describing \hyperlink{class_sprite}{Sprite}. \end{DoxyCompactList}\item 
 void \hyperlink{class_sprite_a1ce4def2f83442fd086e38568f93c6cd}{set\+Spline} (int s)\hypertarget{class_sprite_a1ce4def2f83442fd086e38568f93c6cd}{}\label{class_sprite_a1ce4def2f83442fd086e38568f93c6cd}
 
 \begin{DoxyCompactList}\small\item\em Manually sets the number of pixels to spline. \end{DoxyCompactList}\item 
 void \hyperlink{class_sprite_aa9d0dd6123988d79c94a18f3e404d8d7}{set\+Sprite} (sprite\+Type st)\hypertarget{class_sprite_aa9d0dd6123988d79c94a18f3e404d8d7}{}\label{class_sprite_aa9d0dd6123988d79c94a18f3e404d8d7}
 
-\begin{DoxyCompactList}\small\item\em Manually change sprite type (facing, etc). \end{DoxyCompactList}\item 
-void \hyperlink{class_sprite_a0c2efc62131a56a1c81405527a930b71}{set\+Type} (const string \&str)\hypertarget{class_sprite_a0c2efc62131a56a1c81405527a930b71}{}\label{class_sprite_a0c2efc62131a56a1c81405527a930b71}
-
-\begin{DoxyCompactList}\small\item\em Set the descriptive string describing \hyperlink{class_sprite}{Sprite}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Manually change sprite type (facing, etc). \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-dir \hyperlink{class_sprite_a40357a4e61f454decf1970929e9d2d0c}{facing}\hypertarget{class_sprite_a40357a4e61f454decf1970929e9d2d0c}{}\label{class_sprite_a40357a4e61f454decf1970929e9d2d0c}
-
-\begin{DoxyCompactList}\small\item\em Direction \hyperlink{class_sprite}{Sprite} is currently facing. \end{DoxyCompactList}\item 
 queue$<$ action $>$ \hyperlink{class_sprite_a8b183d19c55c1f0928075bd2cb926f68}{actionQ}\hypertarget{class_sprite_a8b183d19c55c1f0928075bd2cb926f68}{}\label{class_sprite_a8b183d19c55c1f0928075bd2cb926f68}
 
 \begin{DoxyCompactList}\small\item\em Queue of upcoming moves to make. \end{DoxyCompactList}\item 
+dir \hyperlink{class_sprite_a40357a4e61f454decf1970929e9d2d0c}{facing}\hypertarget{class_sprite_a40357a4e61f454decf1970929e9d2d0c}{}\label{class_sprite_a40357a4e61f454decf1970929e9d2d0c}
+
+\begin{DoxyCompactList}\small\item\em Direction \hyperlink{class_sprite}{Sprite} is currently facing. \end{DoxyCompactList}\item 
+T\+T\+F\+\_\+\+Font $\ast$ \hyperlink{class_sprite_aa9beec56e0e61eb611b204364fe446ce}{font}\hypertarget{class_sprite_aa9beec56e0e61eb611b204364fe446ce}{}\label{class_sprite_aa9beec56e0e61eb611b204364fe446ce}
+
+\begin{DoxyCompactList}\small\item\em Font the \hyperlink{class_sprite}{Sprite} uses to \textquotesingle{}speak\textquotesingle{}. \end{DoxyCompactList}\item 
+string \hyperlink{class_sprite_a166409bbd17355e157618ec02441dab8}{name}\hypertarget{class_sprite_a166409bbd17355e157618ec02441dab8}{}\label{class_sprite_a166409bbd17355e157618ec02441dab8}
+
+\begin{DoxyCompactList}\small\item\em Name of the \hyperlink{class_sprite}{Sprite}. Used for speech. \end{DoxyCompactList}\item 
+string \hyperlink{class_sprite_ad23c15d2b97d15db7522f9caa1a0b7a2}{purpose}\hypertarget{class_sprite_ad23c15d2b97d15db7522f9caa1a0b7a2}{}\label{class_sprite_ad23c15d2b97d15db7522f9caa1a0b7a2}
+
+\begin{DoxyCompactList}\small\item\em String describing the purpose of \hyperlink{class_sprite}{Sprite}. \end{DoxyCompactList}\item 
+queue$<$ string $>$ \hyperlink{class_sprite_af7fbb50aaa8f3586b9a41def56384d43}{speech}\hypertarget{class_sprite_af7fbb50aaa8f3586b9a41def56384d43}{}\label{class_sprite_af7fbb50aaa8f3586b9a41def56384d43}
+
+\begin{DoxyCompactList}\small\item\em Circular queue of everything this \hyperlink{class_sprite}{Sprite} says. \end{DoxyCompactList}\item 
 int \hyperlink{class_sprite_aa3a18aaf97a12edfced1b31f2323ae01}{spline}\hypertarget{class_sprite_aa3a18aaf97a12edfced1b31f2323ae01}{}\label{class_sprite_aa3a18aaf97a12edfced1b31f2323ae01}
 
 \begin{DoxyCompactList}\small\item\em Number of pixels left to be splined towards destination. \end{DoxyCompactList}\item 
@@ -74,10 +92,7 @@ sprite\+Type \hyperlink{class_sprite_afbd06de3c7cace1c741bbb609abfa119}{sprite}\
 \begin{DoxyCompactList}\small\item\em Which sprite on the spritesheet is currently being used. \end{DoxyCompactList}\item 
 S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{class_sprite_aec7102885a3ca3fdd5124f8677135013}{sprite\+Sheet}\hypertarget{class_sprite_aec7102885a3ca3fdd5124f8677135013}{}\label{class_sprite_aec7102885a3ca3fdd5124f8677135013}
 
-\begin{DoxyCompactList}\small\item\em The spritesheet used to draw this \hyperlink{class_sprite}{Sprite}. \end{DoxyCompactList}\item 
-string \hyperlink{class_sprite_af4ab6cfa8155326b6d8af31f943514f2}{type}\hypertarget{class_sprite_af4ab6cfa8155326b6d8af31f943514f2}{}\label{class_sprite_af4ab6cfa8155326b6d8af31f943514f2}
-
-\begin{DoxyCompactList}\small\item\em String describing the purpose of \hyperlink{class_sprite}{Sprite}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The spritesheet used to draw this \hyperlink{class_sprite}{Sprite}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}

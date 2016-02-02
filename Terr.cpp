@@ -8,6 +8,12 @@ Terr::Terr(SDL_Renderer *r, const string &str)
   w = 0;
   h = 0;
   ren = r;
+  // spritesheets
+
+  tileSS.emplace("Carpet", loadTexture("Tiles-Carpet.png", ren));
+  tileSS.emplace("Floor", loadTexture("Tiles-Floor.png", ren));
+  tileSS.emplace("Throne", loadTexture("Tiles-Throne.png", ren));
+  tileSS.emplace("Wall", loadTexture("Tiles-Wall.png", ren));
   if (str.length())
     loadMap(str);  // if string length is 0, there's no map to load.
 }  // Terr::Terr(string str)
@@ -15,6 +21,11 @@ Terr::Terr(SDL_Renderer *r, const string &str)
 
 Terr::~Terr()
 {
+  SDL_DestroyTexture(tileSS["Carpet"]);
+  SDL_DestroyTexture(tileSS["Floor"]);
+  SDL_DestroyTexture(tileSS["Throne"]);
+  SDL_DestroyTexture(tileSS["Wall"]);
+  tileSS.clear();
 }  // Terr::~Terr()
 
 
@@ -191,10 +202,12 @@ void Terr::interactSprite(shared_ptr<Sprite> sprite)
 
 void Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> target)
 {
-  if (sprite->getType() == "Hero" && target->getType() == "test")
+  if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
   {
     setSprite(target, nullptr);
   }  // Test interaction: Hero kills test NPC (removes from map).
+  else if (sprite->getPurpose() == "Hero")
+    target->say(ren);
 }  // void Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> sprite)
 
 
@@ -210,19 +223,19 @@ void Terr::loadMap(const string &str)
 {
   ifstream file;
   int c;
-  file.open(("resources/"+str), ifstream::in);
+  file.open(("resources/maps/"+str), ifstream::in);
   if (!file.good())
     logSDLError("Map not found: " + str);  // error, probably bad filename
 
   file >> w;
   file >> h;
   map.resize(w);
-  for (vector <vector<shared_ptr<Tile>> >::iterator itr = begin(map); itr != end(map);
+  for (vector <vector<shared_ptr<Tile> > >::iterator itr = begin(map); itr != end(map);
           itr++)
     itr->resize(h);
   for (int i = 0; i < w; i++)
     for (int j = 0; j < h; j++)
-      map[i][j].reset(new Tile(VOID));
+      map[i][j].reset(new Tile(tileSS["Wall"], false));
   for (int i = 0; i < w; i++)
     for (int j = 0; j < h; j++)
     {
@@ -249,18 +262,20 @@ void Terr::loadMap(const string &str)
       switch (c)
       {
       case 'x':
-        map[i][j]->setType(VOID);
+        map[i][j]->setTex(tileSS["Wall"]);
+        map[i][j]->setIsPassable(false);
         break;
       case ' ':
-        map[i][j]->setType(OPEN);
+        map[i][j]->setTex(tileSS["Floor"]);
+        map[i][j]->setIsPassable(true);
         break;
       case 'c':
-        map[i][j]->setType(CARPET_CORE);
-        // first pass: specify all carpets as core.
-        // Determine Flip status on next pass through the map's tiles, below.
+        map[i][j]->setTex(tileSS["Carpet"]);
+        map[i][j]->setIsPassable(true);
         break;
       case 't':
-        map[i][j]->setType(THRONE);
+        map[i][j]->setTex(tileSS["Throne"]);
+        map[i][j]->setIsPassable(true);
         break;
       case '\r':
       case '\f':
@@ -268,7 +283,8 @@ void Terr::loadMap(const string &str)
         i--;
         break;
       default:
-        map[i][j]->setType(VOID);
+        map[i][j]->setTex(tileSS["Wall"]);
+        map[i][j]->setIsPassable(false);
         break;
       }
     }
@@ -282,63 +298,69 @@ void Terr::loadMap(const string &str)
     {
       adjacent = 0;
       N = S = E = W = false;
-      switch (map[i][j]->getType())
+      if (map[i][j]->getTile(EAST) &&
+              map[i][j]->getTex() == map[i][j]->getTile(EAST)->getTex())
       {
-      case CARPET_CORE:
-        if (map[i][j]->getTile(NORTH) &&
-                (map[i][j]->getTile(NORTH)->getType() >= CARPET_CORE) &&
-                (map[i][j]->getTile(NORTH)->getType() <= CARPET_EDGE_S))
-        {
-          N = true;
-          adjacent++;
-        }  // range check, only works if all carpet types are consecutive
-        if (map[i][j]->getTile(SOUTH) &&
-                (map[i][j]->getTile(SOUTH)->getType() >= CARPET_CORE) &&
-                (map[i][j]->getTile(SOUTH)->getType() <= CARPET_EDGE_S))
-        {
-          S = true;
-          adjacent++;
-        }
-        if (map[i][j]->getTile(EAST) &&
-                (map[i][j]->getTile(EAST)->getType() >= CARPET_CORE) &&
-                (map[i][j]->getTile(EAST)->getType() <= CARPET_EDGE_S))
-        {
-          E = true;
-          adjacent++;
-        }
-        if (map[i][j]->getTile(WEST) &&
-                (map[i][j]->getTile(WEST)->getType() >= CARPET_CORE) &&
-                (map[i][j]->getTile(WEST)->getType() <= CARPET_EDGE_S))
-        {
-          W = true;
-          adjacent++;
-        }
-        if (adjacent == 3)
-        {
-          if (!N)
-            map[i][j]->setType(CARPET_EDGE_N);
-          else if (!E)
-            map[i][j]->setType(CARPET_EDGE_E);
-          else if (!S)
-            map[i][j]->setType(CARPET_EDGE_S);
-          else if (!W)
-            map[i][j]->setType(CARPET_EDGE_W);
-        }
-        else if (adjacent == 2)
-        {
-          if (N && E)
-            map[i][j]->setType(CARPET_CORNER_SW);
-          else if (E && S)
-            map[i][j]->setType(CARPET_CORNER_NW);
-          else if (S && W)
-            map[i][j]->setType(CARPET_CORNER_NE);
-          else if (W && N)
-            map[i][j]->setType(CARPET_CORNER_SE);
-        }
-        break;
-      default:
-        break;
+        E = true;
+        adjacent++;
       }
+      if (map[i][j]->getTile(NORTH) &&
+              map[i][j]->getTex() == map[i][j]->getTile(NORTH)->getTex())
+      {
+        N = true;
+        adjacent++;
+      }
+      if (map[i][j]->getTile(SOUTH) &&
+              map[i][j]->getTex() == map[i][j]->getTile(SOUTH)->getTex())
+      {
+        S = true;
+        adjacent++;
+      }
+      if (map[i][j]->getTile(WEST) &&
+              map[i][j]->getTex() == map[i][j]->getTile(WEST)->getTex())
+      {
+        W = true;
+        adjacent++;
+      }
+      if (adjacent == 3)
+      {
+        if (!N)
+          map[i][j]->setType(TILE_EDGE_N);
+        else if (!E)
+          map[i][j]->setType(TILE_EDGE_E);
+        else if (!S)
+          map[i][j]->setType(TILE_EDGE_S);
+        else if (!W)
+          map[i][j]->setType(TILE_EDGE_W);
+      }
+      else if (adjacent == 2)
+      {
+        if (S && W)
+          map[i][j]->setType(TILE_CORNER_NE);
+        else if (E && S)
+          map[i][j]->setType(TILE_CORNER_NW);
+        else if (W && N)
+          map[i][j]->setType(TILE_CORNER_SE);
+        else if (N && E)
+          map[i][j]->setType(TILE_CORNER_SW);
+        else if (E && W)
+          map[i][j]->setType(TILE_THIN_EW);
+        else if (N && S)
+          map[i][j]->setType(TILE_THIN_NS);
+      }
+      else if (adjacent == 1)
+      {
+        if (E)
+          map[i][j]->setType(TILE_END_E);
+        else if (N)
+          map[i][j]->setType(TILE_END_N);
+        else if (S)
+          map[i][j]->setType(TILE_END_S);
+        else if (W)
+          map[i][j]->setType(TILE_END_W);
+      }
+      else if (adjacent == 0)
+        map[i][j]->setType(TILE_ISOLATED);
     }
 
   // Set up special Tiles
@@ -365,12 +387,16 @@ void Terr::loadMap(const string &str)
 void Terr::loadSprite(ifstream &file)
 {
   int x, y;
-  string spriteFile = "NPC.png", spriteType = "test";
+  string spriteFile = "NPC.png", name = "I_AM_ERROR";
+  string purpose = "ERROR", scriptFile = "Silence.txt"; 
   file >> x;
   file >> y;
   file >> spriteFile;
-  file >> spriteType;
-  shared_ptr<Sprite> sprite(new Sprite(ren, spriteFile, spriteType));
+  file >> name;
+  file >> purpose;
+  file >> scriptFile;
+  shared_ptr<Sprite> sprite(new Sprite(ren, spriteFile, name, purpose,
+          scriptFile));
   setSprite(sprite, getTile(x, y));
 }  // void Terr::loadSprite(ifstream &file)
 
@@ -391,21 +417,21 @@ void Terr::loadWarpTile(ifstream &file)
             destX, destY));
     if (map[sourceX][sourceY]->getTile(EAST) &&
             map[sourceX][sourceY]->getTile(EAST)->getTile(WEST) == tile)
-            map[sourceX][sourceY]->getTile(EAST)->connectTile(WEST,
-            map[sourceX][sourceY]);
+      map[sourceX][sourceY]->getTile(EAST)->connectTile(WEST,
+              map[sourceX][sourceY]);
     if (map[sourceX][sourceY]->getTile(NORTH) &&
             map[sourceX][sourceY]->getTile(NORTH)->getTile(SOUTH) == tile)
-            map[sourceX][sourceY]->getTile(NORTH)->connectTile(SOUTH,
-            map[sourceX][sourceY]);
+      map[sourceX][sourceY]->getTile(NORTH)->connectTile(SOUTH,
+              map[sourceX][sourceY]);
     if (map[sourceX][sourceY]->getTile(SOUTH) &&
             map[sourceX][sourceY]->getTile(SOUTH)->getTile(NORTH) == tile)
-            map[sourceX][sourceY]->getTile(SOUTH)->connectTile(NORTH,
-            map[sourceX][sourceY]);
+      map[sourceX][sourceY]->getTile(SOUTH)->connectTile(NORTH,
+              map[sourceX][sourceY]);
     if (map[sourceX][sourceY]->getTile(WEST) &&
             map[sourceX][sourceY]->getTile(WEST)->getTile(EAST) == tile)
-            map[sourceX][sourceY]->getTile(WEST)->connectTile(EAST,
-            map[sourceX][sourceY]);
-  }
+      map[sourceX][sourceY]->getTile(WEST)->connectTile(EAST,
+              map[sourceX][sourceY]);
+  }  // Tile doesn't upgrade if it's not on the map.
 }  // void Terr::loadWarpTile(ifstream &file)
 
 

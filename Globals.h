@@ -67,8 +67,9 @@
   void logSDLError(const string &msg, ostream &os = cerr);
   //!< Logs an error to the output of choice, cerr by default. Also prints out
   //!< last error encountered by SDL, which may not be relevant to the problem.
-  void pressAnyKey();
+  SDL_Event pressAnyKey();
   //!< Make the program wait for a key (any key) to be pressed.
+  //!< Alternately, mouseclicks count. Returns the key/click event.
   void quit(const string err = "", int errtype = -1,
           SDL_Renderer *ren = nullptr, SDL_Window *win = nullptr);
   //!< Quits the program, logging an error if given one.

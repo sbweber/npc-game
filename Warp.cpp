@@ -3,10 +3,11 @@
 #include "Warp.h"
 
 
-Warp::Warp(shared_ptr<Tile> tile, const string &dT, int dX, int dY)
+Warp::Warp(shared_ptr<Tile> tile, const string &dT, int dX, int dY) : Tile(tile->getTex())
 {
   x = tile->getX();
   y = tile->getY();
+  tex = tile->getTex();
   type = tile->getType();
   isPassable = tile->getIsPassable();
   E = tile->getTile(EAST);

@@ -22,6 +22,9 @@ S\+D\+L\+\_\+\+Renderer $\ast$ \hyperlink{class_party_acd791a319c74dcc757fc13c96
 shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ \hyperlink{class_party_a7f8bf409daa7750d0ce103841c437f27}{get\+Sprite} ()\hypertarget{class_party_a7f8bf409daa7750d0ce103841c437f27}{}\label{class_party_a7f8bf409daa7750d0ce103841c437f27}
 
 \begin{DoxyCompactList}\small\item\em Returns the \hyperlink{class_sprite}{Sprite} representing the party by reference. \end{DoxyCompactList}\item 
+game\+State \hyperlink{class_party_a3c0be11b35c62c1cc3c899b9c2ebd7d1}{get\+State} ()\hypertarget{class_party_a3c0be11b35c62c1cc3c899b9c2ebd7d1}{}\label{class_party_a3c0be11b35c62c1cc3c899b9c2ebd7d1}
+
+\begin{DoxyCompactList}\small\item\em Gets game\+State. \end{DoxyCompactList}\item 
 unique\+\_\+ptr$<$ \hyperlink{class_terr}{Terr} $>$ \& \hyperlink{class_party_adde2e05d8910f1882e112ddc74576a9e}{get\+Terr} ()\hypertarget{class_party_adde2e05d8910f1882e112ddc74576a9e}{}\label{class_party_adde2e05d8910f1882e112ddc74576a9e}
 
 \begin{DoxyCompactList}\small\item\em Returns the current \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
@@ -37,6 +40,9 @@ void \hyperlink{class_party_aba5ff3d67efb8c61a9cfa8f6b3bbf7b3}{set\+Location} (s
 void \hyperlink{class_party_abe069ffbbf3352f6b39246c8382dd26b}{set\+Sprite} (S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&str)\hypertarget{class_party_abe069ffbbf3352f6b39246c8382dd26b}{}\label{class_party_abe069ffbbf3352f6b39246c8382dd26b}
 
 \begin{DoxyCompactList}\small\item\em Resets the party’s \hyperlink{class_sprite}{Sprite} to the one in the file named by str. \end{DoxyCompactList}\item 
+void \hyperlink{class_party_a7cc812d17ccb47a6109e60a5d0b82ded}{set\+State} (game\+State gs)\hypertarget{class_party_a7cc812d17ccb47a6109e60a5d0b82ded}{}\label{class_party_a7cc812d17ccb47a6109e60a5d0b82ded}
+
+\begin{DoxyCompactList}\small\item\em Sets game\+State. \end{DoxyCompactList}\item 
 shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_party_af38511e79b486f468c4f3d8e7be0cd1a}{tile\+Click} (S\+D\+L\+\_\+\+Mouse\+Button\+Event \&click)\hypertarget{class_party_af38511e79b486f468c4f3d8e7be0cd1a}{}\label{class_party_af38511e79b486f468c4f3d8e7be0cd1a}
 
 \begin{DoxyCompactList}\small\item\em Used when clicking on the map. Returns a pointer to the \hyperlink{class_tile}{Tile} clicked. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -52,6 +58,9 @@ vector$<$ unique\+\_\+ptr$<$ \hyperlink{class_unit}{Unit} $>$ $>$ \hyperlink{cla
 shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ \hyperlink{class_party_ae063baa6bfa6fe247ade34a135eb3552}{sprite}\hypertarget{class_party_ae063baa6bfa6fe247ade34a135eb3552}{}\label{class_party_ae063baa6bfa6fe247ade34a135eb3552}
 
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_sprite}{Sprite} representing the player\textquotesingle{}s party. \end{DoxyCompactList}\item 
+game\+State \hyperlink{class_party_af307661a756afaad6a61efc1f2173feb}{state}\hypertarget{class_party_af307661a756afaad6a61efc1f2173feb}{}\label{class_party_af307661a756afaad6a61efc1f2173feb}
+
+\begin{DoxyCompactList}\small\item\em State of game. \end{DoxyCompactList}\item 
 unique\+\_\+ptr$<$ \hyperlink{class_terr}{Terr} $>$ \hyperlink{class_party_a50fdc449d05dd04c217ebb380e98a955}{terr}\hypertarget{class_party_a50fdc449d05dd04c217ebb380e98a955}{}\label{class_party_a50fdc449d05dd04c217ebb380e98a955}
 
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_terr}{Terr} where the player\textquotesingle{}s party currently is. \end{DoxyCompactList}\end{DoxyCompactItemize}
