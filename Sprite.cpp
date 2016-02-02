@@ -10,6 +10,9 @@ Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile, const string &t)
   facing = SOUTH;
   spline = 0;
   type = t;
+  font = TTF_OpenFont("resources/fonts/ClearSans-Light.ttf", 20);
+  if (font == nullptr)
+    quit("TTF_OpenFont", 5);
 }  // Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile)
 
 
@@ -110,6 +113,12 @@ void Sprite::pushAct(action act)
 {
   actionQ.push(act);
 }  // void Sprite::pushMove()
+
+
+void Sprite::say(SDL_Renderer *ren, string &str)
+{
+  renderSpeech(ren, font, str);
+}  // void Sprite::say(SDL_Renderer *ren, string &str)
 
 
 void Sprite::setSpline(int s)

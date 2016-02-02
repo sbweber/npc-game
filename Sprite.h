@@ -59,6 +59,8 @@
     //!< Returns the next action in the queue and pops it off the queue.
     void pushAct(action act);
     //!< Pushes an action into the action queue.
+    void say(SDL_Renderer *ren, string &str);
+    //!< Make the Sprite output text to the screen in its font.
     void setSpline(int s);
     //!< Manually sets the number of pixels to spline.
     void setSprite(spriteType st);
@@ -66,10 +68,12 @@
     void setType(const string &str);
     //!< Set the descriptive string describing Sprite
   protected:
-    dir facing;
-    //!< Direction Sprite is currently facing.
     queue<action> actionQ;
     //!< Queue of upcoming moves to make.
+    dir facing;
+    //!< Direction Sprite is currently facing.
+    TTF_Font *font;
+    //!< Font the Sprite uses to 'speak'.
     int spline;
     //!< Number of pixels left to be splined towards destination.
     spriteType sprite;

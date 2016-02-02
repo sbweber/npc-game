@@ -22,27 +22,27 @@ int main(int argc, char **argv)
     quit("SDL_CreateRenderer", 3);
   if (TTF_Init() != 0)
     quit("TTF_Init", 4);
-  TTF_Font *font = TTF_OpenFont("resources/ClearSans-Light.ttf", 20);
+  TTF_Font *font = TTF_OpenFont("resources/fonts/ClearSans-Light.ttf", 20);
   if (font == nullptr)
     quit("TTF_OpenFont", 5);
 
-  // SDL vars
+  // loop vars
   SDL_Event e;
   bool quit = false;
 
   // backend vars
   unique_ptr<Party> party(new Party(ren));
-  gameState state = TITLE;
+  party->setState(TITLE);
 
   loadKeys();
 
   while (!quit)
     while (SDL_PollEvent(&e))
-      quit = mainLoop(e, font, party, state);
+      quit = mainLoop(e, font, party);
 
+  TTF_CloseFont(font);
   SDL_DestroyRenderer(ren);
   SDL_DestroyWindow(win);
-  TTF_CloseFont(font);
 
   TTF_Quit();
   IMG_Quit();

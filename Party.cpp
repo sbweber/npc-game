@@ -37,6 +37,12 @@ shared_ptr<Sprite> Party::getSprite()
 }  // shared_ptr<Sprite> Party::getSprite()
 
 
+gameState Party::getState()
+{
+  return state;
+}  // gameState Party::getState()
+
+
 unique_ptr<Terr>& Party::getTerr()
 {
   return terr;
@@ -67,6 +73,12 @@ void Party::setSprite(SDL_Renderer *ren, const string &str)
 {
   sprite.reset(new Sprite(ren, str));
 }  // void Party::setSprite(SDL_Renderer *ren, const string &str)
+
+
+void Party::setState(gameState gs)
+{
+  state = gs;
+}  // void Party::setState(gameState gs)
 
 
 shared_ptr<Tile> Party::tileClick(SDL_MouseButtonEvent &click)

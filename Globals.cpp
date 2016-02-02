@@ -16,13 +16,13 @@ void logSDLError(const string &msg, ostream &os)
 
 void pressAnyKey()
 {
-  bool cont = true;
   SDL_Event e;
   SDL_FlushEvent(SDL_KEYDOWN);
-  while (cont)
+  SDL_FlushEvent(SDL_MOUSEBUTTONDOWN);
+  while (true)
     if (SDL_PollEvent(&e))
-      if (e.type == SDL_KEYDOWN)
-        cont = false;
+      if (e.type == SDL_KEYDOWN || e.type == SDL_MOUSEBUTTONDOWN)
+        return;
 }  // void pressAnyKey()
 
 

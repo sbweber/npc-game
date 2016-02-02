@@ -13,8 +13,8 @@ void drawBattle(SDL_Renderer *ren, TTF_Font* font)
           "necessitate covering multiple lines. I should also contain some"
           "relatively long words, just in case, as well as plenty of short"
           "ones. Really, anything necessary to extend the length of this as"
-          "long as possible. Ideally, this message should be too long to fit on"
-          "the screen. Hopefully this is enough to do so.";
+          "long as possible. Ideally, this message should be too long to fit"
+          "on the screen. Hopefully this is enough to do so.";
   renderTextbox(ren, font, str);
   SDL_RenderPresent(ren);
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)

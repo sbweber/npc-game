@@ -202,10 +202,20 @@ void Terr::interactSprite(shared_ptr<Sprite> sprite)
 
 void Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> target)
 {
-  if (sprite->getType() == "Hero" && target->getType() == "test")
+  if (sprite->getType() == "Hero" && target->getType() == "KillTest")
   {
     setSprite(target, nullptr);
   }  // Test interaction: Hero kills test NPC (removes from map).
+  if (sprite->getType() == "Hero" && target->getType() == "SpeechTest")
+  {
+    string str = "I am an extended text message. I need to be long enough to "
+      "necessitate covering multiple lines. I should also contain some "
+      "relatively long words, just in case, as well as plenty of short "
+      "ones. Really, anything necessary to extend the length of this as "
+      "long as possible. Ideally, this message should be too long to fit "
+      "on the screen. Hopefully this is enough to do so.";
+    target->say(ren, str);
+  }
 }  // void Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> sprite)
 
 
@@ -221,7 +231,7 @@ void Terr::loadMap(const string &str)
 {
   ifstream file;
   int c;
-  file.open(("resources/"+str), ifstream::in);
+  file.open(("resources/maps/"+str), ifstream::in);
   if (!file.good())
     logSDLError("Map not found: " + str);  // error, probably bad filename
 
@@ -307,7 +317,7 @@ void Terr::loadMap(const string &str)
       {
         N = true;
         adjacent++;
-      }  // range check, only works if all carpet types are consecutive
+      }
       if (map[i][j]->getTile(SOUTH) &&
               map[i][j]->getTex() == map[i][j]->getTile(SOUTH)->getTex())
       {
@@ -411,21 +421,21 @@ void Terr::loadWarpTile(ifstream &file)
             destX, destY));
     if (map[sourceX][sourceY]->getTile(EAST) &&
             map[sourceX][sourceY]->getTile(EAST)->getTile(WEST) == tile)
-            map[sourceX][sourceY]->getTile(EAST)->connectTile(WEST,
-            map[sourceX][sourceY]);
+      map[sourceX][sourceY]->getTile(EAST)->connectTile(WEST,
+              map[sourceX][sourceY]);
     if (map[sourceX][sourceY]->getTile(NORTH) &&
             map[sourceX][sourceY]->getTile(NORTH)->getTile(SOUTH) == tile)
-            map[sourceX][sourceY]->getTile(NORTH)->connectTile(SOUTH,
-            map[sourceX][sourceY]);
+      map[sourceX][sourceY]->getTile(NORTH)->connectTile(SOUTH,
+              map[sourceX][sourceY]);
     if (map[sourceX][sourceY]->getTile(SOUTH) &&
             map[sourceX][sourceY]->getTile(SOUTH)->getTile(NORTH) == tile)
-            map[sourceX][sourceY]->getTile(SOUTH)->connectTile(NORTH,
-            map[sourceX][sourceY]);
+      map[sourceX][sourceY]->getTile(SOUTH)->connectTile(NORTH,
+              map[sourceX][sourceY]);
     if (map[sourceX][sourceY]->getTile(WEST) &&
             map[sourceX][sourceY]->getTile(WEST)->getTile(EAST) == tile)
-            map[sourceX][sourceY]->getTile(WEST)->connectTile(EAST,
-            map[sourceX][sourceY]);
-  }
+      map[sourceX][sourceY]->getTile(WEST)->connectTile(EAST,
+              map[sourceX][sourceY]);
+  }  // Tile doesn't upgrade if it's not on the map.
 }  // void Terr::loadWarpTile(ifstream &file)
 
 

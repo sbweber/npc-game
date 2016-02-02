@@ -66,7 +66,7 @@
     //!< The SDL_Renderer to which everything is drawn.
     spritelog sprites;
     //!< bi-directional map relating each Sprite to its Tile (and vice versa).
-    unordered_map<string, SDL_Texture* > tileSS;
+    unordered_map<string, SDL_Texture*> tileSS;
     //!< All Tile spritesheets, stored by key.
     int w;
     //!< map width (in Tiles)
