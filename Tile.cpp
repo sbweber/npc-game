@@ -3,13 +3,15 @@
 #include "Tile.h"
 
 
-Tile::Tile(tileType t)
+Tile::Tile(SDL_Texture* t, bool p, tileType tt)
 {
   x = 0;
   y = 0;
-  setType(t);
+  tex = t;
+  type = tt;
   angle = 0;
   flip = SDL_FLIP_NONE;
+  isPassable = p;
 }  // Tile::Tile(tileType t)
 
 
@@ -64,6 +66,12 @@ bool Tile::getIsPassable()
 }  // bool Tile::getIsPassable()
 
 
+SDL_Texture* Tile::getTex()
+{
+  return tex;
+}  // SDL_Texture* Tile::getTex()
+
+
 shared_ptr<Tile> Tile::getTile(dir d)
 {
   switch (d)
@@ -116,6 +124,12 @@ void Tile::setFlip(SDL_RendererFlip f)
 }  // void Tile::setFlip(SDL_RendererFlip f)
 
 
+void Tile::setIsPassable(bool p)
+{
+  isPassable = p;
+}  // void Tile::setIsPassable(bool p)
+
+
 void Tile::setPos(int xPos, int yPos)
 {
   x = xPos;
@@ -123,14 +137,14 @@ void Tile::setPos(int xPos, int yPos)
 }  // void Tile::setPos(int xPos, int yPos)
 
 
+void Tile::setTex(SDL_Texture* t)
+{
+  tex = t;
+}  // void Tile::setTex(SDL_Texture* t)
+
+
 void Tile::setType(tileType t)
 {
   type = t;
-  // move the following into a resource file with information about the
-  // various tile types eventually
-  if (type == VOID)
-    isPassable = false;
-  else
-    isPassable = true;
 }  // void Tile::setType(tileType t)
 

@@ -9,7 +9,7 @@ Party::Party(SDL_Renderer *ren)
     active[i] = nullptr;
   passive.clear();
   if (ren)
-    sprite.reset(new Sprite(ren, "Hero.png", "Hero"));
+    sprite.reset(new Sprite(ren, "Hero.png", "Roland", "Hero"));
   terr.reset(new Terr(ren, ""));
 }  // Party::Party(SDL_Renderer *ren)
 
@@ -35,6 +35,12 @@ shared_ptr<Sprite> Party::getSprite()
 {
   return sprite;
 }  // shared_ptr<Sprite> Party::getSprite()
+
+
+gameState Party::getState()
+{
+  return state;
+}  // gameState Party::getState()
 
 
 unique_ptr<Terr>& Party::getTerr()
@@ -67,6 +73,12 @@ void Party::setSprite(SDL_Renderer *ren, const string &str)
 {
   sprite.reset(new Sprite(ren, str));
 }  // void Party::setSprite(SDL_Renderer *ren, const string &str)
+
+
+void Party::setState(gameState gs)
+{
+  state = gs;
+}  // void Party::setState(gameState gs)
 
 
 shared_ptr<Tile> Party::tileClick(SDL_MouseButtonEvent &click)

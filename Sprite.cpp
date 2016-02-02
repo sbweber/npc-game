@@ -3,13 +3,28 @@
 #include "Sprite.h"
 
 
-Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile, const string &t)
+Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile, const string &n,
+        const string &p, const string &scriptFile)
 {
   spriteSheet = loadTexture(spriteFile, ren);
   sprite = DOWN;  // default all sprites as facing down
   facing = SOUTH;
   spline = 0;
-  type = t;
+  purpose = p;
+  name = n;
+  font = TTF_OpenFont("resources/fonts/ClearSans-Light.ttf", 20);
+  if (font == nullptr)
+    quit("TTF_OpenFont", 5);
+  if (!scriptFile.empty())
+  {
+    ifstream script("resources/scripts/" + scriptFile);
+    string line;
+    while (script.good())
+    {
+      getline(script, line);
+      speech.push(line);
+    }  // copy character's script into memory
+  }  // load up speech with the script
 }  // Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile)
 
 
@@ -88,9 +103,9 @@ SDL_Texture* Sprite::getSpriteSheet()
 }  // SDL_Texture* Sprite::getSpriteSheet()
 
 
-const string Sprite::getType()
+const string Sprite::getPurpose()
 {
-  return type;
+  return purpose;
 }  // const string Sprite::getType()
 
 
@@ -112,6 +127,45 @@ void Sprite::pushAct(action act)
 }  // void Sprite::pushMove()
 
 
+void Sprite::renderSpeech(SDL_Renderer *ren, const string &str,
+        SDL_Color color)
+{
+  string temp = str;
+  while (!temp.empty())
+  {
+    renderTextbox(ren, font, "");
+    if (!name.empty())
+      temp = renderTextbox(ren, font, name + ": " + temp, color);
+    else
+      temp = renderTextbox(ren, font, temp, color);
+    SDL_RenderPresent(ren);
+    SDL_Event e = pressAnyKey();
+    if (e.type == SDL_KEYDOWN && e.key.keysym == stateQuit)
+      quit("Told to quit while in text", 0, ren);
+  }
+}  // void renderSpeech()
+
+
+void Sprite::say(SDL_Renderer *ren)
+{
+  if(speech.empty())
+    renderSpeech(ren, "I have nothing more to say.");
+  else
+  {
+    string str = speech.front();
+    speech.pop();
+    renderSpeech(ren, str);
+    speech.push(str);
+  }
+}  // void Sprite::say(SDL_Renderer *ren, string &str)
+
+
+void Sprite::setPurpose(const string &p)
+{
+  purpose = p;
+}  // void Sprite::setType(string str)
+
+
 void Sprite::setSpline(int s)
 {
   spline = s;
@@ -122,10 +176,4 @@ void Sprite::setSprite(spriteType st)
 {
   sprite = st;
 }  // void Sprite::setSprite()
-
-
-void Sprite::setType(const string &str)
-{
-  type = str;
-}  // void Sprite::setType(string str)
 
