@@ -127,15 +127,34 @@ void Sprite::pushAct(action act)
 }  // void Sprite::pushMove()
 
 
+void Sprite::renderSpeech(SDL_Renderer *ren, const string &str,
+        SDL_Color color)
+{
+  string temp = str;
+  while (!temp.empty())
+  {
+    renderTextbox(ren, font, "");
+    if (!name.empty())
+      temp = renderTextbox(ren, font, name + ": " + temp, color);
+    else
+      temp = renderTextbox(ren, font, temp, color);
+    SDL_RenderPresent(ren);
+    SDL_Event e = pressAnyKey();
+    if (e.type == SDL_KEYDOWN && e.key.keysym == stateQuit)
+      quit("Told to quit while in text", 0, ren);
+  }
+}  // void renderSpeech()
+
+
 void Sprite::say(SDL_Renderer *ren)
 {
   if(speech.empty())
-    renderSpeech(ren, font, name, "I have nothing more to say.");
+    renderSpeech(ren, "I have nothing more to say.");
   else
   {
     string str = speech.front();
     speech.pop();
-    renderSpeech(ren, font, name, str);
+    renderSpeech(ren, str);
     speech.push(str);
   }
 }  // void Sprite::say(SDL_Renderer *ren, string &str)

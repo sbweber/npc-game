@@ -14,7 +14,7 @@ void logSDLError(const string &msg, ostream &os)
 }  // void logSDLError(const string &msg, ostream &os)
 
 
-void pressAnyKey()
+SDL_Event pressAnyKey()
 {
   SDL_Event e;
   SDL_FlushEvent(SDL_KEYDOWN);
@@ -22,7 +22,7 @@ void pressAnyKey()
   while (true)
     if (SDL_PollEvent(&e))
       if (e.type == SDL_KEYDOWN || e.type == SDL_MOUSEBUTTONDOWN)
-        return;
+        return e;
 }  // void pressAnyKey()
 
 

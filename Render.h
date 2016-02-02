@@ -13,9 +13,6 @@
   //!< Loads a texture
   void renderBackground(SDL_Texture *bg, SDL_Renderer *ren);
   //!< Renders an image, stretched to fit the entire screen.
-  void renderSpeech(SDL_Renderer *ren, TTF_Font *font, const string &name,
-          const string &str, SDL_Color color = { 255, 255, 255, 255 });
-  //!< Draws a series of textboxes with text until str has been displayed.
   SDL_Texture* renderText(SDL_Renderer *ren, TTF_Font *font,
           const string &str, SDL_Color color = {255, 255, 255, 255});
   //!< Renders text into a picture. Text is white by default.

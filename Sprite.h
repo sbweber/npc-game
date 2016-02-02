@@ -3,8 +3,9 @@
 #ifndef SPRITE_H
   #define SPRITE_H
 
-  #include "Render.h"
   #include "Globals.h"
+  #include "Keybind.h"
+  #include "Render.h"
 
 
   //! Spritesheets for characters always arranged in the same manner,
@@ -60,6 +61,9 @@
     //!< Returns the next action in the queue and pops it off the queue.
     void pushAct(action act);
     //!< Pushes an action into the action queue.
+    void renderSpeech(SDL_Renderer *ren, const string &str,
+            SDL_Color color = { 255, 255, 255, 255 });
+    //!< Draws a series of textboxes with text until str has been displayed.
     void say(SDL_Renderer *ren);
     //!< Make the Sprite output text to the screen in its font.
     void setPurpose(const string &p);
