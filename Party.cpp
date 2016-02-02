@@ -9,7 +9,7 @@ Party::Party(SDL_Renderer *ren)
     active[i] = nullptr;
   passive.clear();
   if (ren)
-    sprite.reset(new Sprite(ren, "Hero.png", "Hero"));
+    sprite.reset(new Sprite(ren, "Hero.png", "Roland", "Hero"));
   terr.reset(new Terr(ren, ""));
 }  // Party::Party(SDL_Renderer *ren)
 

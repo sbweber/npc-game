@@ -35,7 +35,8 @@
   class Sprite
   {
   public:
-    Sprite(SDL_Renderer *ren, const string &spriteFile, const string &t = "");
+    Sprite(SDL_Renderer *ren, const string &spriteFile, const string &n = "",
+            const string &p = "", const string &scriptFile = "");
     //!< All units MUST have a spritesheet specified. type string optional.
     ~Sprite();
     //!< Default destructor
@@ -49,8 +50,8 @@
     //!< Returns which direction the Sprite is currently facing.
     int getSpline();
     //!< Returns the number of pixels left to spline.
-    const string getType();
-    //!< Returns the type descriptor string for this NPC.
+    const string getPurpose();
+    //!< Returns the purpose string for this NPC.
     spriteType getSprite();
     //!< Returns the type of sprite (facing, etc) currently being used.
     SDL_Texture* getSpriteSheet();
@@ -59,14 +60,14 @@
     //!< Returns the next action in the queue and pops it off the queue.
     void pushAct(action act);
     //!< Pushes an action into the action queue.
-    void say(SDL_Renderer *ren, string &str);
+    void say(SDL_Renderer *ren);
     //!< Make the Sprite output text to the screen in its font.
+    void setPurpose(const string &p);
+    //!< Set the descriptive string describing Sprite
     void setSpline(int s);
     //!< Manually sets the number of pixels to spline.
     void setSprite(spriteType st);
     //!< Manually change sprite type (facing, etc).
-    void setType(const string &str);
-    //!< Set the descriptive string describing Sprite
   protected:
     queue<action> actionQ;
     //!< Queue of upcoming moves to make.
@@ -74,14 +75,18 @@
     //!< Direction Sprite is currently facing.
     TTF_Font *font;
     //!< Font the Sprite uses to 'speak'.
+    string name;
+    //!< Name of the Sprite. Used for speech.
+    string purpose;
+    //!< String describing the purpose of Sprite.
+    queue<string> speech;
+    //!< Circular queue of everything this Sprite says.
     int spline;
     //!< Number of pixels left to be splined towards destination.
     spriteType sprite;
     //!< Which sprite on the spritesheet is currently being used.
     SDL_Texture *spriteSheet;
     //!< The spritesheet used to draw this Sprite.
-    string type;
-    //!< String describing the purpose of Sprite.
   };
 
 #endif

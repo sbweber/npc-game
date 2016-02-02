@@ -11,13 +11,13 @@ bool loopAnyState(SDL_Event &e, unique_ptr<Party> &party)
       party->setState(BATTLE);  // debug command startbattle
     if (e.key.keysym == stateMap1)
     {
-      party->changeTerr("Map0,0.txt");
+      party->changeTerr("0,0.txt");
       party->setState(MAP);
       party->setLocation(4, 3);
     }  // debug command map1
     if (e.key.keysym == stateMap2)
     {
-      party->changeTerr("Map0,1.txt");
+      party->changeTerr("0,1.txt");
       party->setState(MAP);
       party->setLocation(1, 1);
     }  // debug command map2
@@ -123,7 +123,7 @@ bool loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
   case SDL_MOUSEBUTTONDOWN:
     if (toGame->buttonClick(e.button))
     {
-      party->changeTerr("Map0,0.txt");
+      party->changeTerr("0,0.txt");
       party->setState(MAP);
       party->setLocation(6, 10);
       SDL_Event* wait = new SDL_Event();

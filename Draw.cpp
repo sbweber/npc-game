@@ -9,13 +9,7 @@ void drawBattle(SDL_Renderer *ren, TTF_Font* font)
   // draw graphics visuals (ignoring this step for now, except for...)
   // ...including text box at bottom
   // choose and print next line of text (damage report, etc)
-  string str = "I am an extended text message. I need to be long enough to"
-          "necessitate covering multiple lines. I should also contain some"
-          "relatively long words, just in case, as well as plenty of short"
-          "ones. Really, anything necessary to extend the length of this as"
-          "long as possible. Ideally, this message should be too long to fit"
-          "on the screen. Hopefully this is enough to do so.";
-  renderTextbox(ren, font, str);
+  renderTextbox(ren, font, "");
   SDL_RenderPresent(ren);
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 

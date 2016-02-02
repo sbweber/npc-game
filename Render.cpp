@@ -30,14 +30,17 @@ void renderBackground(SDL_Texture* bg, SDL_Renderer *ren)
 }  // void renderBackground(SDL_Texture *tex, SDL_Renderer *ren)
 
 
-void renderSpeech(SDL_Renderer *ren, TTF_Font *font, const string &str,
-        SDL_Color color)
+void renderSpeech(SDL_Renderer *ren, TTF_Font *font, const string &name,
+        const string &str, SDL_Color color)
 {
   string temp = str;
   while (!temp.empty())
   {
     renderTextbox(ren, font, "");
-    temp = renderTextbox(ren, font, temp, color);
+    if (!name.empty())
+      temp = renderTextbox(ren, font, name + ": " + temp, color);
+    else
+      temp = renderTextbox(ren, font, temp, color);
     SDL_RenderPresent(ren);
     pressAnyKey();
   }

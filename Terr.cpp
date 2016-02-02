@@ -202,20 +202,12 @@ void Terr::interactSprite(shared_ptr<Sprite> sprite)
 
 void Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> target)
 {
-  if (sprite->getType() == "Hero" && target->getType() == "KillTest")
+  if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
   {
     setSprite(target, nullptr);
   }  // Test interaction: Hero kills test NPC (removes from map).
-  if (sprite->getType() == "Hero" && target->getType() == "SpeechTest")
-  {
-    string str = "I am an extended text message. I need to be long enough to "
-      "necessitate covering multiple lines. I should also contain some "
-      "relatively long words, just in case, as well as plenty of short "
-      "ones. Really, anything necessary to extend the length of this as "
-      "long as possible. Ideally, this message should be too long to fit "
-      "on the screen. Hopefully this is enough to do so.";
-    target->say(ren, str);
-  }
+  else if (sprite->getPurpose() == "Hero")
+    target->say(ren);
 }  // void Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> sprite)
 
 
@@ -395,12 +387,16 @@ void Terr::loadMap(const string &str)
 void Terr::loadSprite(ifstream &file)
 {
   int x, y;
-  string spriteFile = "NPC.png", spriteType = "test";
+  string spriteFile = "NPC.png", name = "I_AM_ERROR";
+  string purpose = "ERROR", scriptFile = "Silence.txt"; 
   file >> x;
   file >> y;
   file >> spriteFile;
-  file >> spriteType;
-  shared_ptr<Sprite> sprite(new Sprite(ren, spriteFile, spriteType));
+  file >> name;
+  file >> purpose;
+  file >> scriptFile;
+  shared_ptr<Sprite> sprite(new Sprite(ren, spriteFile, name, purpose,
+          scriptFile));
   setSprite(sprite, getTile(x, y));
 }  // void Terr::loadSprite(ifstream &file)
 
