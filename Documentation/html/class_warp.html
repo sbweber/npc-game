@@ -127,10 +127,10 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <tr class="memitem:a5c61204c5eafbd5dfa8a365c08257eec"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_warp.html#a5c61204c5eafbd5dfa8a365c08257eec">getDestTerr</a> ()</td></tr>
 <tr class="separator:a5c61204c5eafbd5dfa8a365c08257eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_tile"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_tile')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_tile.html">Tile</a></td></tr>
-<tr class="memitem:ae8839483d411c1324a0c89327a557194 inherit pub_methods_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8839483d411c1324a0c89327a557194"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ae8839483d411c1324a0c89327a557194">Tile</a> (tileType t=VOID)</td></tr>
-<tr class="memdesc:ae8839483d411c1324a0c89327a557194 inherit pub_methods_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> constructor. Makes a VOID <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> by default. <br /></td></tr>
-<tr class="separator:ae8839483d411c1324a0c89327a557194 inherit pub_methods_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a76de53ca5def42bfd047dd9d97fa4e inherit pub_methods_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a76de53ca5def42bfd047dd9d97fa4e"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a9a76de53ca5def42bfd047dd9d97fa4e">Tile</a> (SDL_Texture *t, bool p=true, tileType tt=TILE_CORE)</td></tr>
+<tr class="memdesc:a9a76de53ca5def42bfd047dd9d97fa4e inherit pub_methods_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> constructor. <br /></td></tr>
+<tr class="separator:a9a76de53ca5def42bfd047dd9d97fa4e inherit pub_methods_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98634abbd93fa13d0578d7103202d03d inherit pub_methods_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a98634abbd93fa13d0578d7103202d03d"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a98634abbd93fa13d0578d7103202d03d">~Tile</a> ()</td></tr>
 <tr class="memdesc:a98634abbd93fa13d0578d7103202d03d inherit pub_methods_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> destructor. <br /></td></tr>
@@ -151,6 +151,10 @@ SDL_RendererFlip&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#aaddc2d065a537489c31de4a566bb0bd5">getIsPassable</a> ()</td></tr>
 <tr class="memdesc:aaddc2d065a537489c31de4a566bb0bd5 inherit pub_methods_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> may be entered by a <a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>. <br /></td></tr>
 <tr class="separator:aaddc2d065a537489c31de4a566bb0bd5 inherit pub_methods_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50aa680406e6f9898c24aee23dae3862 inherit pub_methods_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50aa680406e6f9898c24aee23dae3862"></a>
+SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a50aa680406e6f9898c24aee23dae3862">getTex</a> ()</td></tr>
+<tr class="memdesc:a50aa680406e6f9898c24aee23dae3862 inherit pub_methods_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the spritesheet for this <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a>. <br /></td></tr>
+<tr class="separator:a50aa680406e6f9898c24aee23dae3862 inherit pub_methods_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8d11748dbf9b8f57dd2a56f4a733065 inherit pub_methods_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8d11748dbf9b8f57dd2a56f4a733065"></a>
 shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ac8d11748dbf9b8f57dd2a56f4a733065">getTile</a> (dir d)</td></tr>
 <tr class="memdesc:ac8d11748dbf9b8f57dd2a56f4a733065 inherit pub_methods_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to adjacent tile in specified direction. May be nullptr. <br /></td></tr>
@@ -175,10 +179,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a801a349b0e7f7500b60af91e5e821f2e">setFlip</a> (SDL_RendererFlip f)</td></tr>
 <tr class="memdesc:a801a349b0e7f7500b60af91e5e821f2e inherit pub_methods_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets whether the Tile’s sprite is flipped. <br /></td></tr>
 <tr class="separator:a801a349b0e7f7500b60af91e5e821f2e inherit pub_methods_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef0ce26fbd9688dababd9d66d8e604e7 inherit pub_methods_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef0ce26fbd9688dababd9d66d8e604e7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#aef0ce26fbd9688dababd9d66d8e604e7">setIsPassable</a> (bool p)</td></tr>
+<tr class="memdesc:aef0ce26fbd9688dababd9d66d8e604e7 inherit pub_methods_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets whether the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> may be entered. <br /></td></tr>
+<tr class="separator:aef0ce26fbd9688dababd9d66d8e604e7 inherit pub_methods_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a6429d2adbe3e45c519d86a57b514c3 inherit pub_methods_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a6429d2adbe3e45c519d86a57b514c3"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a8a6429d2adbe3e45c519d86a57b514c3">setPos</a> (int xPos, int yPos)</td></tr>
 <tr class="memdesc:a8a6429d2adbe3e45c519d86a57b514c3 inherit pub_methods_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets where <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> thinks it is on a <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a8a6429d2adbe3e45c519d86a57b514c3 inherit pub_methods_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ec617aea3fcdfb023042e3712d3cdf3 inherit pub_methods_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ec617aea3fcdfb023042e3712d3cdf3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a2ec617aea3fcdfb023042e3712d3cdf3">setTex</a> (SDL_Texture *t)</td></tr>
+<tr class="memdesc:a2ec617aea3fcdfb023042e3712d3cdf3 inherit pub_methods_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the tile spritesheet. <br /></td></tr>
+<tr class="separator:a2ec617aea3fcdfb023042e3712d3cdf3 inherit pub_methods_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2557595d030a43cf9b5334df3b7264f7 inherit pub_methods_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2557595d030a43cf9b5334df3b7264f7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a2557595d030a43cf9b5334df3b7264f7">setType</a> (tileType t)</td></tr>
 <tr class="memdesc:a2557595d030a43cf9b5334df3b7264f7 inherit pub_methods_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets what kind of tile it is. <br /></td></tr>
@@ -199,24 +211,20 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <tr class="memdesc:a3290d5a86cfed24b596a369a81ad9fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y-position of character on new <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a3290d5a86cfed24b596a369a81ad9fa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_tile"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_tile')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_tile.html">Tile</a></td></tr>
-<tr class="memitem:a47b5eb2072d4b1978923a480043899c9 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47b5eb2072d4b1978923a480043899c9"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a47b5eb2072d4b1978923a480043899c9">x</a></td></tr>
-<tr class="memdesc:a47b5eb2072d4b1978923a480043899c9 inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">X-position <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> believes it holds on a <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
-<tr class="separator:a47b5eb2072d4b1978923a480043899c9 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d87d8813151af6bbd60811964f047a8 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d87d8813151af6bbd60811964f047a8"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a2d87d8813151af6bbd60811964f047a8">y</a></td></tr>
-<tr class="memdesc:a2d87d8813151af6bbd60811964f047a8 inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y-position <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> believes it holds on a <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
-<tr class="separator:a2d87d8813151af6bbd60811964f047a8 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5aa7ae6350675967edf46400c486a412 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5aa7ae6350675967edf46400c486a412"></a>
-tileType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a5aa7ae6350675967edf46400c486a412">type</a></td></tr>
-<tr class="memdesc:a5aa7ae6350675967edf46400c486a412 inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Which type of tile to draw. <br /></td></tr>
-<tr class="separator:a5aa7ae6350675967edf46400c486a412 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa72b458d549b9533f058e2d2fad0f81 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#afa72b458d549b9533f058e2d2fad0f81">isPassable</a></td></tr>
-<tr class="separator:afa72b458d549b9533f058e2d2fad0f81 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33219999fbd38d9c9e8e98d09a9b65a5 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33219999fbd38d9c9e8e98d09a9b65a5"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a33219999fbd38d9c9e8e98d09a9b65a5">angle</a></td></tr>
+<tr class="memdesc:a33219999fbd38d9c9e8e98d09a9b65a5 inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Angle at which Tile’s sprite is rotated. <br /></td></tr>
+<tr class="separator:a33219999fbd38d9c9e8e98d09a9b65a5 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8130191ee5d094e7505fd26f676393c inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af8130191ee5d094e7505fd26f676393c"></a>
 weak_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#af8130191ee5d094e7505fd26f676393c">E</a></td></tr>
 <tr class="memdesc:af8130191ee5d094e7505fd26f676393c inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the East/Right. <br /></td></tr>
 <tr class="separator:af8130191ee5d094e7505fd26f676393c inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a815af374aa83cd0be79bb5553056b15e inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a815af374aa83cd0be79bb5553056b15e"></a>
+SDL_RendererFlip&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a815af374aa83cd0be79bb5553056b15e">flip</a></td></tr>
+<tr class="memdesc:a815af374aa83cd0be79bb5553056b15e inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flip status of Tile’s sprite. <br /></td></tr>
+<tr class="separator:a815af374aa83cd0be79bb5553056b15e inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa72b458d549b9533f058e2d2fad0f81 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#afa72b458d549b9533f058e2d2fad0f81">isPassable</a></td></tr>
+<tr class="separator:afa72b458d549b9533f058e2d2fad0f81 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c0be3e9600a9694e7e91d54090b37d4 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c0be3e9600a9694e7e91d54090b37d4"></a>
 weak_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a4c0be3e9600a9694e7e91d54090b37d4">N</a></td></tr>
 <tr class="memdesc:a4c0be3e9600a9694e7e91d54090b37d4 inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the North/Up. <br /></td></tr>
@@ -225,18 +233,26 @@ weak_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td cl
 weak_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#abf033f1e7b26d12afacad32dd5f44ea5">S</a></td></tr>
 <tr class="memdesc:abf033f1e7b26d12afacad32dd5f44ea5 inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the South/Down. <br /></td></tr>
 <tr class="separator:abf033f1e7b26d12afacad32dd5f44ea5 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1697dda1927feabb756c0798771c116 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1697dda1927feabb756c0798771c116"></a>
+SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ab1697dda1927feabb756c0798771c116">tex</a></td></tr>
+<tr class="memdesc:ab1697dda1927feabb756c0798771c116 inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the spritesheet for this <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a>. <br /></td></tr>
+<tr class="separator:ab1697dda1927feabb756c0798771c116 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aa7ae6350675967edf46400c486a412 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5aa7ae6350675967edf46400c486a412"></a>
+tileType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a5aa7ae6350675967edf46400c486a412">type</a></td></tr>
+<tr class="memdesc:a5aa7ae6350675967edf46400c486a412 inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Which type of tile to draw. <br /></td></tr>
+<tr class="separator:a5aa7ae6350675967edf46400c486a412 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae204f0d7ecc0da698dba11c9c33c3deb inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae204f0d7ecc0da698dba11c9c33c3deb"></a>
 weak_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#ae204f0d7ecc0da698dba11c9c33c3deb">W</a></td></tr>
 <tr class="memdesc:ae204f0d7ecc0da698dba11c9c33c3deb inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjacent <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> to the West/Left. <br /></td></tr>
 <tr class="separator:ae204f0d7ecc0da698dba11c9c33c3deb inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a33219999fbd38d9c9e8e98d09a9b65a5 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33219999fbd38d9c9e8e98d09a9b65a5"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a33219999fbd38d9c9e8e98d09a9b65a5">angle</a></td></tr>
-<tr class="memdesc:a33219999fbd38d9c9e8e98d09a9b65a5 inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Angle at which Tile’s sprite is rotated. <br /></td></tr>
-<tr class="separator:a33219999fbd38d9c9e8e98d09a9b65a5 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a815af374aa83cd0be79bb5553056b15e inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a815af374aa83cd0be79bb5553056b15e"></a>
-SDL_RendererFlip&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a815af374aa83cd0be79bb5553056b15e">flip</a></td></tr>
-<tr class="memdesc:a815af374aa83cd0be79bb5553056b15e inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flip status of Tile’s sprite. <br /></td></tr>
-<tr class="separator:a815af374aa83cd0be79bb5553056b15e inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47b5eb2072d4b1978923a480043899c9 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47b5eb2072d4b1978923a480043899c9"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a47b5eb2072d4b1978923a480043899c9">x</a></td></tr>
+<tr class="memdesc:a47b5eb2072d4b1978923a480043899c9 inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">X-position <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> believes it holds on a <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
+<tr class="separator:a47b5eb2072d4b1978923a480043899c9 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d87d8813151af6bbd60811964f047a8 inherit pro_attribs_class_tile"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d87d8813151af6bbd60811964f047a8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile.html#a2d87d8813151af6bbd60811964f047a8">y</a></td></tr>
+<tr class="memdesc:a2d87d8813151af6bbd60811964f047a8 inherit pro_attribs_class_tile"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y-position <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> believes it holds on a <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
+<tr class="separator:a2d87d8813151af6bbd60811964f047a8 inherit pro_attribs_class_tile"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="class_warp.html" title="Warp is a kind of Tile that loads a new Terr (e.g. leaving a building). ">Warp</a> is a kind of <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> that loads a new <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a> (e.g. leaving a building). </p>

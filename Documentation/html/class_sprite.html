@@ -99,10 +99,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a874648e9628df9ca42f3672693adf3a3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a874648e9628df9ca42f3672693adf3a3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a874648e9628df9ca42f3672693adf3a3">Sprite</a> (SDL_Renderer *ren, const string &amp;spriteFile, const string &amp;t=&quot;&quot;)</td></tr>
-<tr class="memdesc:a874648e9628df9ca42f3672693adf3a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">All units MUST have a spritesheet specified. type string optional. <br /></td></tr>
-<tr class="separator:a874648e9628df9ca42f3672693adf3a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1806d04dfca4c8989df24fd5436e4e78"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1806d04dfca4c8989df24fd5436e4e78"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a1806d04dfca4c8989df24fd5436e4e78">Sprite</a> (SDL_Renderer *ren, const string &amp;spriteFile, const string &amp;n=&quot;&quot;, const string &amp;p=&quot;&quot;, const string &amp;scriptFile=&quot;&quot;)</td></tr>
+<tr class="memdesc:a1806d04dfca4c8989df24fd5436e4e78"><td class="mdescLeft">&#160;</td><td class="mdescRight">All units MUST have a spritesheet specified. type string optional. <br /></td></tr>
+<tr class="separator:a1806d04dfca4c8989df24fd5436e4e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8accab430f9d90ae5117b57d67e32b84"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8accab430f9d90ae5117b57d67e32b84"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a8accab430f9d90ae5117b57d67e32b84">~Sprite</a> ()</td></tr>
 <tr class="memdesc:a8accab430f9d90ae5117b57d67e32b84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
@@ -127,10 +127,10 @@ dir&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#aad5e5beb45ec5eae6fe8d096d5ebef68">getSpline</a> ()</td></tr>
 <tr class="memdesc:aad5e5beb45ec5eae6fe8d096d5ebef68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of pixels left to spline. <br /></td></tr>
 <tr class="separator:aad5e5beb45ec5eae6fe8d096d5ebef68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58c0213b779c1174473852a090efaa72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a58c0213b779c1174473852a090efaa72"></a>
-const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a58c0213b779c1174473852a090efaa72">getType</a> ()</td></tr>
-<tr class="memdesc:a58c0213b779c1174473852a090efaa72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the type descriptor string for this NPC. <br /></td></tr>
-<tr class="separator:a58c0213b779c1174473852a090efaa72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab130d27f349a15e736e2f60c9a20ca0d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab130d27f349a15e736e2f60c9a20ca0d"></a>
+const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#ab130d27f349a15e736e2f60c9a20ca0d">getPurpose</a> ()</td></tr>
+<tr class="memdesc:ab130d27f349a15e736e2f60c9a20ca0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the purpose string for this NPC. <br /></td></tr>
+<tr class="separator:ab130d27f349a15e736e2f60c9a20ca0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01742e39c9f18622a094a187d6858912"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a01742e39c9f18622a094a187d6858912"></a>
 spriteType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a01742e39c9f18622a094a187d6858912">getSprite</a> ()</td></tr>
 <tr class="memdesc:a01742e39c9f18622a094a187d6858912"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the type of sprite (facing, etc) currently being used. <br /></td></tr>
@@ -147,6 +147,18 @@ const action&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a25d3b1c4533e8aa9e530d7025dc5365b">pushAct</a> (action act)</td></tr>
 <tr class="memdesc:a25d3b1c4533e8aa9e530d7025dc5365b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pushes an action into the action queue. <br /></td></tr>
 <tr class="separator:a25d3b1c4533e8aa9e530d7025dc5365b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a602e995adde51d155e2d0e83285f0643"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a602e995adde51d155e2d0e83285f0643"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a602e995adde51d155e2d0e83285f0643">renderSpeech</a> (SDL_Renderer *ren, const string &amp;str, SDL_Color color={255, 255, 255, 255})</td></tr>
+<tr class="memdesc:a602e995adde51d155e2d0e83285f0643"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a series of textboxes with text until str has been displayed. <br /></td></tr>
+<tr class="separator:a602e995adde51d155e2d0e83285f0643"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14a138e5acf82b97c052673dffb744f6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a14a138e5acf82b97c052673dffb744f6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a14a138e5acf82b97c052673dffb744f6">say</a> (SDL_Renderer *ren)</td></tr>
+<tr class="memdesc:a14a138e5acf82b97c052673dffb744f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make the <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> output text to the screen in its font. <br /></td></tr>
+<tr class="separator:a14a138e5acf82b97c052673dffb744f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5cdeb3206d89719fc10af1146ebbaf6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5cdeb3206d89719fc10af1146ebbaf6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#ac5cdeb3206d89719fc10af1146ebbaf6">setPurpose</a> (const string &amp;p)</td></tr>
+<tr class="memdesc:ac5cdeb3206d89719fc10af1146ebbaf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the descriptive string describing <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a>. <br /></td></tr>
+<tr class="separator:ac5cdeb3206d89719fc10af1146ebbaf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ce4def2f83442fd086e38568f93c6cd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1ce4def2f83442fd086e38568f93c6cd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a1ce4def2f83442fd086e38568f93c6cd">setSpline</a> (int s)</td></tr>
 <tr class="memdesc:a1ce4def2f83442fd086e38568f93c6cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually sets the number of pixels to spline. <br /></td></tr>
@@ -155,21 +167,33 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#aa9d0dd6123988d79c94a18f3e404d8d7">setSprite</a> (spriteType st)</td></tr>
 <tr class="memdesc:aa9d0dd6123988d79c94a18f3e404d8d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually change sprite type (facing, etc). <br /></td></tr>
 <tr class="separator:aa9d0dd6123988d79c94a18f3e404d8d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c2efc62131a56a1c81405527a930b71"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c2efc62131a56a1c81405527a930b71"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a0c2efc62131a56a1c81405527a930b71">setType</a> (const string &amp;str)</td></tr>
-<tr class="memdesc:a0c2efc62131a56a1c81405527a930b71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the descriptive string describing <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a>. <br /></td></tr>
-<tr class="separator:a0c2efc62131a56a1c81405527a930b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a40357a4e61f454decf1970929e9d2d0c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a40357a4e61f454decf1970929e9d2d0c"></a>
-dir&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a40357a4e61f454decf1970929e9d2d0c">facing</a></td></tr>
-<tr class="memdesc:a40357a4e61f454decf1970929e9d2d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direction <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> is currently facing. <br /></td></tr>
-<tr class="separator:a40357a4e61f454decf1970929e9d2d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b183d19c55c1f0928075bd2cb926f68"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8b183d19c55c1f0928075bd2cb926f68"></a>
 queue&lt; action &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a8b183d19c55c1f0928075bd2cb926f68">actionQ</a></td></tr>
 <tr class="memdesc:a8b183d19c55c1f0928075bd2cb926f68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue of upcoming moves to make. <br /></td></tr>
 <tr class="separator:a8b183d19c55c1f0928075bd2cb926f68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40357a4e61f454decf1970929e9d2d0c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a40357a4e61f454decf1970929e9d2d0c"></a>
+dir&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a40357a4e61f454decf1970929e9d2d0c">facing</a></td></tr>
+<tr class="memdesc:a40357a4e61f454decf1970929e9d2d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direction <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> is currently facing. <br /></td></tr>
+<tr class="separator:a40357a4e61f454decf1970929e9d2d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9beec56e0e61eb611b204364fe446ce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa9beec56e0e61eb611b204364fe446ce"></a>
+TTF_Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#aa9beec56e0e61eb611b204364fe446ce">font</a></td></tr>
+<tr class="memdesc:aa9beec56e0e61eb611b204364fe446ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Font the <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> uses to 'speak'. <br /></td></tr>
+<tr class="separator:aa9beec56e0e61eb611b204364fe446ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a166409bbd17355e157618ec02441dab8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a166409bbd17355e157618ec02441dab8"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a166409bbd17355e157618ec02441dab8">name</a></td></tr>
+<tr class="memdesc:a166409bbd17355e157618ec02441dab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a>. Used for speech. <br /></td></tr>
+<tr class="separator:a166409bbd17355e157618ec02441dab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad23c15d2b97d15db7522f9caa1a0b7a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad23c15d2b97d15db7522f9caa1a0b7a2"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#ad23c15d2b97d15db7522f9caa1a0b7a2">purpose</a></td></tr>
+<tr class="memdesc:ad23c15d2b97d15db7522f9caa1a0b7a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">String describing the purpose of <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a>. <br /></td></tr>
+<tr class="separator:ad23c15d2b97d15db7522f9caa1a0b7a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7fbb50aaa8f3586b9a41def56384d43"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7fbb50aaa8f3586b9a41def56384d43"></a>
+queue&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#af7fbb50aaa8f3586b9a41def56384d43">speech</a></td></tr>
+<tr class="memdesc:af7fbb50aaa8f3586b9a41def56384d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Circular queue of everything this <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> says. <br /></td></tr>
+<tr class="separator:af7fbb50aaa8f3586b9a41def56384d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3a18aaf97a12edfced1b31f2323ae01"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3a18aaf97a12edfced1b31f2323ae01"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#aa3a18aaf97a12edfced1b31f2323ae01">spline</a></td></tr>
 <tr class="memdesc:aa3a18aaf97a12edfced1b31f2323ae01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of pixels left to be splined towards destination. <br /></td></tr>
@@ -182,10 +206,6 @@ spriteType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#aec7102885a3ca3fdd5124f8677135013">spriteSheet</a></td></tr>
 <tr class="memdesc:aec7102885a3ca3fdd5124f8677135013"><td class="mdescLeft">&#160;</td><td class="mdescRight">The spritesheet used to draw this <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a>. <br /></td></tr>
 <tr class="separator:aec7102885a3ca3fdd5124f8677135013"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4ab6cfa8155326b6d8af31f943514f2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4ab6cfa8155326b6d8af31f943514f2"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#af4ab6cfa8155326b6d8af31f943514f2">type</a></td></tr>
-<tr class="memdesc:af4ab6cfa8155326b6d8af31f943514f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">String describing the purpose of <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a>. <br /></td></tr>
-<tr class="separator:af4ab6cfa8155326b6d8af31f943514f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Visual half of a <a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>. Information on what to draw to put a sprite onscreen. </p>

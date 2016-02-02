@@ -18,9 +18,9 @@ Inheritance diagram for Tile\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_tile_ae8839483d411c1324a0c89327a557194}{Tile} (tile\+Type t=V\+O\+ID)\hypertarget{class_tile_ae8839483d411c1324a0c89327a557194}{}\label{class_tile_ae8839483d411c1324a0c89327a557194}
+\hyperlink{class_tile_a9a76de53ca5def42bfd047dd9d97fa4e}{Tile} (S\+D\+L\+\_\+\+Texture $\ast$t, bool p=true, tile\+Type tt=T\+I\+L\+E\+\_\+\+C\+O\+RE)\hypertarget{class_tile_a9a76de53ca5def42bfd047dd9d97fa4e}{}\label{class_tile_a9a76de53ca5def42bfd047dd9d97fa4e}
 
-\begin{DoxyCompactList}\small\item\em \hyperlink{class_tile}{Tile} constructor. Makes a V\+O\+ID \hyperlink{class_tile}{Tile} by default. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_tile}{Tile} constructor. \end{DoxyCompactList}\item 
 virtual \hyperlink{class_tile_a98634abbd93fa13d0578d7103202d03d}{$\sim$\+Tile} ()\hypertarget{class_tile_a98634abbd93fa13d0578d7103202d03d}{}\label{class_tile_a98634abbd93fa13d0578d7103202d03d}
 
 \begin{DoxyCompactList}\small\item\em Virtual \hyperlink{class_tile}{Tile} destructor. \end{DoxyCompactList}\item 
@@ -38,6 +38,9 @@ S\+D\+L\+\_\+\+Renderer\+Flip \hyperlink{class_tile_ad2d2b3bd012d3a54ccb51f6eb98
 bool \hyperlink{class_tile_aaddc2d065a537489c31de4a566bb0bd5}{get\+Is\+Passable} ()\hypertarget{class_tile_aaddc2d065a537489c31de4a566bb0bd5}{}\label{class_tile_aaddc2d065a537489c31de4a566bb0bd5}
 
 \begin{DoxyCompactList}\small\item\em Returns true if the \hyperlink{class_tile}{Tile} may be entered by a \hyperlink{class_unit}{Unit}. \end{DoxyCompactList}\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{class_tile_a50aa680406e6f9898c24aee23dae3862}{get\+Tex} ()\hypertarget{class_tile_a50aa680406e6f9898c24aee23dae3862}{}\label{class_tile_a50aa680406e6f9898c24aee23dae3862}
+
+\begin{DoxyCompactList}\small\item\em Returns the spritesheet for this \hyperlink{class_tile}{Tile}. \end{DoxyCompactList}\item 
 shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_tile_ac8d11748dbf9b8f57dd2a56f4a733065}{get\+Tile} (dir d)\hypertarget{class_tile_ac8d11748dbf9b8f57dd2a56f4a733065}{}\label{class_tile_ac8d11748dbf9b8f57dd2a56f4a733065}
 
 \begin{DoxyCompactList}\small\item\em Returns pointer to adjacent tile in specified direction. May be nullptr. \end{DoxyCompactList}\item 
@@ -56,44 +59,53 @@ void \hyperlink{class_tile_a94f9e2d35e55c1d1b9f56dbd7816f51a}{set\+Angle} (doubl
 void \hyperlink{class_tile_a801a349b0e7f7500b60af91e5e821f2e}{set\+Flip} (S\+D\+L\+\_\+\+Renderer\+Flip f)\hypertarget{class_tile_a801a349b0e7f7500b60af91e5e821f2e}{}\label{class_tile_a801a349b0e7f7500b60af91e5e821f2e}
 
 \begin{DoxyCompactList}\small\item\em Sets whether the Tile’s sprite is flipped. \end{DoxyCompactList}\item 
+void \hyperlink{class_tile_aef0ce26fbd9688dababd9d66d8e604e7}{set\+Is\+Passable} (bool p)\hypertarget{class_tile_aef0ce26fbd9688dababd9d66d8e604e7}{}\label{class_tile_aef0ce26fbd9688dababd9d66d8e604e7}
+
+\begin{DoxyCompactList}\small\item\em Sets whether the \hyperlink{class_tile}{Tile} may be entered. \end{DoxyCompactList}\item 
 void \hyperlink{class_tile_a8a6429d2adbe3e45c519d86a57b514c3}{set\+Pos} (int x\+Pos, int y\+Pos)\hypertarget{class_tile_a8a6429d2adbe3e45c519d86a57b514c3}{}\label{class_tile_a8a6429d2adbe3e45c519d86a57b514c3}
 
 \begin{DoxyCompactList}\small\item\em Sets where \hyperlink{class_tile}{Tile} thinks it is on a \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
+void \hyperlink{class_tile_a2ec617aea3fcdfb023042e3712d3cdf3}{set\+Tex} (S\+D\+L\+\_\+\+Texture $\ast$t)\hypertarget{class_tile_a2ec617aea3fcdfb023042e3712d3cdf3}{}\label{class_tile_a2ec617aea3fcdfb023042e3712d3cdf3}
+
+\begin{DoxyCompactList}\small\item\em Sets the tile spritesheet. \end{DoxyCompactList}\item 
 void \hyperlink{class_tile_a2557595d030a43cf9b5334df3b7264f7}{set\+Type} (tile\+Type t)\hypertarget{class_tile_a2557595d030a43cf9b5334df3b7264f7}{}\label{class_tile_a2557595d030a43cf9b5334df3b7264f7}
 
 \begin{DoxyCompactList}\small\item\em Sets what kind of tile it is. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{class_tile_a47b5eb2072d4b1978923a480043899c9}{x}\hypertarget{class_tile_a47b5eb2072d4b1978923a480043899c9}{}\label{class_tile_a47b5eb2072d4b1978923a480043899c9}
+double \hyperlink{class_tile_a33219999fbd38d9c9e8e98d09a9b65a5}{angle}\hypertarget{class_tile_a33219999fbd38d9c9e8e98d09a9b65a5}{}\label{class_tile_a33219999fbd38d9c9e8e98d09a9b65a5}
 
-\begin{DoxyCompactList}\small\item\em X-\/position \hyperlink{class_tile}{Tile} believes it holds on a \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
-int \hyperlink{class_tile_a2d87d8813151af6bbd60811964f047a8}{y}\hypertarget{class_tile_a2d87d8813151af6bbd60811964f047a8}{}\label{class_tile_a2d87d8813151af6bbd60811964f047a8}
-
-\begin{DoxyCompactList}\small\item\em Y-\/position \hyperlink{class_tile}{Tile} believes it holds on a \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
-tile\+Type \hyperlink{class_tile_a5aa7ae6350675967edf46400c486a412}{type}\hypertarget{class_tile_a5aa7ae6350675967edf46400c486a412}{}\label{class_tile_a5aa7ae6350675967edf46400c486a412}
-
-\begin{DoxyCompactList}\small\item\em Which type of tile to draw. \end{DoxyCompactList}\item 
-bool \hyperlink{class_tile_afa72b458d549b9533f058e2d2fad0f81}{is\+Passable}
-\item 
+\begin{DoxyCompactList}\small\item\em Angle at which Tile’s sprite is rotated. \end{DoxyCompactList}\item 
 weak\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_tile_af8130191ee5d094e7505fd26f676393c}{E}\hypertarget{class_tile_af8130191ee5d094e7505fd26f676393c}{}\label{class_tile_af8130191ee5d094e7505fd26f676393c}
 
 \begin{DoxyCompactList}\small\item\em Adjacent \hyperlink{class_tile}{Tile} to the East/\+Right. \end{DoxyCompactList}\item 
+S\+D\+L\+\_\+\+Renderer\+Flip \hyperlink{class_tile_a815af374aa83cd0be79bb5553056b15e}{flip}\hypertarget{class_tile_a815af374aa83cd0be79bb5553056b15e}{}\label{class_tile_a815af374aa83cd0be79bb5553056b15e}
+
+\begin{DoxyCompactList}\small\item\em Flip status of Tile’s sprite. \end{DoxyCompactList}\item 
+bool \hyperlink{class_tile_afa72b458d549b9533f058e2d2fad0f81}{is\+Passable}
+\item 
 weak\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_tile_a4c0be3e9600a9694e7e91d54090b37d4}{N}\hypertarget{class_tile_a4c0be3e9600a9694e7e91d54090b37d4}{}\label{class_tile_a4c0be3e9600a9694e7e91d54090b37d4}
 
 \begin{DoxyCompactList}\small\item\em Adjacent \hyperlink{class_tile}{Tile} to the North/\+Up. \end{DoxyCompactList}\item 
 weak\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_tile_abf033f1e7b26d12afacad32dd5f44ea5}{S}\hypertarget{class_tile_abf033f1e7b26d12afacad32dd5f44ea5}{}\label{class_tile_abf033f1e7b26d12afacad32dd5f44ea5}
 
 \begin{DoxyCompactList}\small\item\em Adjacent \hyperlink{class_tile}{Tile} to the South/\+Down. \end{DoxyCompactList}\item 
+S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{class_tile_ab1697dda1927feabb756c0798771c116}{tex}\hypertarget{class_tile_ab1697dda1927feabb756c0798771c116}{}\label{class_tile_ab1697dda1927feabb756c0798771c116}
+
+\begin{DoxyCompactList}\small\item\em Pointer to the spritesheet for this \hyperlink{class_tile}{Tile}. \end{DoxyCompactList}\item 
+tile\+Type \hyperlink{class_tile_a5aa7ae6350675967edf46400c486a412}{type}\hypertarget{class_tile_a5aa7ae6350675967edf46400c486a412}{}\label{class_tile_a5aa7ae6350675967edf46400c486a412}
+
+\begin{DoxyCompactList}\small\item\em Which type of tile to draw. \end{DoxyCompactList}\item 
 weak\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_tile_ae204f0d7ecc0da698dba11c9c33c3deb}{W}\hypertarget{class_tile_ae204f0d7ecc0da698dba11c9c33c3deb}{}\label{class_tile_ae204f0d7ecc0da698dba11c9c33c3deb}
 
 \begin{DoxyCompactList}\small\item\em Adjacent \hyperlink{class_tile}{Tile} to the West/\+Left. \end{DoxyCompactList}\item 
-double \hyperlink{class_tile_a33219999fbd38d9c9e8e98d09a9b65a5}{angle}\hypertarget{class_tile_a33219999fbd38d9c9e8e98d09a9b65a5}{}\label{class_tile_a33219999fbd38d9c9e8e98d09a9b65a5}
+int \hyperlink{class_tile_a47b5eb2072d4b1978923a480043899c9}{x}\hypertarget{class_tile_a47b5eb2072d4b1978923a480043899c9}{}\label{class_tile_a47b5eb2072d4b1978923a480043899c9}
 
-\begin{DoxyCompactList}\small\item\em Angle at which Tile’s sprite is rotated. \end{DoxyCompactList}\item 
-S\+D\+L\+\_\+\+Renderer\+Flip \hyperlink{class_tile_a815af374aa83cd0be79bb5553056b15e}{flip}\hypertarget{class_tile_a815af374aa83cd0be79bb5553056b15e}{}\label{class_tile_a815af374aa83cd0be79bb5553056b15e}
+\begin{DoxyCompactList}\small\item\em X-\/position \hyperlink{class_tile}{Tile} believes it holds on a \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
+int \hyperlink{class_tile_a2d87d8813151af6bbd60811964f047a8}{y}\hypertarget{class_tile_a2d87d8813151af6bbd60811964f047a8}{}\label{class_tile_a2d87d8813151af6bbd60811964f047a8}
 
-\begin{DoxyCompactList}\small\item\em Flip status of Tile’s sprite. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Y-\/position \hyperlink{class_tile}{Tile} believes it holds on a \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
