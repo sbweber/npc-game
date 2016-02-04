@@ -7,6 +7,19 @@
   class Unit
   {
   public:
+    Unit();
+    //!< Unit constructor
+    long attack();
+    //!< Returns the amount of damage the attack should deal (before defenses).
+    void fullHeal();
+    //!< Restores all HP.
+    void receiveAttack(long damage);
+    //!< Given an attack, takes damage based on stats.
+  protected:
+    long maxHP;
+    //!< Unit's maximum HP.
+    long currHP;
+    //!< Unit's current HP.
   };
 
 #endif

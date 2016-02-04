@@ -73,7 +73,7 @@
   void quit(const string err = "", int errtype = -1,
           SDL_Renderer *ren = nullptr, SDL_Window *win = nullptr);
   //!< Quits the program, logging an error if given one.
-  long int rng(long int min, long int max);
+  long rng(long min, long max);
   //!< My wrapper for rand(). Better than a naked call, still flawed.
 
 #endif

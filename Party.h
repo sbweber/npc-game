@@ -29,7 +29,7 @@
     unique_ptr<Terr>& getTerr();
     //!< Returns the current Terr.
     void move(dir d, bool interrupt = true);
-    //!< Move player's Sprite. Load new Terr if entering a Warp
+    //!< Move player's Sprite. Interrupt flag determines if actionQ cleared.
     void setLocation(int x, int y);
     //!< Sets the Party's location on the terr to (x, y).
     void setLocation(shared_ptr<Tile> tile);

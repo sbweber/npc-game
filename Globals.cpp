@@ -40,12 +40,12 @@ void quit(const string err, int errtype, SDL_Renderer *ren, SDL_Window *win)
 }  // void quit()
 
 
-long int rng(long int min, long int max)
+long rng(long min, long max)
 {
   int randNum;
   if (min > max)
   {
-    long int temp = min;
+    long temp = min;
     min = max;
     max = temp;
   }  // if (min > max)
@@ -63,5 +63,5 @@ long int rng(long int min, long int max)
   }  // while die cannot finish iteration, reroll and increment reseed counter.
   randNum = randNum % (max - min + 1) + min;
   return randNum;
-}  // const long int rng(long int min, long int max)
+}  // const long rng(long min, long max)
 

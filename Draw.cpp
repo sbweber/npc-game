@@ -136,32 +136,6 @@ void drawRebind(SDL_Renderer *ren, TTF_Font* font)
 }  // void drawRebind(SDL_Renderer *ren)
 
 
-void drawScreen(gameState &state, TTF_Font* font, unique_ptr<Party> &party,
-        unique_ptr<Button> &toGame)
-{
-  // when things change (any event happens): clear the renderer, refill it.
-  // Draw the background first, then the chars on top of it.
-  SDL_RenderClear(party->getRen());
-  switch (state)
-  {
-  case BATTLE:
-    drawBattle(party->getRen(), font);
-    break;
-  case MAP:
-    drawMap(party);
-    break;
-  case REBIND:
-    drawRebind(party->getRen(), font);
-    break;
-  case TITLE:
-    drawTitle(party->getRen(), toGame);
-    break;
-  default:
-    break;
-  }
-}  // void drawScreen()
-
-
 bool drawSprite(shared_ptr<Tile> tile, unique_ptr<Party> &party, int i, int j)
 {
   int sc = 0, vSpline = 0, hSpline = 0;
@@ -216,12 +190,13 @@ bool drawSprite(shared_ptr<Tile> tile, unique_ptr<Party> &party, int i, int j)
 }//void drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
 
 
-void drawTitle(SDL_Renderer *ren, unique_ptr<Button> &toGame)
+void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons)
 {
   SDL_RenderClear(ren);
   SDL_Texture* bg = loadTexture("Title.png", ren);
   renderBackground(bg, ren);
-  toGame->render(ren);
+  for (unique_ptr<Button> &button : buttons)
+    button->render(ren);
   SDL_RenderPresent(ren);
 }  // void drawTitle(SDL_Renderer *ren)
 

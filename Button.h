@@ -19,8 +19,6 @@
     ~Button();
     bool buttonClick(SDL_MouseButtonEvent &click);
     //!< Returns true if Button was clicked
-    SDL_Texture* getPic();
-    //!< Returns Button's background picture
     void render(SDL_Renderer *ren);
     //!< Draws Button on the renderer
   protected:
@@ -29,7 +27,7 @@
     SDL_Texture* pic;
     //!< Button's background picture
     SDL_Texture* text;
-    //!< Button's optional foreground text, as a picture
+    //!< Button's optional foreground text, as a texture
   };
 
 

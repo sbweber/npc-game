@@ -19,13 +19,10 @@
   //!< Draws the overworld map for exploration. Returns true if splining.
   void drawRebind(SDL_Renderer *ren, TTF_Font* font);
   //!< Draws the screen for rebinding keys.
-  void drawScreen(gameState &state, TTF_Font* font, unique_ptr<Party> &party,
-          unique_ptr<Button> &toGame);
-  //!< Chooses what kind of screen to draw based on current gamestate.
   bool drawSprite(shared_ptr<Tile> tile,
           unique_ptr<Party> &party, int i, int j);
   //!< Draws a single Sprite on the map without redrawing the map.
-  void drawTitle(SDL_Renderer *ren, unique_ptr<Button> &toGame);
+  void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons);
   //!< Draws the title screen.
 
 #endif

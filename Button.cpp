@@ -2,6 +2,7 @@
 
 #include "Button.h"
 
+
 Button::Button(SDL_Renderer *ren, const string &file, int x, int y, int w,
         int h, TTF_Font *font, const string &str)
 {
@@ -16,11 +17,13 @@ Button::Button(SDL_Renderer *ren, const string &file, int x, int y, int w,
     text = nullptr;
 }  // Button constructor
 
+
 Button::~Button()
 {
   SDL_DestroyTexture(pic);
   SDL_DestroyTexture(text);
 }  // Button::~Button()
+
 
 bool Button::buttonClick(SDL_MouseButtonEvent &click)
 {
@@ -52,16 +55,12 @@ bool Button::buttonClick(SDL_MouseButtonEvent &click)
   return false;  // did not click on button
 }  // bool buttonClick(SDL_Rect &button, SDL_MouseButtonEvent &click)
 
-SDL_Texture* Button::getPic()
-{
-  return pic;
-}  // SDL_Texture* Button::getPic()
 
 void Button::render(SDL_Renderer *ren)
 {
   SDL_Rect clips[2];
   getClips(clips, 2, 2, 240, 100);
-  renderTexture(pic, ren, SCREEN_WIDTH / 2 - 120, 300, &clips[0]);
+  renderTexture(pic, ren, button.x, button.y, &clips[0]);
   if (text)
     renderTexture(text, ren, button);
 }  // void Button::render(SDL_Renderer *ren)

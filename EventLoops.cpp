@@ -40,6 +40,8 @@ bool loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party)
   {
   case SDL_KEYDOWN:
     break;
+  case SDL_MOUSEBUTTONDOWN:
+    break;
   default:
     break;
   }
@@ -113,16 +115,19 @@ bool loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font)
 
 bool loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
 {
-  unique_ptr<Button> toGame(new Button(party->getRen(), "Button.png",
+  vector<unique_ptr<Button> > buttons;
+  buttons.emplace_back(new Button(party->getRen(), "Button.png",
           SCREEN_WIDTH / 2 - 120, 300, 240, 100, font, "To Game"));
-  drawTitle(party->getRen(), toGame);
+  buttons.emplace_back(new Button(party->getRen(), "Button.png",
+          SCREEN_WIDTH / 2 - 120, 450, 240, 100, font, "Quit"));
+  drawTitle(party->getRen(), buttons);
   switch (e.type)
   {
   case SDL_KEYDOWN:
     // TODO: use arrow keys to select button; enter/interact to depress button
     break;
   case SDL_MOUSEBUTTONDOWN:
-    if (toGame->buttonClick(e.button))
+    if (buttons[0]->buttonClick(e.button))
     {
       party->changeTerr("0,0.txt");
       party->setState(MAP);
@@ -130,10 +135,13 @@ bool loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
       SDL_Event* wait = new SDL_Event();
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
     }
+    else if (buttons[1]->buttonClick(e.button))
+      return true;
     // click on button to depress button
     break;
   case SDL_MOUSEBUTTONUP:
     // TODO: follow through on buttonclick iff buttonup is also in button area
+    // This functionality actually appropriate as part of buttonClick()
     break;
   case SDL_MOUSEMOTION:
     // TODO: mouseover button to select button 
@@ -149,6 +157,7 @@ bool mainLoop(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
 {
   bool quit = false;
   quit = loopAnyState(e, party);
+//  drawScreen(font, party);
   if (quit)
     return true;
   switch (party->getState())
