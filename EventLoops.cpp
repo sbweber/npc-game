@@ -127,7 +127,7 @@ bool loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
     // TODO: use arrow keys to select button; enter/interact to depress button
     break;
   case SDL_MOUSEBUTTONDOWN:
-    if (buttons[0]->buttonClick(e.button))
+    if (buttons[0]->buttonClick(party->getRen(), e.button))
     {
       party->changeTerr("0,0.txt");
       party->setState(MAP);
@@ -135,7 +135,7 @@ bool loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
       SDL_Event* wait = new SDL_Event();
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
     }
-    else if (buttons[1]->buttonClick(e.button))
+    else if (buttons[1]->buttonClick(party->getRen(), e.button))
       return true;
     // click on button to depress button
     break;

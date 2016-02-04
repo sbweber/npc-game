@@ -25,7 +25,7 @@ Button::~Button()
 }  // Button::~Button()
 
 
-bool Button::buttonClick(SDL_MouseButtonEvent &click)
+bool Button::buttonClick(SDL_Renderer *ren, SDL_MouseButtonEvent &click)
 {
   SDL_Event e;
   SDL_MouseButtonEvent release;
@@ -34,12 +34,16 @@ bool Button::buttonClick(SDL_MouseButtonEvent &click)
   if ((click.x >= button.x) && (click.x <= (button.x + button.w)) &&
           (click.y >= button.y) && (click.y <= (button.y + button.h)))
   {
+    render(ren, true);
+    SDL_RenderPresent(ren);
     while (true)
     {
       if (SDL_PollEvent(&e))
       {
         if (e.type == SDL_MOUSEBUTTONUP)
         {
+          render(ren, false);
+          SDL_RenderPresent(ren);
           release = e.button;
           if ((release.x >= button.x) &&
                   (release.x <= (button.x + button.w)) &&
@@ -56,11 +60,14 @@ bool Button::buttonClick(SDL_MouseButtonEvent &click)
 }  // bool buttonClick(SDL_Rect &button, SDL_MouseButtonEvent &click)
 
 
-void Button::render(SDL_Renderer *ren)
+void Button::render(SDL_Renderer *ren, bool isClicking)
 {
   SDL_Rect clips[2];
   getClips(clips, 2, 2, 240, 100);
-  renderTexture(pic, ren, button.x, button.y, &clips[0]);
+  if (isClicking)
+    renderTexture(pic, ren, button.x, button.y, &clips[1]);
+  else
+    renderTexture(pic, ren, button.x, button.y, &clips[0]);
   if (text)
     renderTexture(text, ren, button);
 }  // void Button::render(SDL_Renderer *ren)

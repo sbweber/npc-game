@@ -17,9 +17,9 @@
      *   filename for the background pic. Text and font are optional.
      */
     ~Button();
-    bool buttonClick(SDL_MouseButtonEvent &click);
+    bool buttonClick(SDL_Renderer *ren, SDL_MouseButtonEvent &click);
     //!< Returns true if Button was clicked
-    void render(SDL_Renderer *ren);
+    void render(SDL_Renderer *ren, bool isClicking = false);
     //!< Draws Button on the renderer
   protected:
     SDL_Rect button;
