@@ -44,6 +44,7 @@
 
   using namespace std;
 
+
   enum dir
   {
     NORTH,
@@ -53,6 +54,7 @@
     UNDEFINED_DIRECTION
   };
 
+
   enum gameState
   {
     BATTLE,
@@ -60,6 +62,7 @@
     REBIND,
     TITLE
   };
+
 
   // Globals.cpp
   void logError(const string &msg, ostream &os = cerr);

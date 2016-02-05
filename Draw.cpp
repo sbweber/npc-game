@@ -190,13 +190,20 @@ bool drawSprite(shared_ptr<Tile> tile, unique_ptr<Party> &party, int i, int j)
 }//void drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
 
 
-void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons)
+void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons,
+        int x, int y)
 {
   SDL_RenderClear(ren);
   SDL_Texture* bg = loadTexture("Title.png", ren);
   renderBackground(bg, ren);
   for (unique_ptr<Button> &button : buttons)
-    button->render(ren);
+  {
+    button->render(ren, buttonUp);
+    if (button->mouseOnButton(x, y))
+      button->render(ren, buttonSelected);
+    else
+      button->render(ren, buttonUp);
+  }
   SDL_RenderPresent(ren);
 }  // void drawTitle(SDL_Renderer *ren)
 

@@ -6,6 +6,14 @@
   #include "Render.h"
   #include "Globals.h"
 
+  enum buttonState
+  {
+    buttonUp,
+    buttonClicked,
+    buttonSelected,
+  };
+
+
   //! Describes a clickable button.
   class Button
   {
@@ -19,7 +27,13 @@
     ~Button();
     bool buttonClick(SDL_Renderer *ren, SDL_MouseButtonEvent &click);
     //!< Returns true if Button was clicked
-    void render(SDL_Renderer *ren, bool isClicking = false);
+    bool mouseOnButton(int x, int y);
+    //!< Returns true if mouse is over the button (x/y coords).
+    bool mouseOnButton(SDL_MouseButtonEvent &mouse);
+    //!< Returns true if mouse is over the button (click).
+    bool mouseOnButton(SDL_MouseMotionEvent &mouse);
+    //!< Returns true if mouse is over the button (mouseover).
+    void render(SDL_Renderer *ren, buttonState state);
     //!< Draws Button on the renderer
   protected:
     SDL_Rect button;

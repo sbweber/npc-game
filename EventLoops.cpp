@@ -26,6 +26,8 @@ bool loopAnyState(SDL_Event &e, unique_ptr<Party> &party)
     if (e.key.keysym == stateQuit)
       return true;
     break;
+  case SDL_QUIT:
+    return true;
   default:
     break;
   }  // switch (event type)
@@ -116,11 +118,13 @@ bool loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font)
 bool loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
 {
   vector<unique_ptr<Button> > buttons;
+  int x, y;
   buttons.emplace_back(new Button(party->getRen(), "Button.png",
           SCREEN_WIDTH / 2 - 120, 300, 240, 100, font, "To Game"));
   buttons.emplace_back(new Button(party->getRen(), "Button.png",
           SCREEN_WIDTH / 2 - 120, 450, 240, 100, font, "Quit"));
-  drawTitle(party->getRen(), buttons);
+  SDL_GetMouseState(&x, &y);
+  drawTitle(party->getRen(), buttons, x, y);
   switch (e.type)
   {
   case SDL_KEYDOWN:
@@ -138,13 +142,6 @@ bool loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
     else if (buttons[1]->buttonClick(party->getRen(), e.button))
       return true;
     // click on button to depress button
-    break;
-  case SDL_MOUSEBUTTONUP:
-    // TODO: follow through on buttonclick iff buttonup is also in button area
-    // This functionality actually appropriate as part of buttonClick()
-    break;
-  case SDL_MOUSEMOTION:
-    // TODO: mouseover button to select button 
     break;
   default:
     break;

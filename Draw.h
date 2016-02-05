@@ -22,7 +22,8 @@
   bool drawSprite(shared_ptr<Tile> tile,
           unique_ptr<Party> &party, int i, int j);
   //!< Draws a single Sprite on the map without redrawing the map.
-  void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons);
+  void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons,
+          int x, int y);
   //!< Draws the title screen.
 
 #endif
