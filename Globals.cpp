@@ -2,6 +2,15 @@
 
 #include "Globals.h"
 
+void eventQuit()
+{
+  SDL_Event *q = new SDL_Event();
+  q->type = SDL_QUIT;
+  SDL_FlushEvents(0, UINT32_MAX);
+  SDL_PushEvent(q);
+}  // void eventQuit()
+
+
 void logError(const string &msg, ostream &os)
 {
 	os << msg << endl << endl;
@@ -19,10 +28,10 @@ SDL_Event pressAnyKey()
   SDL_Event e;
   SDL_FlushEvent(SDL_KEYDOWN);
   SDL_FlushEvent(SDL_MOUSEBUTTONDOWN);
-  while (true)
-    if (SDL_PollEvent(&e))
-      if (e.type == SDL_KEYDOWN || e.type == SDL_MOUSEBUTTONDOWN)
-        return e;
+  SDL_WaitEvent(&e);
+  while (e.type != SDL_KEYDOWN && e.type != SDL_MOUSEBUTTONDOWN)
+    SDL_WaitEvent(&e);
+  return e;
 }  // void pressAnyKey()
 
 

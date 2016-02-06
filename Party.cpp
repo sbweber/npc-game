@@ -11,6 +11,7 @@ Party::Party(SDL_Renderer *ren)
   if (ren)
     sprite.reset(new Sprite(ren, "Hero.png", "Roland", "Hero"));
   terr.reset(new Terr(ren, ""));
+  cursorPos = 0;
 }  // Party::Party(SDL_Renderer *ren)
 
 
@@ -23,6 +24,21 @@ void Party::changeTerr(const string& newTerr)
 {
   terr->loadMap(newTerr);
 }  // void Party::changeTerr(string& newTerr)
+
+
+void Party::decCursorPos(int max)
+{
+  if (cursorPos == 0)
+    cursorPos = max - 1;
+  else
+    cursorPos--;
+}  // void Party::decCursorPos(int max)
+
+
+int Party::getCursorPos()
+{
+  return cursorPos;
+}  // int Party::getCursorPos()
 
 
 SDL_Renderer* Party::getRen()
@@ -49,12 +65,27 @@ unique_ptr<Terr>& Party::getTerr()
 }  // unique_ptr<Terr> Party::getTerr()
 
 
+void Party::incCursorPos(int max)
+{
+  if (cursorPos >= (max - 1))
+    cursorPos = 0;
+  else
+    cursorPos++;
+}  // void Party::incCursorPos(int max)
+
+
 void Party::move(dir d, bool interrupt)
 {
   if (interrupt)
     sprite->clearActs();
   terr->moveSprite(sprite, d);
 }  // void Party::move(dir d)
+
+
+void Party::resetCursorPos()
+{
+  cursorPos = 0;
+}  // void Party::resetCursorPos()
 
 
 void Party::setLocation(int x, int y)

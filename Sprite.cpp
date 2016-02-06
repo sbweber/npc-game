@@ -141,7 +141,7 @@ void Sprite::renderSpeech(SDL_Renderer *ren, const string &str,
     SDL_RenderPresent(ren);
     SDL_Event e = pressAnyKey();
     if (e.type == SDL_KEYDOWN && e.key.keysym == stateQuit)
-      quit("Told to quit while in text", 0, ren);
+      eventQuit();
   }
 }  // void renderSpeech()
 

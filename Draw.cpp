@@ -108,22 +108,19 @@ void drawRebind(SDL_Renderer *ren, TTF_Font* font)
   renderTextbox(ren, font, str);
   SDL_RenderPresent(ren);
   SDL_Event e;
-  bool cont = true;
-  while (cont)
-    if (SDL_PollEvent(&e))
-      if (e.type == SDL_KEYDOWN)
-      {
-        if ((e.key.keysym.sym != SDLK_LALT) &&
-                (e.key.keysym.sym != SDLK_RALT) &&
-                (e.key.keysym.sym != SDLK_LSHIFT) &&
-                (e.key.keysym.sym != SDLK_RSHIFT) &&
-                (e.key.keysym.sym != SDLK_LCTRL) &&
-                (e.key.keysym.sym != SDLK_RCTRL))
-        {
-          rebind(interact, e.key.keysym);
-          cont = false;
-        }
-      }
+  SDL_WaitEvent(&e);
+  if (e.type == SDL_KEYDOWN)
+  {
+    if ((e.key.keysym.sym != SDLK_LALT) &&
+            (e.key.keysym.sym != SDLK_RALT) &&
+            (e.key.keysym.sym != SDLK_LSHIFT) &&
+            (e.key.keysym.sym != SDLK_RSHIFT) &&
+            (e.key.keysym.sym != SDLK_LCTRL) &&
+            (e.key.keysym.sym != SDLK_RCTRL))
+    {
+      rebind(interact, e.key.keysym);
+    }
+  }
   const char* newKey = SDL_GetKeyName(interact.sym);
   str.clear();
   str += "New key for interact button: ";
@@ -191,10 +188,11 @@ bool drawSprite(shared_ptr<Tile> tile, unique_ptr<Party> &party, int i, int j)
 
 
 void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons,
-        int x, int y)
+        int x, int y, int cursor)
 {
   SDL_RenderClear(ren);
   SDL_Texture* bg = loadTexture("Title.png", ren);
+  SDL_Texture* c = loadTexture("ButtonCursor.png", ren);
   renderBackground(bg, ren);
   for (unique_ptr<Button> &button : buttons)
   {
@@ -204,6 +202,9 @@ void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons,
     else
       button->render(ren, buttonUp);
   }
+  renderTexture(c, ren, buttons[cursor]->getPos());
   SDL_RenderPresent(ren);
+  SDL_DestroyTexture(bg);
+  SDL_DestroyTexture(c);
 }  // void drawTitle(SDL_Renderer *ren)
 

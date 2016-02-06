@@ -9,18 +9,18 @@
   #include "Party.h"
 
   // EventLoops.cpp
-  bool loopAnyState(SDL_Event &e, unique_ptr<Party> &party);
+  void loopAnyState(SDL_Event &e, unique_ptr<Party> &party);
   //!< Loop to handle input that’s treated the same in all states.
-  bool loopBattle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party);
+  void loopBattle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party);
   //!< Loop to process actions in battle state.
-  bool loopMap(SDL_Event &e, unique_ptr<Party> &party);
+  void loopMap(SDL_Event &e, unique_ptr<Party> &party);
   //!< Loop to process inputs while on overworld map.
-  bool loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font);
+  void loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font);
   //!< Loop to process inputs and events while in the key binding menu.
-  bool loopTitle(SDL_Event &e, TTF_Font *font,
+  void loopTitle(SDL_Event &e, TTF_Font *font,
           unique_ptr<Party> &party, vector<unique_ptr<Button> > buttons);
   //!< Loop to process inputs on the title screen.
-  bool mainLoop(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party);
+  void mainLoop(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party);
   //!< Loop to select which event loop to run.
 
 #endif

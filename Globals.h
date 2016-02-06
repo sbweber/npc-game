@@ -65,6 +65,8 @@
 
 
   // Globals.cpp
+  void eventQuit();
+  //!< Pushes an SDL_Quit type event onto the event queue and clears the queue.
   void logError(const string &msg, ostream &os = cerr);
   //!< Logs an error to the output of choice, cerr by default.
   void logSDLError(const string &msg, ostream &os = cerr);

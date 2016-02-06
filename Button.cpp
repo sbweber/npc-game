@@ -34,37 +34,38 @@ bool Button::buttonClick(SDL_Renderer *ren, SDL_MouseButtonEvent &click)
   {
     render(ren, buttonClicked);
     SDL_RenderPresent(ren);
-    while (true)
+    SDL_WaitEvent(&e);
+    if (e.type == SDL_MOUSEBUTTONUP)
     {
-      if (SDL_PollEvent(&e))
+      render(ren, buttonUp);
+      SDL_RenderPresent(ren);
+      if (mouseOnButton(e.button))
+        return true;
+      else
+        return false;
+    }  // wait for event == mousebuttonup
+    else if (e.type == SDL_MOUSEMOTION)
+    {
+      if (mouseOnButton(e.motion))
       {
-        if (e.type == SDL_MOUSEBUTTONUP)
-        {
-          render(ren, buttonUp);
-          SDL_RenderPresent(ren);
-          if (mouseOnButton(e.button))
-            return true;
-          else
-            return false;
-        }  // wait for event == mousebuttonup
-        else if (e.type == SDL_MOUSEMOTION)
-        {
-          if (mouseOnButton(e.motion))
-          {
-            render(ren, buttonClicked);
-            SDL_RenderPresent(ren);
-          }
-          else
-          {
-            render(ren, buttonUp);
-            SDL_RenderPresent(ren);
-          }
-        }  // If mouse moves off button, lift it.
-      }  // wait for event
-    }  // loop while waiting
+        render(ren, buttonClicked);
+        SDL_RenderPresent(ren);
+      }
+      else
+      {
+        render(ren, buttonUp);
+        SDL_RenderPresent(ren);
+      }
+    }  // If mouse moves off button, lift it.
   }  // if mousebuttondown on button
   return false;  // did not click on button
 }  // bool buttonClick(SDL_Rect &button, SDL_MouseButtonEvent &click)
+
+
+SDL_Rect Button::getPos()
+{
+  return button;
+}  // SDL_Rect Button::getPos()
 
 
 bool Button::mouseOnButton(int x, int y)
@@ -92,6 +93,11 @@ void Button::render(SDL_Renderer *ren, buttonState state)
 {
   SDL_Rect clips[3];
   getClips(clips, 3, 3, 240, 100);
+  SDL_Rect dest;
+  dest.x = button.x + button.w / 10;
+  dest.y = button.y + button.h / 10;
+  dest.w = button.w * 8 / 10;
+  dest.h = button.h * 8 / 10;
   switch (state)
   {
   case buttonUp:
@@ -105,6 +111,6 @@ void Button::render(SDL_Renderer *ren, buttonState state)
     break;
   }
   if (text)
-    renderTexture(text, ren, button);
+    renderTexture(text, ren, dest);
 }  // void Button::render(SDL_Renderer *ren)
 
