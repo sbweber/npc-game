@@ -40,9 +40,9 @@
     //!< Returns the Tile under the given Sprite.
     int getWidth();
     //!< Returns the width (w) of Terr.
-    void interactSprite(shared_ptr<Sprite> sprite);
+    gameState interactSprite(shared_ptr<Sprite> sprite);
     //!< Intelligently interact with Sprite being faced, if any.
-    void interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> target);
+    gameState interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> target);
     //!< Intelligently interact between two sprites.
     bool isOccupied(shared_ptr<Tile> tile);
     //!< Return true if the Tile has a Sprite associated with it.

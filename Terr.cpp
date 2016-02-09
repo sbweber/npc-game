@@ -184,30 +184,32 @@ int Terr::getWidth()
 }  // int Terr::getWidth()
 
 
-void Terr::interactSprite(shared_ptr<Sprite> sprite)
+gameState Terr::interactSprite(shared_ptr<Sprite> sprite)
 {
   shared_ptr<Tile> tile = getTile(sprite);
   if (!tile)
   {
     logError("Sprite not on map!");
-    return;
+    return MAP;
   }  // Sprite must be on map.
   tile = tile->getTile(sprite->getFacing());
   if (!tile)
-    return;  // not an error, just invalid. Interacting with edge of map.
+    return MAP;  // not an error, just invalid. Interacting with edge of map.
   if (isOccupied(tile))
-    interactSprites(sprite, getSprite(tile));
+    return interactSprites(sprite, getSprite(tile));
+  return MAP;
 }  // void Terr::interactSprite(shared_ptr<Sprite> sprite)
 
 
-void Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> target)
+gameState Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> target)
 {
   if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
-  {
     setSprite(target, nullptr);
-  }  // Test interaction: Hero kills test NPC (removes from map).
   else if (sprite->getPurpose() == "Hero")
     target->say(ren);
+  if (sprite->getPurpose() == "Hero" && target->getPurpose() == "FightTest")
+    return BATTLE;
+  return MAP;
 }  // void Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> sprite)
 
 

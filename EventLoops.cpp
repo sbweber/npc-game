@@ -9,21 +9,23 @@ void loopAnyState(SDL_Event &e, unique_ptr<Party> &party)
   case SDL_KEYDOWN:
     if (e.key.keysym == stateBattle)
       party->setState(BATTLE);  // debug command startbattle
-    if (e.key.keysym == stateMap1)
+    else if (e.key.keysym == stateMap1)
     {
       party->changeTerr("0,0.txt");
       party->setState(MAP);
       party->setLocation(4, 3);
     }  // debug command map1
-    if (e.key.keysym == stateMap2)
+    else if (e.key.keysym == stateMap2)
     {
       party->changeTerr("0,1.txt");
       party->setState(MAP);
       party->setLocation(1, 1);
     }  // debug command map2
-    if (e.key.keysym == stateRebind)
+    else if (e.key.keysym == stateRebind)
       party->setState(REBIND);  // debug command go to rebind menu
-    if (e.key.keysym == stateQuit)
+    else if (e.key.keysym == stateTitle)
+      party->setState(TITLE);
+    else if (e.key.keysym == stateQuit)
       eventQuit();
     break;
   case SDL_QUIT:
@@ -69,7 +71,7 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party)
     if (e.key.keysym == dirRight)
       party->move(EAST);
     if (e.key.keysym == interact)
-      party->getTerr()->interactSprite(party->getSprite());
+      party->setState(party->getTerr()->interactSprite(party->getSprite()));
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = party->tileClick(e.button);
@@ -88,7 +90,7 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party)
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
       break;
     case INTERACT:
-      party->getTerr()->interactSprite(party->getSprite());
+      party->setState(party->getTerr()->interactSprite(party->getSprite()));
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
       break;
     case BAD_ACTION:
