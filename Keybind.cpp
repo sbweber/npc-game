@@ -31,8 +31,8 @@ void loadKeys()
   stateMap1.sym = SDLK_1;
   stateMap2.sym = SDLK_2;
   stateRebind.sym = SDLK_9;
-  stateTitle.sym = SDLK_0;
   // permanent key commands
+  stateTitle.sym = SDLK_F12;
   stateQuit.sym = SDLK_F4;
   stateQuit.mod = KMOD_ALT;
   back.sym = SDLK_ESCAPE;
