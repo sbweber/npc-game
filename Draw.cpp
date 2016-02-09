@@ -2,15 +2,23 @@
 
 #include "Draw.h"
 
-
-void drawBattle(SDL_Renderer *ren, TTF_Font* font)
-{ // TODO: All battle functionality stubbed or otherwise incomplete
+void drawBattle(SDL_Renderer *ren, TTF_Font* font,
+        vector<unique_ptr<Button> > &buttons, int x, int y, int cursor)
+{
   SDL_RenderClear(ren);
-  // draw graphics visuals (ignoring this step for now, except for...)
-  // ...including text box at bottom
-  // choose and print next line of text (damage report, etc)
+  SDL_Texture* c = loadTexture("ButtonCursor.png", ren);
   renderTextbox(ren, font, "");
+  for (unique_ptr<Button> &button : buttons)
+  {
+    button->render(ren, buttonUp);
+    if (button->mouseOnButton(x, y))
+      button->render(ren, buttonSelected);
+    else
+      button->render(ren, buttonUp);
+  }
+  renderTexture(c, ren, buttons[cursor]->getPos());
   SDL_RenderPresent(ren);
+  SDL_DestroyTexture(c);
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 
 

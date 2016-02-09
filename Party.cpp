@@ -26,7 +26,7 @@ void Party::changeTerr(const string& newTerr)
 }  // void Party::changeTerr(string& newTerr)
 
 
-void Party::decCursorPos(int max)
+void Party::decCursorPos(unsigned int max)
 {
   if (cursorPos == 0)
     cursorPos = max - 1;
@@ -35,7 +35,7 @@ void Party::decCursorPos(int max)
 }  // void Party::decCursorPos(int max)
 
 
-int Party::getCursorPos()
+unsigned int Party::getCursorPos()
 {
   return cursorPos;
 }  // int Party::getCursorPos()
@@ -65,7 +65,7 @@ unique_ptr<Terr>& Party::getTerr()
 }  // unique_ptr<Terr> Party::getTerr()
 
 
-void Party::incCursorPos(int max)
+void Party::incCursorPos(unsigned int max)
 {
   if (cursorPos >= (max - 1))
     cursorPos = 0;

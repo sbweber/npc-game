@@ -40,17 +40,50 @@ void loopAnyState(SDL_Event &e, unique_ptr<Party> &party)
 
 void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party)
 {
-  drawBattle(party->getRen(), font);
+  vector<unique_ptr<Button> > buttons;
+  int x, y;
+  buttons.emplace_back(new Button(party->getRen(), "Button.png",
+    100, 643, 240, 100, font, "Fight"));
+  buttons.emplace_back(new Button(party->getRen(), "Button.png",
+    684, 643, 240, 100, font, "Run"));
+  SDL_GetMouseState(&x, &y);
+  if (party->getCursorPos() > buttons.size())
+    party->resetCursorPos();
+  drawBattle(party->getRen(), font, buttons, x, y, party->getCursorPos());
   switch (e.type)
   {
   case SDL_KEYDOWN:
+    if (e.key.keysym == dirLeft)
+      party->decCursorPos(buttons.size());
+    else if (e.key.keysym == dirRight)
+      party->incCursorPos(buttons.size());
+    else if (e.key.keysym == interact)
+    {
+      if (party->getCursorPos() == 0)
+        loopBattleFight(font, party);
+      else if (party->getCursorPos() == 1)
+        party->setState(MAP);
+    }
+    SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   case SDL_MOUSEBUTTONDOWN:
+    if (buttons[0]->buttonClick(party->getRen(), e.button))
+      loopBattleFight(font, party);
+    else if (buttons[1]->buttonClick(party->getRen(), e.button))
+      party->setState(MAP);
+    // click on button to depress button
+    SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   default:
     break;
   }
 }  // void loopBattle(SDL_Event &e)
+
+
+void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party)
+{
+
+}  // void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party)
 
 
 void loopMap(SDL_Event &e, unique_ptr<Party> &party)
@@ -124,6 +157,8 @@ void loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
   buttons.emplace_back(new Button(party->getRen(), "Button.png",
           SCREEN_WIDTH / 2 - 120, 450, 240, 100, font, "Quit"));
   SDL_GetMouseState(&x, &y);
+  if (party->getCursorPos() > buttons.size())
+    party->resetCursorPos();
   drawTitle(party->getRen(), buttons, x, y, party->getCursorPos());
   switch (e.type)
   {
@@ -139,7 +174,6 @@ void loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
         party->changeTerr("0,0.txt");
         party->setState(MAP);
         party->setLocation(6, 10);
-        SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
       }
       else if (party->getCursorPos() == 1)
         eventQuit();
@@ -152,11 +186,11 @@ void loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
       party->changeTerr("0,0.txt");
       party->setState(MAP);
       party->setLocation(6, 10);
-      SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     }
     else if (buttons[1]->buttonClick(party->getRen(), e.button))
       eventQuit();
     // click on button to depress button
+    SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   default:
     break;

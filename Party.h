@@ -20,9 +20,9 @@
     //!< Default destructor.
     void changeTerr(const string &newTerr);
     //!< Changes the active Terr.
-    void decCursorPos(int max);
+    void decCursorPos(unsigned int max);
     //!< subtracts one from cursorPos, looping to max if needed.
-    int getCursorPos();
+    unsigned int getCursorPos();
     //!< Returns cursorPos.
     SDL_Renderer* getRen();
     //!< Calls Terr's getRen().
@@ -32,7 +32,7 @@
     //!< Gets gameState.
     unique_ptr<Terr>& getTerr();
     //!< Returns the current Terr.
-    void incCursorPos(int max);
+    void incCursorPos(unsigned int max);
     //!< Adds one to cursorPos, looping to zero if needed.
     void move(dir d, bool interrupt = true);
     //!< Move player's Sprite. Interrupt flag determines if actionQ cleared.
@@ -51,7 +51,7 @@
   protected:
     unique_ptr<Unit> active[4];
     //!< Pointers to the up to four active party members.
-    int cursorPos;
+    unsigned int cursorPos;
     //!< Position of cursor in menus.
     vector<unique_ptr<Unit> > passive;
     //!< Vector of pointers to non-active party members.

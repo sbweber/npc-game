@@ -13,6 +13,8 @@
   //!< Loop to handle input that’s treated the same in all states.
   void loopBattle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party);
   //!< Loop to process actions in battle state.
+  void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party);
+  //!< Subloop for the 'fight' command in battle.
   void loopMap(SDL_Event &e, unique_ptr<Party> &party);
   //!< Loop to process inputs while on overworld map.
   void loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font);
