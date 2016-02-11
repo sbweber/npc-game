@@ -39,7 +39,7 @@ void loopAnyState(SDL_Event &e, unique_ptr<Party> &party)
 
 
 void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party,
-        unique_ptr<vector<Unit> > &enemies)
+        vector<unique_ptr<Unit> > &enemies)
 {
   vector<unique_ptr<Button> > buttons;
   int x, y;
@@ -82,13 +82,16 @@ void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party,
 
 
 void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party,
-        unique_ptr<vector<Unit> > &enemies)
+        vector<unique_ptr<Unit> > &enemies)
 {
-
+  enemies.pop_back();
+  if (enemies.empty())
+    party->setState(MAP);
 }  // void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party)
 
 
-void loopMap(SDL_Event &e, unique_ptr<Party> &party)
+void loopMap(SDL_Event &e, unique_ptr<Party> &party,
+        vector<unique_ptr<Unit> > &enemies)
 {
   shared_ptr<Tile> tile;
   action act(UNDEFINED_DIRECTION, BAD_ACTION);
@@ -96,26 +99,26 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party)
   while(drawMap(party));
   switch (e.type)
   {
-  case SDL_KEYDOWN:
-    if (e.key.keysym == dirUp)
-      party->move(NORTH);
-    if (e.key.keysym == dirLeft)
-      party->move(WEST);
-    if (e.key.keysym == dirDown)
-      party->move(SOUTH);
-    if (e.key.keysym == dirRight)
-      party->move(EAST);
-    if (e.key.keysym == interact)
-      party->setState(party->getTerr()->interactSprite(party->getSprite()));
-    break;
   case SDL_MOUSEBUTTONDOWN:
     tile = party->tileClick(e.button);
     if (tile && tile->getIsPassable())
     {
       party->getTerr()->findPath(party->getTerr()->getTile(party->getSprite()),
-              tile, party->getSprite());
+        tile, party->getSprite());
     }  // If tile can be legally entered, path to it
     break;
+  case SDL_KEYDOWN:
+    party->getSprite()->clearActs();
+    if (e.key.keysym == dirUp)
+      party->getSprite()->pushAct(action(NORTH, MOVE));
+    if (e.key.keysym == dirLeft)
+      party->getSprite()->pushAct(action(WEST, MOVE));
+    if (e.key.keysym == dirDown)
+      party->getSprite()->pushAct(action(SOUTH, MOVE));
+    if (e.key.keysym == dirRight)
+      party->getSprite()->pushAct(action(EAST, MOVE));
+    if (e.key.keysym == interact)
+      party->getSprite()->pushAct(action(UNDEFINED_DIRECTION, INTERACT));
   default:
     act = party->getSprite()->popAct();
     switch (get<1>(act))
@@ -125,7 +128,8 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party)
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
       break;
     case INTERACT:
-      party->setState(party->getTerr()->interactSprite(party->getSprite()));
+      party->setState(move(party->getTerr()->interactSprite(
+              party->getSprite(), enemies)));
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
       break;
     case BAD_ACTION:
@@ -201,7 +205,7 @@ void loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
 
 
 void mainLoop(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party,
-        unique_ptr<vector<Unit> > &enemies)
+        vector<unique_ptr<Unit> > &enemies)
 {
   loopAnyState(e, party);
   switch (party->getState())
@@ -210,7 +214,7 @@ void mainLoop(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party,
     loopBattle(e, font, party, enemies);
     break;
   case MAP:
-    loopMap(e, party);
+    loopMap(e, party, enemies);
     break;
   case REBIND:
     loopRebind(party->getRen(), e, font);

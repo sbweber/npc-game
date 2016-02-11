@@ -6,6 +6,7 @@
   #include "Globals.h"
   #include "Sprite.h"
   #include "Tile.h"
+  #include "Unit.h"
   #include "Warp.h"
 
 
@@ -40,9 +41,11 @@
     //!< Returns the Tile under the given Sprite.
     int getWidth();
     //!< Returns the width (w) of Terr.
-    gameState interactSprite(shared_ptr<Sprite> sprite);
+    gameState interactSprite(shared_ptr<Sprite> sprite,
+            vector<unique_ptr<Unit> > &enemies);
     //!< Intelligently interact with Sprite being faced, if any.
-    gameState interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> target);
+    gameState interactSprites(shared_ptr<Sprite> sprite,
+            shared_ptr<Sprite> target, vector<unique_ptr<Unit> > &enemies);
     //!< Intelligently interact between two sprites.
     bool isOccupied(shared_ptr<Tile> tile);
     //!< Return true if the Tile has a Sprite associated with it.
@@ -71,14 +74,15 @@
     int w;
     //!< map width (in Tiles)
 
-    bool findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> *tiles, shared_ptr<Tile> tile);
+    bool findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> &tiles, shared_ptr<Tile> tile);
     //!< Returns true if a tile in dir d exists and gets you closer on your
     //!< route. Requires a fully loaded table of tuples showing how close the
     //!< tiles are on potential routes.
     void findEnqueue(dir d, priority_queue<tuple<int, shared_ptr<Tile> >,
-            vector<tuple<int, shared_ptr<Tile> > >, greater<tuple<int, shared_ptr<Tile> > > > *searchQ,
-            unordered_map<shared_ptr<Tile>, int> *tiles, tuple<int, shared_ptr<Tile> > t,
-            shared_ptr<Tile> target);
+            vector<tuple<int, shared_ptr<Tile> > >,
+            greater<tuple<int, shared_ptr<Tile> > > > &searchQ,
+            unordered_map<shared_ptr<Tile>, int> &tiles,
+            tuple<int, shared_ptr<Tile> > t, shared_ptr<Tile> target);
     //!< Utility function for findPath(): marks/enqueues tiles.
     int findDistance(shared_ptr<Tile> start, shared_ptr<Tile> end);
     //!< Returns taxicab distance to get to end.

@@ -55,43 +55,51 @@ void Terr::enterTileMessageHandler(const string &message,
 }  // Message Handler for entering a tile
 
 
-bool Terr::findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> *tiles, shared_ptr<Tile> tile)
+bool Terr::findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> &tiles,
+        shared_ptr<Tile> tile)
 {
   if (tile->getTile(d) &&
-          tiles->find(tile->getTile(d)) != tiles->end() &&
-          (tiles->find(tile->getTile(d))->second <
-          tiles->find(tile)->second))
+          tiles.find(tile->getTile(d)) != tiles.end() &&
+          (tiles.find(tile->getTile(d))->second <
+          tiles.find(tile)->second))
     return true;
   return false;
 }  // if tile in dir exists, might be on a route, and is closer, return true.
 
 
 void Terr::findEnqueue(dir d, priority_queue<tuple<int, shared_ptr<Tile>>,
-        vector<tuple<int, shared_ptr<Tile>> >, greater<tuple<int, shared_ptr<Tile>> > > *searchQ,
-        unordered_map<shared_ptr<Tile>, int> *tiles, tuple<int, shared_ptr<Tile>> t, shared_ptr<Tile> target)
+        vector<tuple<int, shared_ptr<Tile>> >,
+        greater<tuple<int, shared_ptr<Tile>> > > &searchQ,
+        unordered_map<shared_ptr<Tile>, int> &tiles,
+        tuple<int, shared_ptr<Tile>> t, shared_ptr<Tile> target)
 {
   shared_ptr<Tile> tile = get<1>(t);
-  if (tile->getTile(d) && tiles->find(tile->getTile(d)) == tiles->end() &&
+  if (tile->getTile(d) && tiles.find(tile->getTile(d)) == tiles.end() &&
           tile->getTile(d)->getIsPassable() &&
           (!isOccupied(tile->getTile(d)) || tile->getTile(d) == target))
   {
-    searchQ->emplace(get<0>(t) + 1 + findDistance(tile->getTile(d), target), tile->getTile(d));
-    tiles->emplace(tile->getTile(d), get<0>(t) + 1);
+    searchQ.emplace(get<0>(t) + 1 + findDistance(tile->getTile(d), target), tile->getTile(d));
+    tiles.emplace(tile->getTile(d), get<0>(t) + 1);
   }
 }  // Enqueues unused tile in a direction from current tile
 
 
-int Terr::findDistance(shared_ptr<Tile> start, shared_ptr<Tile> dest)
+int Terr::findDistance(shared_ptr<Tile> start,
+        shared_ptr<Tile> dest)
 {
-  return (abs(dest->getX() - start->getX()) + abs(dest->getY() - start->getY()));
+  return (abs(dest->getX() - start->getX()) +
+          abs(dest->getY() - start->getY()));
 }  // int Terr::findDistance(shared_ptr<Tile> start, shared_ptr<Tile> dest)
 
 
-void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest, shared_ptr<Sprite> sprite)
+void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest,
+        shared_ptr<Sprite> sprite)
 {
   if (!start || !dest || !sprite)
     return;  // Function assumes non-null start/dest/sprite
-  priority_queue<tuple<int, shared_ptr<Tile>>, vector<tuple<int, shared_ptr<Tile>> >, greater<tuple<int, shared_ptr<Tile>> > > searchQ;
+  priority_queue<tuple<int, shared_ptr<Tile>>,
+          vector<tuple<int, shared_ptr<Tile>> >,
+          greater<tuple<int, shared_ptr<Tile>> > > searchQ;
   unordered_map<shared_ptr<Tile>, int> tiles;
   searchQ.emplace(0 + findDistance(dest, start), dest);
   tiles.emplace(dest, 0 + findDistance(dest, start));
@@ -105,10 +113,10 @@ void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest, shared_ptr<Sp
       found = true;
     else
     {
-      findEnqueue(EAST, &searchQ, &tiles, t, start);
-      findEnqueue(NORTH, &searchQ, &tiles, t, start);
-      findEnqueue(SOUTH, &searchQ, &tiles, t, start);
-      findEnqueue(WEST, &searchQ, &tiles, t, start);
+      findEnqueue(EAST, searchQ, tiles, t, start);
+      findEnqueue(NORTH, searchQ, tiles, t, start);
+      findEnqueue(SOUTH, searchQ, tiles, t, start);
+      findEnqueue(WEST, searchQ, tiles, t, start);
     }  // enqueue tile's neighbors with a distance 1 greater if valid and new
   }  // While search queue not empty and element not found
 
@@ -118,22 +126,22 @@ void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest, shared_ptr<Sp
   shared_ptr<Tile> tile = start;
   while (tile != dest)
   {
-    if (findCheckRoute(EAST, &tiles, tile))
+    if (findCheckRoute(EAST, tiles, tile))
     {
       sprite->pushAct(action(EAST, MOVE));
       tile = tile->getTile(EAST);
     }
-    else if (findCheckRoute(NORTH, &tiles, tile))
+    else if (findCheckRoute(NORTH, tiles, tile))
     {
       sprite->pushAct(action(NORTH, MOVE));
       tile = tile->getTile(NORTH);
     }
-    else if (findCheckRoute(SOUTH, &tiles, tile))
+    else if (findCheckRoute(SOUTH, tiles, tile))
     {
       sprite->pushAct(action(SOUTH, MOVE));
       tile = tile->getTile(SOUTH);
     }
-    else if (findCheckRoute(WEST, &tiles, tile))
+    else if (findCheckRoute(WEST, tiles, tile))
     {
       sprite->pushAct(action(WEST, MOVE));
       tile = tile->getTile(WEST);
@@ -184,7 +192,8 @@ int Terr::getWidth()
 }  // int Terr::getWidth()
 
 
-gameState Terr::interactSprite(shared_ptr<Sprite> sprite)
+gameState Terr::interactSprite(shared_ptr<Sprite> sprite,
+        vector<unique_ptr<Unit> > &enemies)
 {
   shared_ptr<Tile> tile = getTile(sprite);
   if (!tile)
@@ -196,19 +205,23 @@ gameState Terr::interactSprite(shared_ptr<Sprite> sprite)
   if (!tile)
     return MAP;  // not an error, just invalid. Interacting with edge of map.
   if (isOccupied(tile))
-    return interactSprites(sprite, getSprite(tile));
+    return interactSprites(sprite, getSprite(tile), enemies);
   return MAP;
 }  // void Terr::interactSprite(shared_ptr<Sprite> sprite)
 
 
-gameState Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> target)
+gameState Terr::interactSprites(shared_ptr<Sprite> sprite,
+        shared_ptr<Sprite> target, vector<unique_ptr<Unit> > &enemies)
 {
   if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
     setSprite(target, nullptr);
   else if (sprite->getPurpose() == "Hero")
     target->say(ren);
   if (sprite->getPurpose() == "Hero" && target->getPurpose() == "FightTest")
+  {
+    enemies.emplace_back(new Unit());
     return BATTLE;
+  }
   return MAP;
 }  // void Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> sprite)
 
