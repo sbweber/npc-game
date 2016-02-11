@@ -33,7 +33,7 @@ int main(int argc, char **argv)
   // backend vars
   unique_ptr<Party> party(new Party(ren));
   party->setState(TITLE);
-  vector<unique_ptr<Unit> > enemies;
+  vector<shared_ptr<Unit> > enemies;
 
   loadKeys();
 

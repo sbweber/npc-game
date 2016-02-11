@@ -13,8 +13,10 @@
     //!< Returns the amount of damage the attack should deal (before defenses).
     void fullHeal();
     //!< Restores all HP.
-    void receiveAttack(long damage);
-    //!< Given an attack, takes damage based on stats.
+    bool isDead();
+    //!< Returns true if currHP is less than or equal to zero.
+    long receiveAttack(long damage);
+    //!< Given an attack, takes damage based on stats. Returns damage taken.
   protected:
     long maxHP;
     //!< Unit's maximum HP.

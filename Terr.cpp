@@ -193,7 +193,7 @@ int Terr::getWidth()
 
 
 gameState Terr::interactSprite(shared_ptr<Sprite> sprite,
-        vector<unique_ptr<Unit> > &enemies)
+        vector<shared_ptr<Unit> > &enemies)
 {
   shared_ptr<Tile> tile = getTile(sprite);
   if (!tile)
@@ -211,7 +211,7 @@ gameState Terr::interactSprite(shared_ptr<Sprite> sprite,
 
 
 gameState Terr::interactSprites(shared_ptr<Sprite> sprite,
-        shared_ptr<Sprite> target, vector<unique_ptr<Unit> > &enemies)
+        shared_ptr<Sprite> target, vector<shared_ptr<Unit> > &enemies)
 {
   if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
     setSprite(target, nullptr);

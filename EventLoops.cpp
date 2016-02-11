@@ -39,7 +39,7 @@ void loopAnyState(SDL_Event &e, unique_ptr<Party> &party)
 
 
 void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party,
-        vector<unique_ptr<Unit> > &enemies)
+        vector<shared_ptr<Unit> > &enemies)
 {
   vector<unique_ptr<Button> > buttons;
   int x, y;
@@ -82,16 +82,34 @@ void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party,
 
 
 void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party,
-        vector<unique_ptr<Unit> > &enemies)
+        vector<shared_ptr<Unit> > &enemies)
 {
-  enemies.pop_back();
+  long damage = enemies[0]->receiveAttack(party->getUnit(0)->attack());
+  string str = "You attacked the enemy for " + to_string(damage) + " damage!";
+  renderTextbox(party->getRen(), font, str);
+  SDL_RenderPresent(party->getRen());
+  pressAnyKey();
+  if (enemies[0]->isDead())
+  {
+    enemies.pop_back();
+    str = "Enemy defeated!";
+    renderTextbox(party->getRen(), font, str);
+    SDL_RenderPresent(party->getRen());
+    pressAnyKey();
+  }
   if (enemies.empty())
+  {
     party->setState(MAP);
+    str = "You won the battle!";
+    renderTextbox(party->getRen(), font, str);
+    SDL_RenderPresent(party->getRen());
+    pressAnyKey();
+  }
 }  // void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party)
 
 
 void loopMap(SDL_Event &e, unique_ptr<Party> &party,
-        vector<unique_ptr<Unit> > &enemies)
+        vector<shared_ptr<Unit> > &enemies)
 {
   shared_ptr<Tile> tile;
   action act(UNDEFINED_DIRECTION, BAD_ACTION);
@@ -205,7 +223,7 @@ void loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
 
 
 void mainLoop(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party,
-        vector<unique_ptr<Unit> > &enemies)
+        vector<shared_ptr<Unit> > &enemies)
 {
   loopAnyState(e, party);
   switch (party->getState())

@@ -32,6 +32,8 @@
     //!< Gets gameState.
     unique_ptr<Terr>& getTerr();
     //!< Returns the current Terr.
+    shared_ptr<Unit> getUnit(int i);
+    //!< Returns specified active unit in party.
     void incCursorPos(unsigned int max);
     //!< Adds one to cursorPos, looping to zero if needed.
     void move(dir d, bool interrupt = true);
@@ -49,11 +51,11 @@
     shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click);
     //!< Used when clicking on the map. Returns a pointer to the Tile clicked.
   protected:
-    unique_ptr<Unit> active[4];
+    shared_ptr<Unit> active[4];
     //!< Pointers to the up to four active party members.
     unsigned int cursorPos;
     //!< Position of cursor in menus.
-    vector<unique_ptr<Unit> > passive;
+    vector<shared_ptr<Unit> > passive;
     //!< Vector of pointers to non-active party members.
     shared_ptr<Sprite> sprite;
     //!< Sprite representing the player's party.

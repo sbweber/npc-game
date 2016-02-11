@@ -7,6 +7,7 @@ Party::Party(SDL_Renderer *ren)
 {
   for (int i = 0; i < 4; i++)
     active[i] = nullptr;
+  active[0].reset(new Unit());
   passive.clear();
   if (ren)
     sprite.reset(new Sprite(ren, "Hero.png", "Roland", "Hero"));
@@ -63,6 +64,14 @@ unique_ptr<Terr>& Party::getTerr()
 {
   return terr;
 }  // unique_ptr<Terr> Party::getTerr()
+
+
+shared_ptr<Unit> Party::getUnit(int i)
+{
+  if (i >= 0 && i < 4)
+    return active[i];
+  return nullptr;
+}  // shared_ptr<Unit> Party::getUnit(int i)
 
 
 void Party::incCursorPos(unsigned int max)
