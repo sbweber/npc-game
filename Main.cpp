@@ -33,6 +33,7 @@ int main(int argc, char **argv)
   // backend vars
   unique_ptr<Party> party(new Party(ren));
   party->setState(TITLE);
+  unique_ptr<vector<Unit> > enemies;
 
   loadKeys();
 
@@ -42,7 +43,7 @@ int main(int argc, char **argv)
       if (e.type == SDL_QUIT)
         quit = true;
       else
-        mainLoop(e, font, party);
+        mainLoop(e, font, party, enemies);
     }
 
   TTF_CloseFont(font);

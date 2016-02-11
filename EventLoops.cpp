@@ -38,7 +38,8 @@ void loopAnyState(SDL_Event &e, unique_ptr<Party> &party)
 }  // void loopAnyState()
 
 
-void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party)
+void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party,
+        unique_ptr<vector<Unit> > &enemies)
 {
   vector<unique_ptr<Button> > buttons;
   int x, y;
@@ -60,7 +61,7 @@ void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party)
     else if (e.key.keysym == interact)
     {
       if (party->getCursorPos() == 0)
-        loopBattleFight(font, party);
+        loopBattleFight(font, party, enemies);
       else if (party->getCursorPos() == 1)
         party->setState(MAP);
     }
@@ -68,7 +69,7 @@ void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party)
     break;
   case SDL_MOUSEBUTTONDOWN:
     if (buttons[0]->buttonClick(party->getRen(), e.button))
-      loopBattleFight(font, party);
+      loopBattleFight(font, party, enemies);
     else if (buttons[1]->buttonClick(party->getRen(), e.button))
       party->setState(MAP);
     // click on button to depress button
@@ -80,7 +81,8 @@ void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party)
 }  // void loopBattle(SDL_Event &e)
 
 
-void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party)
+void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party,
+        unique_ptr<vector<Unit> > &enemies)
 {
 
 }  // void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party)
@@ -198,13 +200,14 @@ void loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
 }  // void loopTitle()
 
 
-void mainLoop(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party)
+void mainLoop(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party,
+        unique_ptr<vector<Unit> > &enemies)
 {
   loopAnyState(e, party);
   switch (party->getState())
   {
   case BATTLE:
-    loopBattle(e, font, party);
+    loopBattle(e, font, party, enemies);
     break;
   case MAP:
     loopMap(e, party);
