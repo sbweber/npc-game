@@ -13,6 +13,10 @@
     //!< Returns the amount of damage the attack should deal (before defenses).
     void fullHeal();
     //!< Restores all HP.
+    long getCurrHP();
+    //!< Returns currHP.
+    long getMaxHP();
+    //!< Returns maxHP.
     bool isDead();
     //!< Returns true if currHP is less than or equal to zero.
     long receiveAttack(long damage);

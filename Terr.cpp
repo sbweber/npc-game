@@ -217,6 +217,8 @@ gameState Terr::interactSprites(shared_ptr<Sprite> sprite,
     setSprite(target, nullptr);
   else if (sprite->getPurpose() == "Hero")
     target->say(ren);
+  if (sprite->getPurpose() == "Hero" && target->getPurpose() == "HealTest")
+    ;  // should call relevant unit's full heal command
   if (sprite->getPurpose() == "Hero" && target->getPurpose() == "FightTest")
   {
     enemies.emplace_back(new Unit());

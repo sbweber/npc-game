@@ -13,9 +13,13 @@
 
 
   // Draw.cpp
-  void drawBattle(SDL_Renderer *ren, TTF_Font* font,
-          vector<unique_ptr<Button> > &buttons, int x, int y, int cursor);
-  //!< Draws the battle screen. Currently stubbed.
+  void drawBattle(unique_ptr<Party> &party, TTF_Font* font,
+          vector<unique_ptr<Button> > &buttons, int x, int y, int cursor,
+          vector<shared_ptr<Unit> > &enemies);
+  //!< Draws the battle screen.
+  void drawBattleUpdate(unique_ptr<Party> &party, TTF_Font* font,
+          vector<shared_ptr<Unit> > &enemies);
+  //!< Draws changes to the battle screen as the turn progresses.
   bool drawMap(unique_ptr<Party> &party);
   //!< Draws the overworld map for exploration. Returns true if splining.
   void drawRebind(SDL_Renderer *ren, TTF_Font* font);

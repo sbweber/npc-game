@@ -2,24 +2,45 @@
 
 #include "Draw.h"
 
-void drawBattle(SDL_Renderer *ren, TTF_Font* font,
-        vector<unique_ptr<Button> > &buttons, int x, int y, int cursor)
+void drawBattle(unique_ptr<Party> &party, TTF_Font* font,
+        vector<unique_ptr<Button> > &buttons, int x, int y, int cursor,
+        vector<shared_ptr<Unit> > &enemies)
 {
-  SDL_RenderClear(ren);
-  SDL_Texture* c = loadTexture("ButtonCursor.png", ren);
-  renderTextbox(ren, font, "");
+  SDL_RenderClear(party->getRen());
+  SDL_Texture* c = loadTexture("ButtonCursor.png", party->getRen());
+  renderTextbox(party->getRen(), font, "");
   for (unique_ptr<Button> &button : buttons)
   {
-    button->render(ren, buttonUp);
+    button->render(party->getRen(), buttonUp);
     if (button->mouseOnButton(x, y))
-      button->render(ren, buttonSelected);
+      button->render(party->getRen(), buttonSelected);
     else
-      button->render(ren, buttonUp);
+      button->render(party->getRen(), buttonUp);
   }
-  renderTexture(c, ren, buttons[cursor]->getPos());
-  SDL_RenderPresent(ren);
+  renderTexture(c, party->getRen(), buttons[cursor]->getPos());
+  drawBattleUpdate(party, font, enemies);
+  SDL_RenderPresent(party->getRen());
   SDL_DestroyTexture(c);
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
+
+
+void drawBattleUpdate(unique_ptr<Party> &party, TTF_Font* font,
+        vector<shared_ptr<Unit> > &enemies)
+{
+  SDL_Texture* partyHP[4];
+  SDL_Texture* black = loadTexture("Black.png", party->getRen());
+  renderTexture(black, party->getRen(), 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 4 / 5);
+  string HPstr = to_string(party->getUnit(0)->getCurrHP()) + "/" + to_string(party->getUnit(0)->getMaxHP());
+  partyHP[0] = renderText(party->getRen(), font, HPstr);
+  HPstr = to_string(enemies[0]->getCurrHP()) + "/" + to_string(enemies[0]->getMaxHP());
+  SDL_Texture* enemyHP = renderText(party->getRen(), font, HPstr);
+  renderTexture(partyHP[0], party->getRen(), 800, 100, 200, 100);
+  renderTexture(enemyHP, party->getRen(), 24, 100, 200, 100);
+  SDL_RenderPresent(party->getRen());
+  SDL_DestroyTexture(partyHP[0]);
+  SDL_DestroyTexture(enemyHP);
+  SDL_DestroyTexture(black);
+}  // void drawBattleUpdate
 
 
 bool drawMap(unique_ptr<Party> &party)

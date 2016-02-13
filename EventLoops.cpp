@@ -50,7 +50,7 @@ void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party,
   SDL_GetMouseState(&x, &y);
   if (party->getCursorPos() > buttons.size())
     party->resetCursorPos();
-  drawBattle(party->getRen(), font, buttons, x, y, party->getCursorPos());
+  drawBattle(party, font, buttons, x, y, party->getCursorPos(), enemies);
   switch (e.type)
   {
   case SDL_KEYDOWN:
@@ -63,7 +63,7 @@ void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party,
       if (party->getCursorPos() == 0)
         loopBattleFight(font, party, enemies);
       else if (party->getCursorPos() == 1)
-        party->setState(MAP);
+        loopBattleRun(font, party, enemies);
     }
     SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
@@ -71,7 +71,7 @@ void loopBattle(SDL_Event &e, TTF_Font* font, unique_ptr<Party> &party,
     if (buttons[0]->buttonClick(party->getRen(), e.button))
       loopBattleFight(font, party, enemies);
     else if (buttons[1]->buttonClick(party->getRen(), e.button))
-      party->setState(MAP);
+      loopBattleRun(font, party, enemies);
     // click on button to depress button
     SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
@@ -89,6 +89,7 @@ void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party,
   renderTextbox(party->getRen(), font, str);
   SDL_RenderPresent(party->getRen());
   pressAnyKey();
+  drawBattleUpdate(party, font, enemies);
   if (enemies[0]->isDead())
   {
     enemies.pop_back();
@@ -96,6 +97,15 @@ void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party,
     renderTextbox(party->getRen(), font, str);
     SDL_RenderPresent(party->getRen());
     pressAnyKey();
+  }
+  else
+  {
+    damage = party->getUnit(0)->receiveAttack(enemies[0]->attack());
+    str = "You were attacked for " + to_string(damage) + " damage!";
+    renderTextbox(party->getRen(), font, str);
+    SDL_RenderPresent(party->getRen());
+    pressAnyKey();
+    drawBattleUpdate(party, font, enemies);
   }
   if (enemies.empty())
   {
@@ -105,7 +115,28 @@ void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party,
     SDL_RenderPresent(party->getRen());
     pressAnyKey();
   }
+  else if (party->getUnit(0)->isDead())
+  {
+    party->setState(MAP);
+    party->getUnit(0)->fullHeal();
+    str = "You were defeated... but at least you fully healed afterwards!";
+    renderTextbox(party->getRen(), font, str);
+    SDL_RenderPresent(party->getRen());
+    pressAnyKey();
+  }
 }  // void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party)
+
+
+void loopBattleRun(TTF_Font *font, unique_ptr<Party> &party,
+       vector<shared_ptr<Unit> > &enemies)
+{
+  string str = "Ran from battle!";
+  renderTextbox(party->getRen(), font, str);
+  SDL_RenderPresent(party->getRen());
+  pressAnyKey();
+  enemies.clear();
+  party->setState(MAP);
+}  // void loopBattleRun(TTF_Font *font, unique_ptr<Party> &party)
 
 
 void loopMap(SDL_Event &e, unique_ptr<Party> &party,

@@ -17,6 +17,9 @@
   void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party,
           vector<shared_ptr<Unit> > &enemies);
   //!< Subloop for the 'fight' command in battle.
+  void loopBattleRun(TTF_Font *font, unique_ptr<Party> &party,
+          vector<shared_ptr<Unit> > &enemies);
+  //!< Subloop for the 'run' command in battle.
   void loopMap(SDL_Event &e, unique_ptr<Party> &party,
           vector<shared_ptr<Unit> > &enemies);
   //!< Loop to process inputs while on overworld map.

@@ -21,6 +21,18 @@ void Unit::fullHeal()
 }  // void Unit::fullHeal()
 
 
+long Unit::getCurrHP()
+{
+  return currHP;
+}  // long Unit::getCurrHP()
+
+
+long Unit::getMaxHP()
+{
+  return maxHP;
+}  // long Unit::getMaxHP()
+
+
 bool Unit::isDead()
 {
   if (currHP <= 0)
