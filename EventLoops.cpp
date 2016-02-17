@@ -148,6 +148,10 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party,
   while(drawMap(party));
   switch (e.type)
   {
+  case SDL_USEREVENT:
+    //for each Sprite on the map, top and pop their action queue
+    cout << "timer ticked" << endl;
+    break;
   case SDL_MOUSEBUTTONDOWN:
     tile = party->tileClick(e.button);
     if (tile && tile->getIsPassable())
@@ -168,6 +172,7 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party,
       party->getSprite()->pushAct(action(EAST, MOVE));
     if (e.key.keysym == interact)
       party->getSprite()->pushAct(action(UNDEFINED_DIRECTION, INTERACT));
+    //NO BREAK HERE INTENTIONALLY!
   default:
     act = party->getSprite()->popAct();
     switch (get<1>(act))

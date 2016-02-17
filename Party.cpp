@@ -13,6 +13,7 @@ Party::Party(SDL_Renderer *ren)
     sprite.reset(new Sprite(ren, "Hero.png", "Roland", "Hero"));
   terr.reset(new Terr(ren, ""));
   cursorPos = 0;
+  timerID = 0;
 }  // Party::Party(SDL_Renderer *ren)
 
 
@@ -117,6 +118,10 @@ void Party::setSprite(SDL_Renderer *ren, const string &str)
 
 void Party::setState(gameState gs)
 {
+  if (gs == MAP)
+    timerID = SDL_AddTimer(1000, mapTimerCallback, nullptr);
+  else if (state == MAP)
+    SDL_RemoveTimer(timerID);
   state = gs;
 }  // void Party::setState(gameState gs)
 

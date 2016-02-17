@@ -28,6 +28,14 @@
   };
 
 
+  //! Sprite's AI
+  enum spriteAI
+  {
+    S_AI_STAND,  // Stand still forever.
+    S_AI_WANDER  // Randomly wander around the map.
+  };
+
+
   //! Action direction and type.
   typedef tuple<dir, actType> action;
 
@@ -47,6 +55,8 @@
     //!< Removes all elements from the action queue.
     bool decSpline();
     //!< If spline is non-zero, decrements it and returns true. Else false.
+    bool decTicks();
+    //!< Decrement ticks. Then, if it's zero, return true and reset it.
     dir getFacing();
     //!< Returns which direction the Sprite is currently facing.
     int getSpline();
@@ -91,6 +101,8 @@
     //!< Which sprite on the spritesheet is currently being used.
     SDL_Texture *spriteSheet;
     //!< The spritesheet used to draw this Sprite.
+    unsigned int ticks;
+    //!< Timer cycles until next action
   };
 
 #endif

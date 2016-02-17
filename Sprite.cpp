@@ -15,6 +15,7 @@ Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile, const string &n,
   font = TTF_OpenFont("resources/fonts/ClearSans-Light.ttf", 20);
   if (font == nullptr)
     quit("TTF_OpenFont", 5);
+  ticks = 5;
   if (!scriptFile.empty())
   {
     ifstream script("resources/scripts/" + scriptFile);
@@ -54,6 +55,18 @@ bool Sprite::decSpline()
   }
   return false;
 }  // void Sprite::decSpline()
+
+
+bool Sprite::decTicks()
+{
+  ticks--;
+  if (!ticks)
+  {
+    ticks = 5;  // magic number: act every 5 seconds. Will be random later.
+    return true;
+  }
+  return false;
+}  // bool Sprite::decTicks()
 
 
 void Sprite::changeDir(dir d)

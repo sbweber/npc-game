@@ -6,6 +6,7 @@
   #include "Globals.h"
   #include "Sprite.h"
   #include "Terr.h"
+  #include "Timer.h"
   #include "Unit.h"
 
 
@@ -63,5 +64,7 @@
     //!< State of game.
     unique_ptr<Terr> terr;
     //!< Terr where the player's party currently is.
+    SDL_TimerID timerID;
+    //!< Timer for regular events
   };
 #endif

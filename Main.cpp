@@ -31,6 +31,8 @@ int main(int argc, char **argv)
   bool quit = false;
 
   // backend vars
+  random_device r;
+  mt19937_64 rng(r());
   unique_ptr<Party> party(new Party(ren));
   party->setState(TITLE);
   vector<shared_ptr<Unit> > enemies;
