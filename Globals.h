@@ -4,6 +4,7 @@
   #define INCLUDE_H
 
   // c++ core includes
+  #include <chrono>
   #include <cstddef>  // implicitly added on non-windows machines
   #include <cstdlib>
   #include <ctime>
@@ -79,8 +80,6 @@
   void quit(const string err = "", int errtype = -1,
           SDL_Renderer *ren = nullptr, SDL_Window *win = nullptr);
   //!< Quits the program, logging an error if given one.
-  long rng(long min, long max);
-  //!< My wrapper for rand(). Better than a naked call, still flawed.
 
 #endif
 

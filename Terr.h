@@ -41,10 +41,10 @@
     //!< Returns the Tile under the given Sprite.
     int getWidth();
     //!< Returns the width (w) of Terr.
-    gameState interactSprite(shared_ptr<Sprite> sprite,
+    string interactSprite(shared_ptr<Sprite> sprite,
             vector<shared_ptr<Unit> > &enemies);
     //!< Intelligently interact with Sprite being faced, if any.
-    gameState interactSprites(shared_ptr<Sprite> sprite,
+    string interactSprites(shared_ptr<Sprite> sprite,
             shared_ptr<Sprite> target, vector<shared_ptr<Unit> > &enemies);
     //!< Intelligently interact between two sprites.
     bool isOccupied(shared_ptr<Tile> tile);
@@ -57,6 +57,8 @@
     //!< Sets a Sprite-Tile relationship.
     void setTile(shared_ptr<Tile> tile, shared_ptr<Sprite> sprite);
     //!< Sets a Sprite-Tile relationship. Alias for setSprite.
+    void tickSprites();
+    //!< Tells all Sprites that a tick has occurred.
     shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click,
             shared_ptr<Sprite> sprite);
     //!< Returns pointer to the Tile clicked. Needs Sprite the map is watching.

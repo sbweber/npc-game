@@ -37,8 +37,14 @@ void Terr::enterTileMessageHandler(const string &message,
   {
     if (message.substr(0, strpos) == "LOAD-MAP")
     {
-      getSprite(tile)->setSpline(0);
-      getSprite(tile)->clearActs();
+      shared_ptr<Sprite> sprite = getSprite(tile);
+      if (sprite->getPurpose() != "Hero")
+      {
+        setSprite(sprite, nullptr);
+        return;
+      }
+      sprite->setSpline(0);
+      sprite->clearActs();
       strpos = message.find(' ', strpos);
       size_t strposnew = message.find(' ', strpos + 1);
       string destTerr = message.substr(strpos + 1, strposnew - strpos - 1);
@@ -49,7 +55,7 @@ void Terr::enterTileMessageHandler(const string &message,
       strposnew = message.find(' ', strpos + 1);
       int destY = stoi(message.substr(strpos + 1, strposnew - strpos - 1));
       loadMap(destTerr);
-      setSprite(getSprite(tile), getTile(destX, destY));
+      setSprite(sprite, getTile(destX, destY));
     }
   }  // No colon found: do default behavior (nothing)
 }  // Message Handler for entering a tile
@@ -192,25 +198,25 @@ int Terr::getWidth()
 }  // int Terr::getWidth()
 
 
-gameState Terr::interactSprite(shared_ptr<Sprite> sprite,
+string Terr::interactSprite(shared_ptr<Sprite> sprite,
         vector<shared_ptr<Unit> > &enemies)
 {
   shared_ptr<Tile> tile = getTile(sprite);
   if (!tile)
   {
     logError("Sprite not on map!");
-    return MAP;
+    return "";
   }  // Sprite must be on map.
   tile = tile->getTile(sprite->getFacing());
   if (!tile)
-    return MAP;  // not an error, just invalid. Interacting with edge of map.
+    return "";  // not an error, just invalid. Interacting with edge of map.
   if (isOccupied(tile))
     return interactSprites(sprite, getSprite(tile), enemies);
-  return MAP;
+  return "";
 }  // void Terr::interactSprite(shared_ptr<Sprite> sprite)
 
 
-gameState Terr::interactSprites(shared_ptr<Sprite> sprite,
+string Terr::interactSprites(shared_ptr<Sprite> sprite,
         shared_ptr<Sprite> target, vector<shared_ptr<Unit> > &enemies)
 {
   if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
@@ -218,13 +224,13 @@ gameState Terr::interactSprites(shared_ptr<Sprite> sprite,
   else if (sprite->getPurpose() == "Hero")
     target->say(ren);
   if (sprite->getPurpose() == "Hero" && target->getPurpose() == "HealTest")
-    ;  // should call relevant unit's full heal command
+    return "PARTY: full-heal";
   if (sprite->getPurpose() == "Hero" && target->getPurpose() == "FightTest")
   {
     enemies.emplace_back(new Unit());
-    return BATTLE;
+    return "CHANGE-STATE: BATTLE";
   }
-  return MAP;
+  return "";
 }  // void Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> sprite)
 
 
@@ -244,6 +250,7 @@ void Terr::loadMap(const string &str)
   if (!file.good())
     logSDLError("Map not found: " + str);  // error, probably bad filename
 
+  sprites.clear();
   file >> w;
   file >> h;
   map.resize(w);
@@ -498,6 +505,24 @@ void Terr::setTile(shared_ptr<Tile> tile, shared_ptr<Sprite> sprite)
 {
   setSprite(sprite, tile);
 }  // void Terr::setTile(shared_ptr<Tile> tile, shared_ptr<Sprite> sprite)
+
+
+void Terr::tickSprites()
+{
+  for (location loc : sprites)
+  {
+    shared_ptr<Sprite> sprite = loc.get_left();
+    if(sprite->decTicks())
+    {
+      action act = sprite->popAct();
+      if (get<1>(act) == MOVE)
+      {
+        moveSprite(sprite, get<0>(act));
+        sprite->pushAct(action(SOUTH, MOVE));
+      }  // If the Sprite wants to move, move and give it a new move command
+    }
+  }
+}  // void Terr::tickSprites()
 
 
 shared_ptr<Tile> Terr::tileClick(SDL_MouseButtonEvent &click, shared_ptr<Sprite> sprite)

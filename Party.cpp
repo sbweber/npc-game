@@ -14,6 +14,7 @@ Party::Party(SDL_Renderer *ren)
   terr.reset(new Terr(ren, ""));
   cursorPos = 0;
   timerID = 0;
+  randNumGen.seed(chrono::system_clock::now().time_since_epoch().count());
 }  // Party::Party(SDL_Renderer *ren)
 
 
@@ -96,6 +97,14 @@ void Party::resetCursorPos()
 {
   cursorPos = 0;
 }  // void Party::resetCursorPos()
+
+
+long Party::rng(long min, long max)
+{
+  uniform_int_distribution<long> randNum(min, max);
+  return randNum(randNumGen);
+}  // long Party::rng(long min, long max)
+
 
 
 void Party::setLocation(int x, int y)

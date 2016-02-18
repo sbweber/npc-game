@@ -2,6 +2,7 @@
 
 #include "Draw.h"
 
+
 void drawBattle(unique_ptr<Party> &party, TTF_Font* font,
         vector<unique_ptr<Button> > &buttons, int x, int y, int cursor,
         vector<shared_ptr<Unit> > &enemies)

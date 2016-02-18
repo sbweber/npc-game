@@ -2,6 +2,34 @@
 
 #include "EventLoops.h"
 
+
+void interactMessageHandler(unique_ptr<Party> &party, string &message)
+{
+  size_t strpos = message.find(':');
+  if (strpos != string::npos)
+  {
+    if (message.substr(0, strpos) == "CHANGE-STATE")
+    {
+      strpos = message.find(' ', strpos);
+      size_t strposnew = message.find(' ', strpos + 1);
+      string state = message.substr(strpos + 1, strposnew - strpos - 1);
+      if (state == "BATTLE")
+        party->setState(BATTLE);
+    }
+    if (message.substr(0, strpos) == "PARTY")
+    {
+      strpos = message.find(' ', strpos);
+      size_t strposnew = message.find(' ', strpos + 1);
+      string command = message.substr(strpos + 1, strposnew - strpos - 1);
+      if (command == "full-heal")
+        for (int i = 0; i < 4; i++)
+          if (party->getUnit(i))
+            party->getUnit(i)->fullHeal();
+    }
+  }  // No colon found: do default behavior (nothing)
+}  // void interactMessageHandler(unique_ptr<Party> &party, string &message)
+
+
 void loopAnyState(SDL_Event &e, unique_ptr<Party> &party)
 {
   switch (e.type)
@@ -145,12 +173,12 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party,
   shared_ptr<Tile> tile;
   action act(UNDEFINED_DIRECTION, BAD_ACTION);
   SDL_Event* wait = new SDL_Event();
+  string message;
   while(drawMap(party));
   switch (e.type)
   {
   case SDL_USEREVENT:
-    //for each Sprite on the map, top and pop their action queue
-    cout << "timer ticked" << endl;
+    party->getTerr()->tickSprites();
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = party->tileClick(e.button);
@@ -182,8 +210,8 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party,
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
       break;
     case INTERACT:
-      party->setState(move(party->getTerr()->interactSprite(
-              party->getSprite(), enemies)));
+      message = party->getTerr()->interactSprite(party->getSprite(), enemies);
+      interactMessageHandler(party, message);
       SDL_PushEvent(wait);  // push empty event to cause immediate state update
       break;
     case BAD_ACTION:

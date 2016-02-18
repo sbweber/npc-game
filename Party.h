@@ -41,6 +41,8 @@
     //!< Move player's Sprite. Interrupt flag determines if actionQ cleared.
     void resetCursorPos();
     //!< Sets cursorPos to 0.
+    long rng(long min, long max);
+    //!< Returns a uniformly distributed random number between min and max.
     void setLocation(int x, int y);
     //!< Sets the Party's location on the terr to (x, y).
     void setLocation(shared_ptr<Tile> tile);
@@ -58,6 +60,8 @@
     //!< Position of cursor in menus.
     vector<shared_ptr<Unit> > passive;
     //!< Vector of pointers to non-active party members.
+    mt19937_64 randNumGen;
+    //!< Random Number Generator.
     shared_ptr<Sprite> sprite;
     //!< Sprite representing the player's party.
     gameState state;

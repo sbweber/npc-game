@@ -15,7 +15,6 @@ Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile, const string &n,
   font = TTF_OpenFont("resources/fonts/ClearSans-Light.ttf", 20);
   if (font == nullptr)
     quit("TTF_OpenFont", 5);
-  ticks = 5;
   if (!scriptFile.empty())
   {
     ifstream script("resources/scripts/" + scriptFile);
@@ -26,6 +25,11 @@ Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile, const string &n,
       speech.push(line);
     }  // copy character's script into memory
   }  // load up speech with the script
+  moveFreqMax = 0;
+  moveFreqMin = 0;
+  if (moveFreqMin > 0)
+    pushAct(action(SOUTH, MOVE));
+  ticks = moveFreqMax;
 }  // Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile)
 
 
@@ -62,7 +66,7 @@ bool Sprite::decTicks()
   ticks--;
   if (!ticks)
   {
-    ticks = 5;  // magic number: act every 5 seconds. Will be random later.
+    ticks = moveFreqMax;
     return true;
   }
   return false;

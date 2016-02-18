@@ -9,6 +9,8 @@
   #include "Party.h"
 
   // EventLoops.cpp
+  void interactMessageHendler(unique_ptr<Party> &party, string &message);
+  //!< Message handler for sprites interacting.
   void loopAnyState(SDL_Event &e, unique_ptr<Party> &party);
   //!< Loop to handle input that’s treated the same in all states.
   void loopBattle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party,

@@ -28,14 +28,6 @@
   };
 
 
-  //! Sprite's AI
-  enum spriteAI
-  {
-    S_AI_STAND,  // Stand still forever.
-    S_AI_WANDER  // Randomly wander around the map.
-  };
-
-
   //! Action direction and type.
   typedef tuple<dir, actType> action;
 
@@ -89,6 +81,10 @@
     //!< Direction Sprite is currently facing.
     TTF_Font *font;
     //!< Font the Sprite uses to 'speak'.
+    int moveFreqMax;
+    //!< Max number of seconds between moving. Ignored if min is negative.
+    int moveFreqMin;
+    //!< Min number of seconds between moving. Negative means stationary.
     string name;
     //!< Name of the Sprite. Used for speech.
     string purpose;
