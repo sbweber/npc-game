@@ -12,12 +12,11 @@
   class GameState
   {
   public:
-    GameState(SDL_Renderer *ren);
+    GameState(SDL_Renderer *ren, TTF_Font *f);
     //!< GameState constructor.
     ~GameState();
     //!< GameState destructor.
-    void advance(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party,
-            vector<shared_ptr<Unit> > &enemies);
+    void advance(SDL_Event &e);
     //!< Loop to select which event loop to run. Advances state.
     void changeTerr(const string &newTerr);
     //!< Changes the active Terr.
@@ -29,14 +28,19 @@
     //!< Returns a uniformly distributed random number between min and max.
     void setState(gameState gs);
     //!< Sets gameState.
-    shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click,
-            shared_ptr<Sprite> sprite);
+    shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click);
     //!< Used when clicking on the map. Returns a pointer to the Tile clicked.
   protected:
     unsigned int cursorPos;
     //!< Position of cursor in menus.
+    vector<shared_ptr<Unit> > enemies;
+    //!< Vector of enemy units for battle.
+    TTF_Font *font;
+    //!< Primary font for regular usage.
     mt19937_64 randNumGen;
     //!< Random Number Generator.
+    unique_ptr<Party> party;
+    //!< The player's party.
     gameState state;
     //!< State of game.
     unique_ptr<Terr> terr;
@@ -44,24 +48,21 @@
     SDL_TimerID timerID;
     //!< Timer for regular events
 
-    void interactMessageHandler(unique_ptr<Party> &party, string &message);
+    void interactMessageHandler(string &message);
     //!< Message handler for sprites interacting.
-    void loopAnyState(SDL_Event &e, unique_ptr<Party> &party);
+    void loopAnyState(SDL_Event &e);
     //!< Loop to handle input that’s treated the same in all states.
-    void loopBattle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party,
-            vector<shared_ptr<Unit> > &enemies);
+    void loopBattle(SDL_Event &e);
     //!< Loop to process actions in battle state.
-    void loopBattleFight(TTF_Font *font, unique_ptr<Party> &party,
-            vector<shared_ptr<Unit> > &enemies);
+    void loopBattleFight();
     //!< Subloop for the 'fight' command in battle.
-    void loopBattleRun(TTF_Font *font, vector<shared_ptr<Unit> > &enemies);
+    void loopBattleRun();
     //!< Subloop for the 'run' command in battle.
-    void loopMap(SDL_Event &e, unique_ptr<Party> &party,
-            vector<shared_ptr<Unit> > &enemies);
+    void loopMap(SDL_Event &e);
     //!< Loop to process inputs while on overworld map.
-    void loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font);
+    void loopRebind(SDL_Event &e);
     //!< Loop to process inputs and events while in the key binding menu.
-    void loopTitle(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party);
+    void loopTitle(SDL_Event &e);
     //!< Loop to process inputs on the title screen.
   };
 

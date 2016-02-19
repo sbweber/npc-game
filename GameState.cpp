@@ -3,7 +3,7 @@
 #include "GameState.h"
 
 
-GameState::GameState(SDL_Renderer *ren)
+GameState::GameState(SDL_Renderer *ren, TTF_Font *f)
 {
   if (!ren)
     quit("Renderer not found!", 3);
@@ -11,6 +11,8 @@ GameState::GameState(SDL_Renderer *ren)
   terr.reset(new Terr(ren, ""));
   cursorPos = 0;
   timerID = 0;
+  party.reset(new Party(ren));
+  font = f;
 }  // GameState::GameState(SDL_Renderer *ren)
 
 
@@ -19,24 +21,23 @@ GameState::~GameState()
 }  // GameState::~GameState()
 
 
-void GameState::advance(SDL_Event &e, TTF_Font *font, unique_ptr<Party> &party,
-        vector<shared_ptr<Unit> > &enemies)
+void GameState::advance(SDL_Event &e)
 {
-  loopAnyState(e, party);
+  loopAnyState(e);
   switch (state)
   {
   case BATTLE:
-    loopBattle(e, font, party, enemies);
+    loopBattle(e);
     break;
   case MAP:
-    loopMap(e, party, enemies);
+    loopMap(e);
     break;
   case REBIND:
-    loopRebind(terr->getRen(), e, font);
+    loopRebind(e);
     setState(TITLE);
     break;
   case TITLE:
-    loopTitle(e, font, party);
+    loopTitle(e);
     break;
   default:
     break;
@@ -68,7 +69,7 @@ void GameState::incCursorPos(unsigned int max)
 }  // void GameState::incCursorPos(int max)
 
 
-void GameState::interactMessageHandler(unique_ptr<Party> &party, string &message)
+void GameState::interactMessageHandler(string &message)
 {
   size_t strpos = message.find(':');
   if (strpos != string::npos)
@@ -95,7 +96,7 @@ void GameState::interactMessageHandler(unique_ptr<Party> &party, string &message
 }  // void interactMessageHandler(unique_ptr<Party> &party, string &message)
 
 
-void GameState::loopAnyState(SDL_Event &e, unique_ptr<Party> &party)
+void GameState::loopAnyState(SDL_Event &e)
 {
   switch (e.type)
   {
@@ -131,8 +132,7 @@ void GameState::loopAnyState(SDL_Event &e, unique_ptr<Party> &party)
 }  // void GameState::loopAnyState()
 
 
-void GameState::loopBattle(SDL_Event &e, TTF_Font* font,
-        unique_ptr<Party> &party, vector<shared_ptr<Unit> > &enemies)
+void GameState::loopBattle(SDL_Event &e)
 {
   vector<unique_ptr<Button> > buttons;
   int x, y;
@@ -154,17 +154,17 @@ void GameState::loopBattle(SDL_Event &e, TTF_Font* font,
     else if (e.key.keysym == interact)
     {
       if (cursorPos == 0)
-        loopBattleFight(font, party, enemies);
+        loopBattleFight();
       else if (cursorPos == 1)
-        loopBattleRun(font, enemies);
+        loopBattleRun();
     }
     SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   case SDL_MOUSEBUTTONDOWN:
     if (buttons[0]->buttonClick(terr->getRen(), e.button))
-      loopBattleFight(font, party, enemies);
+      loopBattleFight();
     else if (buttons[1]->buttonClick(terr->getRen(), e.button))
-      loopBattleRun(font, enemies);
+      loopBattleRun();
     // click on button to depress button
     SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
@@ -174,8 +174,7 @@ void GameState::loopBattle(SDL_Event &e, TTF_Font* font,
 }  // void GameState::loopBattle()
 
 
-void GameState::loopBattleFight(TTF_Font *font, unique_ptr<Party> &party,
-        vector<shared_ptr<Unit> > &enemies)
+void GameState::loopBattleFight()
 {
   long damage = enemies[0]->receiveAttack(party->getUnit(0)->attack());
   string str = "You attacked the enemy for " + to_string(damage) + " damage!";
@@ -220,7 +219,7 @@ void GameState::loopBattleFight(TTF_Font *font, unique_ptr<Party> &party,
 }  // void GameState::loopBattleFight()
 
 
-void GameState::loopBattleRun(TTF_Font *font, vector<shared_ptr<Unit> > &enemies)
+void GameState::loopBattleRun()
 {
   string str = "Ran from battle!";
   renderTextbox(terr->getRen(), font, str);
@@ -231,8 +230,7 @@ void GameState::loopBattleRun(TTF_Font *font, vector<shared_ptr<Unit> > &enemies
 }  // void GameState::loopBattleRun()
 
 
-void GameState::loopMap(SDL_Event &e, unique_ptr<Party> &party,
-        vector<shared_ptr<Unit> > &enemies)
+void GameState::loopMap(SDL_Event &e)
 {
   shared_ptr<Tile> tile;
   action act(UNDEFINED_DIRECTION, BAD_ACTION);
@@ -243,10 +241,10 @@ void GameState::loopMap(SDL_Event &e, unique_ptr<Party> &party,
   case SDL_USEREVENT:
     terr->tickSprites(randNumGen);
     message = terr->actSprites(party->getSprite(), enemies);
-    interactMessageHandler(party, message);
+    interactMessageHandler(message);
     break;
   case SDL_MOUSEBUTTONDOWN:
-    tile = tileClick(e.button, party->getSprite());
+    tile = tileClick(e.button);
     if (tile && tile->getIsPassable())
     {
       terr->findPath(terr->getTile(party->getSprite()),
@@ -272,9 +270,9 @@ void GameState::loopMap(SDL_Event &e, unique_ptr<Party> &party,
 }  // void GameState::loopMap()
 
 
-void GameState::loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font)
+void GameState::loopRebind(SDL_Event &e)
 {
-  drawRebind(ren, font);
+  drawRebind(terr->getRen(), font);
   switch (e.type)
   {
   case SDL_KEYDOWN:
@@ -285,8 +283,7 @@ void GameState::loopRebind(SDL_Renderer *ren, SDL_Event &e, TTF_Font *font)
 }  // void GameState::loopRebind()
 
 
-void GameState::loopTitle(SDL_Event &e, TTF_Font *font,
-        unique_ptr<Party> &party)
+void GameState::loopTitle(SDL_Event &e)
 {
   vector<unique_ptr<Button> > buttons;
   int x, y;
@@ -353,9 +350,8 @@ void GameState::setState(gameState gs)
 }  // void GameState::setState(gameState gs)
 
 
-shared_ptr<Tile> GameState::tileClick(SDL_MouseButtonEvent &click,
-        shared_ptr<Sprite> sprite)
+shared_ptr<Tile> GameState::tileClick(SDL_MouseButtonEvent &click)
 {
-  return terr->tileClick(click, sprite);
+  return terr->tileClick(click, party->getSprite());
 }  // shared_ptr<Tile> GameState::tileClick(SDL_MouseButtonEvent &click)
 

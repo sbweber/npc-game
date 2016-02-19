@@ -32,10 +32,8 @@ int main(int argc, char **argv)
   bool quit = false;
 
   // backend vars
-  unique_ptr<Party> party(new Party(ren));
-  unique_ptr<GameState> state(new GameState(ren));
+  unique_ptr<GameState> state(new GameState(ren, font));
   state->setState(TITLE);
-  vector<shared_ptr<Unit> > enemies;
 
   loadKeys();
 
@@ -45,7 +43,7 @@ int main(int argc, char **argv)
       if (e.type == SDL_QUIT)
         quit = true;
       else
-        state->advance(e, font, party, enemies);
+        state->advance(e);
     }
 
   TTF_CloseFont(font);
