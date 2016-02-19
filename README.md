@@ -14,7 +14,7 @@ Default Controls:
 Arrow keys: Move around the map.  
 z: Interact with things on the map.  
 esc: Go back/up a layer. Currently unused.  
-f4: Quit the program from anywhere.  
+F4: Quit the program from anywhere.  
 F12: Go to the title screen.  
 Click on a tile on the map to move to it.  
 Click on a sprite to interact with it.  
