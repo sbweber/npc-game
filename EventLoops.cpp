@@ -172,13 +172,12 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party,
 {
   shared_ptr<Tile> tile;
   action act(UNDEFINED_DIRECTION, BAD_ACTION);
-  SDL_Event* wait = new SDL_Event();
   string message;
   while(drawMap(party));
   switch (e.type)
   {
   case SDL_USEREVENT:
-    party->getTerr()->tickSprites();
+    party->getTerr()->tickSprites(party->getRNG());
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = party->tileClick(e.button);
@@ -200,26 +199,12 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party,
       party->getSprite()->pushAct(action(EAST, MOVE));
     if (e.key.keysym == interact)
       party->getSprite()->pushAct(action(UNDEFINED_DIRECTION, INTERACT));
-    //NO BREAK HERE INTENTIONALLY!
+    break;
   default:
-    act = party->getSprite()->popAct();
-    switch (get<1>(act))
-    {
-    case MOVE:
-      party->move(get<0>(act), false);
-      SDL_PushEvent(wait);  // push empty event to cause immediate state update
-      break;
-    case INTERACT:
-      message = party->getTerr()->interactSprite(party->getSprite(), enemies);
-      interactMessageHandler(party, message);
-      SDL_PushEvent(wait);  // push empty event to cause immediate state update
-      break;
-    case BAD_ACTION:
-    default:
-      break;
-    }
     break;
   }
+  message = party->getTerr()->actSprites(party->getSprite(), enemies);
+  interactMessageHandler(party, message);
 }  // void loopMap(SDL_Event &e, unique_ptr<Party> &party)
 
 

@@ -5,16 +5,17 @@
 
 Party::Party(SDL_Renderer *ren)
 {
+  randNumGen.seed(chrono::system_clock::now().time_since_epoch().count());
   for (int i = 0; i < 4; i++)
     active[i] = nullptr;
   active[0].reset(new Unit());
   passive.clear();
   if (ren)
-    sprite.reset(new Sprite(ren, "Hero.png", "Roland", "Hero"));
+    sprite.reset(new Sprite(ren, 0, 0, "Hero.png", "Roland", "Hero"));
   terr.reset(new Terr(ren, ""));
   cursorPos = 0;
   timerID = 0;
-  randNumGen.seed(chrono::system_clock::now().time_since_epoch().count());
+  sprite->clearActs();
 }  // Party::Party(SDL_Renderer *ren)
 
 
@@ -48,6 +49,12 @@ SDL_Renderer* Party::getRen()
 {
   return terr->getRen();
 }  // SDL_Renderer* Party::getRen()
+
+
+mt19937_64& Party::getRNG()
+{
+  return randNumGen;
+}  // mt19937_64& Party::getRNG()
 
 
 shared_ptr<Sprite> Party::getSprite()
@@ -121,7 +128,7 @@ void Party::setLocation(shared_ptr<Tile> tile)
 
 void Party::setSprite(SDL_Renderer *ren, const string &str)
 {
-  sprite.reset(new Sprite(ren, str));
+  sprite.reset(new Sprite(ren, 0, 0, str));
 }  // void Party::setSprite(SDL_Renderer *ren, const string &str)
 
 

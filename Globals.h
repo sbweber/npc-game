@@ -49,10 +49,10 @@
 
   enum dir
   {
+    EAST,
     NORTH,
     SOUTH,
     WEST,
-    EAST,
     UNDEFINED_DIRECTION
   };
 
@@ -80,6 +80,10 @@
   void quit(const string err = "", int errtype = -1,
           SDL_Renderer *ren = nullptr, SDL_Window *win = nullptr);
   //!< Quits the program, logging an error if given one.
+  dir randDir(mt19937_64& rng);
+  //!< Returns a random direction (UNDEFINED_DIRECTION if there's an error).
+  long randNum(mt19937_64& rng, long min, long max);
+  //!< Returns a random number from min to max, uniform distribution.
 
 #endif
 

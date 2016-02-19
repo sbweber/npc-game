@@ -3,8 +3,8 @@
 #include "Sprite.h"
 
 
-Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile, const string &n,
-        const string &p, const string &scriptFile)
+Sprite::Sprite(SDL_Renderer *ren, int min, int max, const string &spriteFile,
+        const string &n, const string &p, const string &scriptFile)
 {
   spriteSheet = loadTexture(spriteFile, ren);
   sprite = DOWN;  // default all sprites as facing down
@@ -25,10 +25,8 @@ Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile, const string &n,
       speech.push(line);
     }  // copy character's script into memory
   }  // load up speech with the script
-  moveFreqMax = 0;
-  moveFreqMin = 0;
-  if (moveFreqMin > 0)
-    pushAct(action(SOUTH, MOVE));
+  moveFreqMax = max;
+  moveFreqMin = min;
   ticks = moveFreqMax;
 }  // Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile)
 
@@ -61,16 +59,16 @@ bool Sprite::decSpline()
 }  // void Sprite::decSpline()
 
 
-bool Sprite::decTicks()
+void Sprite::decTicks(mt19937_64& rng)
 {
-  ticks--;
-  if (!ticks)
+  if (ticks)
+    ticks--;
+  if (!ticks && moveFreqMin > 0)
   {
-    ticks = moveFreqMax;
-    return true;
+    ticks = randNum(rng, moveFreqMin, moveFreqMax);
+    pushAct(action(randDir(rng), MOVE));
   }
-  return false;
-}  // bool Sprite::decTicks()
+}  // void Sprite::decTicks(mt19937_64& rng)
 
 
 void Sprite::changeDir(dir d)

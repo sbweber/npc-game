@@ -49,3 +49,35 @@ void quit(const string err, int errtype, SDL_Renderer *ren, SDL_Window *win)
   exit (errtype);
 }  // void quit()
 
+
+dir randDir(mt19937_64& rng)
+{
+  uniform_int_distribution<int> dist(0, 3);
+  int randomResult = dist(rng);
+  switch (randomResult)
+  {
+  case 0:
+    return EAST;
+    break;
+  case 1:
+    return NORTH;
+    break;
+  case 2:
+    return SOUTH;
+    break;
+  case 3:
+    return WEST;
+    break;
+  default:
+    return UNDEFINED_DIRECTION;
+    break;
+  }
+}  // dir randDir(mt19937_64& rng)
+
+
+long randNum(mt19937_64& rng, long min, long max)
+{
+  uniform_int_distribution<long> randNum(min, max);
+  return randNum(rng);
+}  // long rng(mt19937_64& rng, long min, long max)
+

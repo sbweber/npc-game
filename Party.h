@@ -27,6 +27,8 @@
     //!< Returns cursorPos.
     SDL_Renderer* getRen();
     //!< Calls Terr's getRen().
+    mt19937_64& getRNG();
+    //!< Returns the rng object so it can be passed around for use on its own.
     shared_ptr<Sprite> getSprite();
     //!< Returns the Sprite representing the party by reference.
     gameState getState();

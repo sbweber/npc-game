@@ -36,8 +36,9 @@
   class Sprite
   {
   public:
-    Sprite(SDL_Renderer *ren, const string &spriteFile, const string &n = "",
-            const string &p = "", const string &scriptFile = "");
+    Sprite(SDL_Renderer *ren, int min, int max, const string &spriteFile,
+            const string &n = "", const string &p = "",
+            const string &scriptFile = "");
     //!< All units MUST have a spritesheet specified. type string optional.
     ~Sprite();
     //!< Default destructor
@@ -47,7 +48,7 @@
     //!< Removes all elements from the action queue.
     bool decSpline();
     //!< If spline is non-zero, decrements it and returns true. Else false.
-    bool decTicks();
+    void decTicks(mt19937_64& rng);
     //!< Decrement ticks. Then, if it's zero, return true and reset it.
     dir getFacing();
     //!< Returns which direction the Sprite is currently facing.

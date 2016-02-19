@@ -32,11 +32,17 @@ void drawBattleUpdate(unique_ptr<Party> &party, TTF_Font* font,
   SDL_Texture* black = loadTexture("Black.png", party->getRen());
   renderTexture(black, party->getRen(), 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 4 / 5);
   string HPstr = to_string(party->getUnit(0)->getCurrHP()) + "/" + to_string(party->getUnit(0)->getMaxHP());
+  string HPLabel = "Your HP:";
+  SDL_Texture* partyHPLabel = renderText(party->getRen(), font, HPLabel);
   partyHP[0] = renderText(party->getRen(), font, HPstr);
   HPstr = to_string(enemies[0]->getCurrHP()) + "/" + to_string(enemies[0]->getMaxHP());
+  HPLabel = "Enemy HP:";
+  SDL_Texture* enemyHPLabel = renderText(party->getRen(), font, HPLabel);
   SDL_Texture* enemyHP = renderText(party->getRen(), font, HPstr);
-  renderTexture(partyHP[0], party->getRen(), 800, 100, 200, 100);
-  renderTexture(enemyHP, party->getRen(), 24, 100, 200, 100);
+  renderTexture(partyHPLabel, party->getRen(), 800, 70);
+  renderTexture(partyHP[0], party->getRen(), 800, 100);
+  renderTexture(enemyHPLabel, party->getRen(), 24, 70);
+  renderTexture(enemyHP, party->getRen(), 24, 100);
   SDL_RenderPresent(party->getRen());
   SDL_DestroyTexture(partyHP[0]);
   SDL_DestroyTexture(enemyHP);
@@ -48,7 +54,7 @@ bool drawMap(unique_ptr<Party> &party)
 {  // portion of map to be drawn based on position of hero
   SDL_RenderClear(party->getRen());
   int tileClip = 0;
-  bool partyMoved = false, cont = false;
+  bool spriteMoved = false, cont = false;
   SDL_Rect tileClips[16];  // magic number (16): number of tile types. Currently five (black/impassable, white/passable, etc)
   getClips(tileClips, 16, 4, TILE_WIDTH, TILE_HEIGHT);  // magic number (4): number of rows in the tile spritesheet
 
@@ -119,13 +125,12 @@ bool drawMap(unique_ptr<Party> &party)
         if (party->getTerr()->isOccupied(tilePtr))
           cont = drawSprite(tilePtr, party, i, j);
         // if the tile is occupied, draw the character
-        if (!partyMoved && cont &&
-                party->getSprite() == party->getTerr()->getSprite(tilePtr))
-          partyMoved = true;
+        if (!spriteMoved && cont)
+          spriteMoved = true;
       }
     }
   SDL_RenderPresent(party->getRen());
-  return partyMoved;
+  return spriteMoved;
 }  // void drawMap()
 
 

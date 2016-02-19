@@ -23,8 +23,10 @@
     //!< Calls loadMap unless the string is empty.
     ~Terr();
     //!< Default destructor. Because Tiles use new, they must be deleted.
-    void enterTileMessageHandler(const string &message,
-            shared_ptr<Tile> tile);
+    string actSprites(shared_ptr<Sprite> partySprite,
+            vector<shared_ptr<Unit> > &enemies);
+    //!< All sprites pop an action (if any) and enact it.
+    void enterTileMessageHandler(const string &message, shared_ptr<Tile> tile);
     //!< Takes in a message from a Tile being entered, reacts accordingly.
     void findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest,
             shared_ptr<Sprite> sprite);
@@ -57,7 +59,7 @@
     //!< Sets a Sprite-Tile relationship.
     void setTile(shared_ptr<Tile> tile, shared_ptr<Sprite> sprite);
     //!< Sets a Sprite-Tile relationship. Alias for setSprite.
-    void tickSprites();
+    void tickSprites(mt19937_64& rng);
     //!< Tells all Sprites that a tick has occurred.
     shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click,
             shared_ptr<Sprite> sprite);

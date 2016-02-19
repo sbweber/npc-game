@@ -29,8 +29,48 @@ Terr::~Terr()
 }  // Terr::~Terr()
 
 
-void Terr::enterTileMessageHandler(const string &message,
-        shared_ptr<Tile> tile)
+string Terr::actSprites(shared_ptr<Sprite> partySprite,
+        vector<shared_ptr<Unit> > &enemies)
+{
+  string message;
+  SDL_Event* wait = new SDL_Event();
+  shared_ptr<Sprite> sprite;
+  vector<shared_ptr<Sprite> > spritesOnMap;
+  for (int i = 0; i < w; i++)
+    for (int j = 0; j < h; j++)
+      if (sprite = getSprite(map[i][j]))
+        spritesOnMap.push_back(sprite);
+  for (vector<shared_ptr<Sprite> >::iterator itr = spritesOnMap.begin(); itr != spritesOnMap.end(); itr++)
+  {
+    sprite = *itr;
+    if (sprite)
+    {
+      action act = sprite->popAct();
+      switch (get<1>(act))
+      {
+      case MOVE:
+        moveSprite(sprite, get<0>(act));
+        if (sprite == partySprite)
+          SDL_PushEvent(wait);
+        break;
+      case INTERACT:
+        if (sprite == partySprite)
+        {
+          message = interactSprite(partySprite, enemies);
+          SDL_PushEvent(wait);
+        }
+        break;
+      case BAD_ACTION:
+      default:
+        break;
+      }
+    }
+  }
+  return message;
+}  // void Terr::actSprites(shared_ptr<Sprite> partySprite)
+
+
+void Terr::enterTileMessageHandler(const string &message, shared_ptr<Tile> tile)
 {
   size_t strpos = message.find(':');
   if (strpos != string::npos)
@@ -419,7 +459,7 @@ void Terr::loadSprite(ifstream &file)
   file >> name;
   file >> purpose;
   file >> scriptFile;
-  shared_ptr<Sprite> sprite(new Sprite(ren, spriteFile, name, purpose,
+  shared_ptr<Sprite> sprite(new Sprite(ren, 1, 5, spriteFile, name, purpose,
           scriptFile));
   setSprite(sprite, getTile(x, y));
 }  // void Terr::loadSprite(ifstream &file)
@@ -507,20 +547,12 @@ void Terr::setTile(shared_ptr<Tile> tile, shared_ptr<Sprite> sprite)
 }  // void Terr::setTile(shared_ptr<Tile> tile, shared_ptr<Sprite> sprite)
 
 
-void Terr::tickSprites()
+void Terr::tickSprites(mt19937_64& rng)
 {
   for (location loc : sprites)
   {
     shared_ptr<Sprite> sprite = loc.get_left();
-    if(sprite->decTicks())
-    {
-      action act = sprite->popAct();
-      if (get<1>(act) == MOVE)
-      {
-        moveSprite(sprite, get<0>(act));
-        sprite->pushAct(action(SOUTH, MOVE));
-      }  // If the Sprite wants to move, move and give it a new move command
-    }
+    sprite->decTicks(rng);
   }
 }  // void Terr::tickSprites()
 
