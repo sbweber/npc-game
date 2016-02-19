@@ -1,7 +1,7 @@
 // Samuel Weber
 
   #include "Draw.h"
-  #include "EventLoops.h"
+  #include "GameState.h"
   #include "Keybind.h"
   #include "Globals.h"
   #include "Party.h"
@@ -33,7 +33,8 @@ int main(int argc, char **argv)
 
   // backend vars
   unique_ptr<Party> party(new Party(ren));
-  party->setState(TITLE);
+  unique_ptr<GameState> state(new GameState(ren));
+  state->setState(TITLE);
   vector<shared_ptr<Unit> > enemies;
 
   loadKeys();
@@ -44,7 +45,7 @@ int main(int argc, char **argv)
       if (e.type == SDL_QUIT)
         quit = true;
       else
-        mainLoop(e, font, party, enemies);
+        state->advance(e, font, party, enemies);
     }
 
   TTF_CloseFont(font);
