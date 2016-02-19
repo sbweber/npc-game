@@ -99,10 +99,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1806d04dfca4c8989df24fd5436e4e78"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1806d04dfca4c8989df24fd5436e4e78"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a1806d04dfca4c8989df24fd5436e4e78">Sprite</a> (SDL_Renderer *ren, const string &amp;spriteFile, const string &amp;n=&quot;&quot;, const string &amp;p=&quot;&quot;, const string &amp;scriptFile=&quot;&quot;)</td></tr>
-<tr class="memdesc:a1806d04dfca4c8989df24fd5436e4e78"><td class="mdescLeft">&#160;</td><td class="mdescRight">All units MUST have a spritesheet specified. type string optional. <br /></td></tr>
-<tr class="separator:a1806d04dfca4c8989df24fd5436e4e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4c8022f3f3e17a232691bb82e58b5a2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4c8022f3f3e17a232691bb82e58b5a2"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#af4c8022f3f3e17a232691bb82e58b5a2">Sprite</a> (SDL_Renderer *ren, int min, int max, const string &amp;spriteFile, const string &amp;n=&quot;&quot;, const string &amp;p=&quot;&quot;, const string &amp;scriptFile=&quot;&quot;)</td></tr>
+<tr class="memdesc:af4c8022f3f3e17a232691bb82e58b5a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">All units MUST have a spritesheet specified. type string optional. <br /></td></tr>
+<tr class="separator:af4c8022f3f3e17a232691bb82e58b5a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8accab430f9d90ae5117b57d67e32b84"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8accab430f9d90ae5117b57d67e32b84"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a8accab430f9d90ae5117b57d67e32b84">~Sprite</a> ()</td></tr>
 <tr class="memdesc:a8accab430f9d90ae5117b57d67e32b84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
@@ -119,6 +119,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#af880e3cfcd03b6de68171eef82dc6a69">decSpline</a> ()</td></tr>
 <tr class="memdesc:af880e3cfcd03b6de68171eef82dc6a69"><td class="mdescLeft">&#160;</td><td class="mdescRight">If spline is non-zero, decrements it and returns true. Else false. <br /></td></tr>
 <tr class="separator:af880e3cfcd03b6de68171eef82dc6a69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f06e4e0ea4c640c0d9685a1bf53452b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8f06e4e0ea4c640c0d9685a1bf53452b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a8f06e4e0ea4c640c0d9685a1bf53452b">decTicks</a> (mt19937_64 &amp;rng)</td></tr>
+<tr class="memdesc:a8f06e4e0ea4c640c0d9685a1bf53452b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrement ticks. Then, if it's zero, return true and reset it. <br /></td></tr>
+<tr class="separator:a8f06e4e0ea4c640c0d9685a1bf53452b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bf9e87449da385e99c02586eadf5de6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6bf9e87449da385e99c02586eadf5de6"></a>
 dir&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a6bf9e87449da385e99c02586eadf5de6">getFacing</a> ()</td></tr>
 <tr class="memdesc:a6bf9e87449da385e99c02586eadf5de6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns which direction the <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> is currently facing. <br /></td></tr>
@@ -155,6 +159,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a14a138e5acf82b97c052673dffb744f6">say</a> (SDL_Renderer *ren)</td></tr>
 <tr class="memdesc:a14a138e5acf82b97c052673dffb744f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make the <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> output text to the screen in its font. <br /></td></tr>
 <tr class="separator:a14a138e5acf82b97c052673dffb744f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add3d25cc26178af6a14c45ac958422f2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add3d25cc26178af6a14c45ac958422f2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#add3d25cc26178af6a14c45ac958422f2">setMoveFreq</a> (int min, int max)</td></tr>
+<tr class="memdesc:add3d25cc26178af6a14c45ac958422f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets new movement frequency. <br /></td></tr>
+<tr class="separator:add3d25cc26178af6a14c45ac958422f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5cdeb3206d89719fc10af1146ebbaf6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5cdeb3206d89719fc10af1146ebbaf6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#ac5cdeb3206d89719fc10af1146ebbaf6">setPurpose</a> (const string &amp;p)</td></tr>
 <tr class="memdesc:ac5cdeb3206d89719fc10af1146ebbaf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the descriptive string describing <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a>. <br /></td></tr>
@@ -182,6 +190,14 @@ dir&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 TTF_Font *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#aa9beec56e0e61eb611b204364fe446ce">font</a></td></tr>
 <tr class="memdesc:aa9beec56e0e61eb611b204364fe446ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Font the <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> uses to 'speak'. <br /></td></tr>
 <tr class="separator:aa9beec56e0e61eb611b204364fe446ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0834d9fd02051694b0412e6282354d8c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0834d9fd02051694b0412e6282354d8c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a0834d9fd02051694b0412e6282354d8c">moveFreqMax</a></td></tr>
+<tr class="memdesc:a0834d9fd02051694b0412e6282354d8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max number of seconds between moving. Ignored if min is negative. <br /></td></tr>
+<tr class="separator:a0834d9fd02051694b0412e6282354d8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a4228cece7d9e18b98e8b5397cd5183"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3a4228cece7d9e18b98e8b5397cd5183"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a3a4228cece7d9e18b98e8b5397cd5183">moveFreqMin</a></td></tr>
+<tr class="memdesc:a3a4228cece7d9e18b98e8b5397cd5183"><td class="mdescLeft">&#160;</td><td class="mdescRight">Min number of seconds between moving. Negative means stationary. <br /></td></tr>
+<tr class="separator:a3a4228cece7d9e18b98e8b5397cd5183"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a166409bbd17355e157618ec02441dab8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a166409bbd17355e157618ec02441dab8"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a166409bbd17355e157618ec02441dab8">name</a></td></tr>
 <tr class="memdesc:a166409bbd17355e157618ec02441dab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a>. Used for speech. <br /></td></tr>
@@ -206,6 +222,10 @@ spriteType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#aec7102885a3ca3fdd5124f8677135013">spriteSheet</a></td></tr>
 <tr class="memdesc:aec7102885a3ca3fdd5124f8677135013"><td class="mdescLeft">&#160;</td><td class="mdescRight">The spritesheet used to draw this <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a>. <br /></td></tr>
 <tr class="separator:aec7102885a3ca3fdd5124f8677135013"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac22dd37869ae96df32fd1fdba05e96d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac22dd37869ae96df32fd1fdba05e96d4"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#ac22dd37869ae96df32fd1fdba05e96d4">ticks</a></td></tr>
+<tr class="memdesc:ac22dd37869ae96df32fd1fdba05e96d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timer cycles until next action. <br /></td></tr>
+<tr class="separator:ac22dd37869ae96df32fd1fdba05e96d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Visual half of a <a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>. Information on what to draw to put a sprite onscreen. </p>

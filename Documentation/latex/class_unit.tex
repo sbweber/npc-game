@@ -9,11 +9,45 @@ Backend of a character’s data. Visual depiction handled by \hyperlink{class_sp
 
 {\ttfamily \#include $<$Unit.\+h$>$}
 
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_unit_a8e46f663a95736c8002d85ab271a7581}{Unit} ()\hypertarget{class_unit_a8e46f663a95736c8002d85ab271a7581}{}\label{class_unit_a8e46f663a95736c8002d85ab271a7581}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_unit}{Unit} constructor. \end{DoxyCompactList}\item 
+long \hyperlink{class_unit_a005874f369a17842d2ecb42539dacca9}{attack} ()\hypertarget{class_unit_a005874f369a17842d2ecb42539dacca9}{}\label{class_unit_a005874f369a17842d2ecb42539dacca9}
+
+\begin{DoxyCompactList}\small\item\em Returns the amount of damage the attack should deal (before defenses). \end{DoxyCompactList}\item 
+void \hyperlink{class_unit_a2a7293b325fbe8e73fece385b2a0970f}{full\+Heal} ()\hypertarget{class_unit_a2a7293b325fbe8e73fece385b2a0970f}{}\label{class_unit_a2a7293b325fbe8e73fece385b2a0970f}
+
+\begin{DoxyCompactList}\small\item\em Restores all HP. \end{DoxyCompactList}\item 
+long \hyperlink{class_unit_a111f87266234d9bd4a0d851f4d658d86}{get\+Curr\+HP} ()\hypertarget{class_unit_a111f87266234d9bd4a0d851f4d658d86}{}\label{class_unit_a111f87266234d9bd4a0d851f4d658d86}
+
+\begin{DoxyCompactList}\small\item\em Returns curr\+HP. \end{DoxyCompactList}\item 
+long \hyperlink{class_unit_a9aa287c4ed593378b03643b64c8481e5}{get\+Max\+HP} ()\hypertarget{class_unit_a9aa287c4ed593378b03643b64c8481e5}{}\label{class_unit_a9aa287c4ed593378b03643b64c8481e5}
+
+\begin{DoxyCompactList}\small\item\em Returns max\+HP. \end{DoxyCompactList}\item 
+bool \hyperlink{class_unit_a563978d397e42981db23ada6b3c21664}{is\+Dead} ()\hypertarget{class_unit_a563978d397e42981db23ada6b3c21664}{}\label{class_unit_a563978d397e42981db23ada6b3c21664}
+
+\begin{DoxyCompactList}\small\item\em Returns true if curr\+HP is less than or equal to zero. \end{DoxyCompactList}\item 
+long \hyperlink{class_unit_a7869a9bab59e707208367b2cbeedb9b1}{receive\+Attack} (long damage)\hypertarget{class_unit_a7869a9bab59e707208367b2cbeedb9b1}{}\label{class_unit_a7869a9bab59e707208367b2cbeedb9b1}
+
+\begin{DoxyCompactList}\small\item\em Given an attack, takes damage based on stats. Returns damage taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+long \hyperlink{class_unit_a331291f9274b46a302dc8307518531bb}{max\+HP}\hypertarget{class_unit_a331291f9274b46a302dc8307518531bb}{}\label{class_unit_a331291f9274b46a302dc8307518531bb}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_unit}{Unit}\textquotesingle{}s maximum HP. \end{DoxyCompactList}\item 
+long \hyperlink{class_unit_ae49498774522534a20fd57f66ab02139}{curr\+HP}\hypertarget{class_unit_ae49498774522534a20fd57f66ab02139}{}\label{class_unit_ae49498774522534a20fd57f66ab02139}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_unit}{Unit}\textquotesingle{}s current HP. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Backend of a character’s data. Visual depiction handled by \hyperlink{class_sprite}{Sprite} class. 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Unit.\+h\end{DoxyCompactItemize}
+Unit.\+h\item 
+Unit.\+cpp\end{DoxyCompactItemize}

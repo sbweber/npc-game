@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['passive',['passive',['../class_party.html#a6dd68ad949efb33afd401d26de7ba2a4',1,'Party']]],
-  ['pic',['pic',['../class_button.html#adf19f779ff118533b103aedcf743b8bf',1,'Button']]],
-  ['purpose',['purpose',['../class_sprite.html#ad23c15d2b97d15db7522f9caa1a0b7a2',1,'Sprite']]]
+  ['n',['N',['../class_tile.html#a4c0be3e9600a9694e7e91d54090b37d4',1,'Tile']]],
+  ['name',['name',['../class_sprite.html#a166409bbd17355e157618ec02441dab8',1,'Sprite']]]
 ];

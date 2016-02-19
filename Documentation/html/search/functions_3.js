@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['entertile',['enterTile',['../class_tile.html#ae04dfcac010592c1ef0aaae031f31b6a',1,'Tile::enterTile()'],['../class_warp.html#a28e607e491d761c1baad786e911a2681',1,'Warp::enterTile()']]],
-  ['entertilemessagehandler',['enterTileMessageHandler',['../class_terr.html#a6b79ff79c2ffbe2606f5906b3f23df12',1,'Terr']]]
+  ['deccursorpos',['decCursorPos',['../class_game_state.html#ab0ecc413fbf4772869e037bc3489f26e',1,'GameState']]],
+  ['decspline',['decSpline',['../class_sprite.html#af880e3cfcd03b6de68171eef82dc6a69',1,'Sprite']]],
+  ['decticks',['decTicks',['../class_sprite.html#a8f06e4e0ea4c640c0d9685a1bf53452b',1,'Sprite']]]
 ];

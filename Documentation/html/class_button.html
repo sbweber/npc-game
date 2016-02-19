@@ -101,18 +101,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a605828617975a0a3a330dbebbfa736bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a605828617975a0a3a330dbebbfa736bf">Button</a> (SDL_Renderer *ren, const string &amp;file, int x, int y, int w, int h, TTF_Font *font=nullptr, const string &amp;s=&quot;&quot;)</td></tr>
 <tr class="separator:a605828617975a0a3a330dbebbfa736bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a374d116950c2390f883088c7afb107d6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a374d116950c2390f883088c7afb107d6"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a374d116950c2390f883088c7afb107d6">buttonClick</a> (SDL_MouseButtonEvent &amp;click)</td></tr>
-<tr class="memdesc:a374d116950c2390f883088c7afb107d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if <a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a> was clicked. <br /></td></tr>
-<tr class="separator:a374d116950c2390f883088c7afb107d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab22d97c11b0e63f90ef584fc9a5c0f6d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab22d97c11b0e63f90ef584fc9a5c0f6d"></a>
-SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#ab22d97c11b0e63f90ef584fc9a5c0f6d">getPic</a> ()</td></tr>
-<tr class="memdesc:ab22d97c11b0e63f90ef584fc9a5c0f6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a>'s background picture. <br /></td></tr>
-<tr class="separator:ab22d97c11b0e63f90ef584fc9a5c0f6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a599b95776f845111b8245ff15c13f2f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a599b95776f845111b8245ff15c13f2f1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a599b95776f845111b8245ff15c13f2f1">render</a> (SDL_Renderer *ren)</td></tr>
-<tr class="memdesc:a599b95776f845111b8245ff15c13f2f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws <a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a> on the renderer. <br /></td></tr>
-<tr class="separator:a599b95776f845111b8245ff15c13f2f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f93070fbcb76faac1b26df1cf04a9e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1f93070fbcb76faac1b26df1cf04a9e4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a1f93070fbcb76faac1b26df1cf04a9e4">buttonClick</a> (SDL_Renderer *ren, SDL_MouseButtonEvent &amp;click)</td></tr>
+<tr class="memdesc:a1f93070fbcb76faac1b26df1cf04a9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if <a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a> was clicked. <br /></td></tr>
+<tr class="separator:a1f93070fbcb76faac1b26df1cf04a9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aa8e2b4fdc41c911ce7ebbe04ba27f8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4aa8e2b4fdc41c911ce7ebbe04ba27f8"></a>
+SDL_Rect&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a4aa8e2b4fdc41c911ce7ebbe04ba27f8">getPos</a> ()</td></tr>
+<tr class="memdesc:a4aa8e2b4fdc41c911ce7ebbe04ba27f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns button. <br /></td></tr>
+<tr class="separator:a4aa8e2b4fdc41c911ce7ebbe04ba27f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecc3cba90d8121c6f673b600c13e4bc9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aecc3cba90d8121c6f673b600c13e4bc9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#aecc3cba90d8121c6f673b600c13e4bc9">mouseOnButton</a> (int x, int y)</td></tr>
+<tr class="memdesc:aecc3cba90d8121c6f673b600c13e4bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if mouse is over the button (x/y coords). <br /></td></tr>
+<tr class="separator:aecc3cba90d8121c6f673b600c13e4bc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92f3a17475a7a06b82779b1092a1952f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a92f3a17475a7a06b82779b1092a1952f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a92f3a17475a7a06b82779b1092a1952f">mouseOnButton</a> (SDL_MouseButtonEvent &amp;mouse)</td></tr>
+<tr class="memdesc:a92f3a17475a7a06b82779b1092a1952f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if mouse is over the button (click). <br /></td></tr>
+<tr class="separator:a92f3a17475a7a06b82779b1092a1952f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b3d75341a6cc59a0a50730a977cd104"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b3d75341a6cc59a0a50730a977cd104"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a2b3d75341a6cc59a0a50730a977cd104">mouseOnButton</a> (SDL_MouseMotionEvent &amp;mouse)</td></tr>
+<tr class="memdesc:a2b3d75341a6cc59a0a50730a977cd104"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if mouse is over the button (mouseover). <br /></td></tr>
+<tr class="separator:a2b3d75341a6cc59a0a50730a977cd104"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8afc12afd3beb237b7c17e7d00ce3a95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8afc12afd3beb237b7c17e7d00ce3a95"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a8afc12afd3beb237b7c17e7d00ce3a95">render</a> (SDL_Renderer *ren, buttonState state)</td></tr>
+<tr class="memdesc:a8afc12afd3beb237b7c17e7d00ce3a95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws <a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a> on the renderer. <br /></td></tr>
+<tr class="separator:a8afc12afd3beb237b7c17e7d00ce3a95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -126,7 +138,7 @@ SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" h
 <tr class="separator:adf19f779ff118533b103aedcf743b8bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a08d8969454e7a566717d2488a788bd78"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a08d8969454e7a566717d2488a788bd78"></a>
 SDL_Texture *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_button.html#a08d8969454e7a566717d2488a788bd78">text</a></td></tr>
-<tr class="memdesc:a08d8969454e7a566717d2488a788bd78"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a>'s optional foreground text, as a picture. <br /></td></tr>
+<tr class="memdesc:a08d8969454e7a566717d2488a788bd78"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_button.html" title="Describes a clickable button. ">Button</a>'s optional foreground text, as a texture. <br /></td></tr>
 <tr class="separator:a08d8969454e7a566717d2488a788bd78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
