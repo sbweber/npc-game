@@ -175,6 +175,13 @@ void Sprite::say(SDL_Renderer *ren)
 }  // void Sprite::say(SDL_Renderer *ren, string &str)
 
 
+void Sprite::setMoveFreq(int min, int max)
+{
+  moveFreqMax = max;
+  moveFreqMin = min;
+}  // void Sprite::setMoveFreq(int min, int max)
+
+
 void Sprite::setPurpose(const string &p)
 {
   purpose = p;

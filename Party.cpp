@@ -135,7 +135,7 @@ void Party::setSprite(SDL_Renderer *ren, const string &str)
 void Party::setState(gameState gs)
 {
   if (gs == MAP)
-    timerID = SDL_AddTimer(1000, mapTimerCallback, nullptr);
+    timerID = SDL_AddTimer(125, mapTimerCallback, nullptr);
   else if (state == MAP)
     SDL_RemoveTimer(timerID);
   state = gs;

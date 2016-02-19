@@ -178,6 +178,8 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party,
   {
   case SDL_USEREVENT:
     party->getTerr()->tickSprites(party->getRNG());
+    message = party->getTerr()->actSprites(party->getSprite(), enemies);
+    interactMessageHandler(party, message);
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = party->tileClick(e.button);
@@ -203,8 +205,6 @@ void loopMap(SDL_Event &e, unique_ptr<Party> &party,
   default:
     break;
   }
-  message = party->getTerr()->actSprites(party->getSprite(), enemies);
-  interactMessageHandler(party, message);
 }  // void loopMap(SDL_Event &e, unique_ptr<Party> &party)
 
 

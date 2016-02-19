@@ -259,16 +259,24 @@ string Terr::interactSprite(shared_ptr<Sprite> sprite,
 string Terr::interactSprites(shared_ptr<Sprite> sprite,
         shared_ptr<Sprite> target, vector<shared_ptr<Unit> > &enemies)
 {
-  if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
-    setSprite(target, nullptr);
-  else if (sprite->getPurpose() == "Hero")
+  if (sprite->getPurpose() == "Hero")
     target->say(ren);
   if (sprite->getPurpose() == "Hero" && target->getPurpose() == "HealTest")
     return "PARTY: full-heal";
-  if (sprite->getPurpose() == "Hero" && target->getPurpose() == "FightTest")
+  else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "FightTest")
   {
     enemies.emplace_back(new Unit());
     return "CHANGE-STATE: BATTLE";
+  }
+  else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
+  {
+    shared_ptr<Tile> tile = nullptr;
+    for (vector<shared_ptr<Tile> > tvec : map)
+      for (shared_ptr<Tile> t : tvec)
+        if (t->enterTile().find("LOAD-MAP:") != string::npos)
+          tile = t;
+    findPath(getTile(target), tile, target);
+    target->setMoveFreq(0, 0);
   }
   return "";
 }  // void Terr::interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> sprite)
@@ -450,7 +458,7 @@ void Terr::loadMap(const string &str)
 
 void Terr::loadSprite(ifstream &file)
 {
-  int x, y;
+  int x, y, moveFreqMin, moveFreqMax;
   string spriteFile = "NPC.png", name = "I_AM_ERROR";
   string purpose = "ERROR", scriptFile = "Silence.txt"; 
   file >> x;
@@ -459,7 +467,9 @@ void Terr::loadSprite(ifstream &file)
   file >> name;
   file >> purpose;
   file >> scriptFile;
-  shared_ptr<Sprite> sprite(new Sprite(ren, 1, 5, spriteFile, name, purpose,
+  file >> moveFreqMin;
+  file >> moveFreqMax;
+  shared_ptr<Sprite> sprite(new Sprite(ren, moveFreqMin, moveFreqMax, spriteFile, name, purpose,
           scriptFile));
   setSprite(sprite, getTile(x, y));
 }  // void Terr::loadSprite(ifstream &file)

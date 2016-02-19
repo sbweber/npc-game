@@ -69,6 +69,8 @@
     //!< Draws a series of textboxes with text until str has been displayed.
     void say(SDL_Renderer *ren);
     //!< Make the Sprite output text to the screen in its font.
+    void setMoveFreq(int min, int max);
+    //!< Sets new movement frequency.
     void setPurpose(const string &p);
     //!< Set the descriptive string describing Sprite
     void setSpline(int s);
