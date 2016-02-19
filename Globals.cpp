@@ -2,6 +2,16 @@
 
 #include "Globals.h"
 
+
+void eventQuit()
+{
+  SDL_Event *q = new SDL_Event();
+  q->type = SDL_QUIT;
+  SDL_FlushEvents(0, UINT32_MAX);
+  SDL_PushEvent(q);
+}  // void eventQuit()
+
+
 void logError(const string &msg, ostream &os)
 {
 	os << msg << endl << endl;
@@ -19,10 +29,10 @@ SDL_Event pressAnyKey()
   SDL_Event e;
   SDL_FlushEvent(SDL_KEYDOWN);
   SDL_FlushEvent(SDL_MOUSEBUTTONDOWN);
-  while (true)
-    if (SDL_PollEvent(&e))
-      if (e.type == SDL_KEYDOWN || e.type == SDL_MOUSEBUTTONDOWN)
-        return e;
+  SDL_WaitEvent(&e);
+  while (e.type != SDL_KEYDOWN && e.type != SDL_MOUSEBUTTONDOWN)
+    SDL_WaitEvent(&e);
+  return e;
 }  // void pressAnyKey()
 
 
@@ -40,28 +50,34 @@ void quit(const string err, int errtype, SDL_Renderer *ren, SDL_Window *win)
 }  // void quit()
 
 
-long int rng(long int min, long int max)
+dir randDir(mt19937_64& rng)
 {
-  int randNum;
-  if (min > max)
+  uniform_int_distribution<int> dist(0, 3);
+  int randomResult = dist(rng);
+  switch (randomResult)
   {
-    long int temp = min;
-    min = max;
-    max = temp;
-  }  // if (min > max)
-  if ((max > RAND_MAX) || ((max - min) > RAND_MAX))
-    return -1;  // ERROR: random number maximum is too big or range is too big
-  randNum = rand();
-  for (int counter = 0; (RAND_MAX - randNum) < (max - min); counter++)
-  {
-    randNum = rand();
-    if (counter > 10)
-    {
-      srand((unsigned int)time(NULL));
-      counter = 0;
-    }  // If rerolled too many times, reseed and reset counter.
-  }  // while die cannot finish iteration, reroll and increment reseed counter.
-  randNum = randNum % (max - min + 1) + min;
-  return randNum;
-}  // const long int rng(long int min, long int max)
+  case 0:
+    return EAST;
+    break;
+  case 1:
+    return NORTH;
+    break;
+  case 2:
+    return SOUTH;
+    break;
+  case 3:
+    return WEST;
+    break;
+  default:
+    return UNDEFINED_DIRECTION;
+    break;
+  }
+}  // dir randDir(mt19937_64& rng)
+
+
+long randNum(mt19937_64& rng, long min, long max)
+{
+  uniform_int_distribution<long> randNum(min, max);
+  return randNum(rng);
+}  // long rng(mt19937_64& rng, long min, long max)
 

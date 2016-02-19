@@ -14,13 +14,22 @@ Describes a clickable button.
 \item 
 \hyperlink{class_button_a605828617975a0a3a330dbebbfa736bf}{Button} (S\+D\+L\+\_\+\+Renderer $\ast$ren, const string \&file, int x, int y, int w, int h, T\+T\+F\+\_\+\+Font $\ast$font=nullptr, const string \&s=\char`\"{}\char`\"{})
 \item 
-bool \hyperlink{class_button_a374d116950c2390f883088c7afb107d6}{button\+Click} (S\+D\+L\+\_\+\+Mouse\+Button\+Event \&click)\hypertarget{class_button_a374d116950c2390f883088c7afb107d6}{}\label{class_button_a374d116950c2390f883088c7afb107d6}
+bool \hyperlink{class_button_a1f93070fbcb76faac1b26df1cf04a9e4}{button\+Click} (S\+D\+L\+\_\+\+Renderer $\ast$ren, S\+D\+L\+\_\+\+Mouse\+Button\+Event \&click)\hypertarget{class_button_a1f93070fbcb76faac1b26df1cf04a9e4}{}\label{class_button_a1f93070fbcb76faac1b26df1cf04a9e4}
 
 \begin{DoxyCompactList}\small\item\em Returns true if \hyperlink{class_button}{Button} was clicked. \end{DoxyCompactList}\item 
-S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{class_button_ab22d97c11b0e63f90ef584fc9a5c0f6d}{get\+Pic} ()\hypertarget{class_button_ab22d97c11b0e63f90ef584fc9a5c0f6d}{}\label{class_button_ab22d97c11b0e63f90ef584fc9a5c0f6d}
+S\+D\+L\+\_\+\+Rect \hyperlink{class_button_a4aa8e2b4fdc41c911ce7ebbe04ba27f8}{get\+Pos} ()\hypertarget{class_button_a4aa8e2b4fdc41c911ce7ebbe04ba27f8}{}\label{class_button_a4aa8e2b4fdc41c911ce7ebbe04ba27f8}
 
-\begin{DoxyCompactList}\small\item\em Returns \hyperlink{class_button}{Button}\textquotesingle{}s background picture. \end{DoxyCompactList}\item 
-void \hyperlink{class_button_a599b95776f845111b8245ff15c13f2f1}{render} (S\+D\+L\+\_\+\+Renderer $\ast$ren)\hypertarget{class_button_a599b95776f845111b8245ff15c13f2f1}{}\label{class_button_a599b95776f845111b8245ff15c13f2f1}
+\begin{DoxyCompactList}\small\item\em Returns button. \end{DoxyCompactList}\item 
+bool \hyperlink{class_button_aecc3cba90d8121c6f673b600c13e4bc9}{mouse\+On\+Button} (int x, int y)\hypertarget{class_button_aecc3cba90d8121c6f673b600c13e4bc9}{}\label{class_button_aecc3cba90d8121c6f673b600c13e4bc9}
+
+\begin{DoxyCompactList}\small\item\em Returns true if mouse is over the button (x/y coords). \end{DoxyCompactList}\item 
+bool \hyperlink{class_button_a92f3a17475a7a06b82779b1092a1952f}{mouse\+On\+Button} (S\+D\+L\+\_\+\+Mouse\+Button\+Event \&mouse)\hypertarget{class_button_a92f3a17475a7a06b82779b1092a1952f}{}\label{class_button_a92f3a17475a7a06b82779b1092a1952f}
+
+\begin{DoxyCompactList}\small\item\em Returns true if mouse is over the button (click). \end{DoxyCompactList}\item 
+bool \hyperlink{class_button_a2b3d75341a6cc59a0a50730a977cd104}{mouse\+On\+Button} (S\+D\+L\+\_\+\+Mouse\+Motion\+Event \&mouse)\hypertarget{class_button_a2b3d75341a6cc59a0a50730a977cd104}{}\label{class_button_a2b3d75341a6cc59a0a50730a977cd104}
+
+\begin{DoxyCompactList}\small\item\em Returns true if mouse is over the button (mouseover). \end{DoxyCompactList}\item 
+void \hyperlink{class_button_a8afc12afd3beb237b7c17e7d00ce3a95}{render} (S\+D\+L\+\_\+\+Renderer $\ast$ren, button\+State state)\hypertarget{class_button_a8afc12afd3beb237b7c17e7d00ce3a95}{}\label{class_button_a8afc12afd3beb237b7c17e7d00ce3a95}
 
 \begin{DoxyCompactList}\small\item\em Draws \hyperlink{class_button}{Button} on the renderer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
@@ -34,7 +43,7 @@ S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{class_button_adf19f779ff118533b103aedcf
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_button}{Button}\textquotesingle{}s background picture. \end{DoxyCompactList}\item 
 S\+D\+L\+\_\+\+Texture $\ast$ \hyperlink{class_button_a08d8969454e7a566717d2488a788bd78}{text}\hypertarget{class_button_a08d8969454e7a566717d2488a788bd78}{}\label{class_button_a08d8969454e7a566717d2488a788bd78}
 
-\begin{DoxyCompactList}\small\item\em \hyperlink{class_button}{Button}\textquotesingle{}s optional foreground text, as a picture. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_button}{Button}\textquotesingle{}s optional foreground text, as a texture. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}

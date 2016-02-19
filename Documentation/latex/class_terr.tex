@@ -18,6 +18,9 @@ Describes an overworld map. All maps currently must be rectangles.
 \hyperlink{class_terr_a8b68000bbfdc821e364bdb89f4465c17}{$\sim$\+Terr} ()\hypertarget{class_terr_a8b68000bbfdc821e364bdb89f4465c17}{}\label{class_terr_a8b68000bbfdc821e364bdb89f4465c17}
 
 \begin{DoxyCompactList}\small\item\em Default destructor. Because Tiles use new, they must be deleted. \end{DoxyCompactList}\item 
+string \hyperlink{class_terr_adc8910783511bda341ee07d2603823d4}{act\+Sprites} (shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ party\+Sprite, vector$<$ shared\+\_\+ptr$<$ \hyperlink{class_unit}{Unit} $>$ $>$ \&enemies)\hypertarget{class_terr_adc8910783511bda341ee07d2603823d4}{}\label{class_terr_adc8910783511bda341ee07d2603823d4}
+
+\begin{DoxyCompactList}\small\item\em All sprites pop an action (if any) and enact it. \end{DoxyCompactList}\item 
 void \hyperlink{class_terr_a6b79ff79c2ffbe2606f5906b3f23df12}{enter\+Tile\+Message\+Handler} (const string \&message, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ tile)\hypertarget{class_terr_a6b79ff79c2ffbe2606f5906b3f23df12}{}\label{class_terr_a6b79ff79c2ffbe2606f5906b3f23df12}
 
 \begin{DoxyCompactList}\small\item\em Takes in a message from a \hyperlink{class_tile}{Tile} being entered, reacts accordingly. \end{DoxyCompactList}\item 
@@ -42,10 +45,10 @@ shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_terr_af54a8
 int \hyperlink{class_terr_a397fdbbeb3fe3eb8989d9da77af42f57}{get\+Width} ()\hypertarget{class_terr_a397fdbbeb3fe3eb8989d9da77af42f57}{}\label{class_terr_a397fdbbeb3fe3eb8989d9da77af42f57}
 
 \begin{DoxyCompactList}\small\item\em Returns the width (w) of \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
-void \hyperlink{class_terr_ac900225f790f49a5baa490351adfb03a}{interact\+Sprite} (shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ sprite)\hypertarget{class_terr_ac900225f790f49a5baa490351adfb03a}{}\label{class_terr_ac900225f790f49a5baa490351adfb03a}
+string \hyperlink{class_terr_a673ca282c441e6eea4935bd1ae6afdb7}{interact\+Sprite} (shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ sprite, vector$<$ shared\+\_\+ptr$<$ \hyperlink{class_unit}{Unit} $>$ $>$ \&enemies)\hypertarget{class_terr_a673ca282c441e6eea4935bd1ae6afdb7}{}\label{class_terr_a673ca282c441e6eea4935bd1ae6afdb7}
 
 \begin{DoxyCompactList}\small\item\em Intelligently interact with \hyperlink{class_sprite}{Sprite} being faced, if any. \end{DoxyCompactList}\item 
-void \hyperlink{class_terr_a343cd63b0fd20a5baf2dbbf8ea1d7098}{interact\+Sprites} (shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ sprite, shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ target)\hypertarget{class_terr_a343cd63b0fd20a5baf2dbbf8ea1d7098}{}\label{class_terr_a343cd63b0fd20a5baf2dbbf8ea1d7098}
+string \hyperlink{class_terr_a00dfea1cd9014d8b368a46ba466a46b2}{interact\+Sprites} (shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ sprite, shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ target, vector$<$ shared\+\_\+ptr$<$ \hyperlink{class_unit}{Unit} $>$ $>$ \&enemies)\hypertarget{class_terr_a00dfea1cd9014d8b368a46ba466a46b2}{}\label{class_terr_a00dfea1cd9014d8b368a46ba466a46b2}
 
 \begin{DoxyCompactList}\small\item\em Intelligently interact between two sprites. \end{DoxyCompactList}\item 
 bool \hyperlink{class_terr_a367ee972d1e3edffe329fb4f7c84ff3e}{is\+Occupied} (shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ tile)\hypertarget{class_terr_a367ee972d1e3edffe329fb4f7c84ff3e}{}\label{class_terr_a367ee972d1e3edffe329fb4f7c84ff3e}
@@ -63,15 +66,18 @@ void \hyperlink{class_terr_aaa2f0f8ba60f462070a0f7d40d1f4ed0}{set\+Sprite} (shar
 void \hyperlink{class_terr_abd9bbf7cc0d7f0ef48a2198f5b2047ba}{set\+Tile} (shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ tile, shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ sprite)\hypertarget{class_terr_abd9bbf7cc0d7f0ef48a2198f5b2047ba}{}\label{class_terr_abd9bbf7cc0d7f0ef48a2198f5b2047ba}
 
 \begin{DoxyCompactList}\small\item\em Sets a Sprite-\/\+Tile relationship. Alias for set\+Sprite. \end{DoxyCompactList}\item 
+void \hyperlink{class_terr_ab9563f05a13abff25ab62d814dab743f}{tick\+Sprites} (mt19937\+\_\+64 \&rng)\hypertarget{class_terr_ab9563f05a13abff25ab62d814dab743f}{}\label{class_terr_ab9563f05a13abff25ab62d814dab743f}
+
+\begin{DoxyCompactList}\small\item\em Tells all Sprites that a tick has occurred. \end{DoxyCompactList}\item 
 shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_terr_ab1b055dc8ce5abea86d84472e27ceb48}{tile\+Click} (S\+D\+L\+\_\+\+Mouse\+Button\+Event \&click, shared\+\_\+ptr$<$ \hyperlink{class_sprite}{Sprite} $>$ sprite)\hypertarget{class_terr_ab1b055dc8ce5abea86d84472e27ceb48}{}\label{class_terr_ab1b055dc8ce5abea86d84472e27ceb48}
 
 \begin{DoxyCompactList}\small\item\em Returns pointer to the \hyperlink{class_tile}{Tile} clicked. Needs \hyperlink{class_sprite}{Sprite} the map is watching. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \hyperlink{class_terr_af17a51c8b893a518a743c72411de3598}{find\+Check\+Route} (dir d, unordered\+\_\+map$<$ shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$, int $>$ $\ast$tiles, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ tile)
+bool \hyperlink{class_terr_a34bf50aa821f3c2f861c060281e238c3}{find\+Check\+Route} (dir d, unordered\+\_\+map$<$ shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$, int $>$ \&tiles, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ tile)
 \item 
-void \hyperlink{class_terr_a80d2b5befbfc30d4d38a4dd2ade6b7bf}{find\+Enqueue} (dir d, priority\+\_\+queue$<$ tuple$<$ int, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ $>$, vector$<$ tuple$<$ int, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ $>$ $>$, greater$<$ tuple$<$ int, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ $>$ $>$ $>$ $\ast$searchQ, unordered\+\_\+map$<$ shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$, int $>$ $\ast$tiles, tuple$<$ int, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ $>$ t, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ target)\hypertarget{class_terr_a80d2b5befbfc30d4d38a4dd2ade6b7bf}{}\label{class_terr_a80d2b5befbfc30d4d38a4dd2ade6b7bf}
+void \hyperlink{class_terr_a1784db5125ce598d59b68bb0edde9196}{find\+Enqueue} (dir d, priority\+\_\+queue$<$ tuple$<$ int, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ $>$, vector$<$ tuple$<$ int, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ $>$ $>$, greater$<$ tuple$<$ int, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ $>$ $>$ $>$ \&searchQ, unordered\+\_\+map$<$ shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$, int $>$ \&tiles, tuple$<$ int, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ $>$ t, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ target)\hypertarget{class_terr_a1784db5125ce598d59b68bb0edde9196}{}\label{class_terr_a1784db5125ce598d59b68bb0edde9196}
 
 \begin{DoxyCompactList}\small\item\em Utility function for \hyperlink{class_terr_ad0596843b8e4c1ddd9b39220837b88ce}{find\+Path()}\+: marks/enqueues tiles. \end{DoxyCompactList}\item 
 int \hyperlink{class_terr_a76e437b2864d6fd78b85961dbe1ade61}{find\+Distance} (shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ start, shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ end)\hypertarget{class_terr_a76e437b2864d6fd78b85961dbe1ade61}{}\label{class_terr_a76e437b2864d6fd78b85961dbe1ade61}
@@ -112,13 +118,13 @@ Describes an overworld map. All maps currently must be rectangles.
 \subsection{Member Function Documentation}
 \index{Terr@{Terr}!find\+Check\+Route@{find\+Check\+Route}}
 \index{find\+Check\+Route@{find\+Check\+Route}!Terr@{Terr}}
-\subsubsection[{\texorpdfstring{find\+Check\+Route(dir d, unordered\+\_\+map$<$ shared\+\_\+ptr$<$ Tile $>$, int $>$ $\ast$tiles, shared\+\_\+ptr$<$ Tile $>$ tile)}{findCheckRoute(dir d, unordered_map< shared_ptr< Tile >, int > *tiles, shared_ptr< Tile > tile)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Terr\+::find\+Check\+Route (
+\subsubsection[{\texorpdfstring{find\+Check\+Route(dir d, unordered\+\_\+map$<$ shared\+\_\+ptr$<$ Tile $>$, int $>$ \&tiles, shared\+\_\+ptr$<$ Tile $>$ tile)}{findCheckRoute(dir d, unordered_map< shared_ptr< Tile >, int > &tiles, shared_ptr< Tile > tile)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Terr\+::find\+Check\+Route (
 \begin{DoxyParamCaption}
 \item[{dir}]{d, }
-\item[{unordered\+\_\+map$<$ shared\+\_\+ptr$<$ {\bf Tile} $>$, int $>$ $\ast$}]{tiles, }
+\item[{unordered\+\_\+map$<$ shared\+\_\+ptr$<$ {\bf Tile} $>$, int $>$ \&}]{tiles, }
 \item[{shared\+\_\+ptr$<$ {\bf Tile} $>$}]{tile}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_terr_af17a51c8b893a518a743c72411de3598}{}\label{class_terr_af17a51c8b893a518a743c72411de3598}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_terr_a34bf50aa821f3c2f861c060281e238c3}{}\label{class_terr_a34bf50aa821f3c2f861c060281e238c3}
 Returns true if a tile in dir d exists and gets you closer on your route. Requires a fully loaded table of tuples showing how close the tiles are on potential routes. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

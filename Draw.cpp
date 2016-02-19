@@ -3,28 +3,66 @@
 #include "Draw.h"
 
 
-void drawBattle(SDL_Renderer *ren, TTF_Font* font)
-{ // TODO: All battle functionality stubbed or otherwise incomplete
+void drawBattle(SDL_Renderer *ren, unique_ptr<Party> &party, TTF_Font* font,
+        vector<unique_ptr<Button> > &buttons, int x, int y, int cursor,
+        vector<shared_ptr<Unit> > &enemies)
+{
   SDL_RenderClear(ren);
-  // draw graphics visuals (ignoring this step for now, except for...)
-  // ...including text box at bottom
-  // choose and print next line of text (damage report, etc)
+  SDL_Texture* c = loadTexture("ButtonCursor.png", ren);
   renderTextbox(ren, font, "");
+  for (unique_ptr<Button> &button : buttons)
+  {
+    button->render(ren, buttonUp);
+    if (button->mouseOnButton(x, y))
+      button->render(ren, buttonSelected);
+    else
+      button->render(ren, buttonUp);
+  }
+  renderTexture(c, ren, buttons[cursor]->getPos());
+  drawBattleUpdate(ren, party, font, enemies);
   SDL_RenderPresent(ren);
+  SDL_DestroyTexture(c);
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 
 
-bool drawMap(unique_ptr<Party> &party)
+void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
+        TTF_Font* font, vector<shared_ptr<Unit> > &enemies)
+{
+  SDL_Texture* partyHP[4];
+  SDL_Texture* black = loadTexture("Black.png", ren);
+  renderTexture(black, ren, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 4 / 5);
+  string HPstr = to_string(party->getUnit(0)->getCurrHP()) + "/" + to_string(party->getUnit(0)->getMaxHP());
+  string HPLabel = "Your HP:";
+  SDL_Texture* partyHPLabel = renderText(ren, font, HPLabel);
+  partyHP[0] = renderText(ren, font, HPstr);
+  HPstr = to_string(enemies[0]->getCurrHP()) + "/" + to_string(enemies[0]->getMaxHP());
+  HPLabel = "Enemy HP:";
+  SDL_Texture* enemyHPLabel = renderText(ren, font, HPLabel);
+  SDL_Texture* enemyHP = renderText(ren, font, HPstr);
+  renderTexture(partyHPLabel, ren, 800, 70);
+  renderTexture(partyHP[0], ren, 800, 100);
+  renderTexture(enemyHPLabel, ren, 24, 70);
+  renderTexture(enemyHP, ren, 24, 100);
+  SDL_RenderPresent(ren);
+  SDL_DestroyTexture(partyHP[0]);
+  SDL_DestroyTexture(enemyHP);
+  SDL_DestroyTexture(black);
+  SDL_DestroyTexture(partyHPLabel);
+  SDL_DestroyTexture(enemyHPLabel);
+}  // void drawBattleUpdate
+
+
+bool drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party)
 {  // portion of map to be drawn based on position of hero
-  SDL_RenderClear(party->getRen());
+  SDL_RenderClear(terr->getRen());
   int tileClip = 0;
-  bool partyMoved = false, cont = false;
+  bool spriteMoved = false, cont = false;
   SDL_Rect tileClips[16];  // magic number (16): number of tile types. Currently five (black/impassable, white/passable, etc)
   getClips(tileClips, 16, 4, TILE_WIDTH, TILE_HEIGHT);  // magic number (4): number of rows in the tile spritesheet
 
   // position of unit on which camera is focused
-  int x = party->getTerr()->getTile(party->getSprite())->getX();
-  int y = party->getTerr()->getTile(party->getSprite())->getY();
+  int x = terr->getTile(party->getSprite())->getX();
+  int y = terr->getTile(party->getSprite())->getY();
   int hsw = NUM_TILES_WIDTH / 2;  //half screen width (in tiles)
   int hsh = NUM_TILES_HEIGHT / 2;  // half screen height
 
@@ -32,9 +70,9 @@ bool drawMap(unique_ptr<Party> &party)
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
     {
-      if (((x + i - hsw) >= 0) && ((x + i - hsw) < party->getTerr()->getWidth()) &&
-              ((y + j - hsh) >= 0) && ((y + j - hsh) < party->getTerr()->getHeight()))
-        tilePtr = party->getTerr()->getTile((x + i - hsw), (j + y - hsh));
+      if (((x + i - hsw) >= 0) && ((x + i - hsw) < terr->getWidth()) &&
+              ((y + j - hsh) >= 0) && ((y + j - hsh) < terr->getHeight()))
+        tilePtr = terr->getTile((x + i - hsw), (j + y - hsh));
       // if Tile in question exists
       else
         tilePtr = nullptr;
@@ -45,24 +83,24 @@ bool drawMap(unique_ptr<Party> &party)
         switch (party->getSprite()->getFacing())
         {
         case EAST:
-          renderTexture(tilePtr->getTex(), party->getRen(),
+          renderTexture(tilePtr->getTex(), terr->getRen(),
                   TILE_WIDTH * i + party->getSprite()->getSpline(),
                   TILE_HEIGHT * j, &tileClips[tileClip], tilePtr->getAngle());
           break;
         case NORTH:
-          renderTexture(tilePtr->getTex(), party->getRen(),
+          renderTexture(tilePtr->getTex(), terr->getRen(),
                   TILE_WIDTH * i,
                   TILE_HEIGHT * j - party->getSprite()->getSpline(),
                   &tileClips[tileClip], tilePtr->getAngle());
           break;
         case SOUTH:
-          renderTexture(tilePtr->getTex(), party->getRen(),
+          renderTexture(tilePtr->getTex(), terr->getRen(),
                   TILE_WIDTH * i,
                   TILE_HEIGHT * j + party->getSprite()->getSpline(),
                   &tileClips[tileClip], tilePtr->getAngle());
           break;
         case WEST:
-          renderTexture(tilePtr->getTex(), party->getRen(),
+          renderTexture(tilePtr->getTex(), terr->getRen(),
                   TILE_WIDTH * i - party->getSprite()->getSpline(),
                   TILE_HEIGHT * j, &tileClips[tileClip], tilePtr->getAngle());
           break;
@@ -78,24 +116,24 @@ bool drawMap(unique_ptr<Party> &party)
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
     {
-      if (((x + i - hsw) >= 0) && ((x + i - hsw) < party->getTerr()->getWidth()) &&
-        ((y + j - hsh) >= 0) && ((y + j - hsh) < party->getTerr()->getHeight()))
-        tilePtr = party->getTerr()->getTile((x + i - hsw), (j + y - hsh));
+      if (((x + i - hsw) >= 0) && ((x + i - hsw) < terr->getWidth()) &&
+        ((y + j - hsh) >= 0) && ((y + j - hsh) < terr->getHeight()))
+        tilePtr = terr->getTile((x + i - hsw), (j + y - hsh));
       // if Tile in question exists
       else
         tilePtr = nullptr;
       if (tilePtr)
       {
-        if (party->getTerr()->isOccupied(tilePtr))
-          cont = drawSprite(tilePtr, party, i, j);
+        if (terr->isOccupied(tilePtr))
+          cont = drawSprite(terr->getRen(), terr->getSprite(tilePtr),
+                  party, i, j);
         // if the tile is occupied, draw the character
-        if (!partyMoved && cont &&
-                party->getSprite() == party->getTerr()->getSprite(tilePtr))
-          partyMoved = true;
+        if (!spriteMoved && cont)
+          spriteMoved = true;
       }
     }
-  SDL_RenderPresent(party->getRen());
-  return partyMoved;
+  SDL_RenderPresent(terr->getRen());
+  return spriteMoved;
 }  // void drawMap()
 
 
@@ -108,22 +146,19 @@ void drawRebind(SDL_Renderer *ren, TTF_Font* font)
   renderTextbox(ren, font, str);
   SDL_RenderPresent(ren);
   SDL_Event e;
-  bool cont = true;
-  while (cont)
-    if (SDL_PollEvent(&e))
-      if (e.type == SDL_KEYDOWN)
-      {
-        if ((e.key.keysym.sym != SDLK_LALT) &&
-                (e.key.keysym.sym != SDLK_RALT) &&
-                (e.key.keysym.sym != SDLK_LSHIFT) &&
-                (e.key.keysym.sym != SDLK_RSHIFT) &&
-                (e.key.keysym.sym != SDLK_LCTRL) &&
-                (e.key.keysym.sym != SDLK_RCTRL))
-        {
-          rebind(interact, e.key.keysym);
-          cont = false;
-        }
-      }
+  SDL_WaitEvent(&e);
+  if (e.type == SDL_KEYDOWN)
+  {
+    if ((e.key.keysym.sym != SDLK_LALT) &&
+            (e.key.keysym.sym != SDLK_RALT) &&
+            (e.key.keysym.sym != SDLK_LSHIFT) &&
+            (e.key.keysym.sym != SDLK_RSHIFT) &&
+            (e.key.keysym.sym != SDLK_LCTRL) &&
+            (e.key.keysym.sym != SDLK_RCTRL))
+    {
+      rebind(interact, e.key.keysym);
+    }
+  }
   const char* newKey = SDL_GetKeyName(interact.sym);
   str.clear();
   str += "New key for interact button: ";
@@ -136,38 +171,12 @@ void drawRebind(SDL_Renderer *ren, TTF_Font* font)
 }  // void drawRebind(SDL_Renderer *ren)
 
 
-void drawScreen(gameState &state, TTF_Font* font, unique_ptr<Party> &party,
-        unique_ptr<Button> &toGame)
-{
-  // when things change (any event happens): clear the renderer, refill it.
-  // Draw the background first, then the chars on top of it.
-  SDL_RenderClear(party->getRen());
-  switch (state)
-  {
-  case BATTLE:
-    drawBattle(party->getRen(), font);
-    break;
-  case MAP:
-    drawMap(party);
-    break;
-  case REBIND:
-    drawRebind(party->getRen(), font);
-    break;
-  case TITLE:
-    drawTitle(party->getRen(), toGame);
-    break;
-  default:
-    break;
-  }
-}  // void drawScreen()
-
-
-bool drawSprite(shared_ptr<Tile> tile, unique_ptr<Party> &party, int i, int j)
+bool drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
+        unique_ptr<Party> &party, int i, int j)
 {
   int sc = 0, vSpline = 0, hSpline = 0;
   SDL_Rect spriteClips[4];
   getClips(spriteClips, 4, 2, TILE_WIDTH, TILE_HEIGHT);
-  shared_ptr<Sprite> sprite = party->getTerr()->getSprite(tile);
   // magic number (4): number of unit sprite types
   switch (sprite->getSprite())
   {  // note the order -- clips are taken by column, not by row!
@@ -209,19 +218,31 @@ bool drawSprite(shared_ptr<Tile> tile, unique_ptr<Party> &party, int i, int j)
   }
   // technically, this switch should be optional so long as the character
   // spritesheet is kept in the same order as the enum
-  renderTexture(sprite->getSpriteSheet(), party->getRen(),
+  renderTexture(sprite->getSpriteSheet(), ren,
           TILE_WIDTH * i + hSpline, TILE_HEIGHT * j + vSpline,
           &spriteClips[sc]);
   return sprite->decSpline();
 }//void drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
 
 
-void drawTitle(SDL_Renderer *ren, unique_ptr<Button> &toGame)
+void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons,
+        int x, int y, int cursor)
 {
   SDL_RenderClear(ren);
   SDL_Texture* bg = loadTexture("Title.png", ren);
+  SDL_Texture* c = loadTexture("ButtonCursor.png", ren);
   renderBackground(bg, ren);
-  toGame->render(ren);
+  for (unique_ptr<Button> &button : buttons)
+  {
+    button->render(ren, buttonUp);
+    if (button->mouseOnButton(x, y))
+      button->render(ren, buttonSelected);
+    else
+      button->render(ren, buttonUp);
+  }
+  renderTexture(c, ren, buttons[cursor]->getPos());
   SDL_RenderPresent(ren);
+  SDL_DestroyTexture(bg);
+  SDL_DestroyTexture(c);
 }  // void drawTitle(SDL_Renderer *ren)
 

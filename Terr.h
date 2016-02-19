@@ -6,6 +6,7 @@
   #include "Globals.h"
   #include "Sprite.h"
   #include "Tile.h"
+  #include "Unit.h"
   #include "Warp.h"
 
 
@@ -22,8 +23,10 @@
     //!< Calls loadMap unless the string is empty.
     ~Terr();
     //!< Default destructor. Because Tiles use new, they must be deleted.
-    void enterTileMessageHandler(const string &message,
-            shared_ptr<Tile> tile);
+    string actSprites(shared_ptr<Sprite> partySprite,
+            vector<shared_ptr<Unit> > &enemies);
+    //!< All sprites pop an action (if any) and enact it.
+    void enterTileMessageHandler(const string &message, shared_ptr<Tile> tile);
     //!< Takes in a message from a Tile being entered, reacts accordingly.
     void findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest,
             shared_ptr<Sprite> sprite);
@@ -40,9 +43,11 @@
     //!< Returns the Tile under the given Sprite.
     int getWidth();
     //!< Returns the width (w) of Terr.
-    void interactSprite(shared_ptr<Sprite> sprite);
+    string interactSprite(shared_ptr<Sprite> sprite,
+            vector<shared_ptr<Unit> > &enemies);
     //!< Intelligently interact with Sprite being faced, if any.
-    void interactSprites(shared_ptr<Sprite> sprite, shared_ptr<Sprite> target);
+    string interactSprites(shared_ptr<Sprite> sprite,
+            shared_ptr<Sprite> target, vector<shared_ptr<Unit> > &enemies);
     //!< Intelligently interact between two sprites.
     bool isOccupied(shared_ptr<Tile> tile);
     //!< Return true if the Tile has a Sprite associated with it.
@@ -54,6 +59,8 @@
     //!< Sets a Sprite-Tile relationship.
     void setTile(shared_ptr<Tile> tile, shared_ptr<Sprite> sprite);
     //!< Sets a Sprite-Tile relationship. Alias for setSprite.
+    void tickSprites(mt19937_64& rng);
+    //!< Tells all Sprites that a tick has occurred.
     shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click,
             shared_ptr<Sprite> sprite);
     //!< Returns pointer to the Tile clicked. Needs Sprite the map is watching.
@@ -71,14 +78,15 @@
     int w;
     //!< map width (in Tiles)
 
-    bool findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> *tiles, shared_ptr<Tile> tile);
+    bool findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> &tiles, shared_ptr<Tile> tile);
     //!< Returns true if a tile in dir d exists and gets you closer on your
     //!< route. Requires a fully loaded table of tuples showing how close the
     //!< tiles are on potential routes.
     void findEnqueue(dir d, priority_queue<tuple<int, shared_ptr<Tile> >,
-            vector<tuple<int, shared_ptr<Tile> > >, greater<tuple<int, shared_ptr<Tile> > > > *searchQ,
-            unordered_map<shared_ptr<Tile>, int> *tiles, tuple<int, shared_ptr<Tile> > t,
-            shared_ptr<Tile> target);
+            vector<tuple<int, shared_ptr<Tile> > >,
+            greater<tuple<int, shared_ptr<Tile> > > > &searchQ,
+            unordered_map<shared_ptr<Tile>, int> &tiles,
+            tuple<int, shared_ptr<Tile> > t, shared_ptr<Tile> target);
     //!< Utility function for findPath(): marks/enqueues tiles.
     int findDistance(shared_ptr<Tile> start, shared_ptr<Tile> end);
     //!< Returns taxicab distance to get to end.

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['button',['Button',['../class_button.html#a605828617975a0a3a330dbebbfa736bf',1,'Button']]],
-  ['buttonclick',['buttonClick',['../class_button.html#a374d116950c2390f883088c7afb107d6',1,'Button']]]
+  ['actsprites',['actSprites',['../class_terr.html#adc8910783511bda341ee07d2603823d4',1,'Terr']]],
+  ['advance',['advance',['../class_game_state.html#a6635a5af1ea4211afcfec058445ff933',1,'GameState']]],
+  ['attack',['attack',['../class_unit.html#a005874f369a17842d2ecb42539dacca9',1,'Unit']]]
 ];

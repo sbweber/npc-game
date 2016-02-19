@@ -4,6 +4,7 @@
   #define INCLUDE_H
 
   // c++ core includes
+  #include <chrono>
   #include <cstddef>  // implicitly added on non-windows machines
   #include <cstdlib>
   #include <ctime>
@@ -11,6 +12,7 @@
   #include <fstream>
   #include <memory>
   #include <queue>
+  #include <random>
   #include <string>
   #include <tuple>
   #include <unordered_map>
@@ -44,14 +46,16 @@
 
   using namespace std;
 
+
   enum dir
   {
+    EAST,
     NORTH,
     SOUTH,
     WEST,
-    EAST,
     UNDEFINED_DIRECTION
   };
+
 
   enum gameState
   {
@@ -61,7 +65,10 @@
     TITLE
   };
 
+
   // Globals.cpp
+  void eventQuit();
+  //!< Pushes an SDL_Quit type event onto the event queue and clears the queue.
   void logError(const string &msg, ostream &os = cerr);
   //!< Logs an error to the output of choice, cerr by default.
   void logSDLError(const string &msg, ostream &os = cerr);
@@ -73,8 +80,10 @@
   void quit(const string err = "", int errtype = -1,
           SDL_Renderer *ren = nullptr, SDL_Window *win = nullptr);
   //!< Quits the program, logging an error if given one.
-  long int rng(long int min, long int max);
-  //!< My wrapper for rand(). Better than a naked call, still flawed.
+  dir randDir(mt19937_64& rng);
+  //!< Returns a random direction (UNDEFINED_DIRECTION if there's an error).
+  long randNum(mt19937_64& rng, long min, long max);
+  //!< Returns a random number from min to max, uniform distribution.
 
 #endif
 

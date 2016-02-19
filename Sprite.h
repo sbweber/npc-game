@@ -36,8 +36,9 @@
   class Sprite
   {
   public:
-    Sprite(SDL_Renderer *ren, const string &spriteFile, const string &n = "",
-            const string &p = "", const string &scriptFile = "");
+    Sprite(SDL_Renderer *ren, int min, int max, const string &spriteFile,
+            const string &n = "", const string &p = "",
+            const string &scriptFile = "");
     //!< All units MUST have a spritesheet specified. type string optional.
     ~Sprite();
     //!< Default destructor
@@ -47,6 +48,8 @@
     //!< Removes all elements from the action queue.
     bool decSpline();
     //!< If spline is non-zero, decrements it and returns true. Else false.
+    void decTicks(mt19937_64& rng);
+    //!< Decrement ticks. Then, if it's zero, return true and reset it.
     dir getFacing();
     //!< Returns which direction the Sprite is currently facing.
     int getSpline();
@@ -66,6 +69,8 @@
     //!< Draws a series of textboxes with text until str has been displayed.
     void say(SDL_Renderer *ren);
     //!< Make the Sprite output text to the screen in its font.
+    void setMoveFreq(int min, int max);
+    //!< Sets new movement frequency.
     void setPurpose(const string &p);
     //!< Set the descriptive string describing Sprite
     void setSpline(int s);
@@ -79,6 +84,10 @@
     //!< Direction Sprite is currently facing.
     TTF_Font *font;
     //!< Font the Sprite uses to 'speak'.
+    int moveFreqMax;
+    //!< Max number of seconds between moving. Ignored if min is negative.
+    int moveFreqMin;
+    //!< Min number of seconds between moving. Negative means stationary.
     string name;
     //!< Name of the Sprite. Used for speech.
     string purpose;
@@ -91,6 +100,8 @@
     //!< Which sprite on the spritesheet is currently being used.
     SDL_Texture *spriteSheet;
     //!< The spritesheet used to draw this Sprite.
+    unsigned int ticks;
+    //!< Timer cycles until next action
   };
 
 #endif

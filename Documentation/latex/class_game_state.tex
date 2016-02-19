@@ -1,0 +1,104 @@
+\hypertarget{class_game_state}{}\section{Game\+State Class Reference}
+\label{class_game_state}\index{Game\+State@{Game\+State}}
+
+
+The game\textquotesingle{}s current state. Handles the main event loop.  
+
+
+
+
+{\ttfamily \#include $<$Game\+State.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_state_a6075ad239ad5e9cbb08da3e7b97fe676}{Game\+State} (S\+D\+L\+\_\+\+Renderer $\ast$ren, T\+T\+F\+\_\+\+Font $\ast$f)\hypertarget{class_game_state_a6075ad239ad5e9cbb08da3e7b97fe676}{}\label{class_game_state_a6075ad239ad5e9cbb08da3e7b97fe676}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_game_state}{Game\+State} constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_game_state_ae623df5042cd0c17daa3394fdcb397b3}{$\sim$\+Game\+State} ()\hypertarget{class_game_state_ae623df5042cd0c17daa3394fdcb397b3}{}\label{class_game_state_ae623df5042cd0c17daa3394fdcb397b3}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_game_state}{Game\+State} destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_a6635a5af1ea4211afcfec058445ff933}{advance} (S\+D\+L\+\_\+\+Event \&e)\hypertarget{class_game_state_a6635a5af1ea4211afcfec058445ff933}{}\label{class_game_state_a6635a5af1ea4211afcfec058445ff933}
+
+\begin{DoxyCompactList}\small\item\em Loop to select which event loop to run. Advances state. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_ab3c0c9f3f38b875735cfe39ce6a2c154}{change\+Terr} (const string \&new\+Terr)\hypertarget{class_game_state_ab3c0c9f3f38b875735cfe39ce6a2c154}{}\label{class_game_state_ab3c0c9f3f38b875735cfe39ce6a2c154}
+
+\begin{DoxyCompactList}\small\item\em Changes the active \hyperlink{class_terr}{Terr}. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_ab0ecc413fbf4772869e037bc3489f26e}{dec\+Cursor\+Pos} (unsigned int max)\hypertarget{class_game_state_ab0ecc413fbf4772869e037bc3489f26e}{}\label{class_game_state_ab0ecc413fbf4772869e037bc3489f26e}
+
+\begin{DoxyCompactList}\small\item\em subtracts one from cursor\+Pos, looping to max if needed. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_a1f40f501f25ae4ea245a6e3011ac85fd}{inc\+Cursor\+Pos} (unsigned int max)\hypertarget{class_game_state_a1f40f501f25ae4ea245a6e3011ac85fd}{}\label{class_game_state_a1f40f501f25ae4ea245a6e3011ac85fd}
+
+\begin{DoxyCompactList}\small\item\em Adds one to cursor\+Pos, looping to zero if needed. \end{DoxyCompactList}\item 
+long \hyperlink{class_game_state_a64caafde825c0fc890e41d24d12c3927}{rng} (long min, long max)\hypertarget{class_game_state_a64caafde825c0fc890e41d24d12c3927}{}\label{class_game_state_a64caafde825c0fc890e41d24d12c3927}
+
+\begin{DoxyCompactList}\small\item\em Returns a uniformly distributed random number between min and max. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_af81371645645ecd84d5d2a246e97d14d}{set\+State} (game\+State gs)\hypertarget{class_game_state_af81371645645ecd84d5d2a246e97d14d}{}\label{class_game_state_af81371645645ecd84d5d2a246e97d14d}
+
+\begin{DoxyCompactList}\small\item\em Sets game\+State. \end{DoxyCompactList}\item 
+shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_game_state_a12e67e467e0c1be59d5b681b95e33120}{tile\+Click} (S\+D\+L\+\_\+\+Mouse\+Button\+Event \&click)\hypertarget{class_game_state_a12e67e467e0c1be59d5b681b95e33120}{}\label{class_game_state_a12e67e467e0c1be59d5b681b95e33120}
+
+\begin{DoxyCompactList}\small\item\em Used when clicking on the map. Returns a pointer to the \hyperlink{class_tile}{Tile} clicked. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_game_state_ad80bf372b6f644a79b31e97fc4b61532}{interact\+Message\+Handler} (string \&message)\hypertarget{class_game_state_ad80bf372b6f644a79b31e97fc4b61532}{}\label{class_game_state_ad80bf372b6f644a79b31e97fc4b61532}
+
+\begin{DoxyCompactList}\small\item\em Message handler for sprites interacting. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_a6bcac85dc5a7ce95e58c32d0948b54df}{loop\+Any\+State} (S\+D\+L\+\_\+\+Event \&e)\hypertarget{class_game_state_a6bcac85dc5a7ce95e58c32d0948b54df}{}\label{class_game_state_a6bcac85dc5a7ce95e58c32d0948b54df}
+
+\begin{DoxyCompactList}\small\item\em Loop to handle input that’s treated the same in all states. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_a78ccdca45d646c8bec157fb6207ada04}{loop\+Battle} (S\+D\+L\+\_\+\+Event \&e)\hypertarget{class_game_state_a78ccdca45d646c8bec157fb6207ada04}{}\label{class_game_state_a78ccdca45d646c8bec157fb6207ada04}
+
+\begin{DoxyCompactList}\small\item\em Loop to process actions in battle state. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_a8eababbfcac6ae424541fb61e8534682}{loop\+Battle\+Fight} ()\hypertarget{class_game_state_a8eababbfcac6ae424541fb61e8534682}{}\label{class_game_state_a8eababbfcac6ae424541fb61e8534682}
+
+\begin{DoxyCompactList}\small\item\em Subloop for the \textquotesingle{}fight\textquotesingle{} command in battle. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_ac3101f8eba8251f27acfcf082140908d}{loop\+Battle\+Run} ()\hypertarget{class_game_state_ac3101f8eba8251f27acfcf082140908d}{}\label{class_game_state_ac3101f8eba8251f27acfcf082140908d}
+
+\begin{DoxyCompactList}\small\item\em Subloop for the \textquotesingle{}run\textquotesingle{} command in battle. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_a87291e60906c205c34fa84ea957fa898}{loop\+Map} (S\+D\+L\+\_\+\+Event \&e)\hypertarget{class_game_state_a87291e60906c205c34fa84ea957fa898}{}\label{class_game_state_a87291e60906c205c34fa84ea957fa898}
+
+\begin{DoxyCompactList}\small\item\em Loop to process inputs while on overworld map. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_abd3d3df0598dd6731117cab805fa0eef}{loop\+Rebind} (S\+D\+L\+\_\+\+Event \&e)\hypertarget{class_game_state_abd3d3df0598dd6731117cab805fa0eef}{}\label{class_game_state_abd3d3df0598dd6731117cab805fa0eef}
+
+\begin{DoxyCompactList}\small\item\em Loop to process inputs and events while in the key binding menu. \end{DoxyCompactList}\item 
+void \hyperlink{class_game_state_a1fff6670e9d9ce3806d7261cfd829237}{loop\+Title} (S\+D\+L\+\_\+\+Event \&e)\hypertarget{class_game_state_a1fff6670e9d9ce3806d7261cfd829237}{}\label{class_game_state_a1fff6670e9d9ce3806d7261cfd829237}
+
+\begin{DoxyCompactList}\small\item\em Loop to process inputs on the title screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \hyperlink{class_game_state_a31555272335ffcfb24af67bc826e1521}{cursor\+Pos}\hypertarget{class_game_state_a31555272335ffcfb24af67bc826e1521}{}\label{class_game_state_a31555272335ffcfb24af67bc826e1521}
+
+\begin{DoxyCompactList}\small\item\em Position of cursor in menus. \end{DoxyCompactList}\item 
+vector$<$ shared\+\_\+ptr$<$ \hyperlink{class_unit}{Unit} $>$ $>$ \hyperlink{class_game_state_a5a075a4ab1460fb1035c6b87c56e6c05}{enemies}\hypertarget{class_game_state_a5a075a4ab1460fb1035c6b87c56e6c05}{}\label{class_game_state_a5a075a4ab1460fb1035c6b87c56e6c05}
+
+\begin{DoxyCompactList}\small\item\em Vector of enemy units for battle. \end{DoxyCompactList}\item 
+T\+T\+F\+\_\+\+Font $\ast$ \hyperlink{class_game_state_a39f32585535aa7a90c2e66f1e6d474e0}{font}\hypertarget{class_game_state_a39f32585535aa7a90c2e66f1e6d474e0}{}\label{class_game_state_a39f32585535aa7a90c2e66f1e6d474e0}
+
+\begin{DoxyCompactList}\small\item\em Primary font for regular usage. \end{DoxyCompactList}\item 
+mt19937\+\_\+64 \hyperlink{class_game_state_a64e33a5deae96a673585c1a408abce5a}{rand\+Num\+Gen}\hypertarget{class_game_state_a64e33a5deae96a673585c1a408abce5a}{}\label{class_game_state_a64e33a5deae96a673585c1a408abce5a}
+
+\begin{DoxyCompactList}\small\item\em Random Number Generator. \end{DoxyCompactList}\item 
+unique\+\_\+ptr$<$ \hyperlink{class_party}{Party} $>$ \hyperlink{class_game_state_a90d33253ae1bf970ec7f89b2f3975048}{party}\hypertarget{class_game_state_a90d33253ae1bf970ec7f89b2f3975048}{}\label{class_game_state_a90d33253ae1bf970ec7f89b2f3975048}
+
+\begin{DoxyCompactList}\small\item\em The player\textquotesingle{}s party. \end{DoxyCompactList}\item 
+game\+State \hyperlink{class_game_state_a90969808e5db25eb4f0ae6b7be027c65}{state}\hypertarget{class_game_state_a90969808e5db25eb4f0ae6b7be027c65}{}\label{class_game_state_a90969808e5db25eb4f0ae6b7be027c65}
+
+\begin{DoxyCompactList}\small\item\em State of game. \end{DoxyCompactList}\item 
+unique\+\_\+ptr$<$ \hyperlink{class_terr}{Terr} $>$ \hyperlink{class_game_state_ae2450c36c6b73d979978b22523f3521c}{terr}\hypertarget{class_game_state_ae2450c36c6b73d979978b22523f3521c}{}\label{class_game_state_ae2450c36c6b73d979978b22523f3521c}
+
+\begin{DoxyCompactList}\small\item\em Currently loaded terr. \end{DoxyCompactList}\item 
+S\+D\+L\+\_\+\+Timer\+ID \hyperlink{class_game_state_a69d14a618108634864b0b547a5e1b5c5}{timer\+ID}\hypertarget{class_game_state_a69d14a618108634864b0b547a5e1b5c5}{}\label{class_game_state_a69d14a618108634864b0b547a5e1b5c5}
+
+\begin{DoxyCompactList}\small\item\em Timer for regular events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The game\textquotesingle{}s current state. Handles the main event loop. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Game\+State.\+h\item 
+Game\+State.\+cpp\end{DoxyCompactItemize}

@@ -3,7 +3,7 @@
 #include "Render.h"
 
 
-void getClips(SDL_Rect* clips, int numClips, int rows, int cWidth, int cHeight)
+void getClips(SDL_Rect *clips, int numClips, int rows, int cWidth, int cHeight)
 {
   for (int i = 0; i < numClips; i++)
   {
@@ -117,7 +117,7 @@ string renderTextbox(SDL_Renderer *ren, TTF_Font *font, const string &str,
 }  // void renderTextbox()
 
 
-void renderTexture(SDL_Texture* tex, SDL_Renderer *ren, int x,
+void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x,
         int y, SDL_Rect *clip, const double angle, const SDL_RendererFlip flip)
 {
   SDL_Rect dst;
@@ -134,7 +134,7 @@ void renderTexture(SDL_Texture* tex, SDL_Renderer *ren, int x,
 }  // void renderTexture()
 
 
-void renderTexture(SDL_Texture* tex, SDL_Renderer *ren, int x,
+void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x,
         int y, int w, int h, const double angle, const SDL_RendererFlip flip)
 {
   SDL_Rect dst;
@@ -146,7 +146,7 @@ void renderTexture(SDL_Texture* tex, SDL_Renderer *ren, int x,
 }  // void renderTexture()
 
 
-void renderTexture(SDL_Texture* tex, SDL_Renderer *ren,
+void renderTexture(SDL_Texture *tex, SDL_Renderer *ren,
         SDL_Rect dst, SDL_Rect *clip, const double angle,
         const SDL_RendererFlip flip)
 {
@@ -154,7 +154,7 @@ void renderTexture(SDL_Texture* tex, SDL_Renderer *ren,
 }  // void renderTexture()
 
 
-void tileBackground(SDL_Texture* tile, SDL_Renderer *ren)
+void tileBackground(SDL_Texture *tile, SDL_Renderer *ren)
 {
   for (int i = 0; i < (NUM_TILES_WIDTH * NUM_TILES_HEIGHT); i++)
   {

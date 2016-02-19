@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['findcheckroute',['findCheckRoute',['../class_terr.html#af17a51c8b893a518a743c72411de3598',1,'Terr']]],
-  ['finddistance',['findDistance',['../class_terr.html#a76e437b2864d6fd78b85961dbe1ade61',1,'Terr']]],
-  ['findenqueue',['findEnqueue',['../class_terr.html#a80d2b5befbfc30d4d38a4dd2ade6b7bf',1,'Terr']]],
-  ['findpath',['findPath',['../class_terr.html#ad0596843b8e4c1ddd9b39220837b88ce',1,'Terr']]]
+  ['entertile',['enterTile',['../class_tile.html#ae04dfcac010592c1ef0aaae031f31b6a',1,'Tile::enterTile()'],['../class_warp.html#a28e607e491d761c1baad786e911a2681',1,'Warp::enterTile()']]],
+  ['entertilemessagehandler',['enterTileMessageHandler',['../class_terr.html#a6b79ff79c2ffbe2606f5906b3f23df12',1,'Terr']]]
 ];

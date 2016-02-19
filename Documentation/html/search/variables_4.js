@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['facing',['facing',['../class_sprite.html#a40357a4e61f454decf1970929e9d2d0c',1,'Sprite']]],
-  ['flip',['flip',['../class_tile.html#a815af374aa83cd0be79bb5553056b15e',1,'Tile']]],
-  ['font',['font',['../class_sprite.html#aa9beec56e0e61eb611b204364fe446ce',1,'Sprite']]]
+  ['e',['E',['../class_tile.html#af8130191ee5d094e7505fd26f676393c',1,'Tile']]],
+  ['enemies',['enemies',['../class_game_state.html#a5a075a4ab1460fb1035c6b87c56e6c05',1,'GameState']]]
 ];

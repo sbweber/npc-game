@@ -1,11 +1,12 @@
 // Samuel Weber
 
   #include "Draw.h"
-  #include "EventLoops.h"
+  #include "GameState.h"
   #include "Keybind.h"
   #include "Globals.h"
   #include "Party.h"
   #include "Terr.h"
+
 
 int main(int argc, char **argv)
 {
@@ -31,14 +32,19 @@ int main(int argc, char **argv)
   bool quit = false;
 
   // backend vars
-  unique_ptr<Party> party(new Party(ren));
-  party->setState(TITLE);
+  unique_ptr<GameState> state(new GameState(ren, font));
+  state->setState(TITLE);
 
   loadKeys();
 
   while (!quit)
     while (SDL_PollEvent(&e))
-      quit = mainLoop(e, font, party);
+    {
+      if (e.type == SDL_QUIT)
+        quit = true;
+      else
+        state->advance(e);
+    }
 
   TTF_CloseFont(font);
   SDL_DestroyRenderer(ren);

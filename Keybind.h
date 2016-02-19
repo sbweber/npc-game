@@ -10,8 +10,8 @@
   extern SDL_Keysym stateMap1;
   extern SDL_Keysym stateMap2;
   extern SDL_Keysym stateRebind;
-  extern SDL_Keysym stateTitle;
   // permanent key commands
+  extern SDL_Keysym stateTitle;
   extern SDL_Keysym stateQuit;
   extern SDL_Keysym back;
   extern SDL_Keysym dirUp;

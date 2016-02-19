@@ -76,6 +76,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow4" class="tabs3">
     <ul class="tablist">
+      <li><a href="#index_a"><span>a</span></a></li>
       <li><a href="#index_b"><span>b</span></a></li>
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_d"><span>d</span></a></li>
@@ -89,6 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
       <li><a href="#index_t"><span>t</span></a></li>
+      <li><a href="#index_u"><span>u</span></a></li>
       <li><a href="#index_w"><span>w</span></a></li>
       <li class="current"><a href="#index_0x7e"><span>~</span></a></li>
     </ul>
@@ -111,12 +113,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 &#160;
 
+<h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
+<li>actSprites()
+: <a class="el" href="class_terr.html#adc8910783511bda341ee07d2603823d4">Terr</a>
+</li>
+<li>advance()
+: <a class="el" href="class_game_state.html#a6635a5af1ea4211afcfec058445ff933">GameState</a>
+</li>
+<li>attack()
+: <a class="el" href="class_unit.html#a005874f369a17842d2ecb42539dacca9">Unit</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
 <li>Button()
 : <a class="el" href="class_button.html#a605828617975a0a3a330dbebbfa736bf">Button</a>
 </li>
 <li>buttonClick()
-: <a class="el" href="class_button.html#a374d116950c2390f883088c7afb107d6">Button</a>
+: <a class="el" href="class_button.html#a1f93070fbcb76faac1b26df1cf04a9e4">Button</a>
 </li>
 </ul>
 
@@ -126,7 +141,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_sprite.html#a3eadf6ba2634a886862b6e2d9ca93b17">Sprite</a>
 </li>
 <li>changeTerr()
-: <a class="el" href="class_party.html#a5b4e7bc4d910ad64722629b2fe365240">Party</a>
+: <a class="el" href="class_game_state.html#ab3c0c9f3f38b875735cfe39ce6a2c154">GameState</a>
 </li>
 <li>clearActs()
 : <a class="el" href="class_sprite.html#ad22d9f033c1414853cc3063ceae24598">Sprite</a>
@@ -138,8 +153,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>decCursorPos()
+: <a class="el" href="class_game_state.html#ab0ecc413fbf4772869e037bc3489f26e">GameState</a>
+</li>
 <li>decSpline()
 : <a class="el" href="class_sprite.html#af880e3cfcd03b6de68171eef82dc6a69">Sprite</a>
+</li>
+<li>decTicks()
+: <a class="el" href="class_sprite.html#a8f06e4e0ea4c640c0d9685a1bf53452b">Sprite</a>
 </li>
 </ul>
 
@@ -157,23 +178,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
 <li>findCheckRoute()
-: <a class="el" href="class_terr.html#af17a51c8b893a518a743c72411de3598">Terr</a>
+: <a class="el" href="class_terr.html#a34bf50aa821f3c2f861c060281e238c3">Terr</a>
 </li>
 <li>findDistance()
 : <a class="el" href="class_terr.html#a76e437b2864d6fd78b85961dbe1ade61">Terr</a>
 </li>
 <li>findEnqueue()
-: <a class="el" href="class_terr.html#a80d2b5befbfc30d4d38a4dd2ade6b7bf">Terr</a>
+: <a class="el" href="class_terr.html#a1784db5125ce598d59b68bb0edde9196">Terr</a>
 </li>
 <li>findPath()
 : <a class="el" href="class_terr.html#ad0596843b8e4c1ddd9b39220837b88ce">Terr</a>
+</li>
+<li>fullHeal()
+: <a class="el" href="class_unit.html#a2a7293b325fbe8e73fece385b2a0970f">Unit</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
+<li>GameState()
+: <a class="el" href="class_game_state.html#a6075ad239ad5e9cbb08da3e7b97fe676">GameState</a>
+</li>
 <li>getAngle()
 : <a class="el" href="class_tile.html#a947b6692bfcdd7b1adc59fcbee16c1fc">Tile</a>
+</li>
+<li>getCurrHP()
+: <a class="el" href="class_unit.html#a111f87266234d9bd4a0d851f4d658d86">Unit</a>
 </li>
 <li>getDestTerr()
 : <a class="el" href="class_warp.html#a5c61204c5eafbd5dfa8a365c08257eec">Warp</a>
@@ -196,15 +226,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>getIsPassable()
 : <a class="el" href="class_tile.html#aaddc2d065a537489c31de4a566bb0bd5">Tile</a>
 </li>
-<li>getPic()
-: <a class="el" href="class_button.html#ab22d97c11b0e63f90ef584fc9a5c0f6d">Button</a>
+<li>getMaxHP()
+: <a class="el" href="class_unit.html#a9aa287c4ed593378b03643b64c8481e5">Unit</a>
+</li>
+<li>getPos()
+: <a class="el" href="class_button.html#a4aa8e2b4fdc41c911ce7ebbe04ba27f8">Button</a>
 </li>
 <li>getPurpose()
 : <a class="el" href="class_sprite.html#ab130d27f349a15e736e2f60c9a20ca0d">Sprite</a>
 </li>
 <li>getRen()
-: <a class="el" href="class_party.html#acd791a319c74dcc757fc13c961795688">Party</a>
-, <a class="el" href="class_terr.html#a85a154825a89e15d9a94292106782438">Terr</a>
+: <a class="el" href="class_terr.html#a85a154825a89e15d9a94292106782438">Terr</a>
 </li>
 <li>getSpline()
 : <a class="el" href="class_sprite.html#aad5e5beb45ec5eae6fe8d096d5ebef68">Sprite</a>
@@ -217,12 +249,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>getSpriteSheet()
 : <a class="el" href="class_sprite.html#abec247d2cd9396834344c3cfe81eddc1">Sprite</a>
 </li>
-<li>getState()
-: <a class="el" href="class_party.html#a3c0be11b35c62c1cc3c899b9c2ebd7d1">Party</a>
-</li>
-<li>getTerr()
-: <a class="el" href="class_party.html#adde2e05d8910f1882e112ddc74576a9e">Party</a>
-</li>
 <li>getTex()
 : <a class="el" href="class_tile.html#a50aa680406e6f9898c24aee23dae3862">Tile</a>
 </li>
@@ -232,6 +258,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>getType()
 : <a class="el" href="class_tile.html#a36871de25627c7483c31807da1c28706">Tile</a>
+</li>
+<li>getUnit()
+: <a class="el" href="class_party.html#af883dfce54f0f2535ae45ac01e3121d9">Party</a>
 </li>
 <li>getWidth()
 : <a class="el" href="class_terr.html#a397fdbbeb3fe3eb8989d9da77af42f57">Terr</a>
@@ -246,11 +275,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>incCursorPos()
+: <a class="el" href="class_game_state.html#a1f40f501f25ae4ea245a6e3011ac85fd">GameState</a>
+</li>
+<li>interactMessageHandler()
+: <a class="el" href="class_game_state.html#ad80bf372b6f644a79b31e97fc4b61532">GameState</a>
+</li>
 <li>interactSprite()
-: <a class="el" href="class_terr.html#ac900225f790f49a5baa490351adfb03a">Terr</a>
+: <a class="el" href="class_terr.html#a673ca282c441e6eea4935bd1ae6afdb7">Terr</a>
 </li>
 <li>interactSprites()
-: <a class="el" href="class_terr.html#a343cd63b0fd20a5baf2dbbf8ea1d7098">Terr</a>
+: <a class="el" href="class_terr.html#a00dfea1cd9014d8b368a46ba466a46b2">Terr</a>
+</li>
+<li>isDead()
+: <a class="el" href="class_unit.html#a563978d397e42981db23ada6b3c21664">Unit</a>
 </li>
 <li>isOccupied()
 : <a class="el" href="class_terr.html#a367ee972d1e3edffe329fb4f7c84ff3e">Terr</a>
@@ -268,12 +306,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>loadWarpTile()
 : <a class="el" href="class_terr.html#ade4dc4c2e3c5746d7274ff7849b60e38">Terr</a>
 </li>
+<li>loopAnyState()
+: <a class="el" href="class_game_state.html#a6bcac85dc5a7ce95e58c32d0948b54df">GameState</a>
+</li>
+<li>loopBattle()
+: <a class="el" href="class_game_state.html#a78ccdca45d646c8bec157fb6207ada04">GameState</a>
+</li>
+<li>loopBattleFight()
+: <a class="el" href="class_game_state.html#a8eababbfcac6ae424541fb61e8534682">GameState</a>
+</li>
+<li>loopBattleRun()
+: <a class="el" href="class_game_state.html#ac3101f8eba8251f27acfcf082140908d">GameState</a>
+</li>
+<li>loopMap()
+: <a class="el" href="class_game_state.html#a87291e60906c205c34fa84ea957fa898">GameState</a>
+</li>
+<li>loopRebind()
+: <a class="el" href="class_game_state.html#abd3d3df0598dd6731117cab805fa0eef">GameState</a>
+</li>
+<li>loopTitle()
+: <a class="el" href="class_game_state.html#a1fff6670e9d9ce3806d7261cfd829237">GameState</a>
+</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_m"></a>- m -</h3><ul>
-<li>move()
-: <a class="el" href="class_party.html#a729f2e7fd90ec533a9173a5468b046fa">Party</a>
+<li>mouseOnButton()
+: <a class="el" href="class_button.html#aecc3cba90d8121c6f673b600c13e4bc9">Button</a>
 </li>
 <li>moveSprite()
 : <a class="el" href="class_terr.html#aa0023b4af20266bb359b94dd21d96ff5">Terr</a>
@@ -295,11 +354,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
+<li>receiveAttack()
+: <a class="el" href="class_unit.html#a7869a9bab59e707208367b2cbeedb9b1">Unit</a>
+</li>
 <li>render()
-: <a class="el" href="class_button.html#a599b95776f845111b8245ff15c13f2f1">Button</a>
+: <a class="el" href="class_button.html#a8afc12afd3beb237b7c17e7d00ce3a95">Button</a>
 </li>
 <li>renderSpeech()
 : <a class="el" href="class_sprite.html#a602e995adde51d155e2d0e83285f0643">Sprite</a>
+</li>
+<li>rng()
+: <a class="el" href="class_game_state.html#a64caafde825c0fc890e41d24d12c3927">GameState</a>
 </li>
 </ul>
 
@@ -317,8 +382,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>setIsPassable()
 : <a class="el" href="class_tile.html#aef0ce26fbd9688dababd9d66d8e604e7">Tile</a>
 </li>
-<li>setLocation()
-: <a class="el" href="class_party.html#a2efe239264b319d3b50e1a5957fcd859">Party</a>
+<li>setMoveFreq()
+: <a class="el" href="class_sprite.html#add3d25cc26178af6a14c45ac958422f2">Sprite</a>
 </li>
 <li>setPos()
 : <a class="el" href="class_tile.html#a8a6429d2adbe3e45c519d86a57b514c3">Tile</a>
@@ -335,7 +400,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_terr.html#aaa2f0f8ba60f462070a0f7d40d1f4ed0">Terr</a>
 </li>
 <li>setState()
-: <a class="el" href="class_party.html#a7cc812d17ccb47a6109e60a5d0b82ded">Party</a>
+: <a class="el" href="class_game_state.html#af81371645645ecd84d5d2a246e97d14d">GameState</a>
 </li>
 <li>setTex()
 : <a class="el" href="class_tile.html#a2ec617aea3fcdfb023042e3712d3cdf3">Tile</a>
@@ -347,7 +412,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="class_tile.html#a2557595d030a43cf9b5334df3b7264f7">Tile</a>
 </li>
 <li>Sprite()
-: <a class="el" href="class_sprite.html#a1806d04dfca4c8989df24fd5436e4e78">Sprite</a>
+: <a class="el" href="class_sprite.html#af4c8022f3f3e17a232691bb82e58b5a2">Sprite</a>
 </li>
 </ul>
 
@@ -356,12 +421,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Terr()
 : <a class="el" href="class_terr.html#ab2a5e584780b6213d1bf5a7dc3a74c59">Terr</a>
 </li>
+<li>tickSprites()
+: <a class="el" href="class_terr.html#ab9563f05a13abff25ab62d814dab743f">Terr</a>
+</li>
 <li>Tile()
 : <a class="el" href="class_tile.html#a9a76de53ca5def42bfd047dd9d97fa4e">Tile</a>
 </li>
 <li>tileClick()
-: <a class="el" href="class_party.html#af38511e79b486f468c4f3d8e7be0cd1a">Party</a>
+: <a class="el" href="class_game_state.html#a12e67e467e0c1be59d5b681b95e33120">GameState</a>
 , <a class="el" href="class_terr.html#ab1b055dc8ce5abea86d84472e27ceb48">Terr</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_u"></a>- u -</h3><ul>
+<li>Unit()
+: <a class="el" href="class_unit.html#a8e46f663a95736c8002d85ab271a7581">Unit</a>
 </li>
 </ul>
 
@@ -374,6 +449,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_0x7e"></a>- ~ -</h3><ul>
+<li>~GameState()
+: <a class="el" href="class_game_state.html#ae623df5042cd0c17daa3394fdcb397b3">GameState</a>
+</li>
 <li>~Party()
 : <a class="el" href="class_party.html#a85aa837e38a06690e6fee5087d7c7ad7">Party</a>
 </li>

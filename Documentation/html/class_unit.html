@@ -83,6 +83,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="class_unit-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Unit Class Reference</div>  </div>
 </div><!--header-->
@@ -92,10 +96,54 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <a href="class_unit.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_unit_8h_source.html">Unit.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a8e46f663a95736c8002d85ab271a7581"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e46f663a95736c8002d85ab271a7581"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a8e46f663a95736c8002d85ab271a7581">Unit</a> ()</td></tr>
+<tr class="memdesc:a8e46f663a95736c8002d85ab271a7581"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a> constructor. <br /></td></tr>
+<tr class="separator:a8e46f663a95736c8002d85ab271a7581"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a005874f369a17842d2ecb42539dacca9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a005874f369a17842d2ecb42539dacca9"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a005874f369a17842d2ecb42539dacca9">attack</a> ()</td></tr>
+<tr class="memdesc:a005874f369a17842d2ecb42539dacca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the amount of damage the attack should deal (before defenses). <br /></td></tr>
+<tr class="separator:a005874f369a17842d2ecb42539dacca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a7293b325fbe8e73fece385b2a0970f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a7293b325fbe8e73fece385b2a0970f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a2a7293b325fbe8e73fece385b2a0970f">fullHeal</a> ()</td></tr>
+<tr class="memdesc:a2a7293b325fbe8e73fece385b2a0970f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restores all HP. <br /></td></tr>
+<tr class="separator:a2a7293b325fbe8e73fece385b2a0970f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a111f87266234d9bd4a0d851f4d658d86"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a111f87266234d9bd4a0d851f4d658d86"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a111f87266234d9bd4a0d851f4d658d86">getCurrHP</a> ()</td></tr>
+<tr class="memdesc:a111f87266234d9bd4a0d851f4d658d86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns currHP. <br /></td></tr>
+<tr class="separator:a111f87266234d9bd4a0d851f4d658d86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9aa287c4ed593378b03643b64c8481e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9aa287c4ed593378b03643b64c8481e5"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a9aa287c4ed593378b03643b64c8481e5">getMaxHP</a> ()</td></tr>
+<tr class="memdesc:a9aa287c4ed593378b03643b64c8481e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns maxHP. <br /></td></tr>
+<tr class="separator:a9aa287c4ed593378b03643b64c8481e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a563978d397e42981db23ada6b3c21664"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a563978d397e42981db23ada6b3c21664"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a563978d397e42981db23ada6b3c21664">isDead</a> ()</td></tr>
+<tr class="memdesc:a563978d397e42981db23ada6b3c21664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if currHP is less than or equal to zero. <br /></td></tr>
+<tr class="separator:a563978d397e42981db23ada6b3c21664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7869a9bab59e707208367b2cbeedb9b1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7869a9bab59e707208367b2cbeedb9b1"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a7869a9bab59e707208367b2cbeedb9b1">receiveAttack</a> (long damage)</td></tr>
+<tr class="memdesc:a7869a9bab59e707208367b2cbeedb9b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given an attack, takes damage based on stats. Returns damage taken. <br /></td></tr>
+<tr class="separator:a7869a9bab59e707208367b2cbeedb9b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a331291f9274b46a302dc8307518531bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a331291f9274b46a302dc8307518531bb"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a331291f9274b46a302dc8307518531bb">maxHP</a></td></tr>
+<tr class="memdesc:a331291f9274b46a302dc8307518531bb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>'s maximum HP. <br /></td></tr>
+<tr class="separator:a331291f9274b46a302dc8307518531bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae49498774522534a20fd57f66ab02139"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae49498774522534a20fd57f66ab02139"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#ae49498774522534a20fd57f66ab02139">currHP</a></td></tr>
+<tr class="memdesc:ae49498774522534a20fd57f66ab02139"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>'s current HP. <br /></td></tr>
+<tr class="separator:ae49498774522534a20fd57f66ab02139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Backend of a character’s data. Visual depiction handled by <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> class. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_unit_8h_source.html">Unit.h</a></li>
+<li>Unit.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

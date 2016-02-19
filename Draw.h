@@ -13,19 +13,22 @@
 
 
   // Draw.cpp
-  void drawBattle(SDL_Renderer *ren, TTF_Font* font);
-  //!< Draws the battle screen. Currently stubbed.
-  bool drawMap(unique_ptr<Party> &party);
+  void drawBattle(SDL_Renderer *ren, unique_ptr<Party> &party, TTF_Font* font,
+          vector<unique_ptr<Button> > &buttons, int x, int y, int cursor,
+          vector<shared_ptr<Unit> > &enemies);
+  //!< Draws the battle screen.
+  void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
+          TTF_Font* font, vector<shared_ptr<Unit> > &enemies);
+  //!< Draws changes to the battle screen as the turn progresses.
+  bool drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party);
   //!< Draws the overworld map for exploration. Returns true if splining.
   void drawRebind(SDL_Renderer *ren, TTF_Font* font);
   //!< Draws the screen for rebinding keys.
-  void drawScreen(gameState &state, TTF_Font* font, unique_ptr<Party> &party,
-          unique_ptr<Button> &toGame);
-  //!< Chooses what kind of screen to draw based on current gamestate.
-  bool drawSprite(shared_ptr<Tile> tile,
+  bool drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
           unique_ptr<Party> &party, int i, int j);
   //!< Draws a single Sprite on the map without redrawing the map.
-  void drawTitle(SDL_Renderer *ren, unique_ptr<Button> &toGame);
+  void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons,
+          int x, int y, int cursor);
   //!< Draws the title screen.
 
 #endif

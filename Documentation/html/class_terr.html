@@ -108,6 +108,10 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a8b68000bbfdc821e364bdb89f4465c17">~Terr</a> ()</td></tr>
 <tr class="memdesc:a8b68000bbfdc821e364bdb89f4465c17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. Because Tiles use new, they must be deleted. <br /></td></tr>
 <tr class="separator:a8b68000bbfdc821e364bdb89f4465c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc8910783511bda341ee07d2603823d4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adc8910783511bda341ee07d2603823d4"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#adc8910783511bda341ee07d2603823d4">actSprites</a> (shared_ptr&lt; <a class="el" href="class_sprite.html">Sprite</a> &gt; partySprite, vector&lt; shared_ptr&lt; <a class="el" href="class_unit.html">Unit</a> &gt; &gt; &amp;enemies)</td></tr>
+<tr class="memdesc:adc8910783511bda341ee07d2603823d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">All sprites pop an action (if any) and enact it. <br /></td></tr>
+<tr class="separator:adc8910783511bda341ee07d2603823d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b79ff79c2ffbe2606f5906b3f23df12"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b79ff79c2ffbe2606f5906b3f23df12"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a6b79ff79c2ffbe2606f5906b3f23df12">enterTileMessageHandler</a> (const string &amp;message, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; tile)</td></tr>
 <tr class="memdesc:a6b79ff79c2ffbe2606f5906b3f23df12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes in a message from a <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> being entered, reacts accordingly. <br /></td></tr>
@@ -140,14 +144,14 @@ shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td 
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a397fdbbeb3fe3eb8989d9da77af42f57">getWidth</a> ()</td></tr>
 <tr class="memdesc:a397fdbbeb3fe3eb8989d9da77af42f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the width (w) of <a class="el" href="class_terr.html" title="Describes an overworld map. All maps currently must be rectangles. ">Terr</a>. <br /></td></tr>
 <tr class="separator:a397fdbbeb3fe3eb8989d9da77af42f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac900225f790f49a5baa490351adfb03a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac900225f790f49a5baa490351adfb03a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#ac900225f790f49a5baa490351adfb03a">interactSprite</a> (shared_ptr&lt; <a class="el" href="class_sprite.html">Sprite</a> &gt; sprite)</td></tr>
-<tr class="memdesc:ac900225f790f49a5baa490351adfb03a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intelligently interact with <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> being faced, if any. <br /></td></tr>
-<tr class="separator:ac900225f790f49a5baa490351adfb03a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a343cd63b0fd20a5baf2dbbf8ea1d7098"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a343cd63b0fd20a5baf2dbbf8ea1d7098"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a343cd63b0fd20a5baf2dbbf8ea1d7098">interactSprites</a> (shared_ptr&lt; <a class="el" href="class_sprite.html">Sprite</a> &gt; sprite, shared_ptr&lt; <a class="el" href="class_sprite.html">Sprite</a> &gt; target)</td></tr>
-<tr class="memdesc:a343cd63b0fd20a5baf2dbbf8ea1d7098"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intelligently interact between two sprites. <br /></td></tr>
-<tr class="separator:a343cd63b0fd20a5baf2dbbf8ea1d7098"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a673ca282c441e6eea4935bd1ae6afdb7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a673ca282c441e6eea4935bd1ae6afdb7"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a673ca282c441e6eea4935bd1ae6afdb7">interactSprite</a> (shared_ptr&lt; <a class="el" href="class_sprite.html">Sprite</a> &gt; sprite, vector&lt; shared_ptr&lt; <a class="el" href="class_unit.html">Unit</a> &gt; &gt; &amp;enemies)</td></tr>
+<tr class="memdesc:a673ca282c441e6eea4935bd1ae6afdb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intelligently interact with <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> being faced, if any. <br /></td></tr>
+<tr class="separator:a673ca282c441e6eea4935bd1ae6afdb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00dfea1cd9014d8b368a46ba466a46b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a00dfea1cd9014d8b368a46ba466a46b2"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a00dfea1cd9014d8b368a46ba466a46b2">interactSprites</a> (shared_ptr&lt; <a class="el" href="class_sprite.html">Sprite</a> &gt; sprite, shared_ptr&lt; <a class="el" href="class_sprite.html">Sprite</a> &gt; target, vector&lt; shared_ptr&lt; <a class="el" href="class_unit.html">Unit</a> &gt; &gt; &amp;enemies)</td></tr>
+<tr class="memdesc:a00dfea1cd9014d8b368a46ba466a46b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Intelligently interact between two sprites. <br /></td></tr>
+<tr class="separator:a00dfea1cd9014d8b368a46ba466a46b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a367ee972d1e3edffe329fb4f7c84ff3e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a367ee972d1e3edffe329fb4f7c84ff3e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a367ee972d1e3edffe329fb4f7c84ff3e">isOccupied</a> (shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; tile)</td></tr>
 <tr class="memdesc:a367ee972d1e3edffe329fb4f7c84ff3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return true if the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> has a <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> associated with it. <br /></td></tr>
@@ -168,6 +172,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#abd9bbf7cc0d7f0ef48a2198f5b2047ba">setTile</a> (shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; tile, shared_ptr&lt; <a class="el" href="class_sprite.html">Sprite</a> &gt; sprite)</td></tr>
 <tr class="memdesc:abd9bbf7cc0d7f0ef48a2198f5b2047ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a Sprite-Tile relationship. Alias for setSprite. <br /></td></tr>
 <tr class="separator:abd9bbf7cc0d7f0ef48a2198f5b2047ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9563f05a13abff25ab62d814dab743f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9563f05a13abff25ab62d814dab743f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#ab9563f05a13abff25ab62d814dab743f">tickSprites</a> (mt19937_64 &amp;rng)</td></tr>
+<tr class="memdesc:ab9563f05a13abff25ab62d814dab743f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells all Sprites that a tick has occurred. <br /></td></tr>
+<tr class="separator:ab9563f05a13abff25ab62d814dab743f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1b055dc8ce5abea86d84472e27ceb48"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab1b055dc8ce5abea86d84472e27ceb48"></a>
 shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#ab1b055dc8ce5abea86d84472e27ceb48">tileClick</a> (SDL_MouseButtonEvent &amp;click, shared_ptr&lt; <a class="el" href="class_sprite.html">Sprite</a> &gt; sprite)</td></tr>
 <tr class="memdesc:ab1b055dc8ce5abea86d84472e27ceb48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns pointer to the <a class="el" href="class_tile.html" title="Data about individual tiles from a Terr. ">Tile</a> clicked. Needs <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> the map is watching. <br /></td></tr>
@@ -175,12 +183,12 @@ shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:af17a51c8b893a518a743c72411de3598"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#af17a51c8b893a518a743c72411de3598">findCheckRoute</a> (dir d, unordered_map&lt; shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;, int &gt; *tiles, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; tile)</td></tr>
-<tr class="separator:af17a51c8b893a518a743c72411de3598"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80d2b5befbfc30d4d38a4dd2ade6b7bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a80d2b5befbfc30d4d38a4dd2ade6b7bf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a80d2b5befbfc30d4d38a4dd2ade6b7bf">findEnqueue</a> (dir d, priority_queue&lt; tuple&lt; int, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; &gt;, vector&lt; tuple&lt; int, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; &gt; &gt;, greater&lt; tuple&lt; int, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; &gt; &gt; &gt; *searchQ, unordered_map&lt; shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;, int &gt; *tiles, tuple&lt; int, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; &gt; t, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; target)</td></tr>
-<tr class="memdesc:a80d2b5befbfc30d4d38a4dd2ade6b7bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function for <a class="el" href="class_terr.html#ad0596843b8e4c1ddd9b39220837b88ce" title="A* to find a path from start to dest, then enqueue in sprite. ">findPath()</a>: marks/enqueues tiles. <br /></td></tr>
-<tr class="separator:a80d2b5befbfc30d4d38a4dd2ade6b7bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34bf50aa821f3c2f861c060281e238c3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a34bf50aa821f3c2f861c060281e238c3">findCheckRoute</a> (dir d, unordered_map&lt; shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;, int &gt; &amp;tiles, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; tile)</td></tr>
+<tr class="separator:a34bf50aa821f3c2f861c060281e238c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1784db5125ce598d59b68bb0edde9196"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1784db5125ce598d59b68bb0edde9196"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a1784db5125ce598d59b68bb0edde9196">findEnqueue</a> (dir d, priority_queue&lt; tuple&lt; int, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; &gt;, vector&lt; tuple&lt; int, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; &gt; &gt;, greater&lt; tuple&lt; int, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; &gt; &gt; &gt; &amp;searchQ, unordered_map&lt; shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;, int &gt; &amp;tiles, tuple&lt; int, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; &gt; t, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; target)</td></tr>
+<tr class="memdesc:a1784db5125ce598d59b68bb0edde9196"><td class="mdescLeft">&#160;</td><td class="mdescRight">Utility function for <a class="el" href="class_terr.html#ad0596843b8e4c1ddd9b39220837b88ce" title="A* to find a path from start to dest, then enqueue in sprite. ">findPath()</a>: marks/enqueues tiles. <br /></td></tr>
+<tr class="separator:a1784db5125ce598d59b68bb0edde9196"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76e437b2864d6fd78b85961dbe1ade61"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a76e437b2864d6fd78b85961dbe1ade61"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terr.html#a76e437b2864d6fd78b85961dbe1ade61">findDistance</a> (shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; start, shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt; end)</td></tr>
 <tr class="memdesc:a76e437b2864d6fd78b85961dbe1ade61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns taxicab distance to get to end. <br /></td></tr>
@@ -224,7 +232,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Describes an overworld map. All maps currently must be rectangles. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="af17a51c8b893a518a743c72411de3598"></a>
+<a class="anchor" id="a34bf50aa821f3c2f861c060281e238c3"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -240,7 +248,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unordered_map&lt; shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;, int &gt; *&#160;</td>
+          <td class="paramtype">unordered_map&lt; shared_ptr&lt; <a class="el" href="class_tile.html">Tile</a> &gt;, int &gt; &amp;&#160;</td>
           <td class="paramname"><em>tiles</em>, </td>
         </tr>
         <tr>

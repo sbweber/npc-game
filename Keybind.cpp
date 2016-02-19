@@ -2,6 +2,7 @@
 
 #include "Keybind.h"
 
+
 // debug key commands
 SDL_Keysym stateBattle;
 SDL_Keysym stateMap1;
@@ -17,12 +18,14 @@ SDL_Keysym dirLeft;
 SDL_Keysym dirRight;
 SDL_Keysym interact;
 
+
 bool operator==(const SDL_Keysym &lhs, const SDL_Keysym &rhs)
 {
   if (lhs.sym == rhs.sym /*&& lhs.mod == rhs.mod*/)
     return true; //only checks keycode and keymod, and currently ignores keymod
   return false;
 }  // bool operator==(const SDL_Keysym &lhs, const SDL_Keysym &rhs)
+
 
 void loadKeys()
 {
@@ -31,8 +34,8 @@ void loadKeys()
   stateMap1.sym = SDLK_1;
   stateMap2.sym = SDLK_2;
   stateRebind.sym = SDLK_9;
-  stateTitle.sym = SDLK_0;
   // permanent key commands
+  stateTitle.sym = SDLK_F12;
   stateQuit.sym = SDLK_F4;
   stateQuit.mod = KMOD_ALT;
   back.sym = SDLK_ESCAPE;
@@ -42,6 +45,7 @@ void loadKeys()
   dirRight.sym = SDLK_RIGHT;
   interact.sym = SDLK_z;
 }  // void loadKeys()
+
 
 void rebind(SDL_Keysym &keytype, SDL_Keysym newkey)
 {

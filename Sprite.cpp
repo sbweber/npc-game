@@ -3,8 +3,8 @@
 #include "Sprite.h"
 
 
-Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile, const string &n,
-        const string &p, const string &scriptFile)
+Sprite::Sprite(SDL_Renderer *ren, int min, int max, const string &spriteFile,
+        const string &n, const string &p, const string &scriptFile)
 {
   spriteSheet = loadTexture(spriteFile, ren);
   sprite = DOWN;  // default all sprites as facing down
@@ -25,6 +25,9 @@ Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile, const string &n,
       speech.push(line);
     }  // copy character's script into memory
   }  // load up speech with the script
+  moveFreqMax = max;
+  moveFreqMin = min;
+  ticks = moveFreqMax;
 }  // Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile)
 
 
@@ -54,6 +57,18 @@ bool Sprite::decSpline()
   }
   return false;
 }  // void Sprite::decSpline()
+
+
+void Sprite::decTicks(mt19937_64& rng)
+{
+  if (ticks)
+    ticks--;
+  if (!ticks && moveFreqMin > 0)
+  {
+    ticks = randNum(rng, moveFreqMin, moveFreqMax);
+    pushAct(action(randDir(rng), MOVE));
+  }
+}  // void Sprite::decTicks(mt19937_64& rng)
 
 
 void Sprite::changeDir(dir d)
@@ -141,7 +156,7 @@ void Sprite::renderSpeech(SDL_Renderer *ren, const string &str,
     SDL_RenderPresent(ren);
     SDL_Event e = pressAnyKey();
     if (e.type == SDL_KEYDOWN && e.key.keysym == stateQuit)
-      quit("Told to quit while in text", 0, ren);
+      eventQuit();
   }
 }  // void renderSpeech()
 
@@ -158,6 +173,13 @@ void Sprite::say(SDL_Renderer *ren)
     speech.push(str);
   }
 }  // void Sprite::say(SDL_Renderer *ren, string &str)
+
+
+void Sprite::setMoveFreq(int min, int max)
+{
+  moveFreqMax = max;
+  moveFreqMin = min;
+}  // void Sprite::setMoveFreq(int min, int max)
 
 
 void Sprite::setPurpose(const string &p)
