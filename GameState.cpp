@@ -239,9 +239,12 @@ void GameState::loopMap(SDL_Event &e)
   switch (e.type)
   {
   case SDL_USEREVENT:
+    if (party->getMoveButtonHeld())
+      party->getSprite()->pushAct(action(party->getMoveButtonDir(), MOVE));
     terr->tickSprites(randNumGen);
     message = terr->actSprites(party->getSprite(), enemies);
     interactMessageHandler(message);
+    party->getSprite()->clearActs();
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = tileClick(e.button);
@@ -252,17 +255,20 @@ void GameState::loopMap(SDL_Event &e)
     }  // If tile can be legally entered, path to it
     break;
   case SDL_KEYDOWN:
-    party->getSprite()->clearActs();
-    if (e.key.keysym == dirUp)
-      party->getSprite()->pushAct(action(NORTH, MOVE));
-    if (e.key.keysym == dirLeft)
-      party->getSprite()->pushAct(action(WEST, MOVE));
-    if (e.key.keysym == dirDown)
-      party->getSprite()->pushAct(action(SOUTH, MOVE));
     if (e.key.keysym == dirRight)
-      party->getSprite()->pushAct(action(EAST, MOVE));
-    if (e.key.keysym == interact)
+      party->move(EAST);
+    else if (e.key.keysym == dirUp)
+      party->move(NORTH);
+    else if (e.key.keysym == dirDown)
+      party->move(SOUTH);
+    else if (e.key.keysym == dirLeft)
+      party->move(WEST);
+    else if (e.key.keysym == interact)
       party->getSprite()->pushAct(action(UNDEFINED_DIRECTION, INTERACT));
+    break;
+  case SDL_KEYUP:
+    party->move(UNDEFINED_DIRECTION);
+    party->getSprite()->clearActs();
     break;
   default:
     break;

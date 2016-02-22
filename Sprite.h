@@ -77,6 +77,8 @@
     //!< Manually sets the number of pixels to spline.
     void setSprite(spriteType st);
     //!< Manually change sprite type (facing, etc).
+    const action topAct();
+    //!< Returns the next action in the queue.
   protected:
     queue<action> actionQ;
     //!< Queue of upcoming moves to make.

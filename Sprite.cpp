@@ -199,3 +199,14 @@ void Sprite::setSprite(spriteType st)
   sprite = st;
 }  // void Sprite::setSprite()
 
+
+const action Sprite::topAct()
+{
+  if (!actionQ.empty())
+  {
+    action retval = actionQ.front();
+    return retval;
+  }  // If the queue isn't empty, pop the front off and return it.
+  return action(UNDEFINED_DIRECTION, BAD_ACTION);
+}  // const dir Sprite::topAct()
+
