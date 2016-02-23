@@ -459,6 +459,7 @@ void Terr::loadMap(const string &str)
 void Terr::loadSprite(ifstream &file)
 {
   int x, y, moveFreqMin, moveFreqMax;
+  string mfMin, mfMax;
   string spriteFile = "NPC.png", name = "I_AM_ERROR";
   string purpose = "ERROR", scriptFile = "Silence.txt"; 
   file >> x;
@@ -467,8 +468,10 @@ void Terr::loadSprite(ifstream &file)
   file >> name;
   file >> purpose;
   file >> scriptFile;
-  file >> moveFreqMin;
-  file >> moveFreqMax;
+  file >> mfMin;  // in secs
+  file >> mfMax;  // in secs
+  moveFreqMin = NUM_FRAMES_SEC * stod(mfMin);
+  moveFreqMax = NUM_FRAMES_SEC * stod(mfMax);
   shared_ptr<Sprite> sprite(new Sprite(ren, moveFreqMin, moveFreqMax, spriteFile, name, purpose,
           scriptFile));
   setSprite(sprite, getTile(x, y));

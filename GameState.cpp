@@ -348,7 +348,7 @@ long GameState::rng(long min, long max)
 void GameState::setState(gameState gs)
 {
   if (gs == MAP)
-    timerID = SDL_AddTimer(150, mapTimerCallback, nullptr);
+    timerID = SDL_AddTimer(TICKS_MS, mapTimerCallback, nullptr);
   else if (state == MAP)
     SDL_RemoveTimer(timerID);
   state = gs;

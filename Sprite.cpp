@@ -72,9 +72,9 @@ bool Sprite::decSpline()
   if (spline > 0)
   {
     if (facing == NORTH || facing == SOUTH)
-      spline -= (TILE_HEIGHT / NUM_FRAMES_SPLINE);
+      spline -= (TILE_HEIGHT / NUM_FRAMES_SEC);
     else
-      spline -= (TILE_WIDTH / NUM_FRAMES_SPLINE);
+      spline -= (TILE_WIDTH / NUM_FRAMES_SEC);
     if (spline < 0)
       spline = 0;
     return true;

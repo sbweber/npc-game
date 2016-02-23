@@ -39,12 +39,10 @@ int main(int argc, char **argv)
 
   while (!quit)
     while (SDL_PollEvent(&e))
-    {
       if (e.type == SDL_QUIT)
         quit = true;
       else
         state->advance(e);
-    }
 
   TTF_CloseFont(font);
   SDL_DestroyRenderer(ren);
