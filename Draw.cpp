@@ -52,11 +52,10 @@ void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
 }  // void drawBattleUpdate
 
 
-bool drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party)
+void drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party)
 {  // portion of map to be drawn based on position of hero
   SDL_RenderClear(terr->getRen());
   int tileClip = 0;
-  bool spriteMoved = false, cont = false;
   SDL_Rect tileClips[16];  // magic number (16): number of tile types. Currently five (black/impassable, white/passable, etc)
   getClips(tileClips, 16, 4, TILE_WIDTH, TILE_HEIGHT);  // magic number (4): number of rows in the tile spritesheet
 
@@ -115,25 +114,16 @@ bool drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party)
   // are drawn on top of Sprites.
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
-    {
+    {  // if Tile is on screen
       if (((x + i - hsw) >= 0) && ((x + i - hsw) < terr->getWidth()) &&
-        ((y + j - hsh) >= 0) && ((y + j - hsh) < terr->getHeight()))
+              ((y + j - hsh) >= 0) && ((y + j - hsh) < terr->getHeight()))
         tilePtr = terr->getTile((x + i - hsw), (j + y - hsh));
-      // if Tile in question exists
       else
         tilePtr = nullptr;
-      if (tilePtr)
-      {
-        if (terr->isOccupied(tilePtr))
-          cont = drawSprite(terr->getRen(), terr->getSprite(tilePtr),
-                  party, i, j);
-        // if the tile is occupied, draw the character
-        if (!spriteMoved && cont)
-          spriteMoved = true;
-      }
+      if (tilePtr && terr->isOccupied(tilePtr))  // Draw Sprite, if any
+        drawSprite(terr->getRen(), terr->getSprite(tilePtr), party, i, j);
     }
   SDL_RenderPresent(terr->getRen());
-  return spriteMoved;
 }  // void drawMap()
 
 
@@ -171,7 +161,7 @@ void drawRebind(SDL_Renderer *ren, TTF_Font* font)
 }  // void drawRebind(SDL_Renderer *ren)
 
 
-bool drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
+void drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
         unique_ptr<Party> &party, int i, int j)
 {
   int sc = 0, vSpline = 0, hSpline = 0;
@@ -221,7 +211,7 @@ bool drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
   renderTexture(sprite->getSpriteSheet(), ren,
           TILE_WIDTH * i + hSpline, TILE_HEIGHT * j + vSpline,
           &spriteClips[sc]);
-  return sprite->decSpline();
+  sprite->decSpline();
 }//void drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
 
 

@@ -3,7 +3,8 @@
 #include "GameState.h"
 
 
-GameState::GameState(SDL_Renderer *ren, TTF_Font *f)
+GameState::GameState(SDL_Renderer *ren, TTF_Font *f, Uint32 et) :
+eventTick(et)
 {
   if (!ren)
     quit("Renderer not found!", 3);
@@ -235,25 +236,27 @@ void GameState::loopMap(SDL_Event &e)
   shared_ptr<Tile> tile;
   action act(UNDEFINED_DIRECTION, BAD_ACTION);
   string message;
-  while(drawMap(terr, party));
+  drawMap(terr, party);
   switch (e.type)
   {
   case SDL_USEREVENT:
-    if (party->getMoveButtonHeld())
-      party->getSprite()->pushAct(action(party->getMoveButtonDir(), MOVE));
-    terr->tickSprites(randNumGen);
-    message = terr->actSprites(party->getSprite(), enemies);
-    interactMessageHandler(message);
+    if (e.user.type == eventTick)
+    {
+      terr->tickSprites(randNumGen);
+      message = terr->actSprites(party->getSprite(), enemies);
+      interactMessageHandler(message);
+    }
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = tileClick(e.button);
     if (tile && tile->getIsPassable())
     {
       terr->findPath(terr->getTile(party->getSprite()),
-        tile, party->getSprite());
+              tile, party->getSprite());
     }  // If tile can be legally entered, path to it
     break;
   case SDL_KEYDOWN:
+    party->getSprite()->clearActs();
     if (e.key.keysym == dirRight)
       party->move(EAST);
     else if (e.key.keysym == dirUp)
@@ -271,6 +274,13 @@ void GameState::loopMap(SDL_Event &e)
     break;
   default:
     break;
+  }
+  if (party->getMoveButtonHeld())
+    party->getSprite()->pushAct(action(party->getMoveButtonDir(), MOVE));
+  if (e.type != SDL_USEREVENT || e.user.type != eventTick)
+  {
+    message = terr->actSprite(party->getSprite(), party->getSprite(), enemies);
+    interactMessageHandler(message);
   }
 }  // void GameState::loopMap()
 
@@ -348,7 +358,7 @@ long GameState::rng(long min, long max)
 void GameState::setState(gameState gs)
 {
   if (gs == MAP)
-    timerID = SDL_AddTimer(TICKS_MS, mapTimerCallback, nullptr);
+    timerID = SDL_AddTimer(TICK_MS, mapTimerCallback, (void*)eventTick);
   else if (state == MAP)
     SDL_RemoveTimer(timerID);
   state = gs;

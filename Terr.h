@@ -23,6 +23,8 @@
     //!< Calls loadMap unless the string is empty.
     ~Terr();
     //!< Default destructor. Because Tiles use new, they must be deleted.
+    string actSprite(shared_ptr<Sprite> partySprite,
+            shared_ptr<Sprite> sprite, vector<shared_ptr<Unit> > &enemies);
     string actSprites(shared_ptr<Sprite> partySprite,
             vector<shared_ptr<Unit> > &enemies);
     //!< All sprites pop an action (if any) and enact it.

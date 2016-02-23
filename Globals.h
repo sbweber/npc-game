@@ -42,8 +42,9 @@
   const int TILE_HEIGHT = 32;
   const int NUM_TILES_WIDTH = SCREEN_WIDTH / TILE_WIDTH;
   const int NUM_TILES_HEIGHT = SCREEN_HEIGHT / TILE_HEIGHT;
-  const int TICKS_MS = 150;
-  const int NUM_FRAMES_SEC = 1000 / TICKS_MS;
+  const int TICK_MS = 1000;
+  const double NUM_TICKS_SEC = 1000 / TICK_MS;
+  const int NUM_FRAMES_SPLINE = 8;
 
   using namespace std;
 

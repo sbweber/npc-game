@@ -4,7 +4,8 @@
 
 
 Sprite::Sprite(SDL_Renderer *ren, int min, int max, const string &spriteFile,
-        const string &n, const string &p, const string &scriptFile)
+        const string &n, const string &p,
+        const string &scriptFile)
 {
   spriteSheet = loadTexture(spriteFile, ren);
   sprite = DOWN;  // default all sprites as facing down
@@ -72,9 +73,9 @@ bool Sprite::decSpline()
   if (spline > 0)
   {
     if (facing == NORTH || facing == SOUTH)
-      spline -= (TILE_HEIGHT / NUM_FRAMES_SEC);
+      spline -= (TILE_HEIGHT / NUM_FRAMES_SPLINE);
     else
-      spline -= (TILE_WIDTH / NUM_FRAMES_SEC);
+      spline -= (TILE_WIDTH / NUM_FRAMES_SPLINE);
     if (spline < 0)
       spline = 0;
     return true;

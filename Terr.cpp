@@ -29,11 +29,41 @@ Terr::~Terr()
 }  // Terr::~Terr()
 
 
+string Terr::actSprite(shared_ptr<Sprite> partySprite,
+        shared_ptr<Sprite> sprite, vector<shared_ptr<Unit> > &enemies)
+{
+  SDL_Event* wait = new SDL_Event();
+  string message;
+  if (sprite && !sprite->getSpline())
+  {
+    action act = sprite->popAct();
+    switch (get<1>(act))
+    {
+    case MOVE:
+      moveSprite(sprite, get<0>(act));
+      if (sprite == partySprite)
+        SDL_PushEvent(wait);
+      break;
+    case INTERACT:
+      if (sprite == partySprite)
+      {
+        message = interactSprite(partySprite, enemies);
+        SDL_PushEvent(wait);
+      }
+      break;
+    case BAD_ACTION:
+    default:
+      break;
+    }
+  }
+  return message;
+}  // string Terr::actSprite()
+
+
 string Terr::actSprites(shared_ptr<Sprite> partySprite,
         vector<shared_ptr<Unit> > &enemies)
 {
   string message;
-  SDL_Event* wait = new SDL_Event();
   shared_ptr<Sprite> sprite;
   vector<shared_ptr<Sprite> > spritesOnMap;
   for (int i = 0; i < w; i++)
@@ -42,29 +72,9 @@ string Terr::actSprites(shared_ptr<Sprite> partySprite,
         spritesOnMap.push_back(sprite);
   for (vector<shared_ptr<Sprite> >::iterator itr = spritesOnMap.begin(); itr != spritesOnMap.end(); itr++)
   {
-    sprite = *itr;
-    if (sprite)
-    {
-      action act = sprite->popAct();
-      switch (get<1>(act))
-      {
-      case MOVE:
-        moveSprite(sprite, get<0>(act));
-        if (sprite == partySprite)
-          SDL_PushEvent(wait);
-        break;
-      case INTERACT:
-        if (sprite == partySprite)
-        {
-          message = interactSprite(partySprite, enemies);
-          SDL_PushEvent(wait);
-        }
-        break;
-      case BAD_ACTION:
-      default:
-        break;
-      }
-    }
+    string m = actSprite(partySprite, *itr, enemies);
+    if (*itr == partySprite)
+      message = m;
   }
   return message;
 }  // void Terr::actSprites(shared_ptr<Sprite> partySprite)
@@ -470,8 +480,8 @@ void Terr::loadSprite(ifstream &file)
   file >> scriptFile;
   file >> mfMin;  // in secs
   file >> mfMax;  // in secs
-  moveFreqMin = NUM_FRAMES_SEC * stod(mfMin);
-  moveFreqMax = NUM_FRAMES_SEC * stod(mfMax);
+  moveFreqMin = (int)(NUM_TICKS_SEC * stod(mfMin));
+  moveFreqMax = (int)(NUM_TICKS_SEC * stod(mfMax));
   shared_ptr<Sprite> sprite(new Sprite(ren, moveFreqMin, moveFreqMax, spriteFile, name, purpose,
           scriptFile));
   setSprite(sprite, getTile(x, y));

@@ -29,20 +29,30 @@ int main(int argc, char **argv)
 
   // loop vars
   SDL_Event e;
-  bool quit = false;
+  bool endProg = false;
 
   // backend vars
-  unique_ptr<GameState> state(new GameState(ren, font));
+  Uint32 eventTick = SDL_RegisterEvents(1);
+  Uint32 eventNoEvent = SDL_RegisterEvents(1);
+  if ((eventTick == ((Uint32)-1)) || (eventNoEvent == ((Uint32)-1)))
+    quit("Insufficient events", 6);
+  unique_ptr<GameState> state(new GameState(ren, font, eventTick));
   state->setState(TITLE);
 
   loadKeys();
 
-  while (!quit)
-    while (SDL_PollEvent(&e))
-      if (e.type == SDL_QUIT)
-        quit = true;
-      else
-        state->advance(e);
+  while (!endProg)
+  {
+    if (!SDL_PollEvent(&e))
+    {
+      e.type = SDL_USEREVENT;
+      e.user.type = eventNoEvent;
+    }
+    if (e.type == SDL_QUIT)
+      endProg = true;
+    else
+      state->advance(e);
+  }
 
   TTF_CloseFont(font);
   SDL_DestroyRenderer(ren);

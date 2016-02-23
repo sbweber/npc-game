@@ -20,11 +20,11 @@
   void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
           TTF_Font* font, vector<shared_ptr<Unit> > &enemies);
   //!< Draws changes to the battle screen as the turn progresses.
-  bool drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party);
+  void drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party);
   //!< Draws the overworld map for exploration. Returns true if splining.
   void drawRebind(SDL_Renderer *ren, TTF_Font* font);
   //!< Draws the screen for rebinding keys.
-  bool drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
+  void drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
           unique_ptr<Party> &party, int i, int j);
   //!< Draws a single Sprite on the map without redrawing the map.
   void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons,
