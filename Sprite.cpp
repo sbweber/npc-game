@@ -27,7 +27,8 @@ Sprite::Sprite(SDL_Renderer *ren, int min, int max, const string &spriteFile,
   }  // load up speech with the script
   moveFreqMax = max;
   moveFreqMin = min;
-  ticks = moveFreqMax;
+  ticks = 0;
+  pushAct(action(UNDEFINED_DIRECTION, BAD_ACTION));
 }  // Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile)
 
 
@@ -35,6 +36,29 @@ Sprite::~Sprite()
 {
   SDL_DestroyTexture(spriteSheet);
 }  // Sprite::~Sprite()
+
+
+void Sprite::changeDir(dir d)
+{
+  facing = d;
+  switch (d)
+  {
+  case NORTH:
+    sprite = UP;
+    break;
+  case SOUTH:
+    sprite = DOWN;
+    break;
+  case WEST:
+    sprite = LEFT;
+    break;
+  case EAST:
+    sprite = RIGHT;
+    break;
+  default:
+    break;  // default should be impossible
+  }  // changes Sprite direction
+}  // void Sprite::changeDir(dir d)
 
 
 void Sprite::clearActs()
@@ -63,35 +87,13 @@ void Sprite::decTicks(mt19937_64& rng)
 {
   if (ticks)
     ticks--;
-  if (!ticks && moveFreqMin > 0)
+  if (!ticks && (moveFreqMin > 0))
   {
     ticks = randNum(rng, moveFreqMin, moveFreqMax);
-    pushAct(action(randDir(rng), MOVE));
+    if (actionQ.empty())
+      pushAct(action(randDir(rng), MOVE));
   }
 }  // void Sprite::decTicks(mt19937_64& rng)
-
-
-void Sprite::changeDir(dir d)
-{
-  facing = d;
-  switch (d)
-  {
-  case NORTH:
-    sprite = UP;
-    break;
-  case SOUTH:
-    sprite = DOWN;
-    break;
-  case WEST:
-    sprite = LEFT;
-    break;
-  case EAST:
-    sprite = RIGHT;
-    break;
-  default:
-    break;  // default should be impossible
-  }  // changes Sprite direction
-}  // void Sprite::changeDir(dir d)
 
 
 dir Sprite::getFacing()

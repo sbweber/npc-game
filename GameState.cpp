@@ -244,7 +244,6 @@ void GameState::loopMap(SDL_Event &e)
     terr->tickSprites(randNumGen);
     message = terr->actSprites(party->getSprite(), enemies);
     interactMessageHandler(message);
-    party->getSprite()->clearActs();
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = tileClick(e.button);
@@ -349,7 +348,7 @@ long GameState::rng(long min, long max)
 void GameState::setState(gameState gs)
 {
   if (gs == MAP)
-    timerID = SDL_AddTimer(125, mapTimerCallback, nullptr);
+    timerID = SDL_AddTimer(150, mapTimerCallback, nullptr);
   else if (state == MAP)
     SDL_RemoveTimer(timerID);
   state = gs;
