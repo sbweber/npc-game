@@ -11,7 +11,7 @@ Party::Party(SDL_Renderer *ren)
     active[i] = nullptr;
   active[0].reset(new Unit());
   passive.clear();
-  sprite.reset(new Sprite(ren, 0, 0, "Hero.png", "Roland", "Hero"));
+  sprite.reset(new Sprite(ren, 0, 0, "Hero.png", 0, "Roland", "Hero"));
   sprite->clearActs();
 }  // Party::Party(SDL_Renderer *ren)
 
@@ -51,6 +51,6 @@ void Party::move(dir moveDir)
 
 void Party::setSprite(SDL_Renderer *ren, const string &str)
 {
-  sprite.reset(new Sprite(ren, 0, 0, str));
+  sprite.reset(new Sprite(ren, 0, 0, str, 0));
 }  // void Party::setSprite(SDL_Renderer *ren, const string &str)
 

@@ -4,7 +4,7 @@
 
 
 Sprite::Sprite(SDL_Renderer *ren, int min, int max, const string &spriteFile,
-        const string &n, const string &p,
+        int initTicks, const string &n, const string &p,
         const string &scriptFile)
 {
   spriteSheet = loadTexture(spriteFile, ren);
@@ -28,8 +28,7 @@ Sprite::Sprite(SDL_Renderer *ren, int min, int max, const string &spriteFile,
   }  // load up speech with the script
   moveFreqMax = max;
   moveFreqMin = min;
-  ticks = 0;
-  pushAct(action(UNDEFINED_DIRECTION, BAD_ACTION));
+  ticks = initTicks;
 }  // Sprite::Sprite(SDL_Renderer *ren, const string &spriteFile)
 
 

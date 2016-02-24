@@ -37,7 +37,7 @@
   {
   public:
     Sprite(SDL_Renderer *ren, int min, int max, const string &spriteFile,
-            const string &n = "", const string &p = "",
+            int initTicks, const string &n = "", const string &p = "",
             const string &scriptFile = "");
     //!< All units MUST have a spritesheet specified. type string optional.
     ~Sprite();

@@ -9,7 +9,7 @@ eventTick(et)
   if (!ren)
     quit("Renderer not found!", 3);
   randNumGen.seed(chrono::system_clock::now().time_since_epoch().count());
-  terr.reset(new Terr(ren, ""));
+  terr.reset(new Terr(ren, randNumGen, ""));
   cursorPos = 0;
   timerID = 0;
   party.reset(new Party(ren));
@@ -20,6 +20,47 @@ eventTick(et)
 GameState::~GameState()
 {
 }  // GameState::~GameState()
+
+
+void GameState::actionMessageHandler(string &message)
+{
+  size_t strpos = message.find(':');
+  if (strpos != string::npos)
+  {
+    if (message.substr(0, strpos) == "CHANGE-STATE")
+    {
+      strpos = message.find(' ', strpos);
+      size_t strposnew = message.find(' ', strpos + 1);
+      string state = message.substr(strpos + 1, strposnew - strpos - 1);
+      if (state == "BATTLE")
+        setState(BATTLE);
+    }
+    else if (message.substr(0, strpos) == "PARTY")
+    {
+      strpos = message.find(' ', strpos);
+      size_t strposnew = message.find(' ', strpos + 1);
+      string command = message.substr(strpos + 1, strposnew - strpos - 1);
+      if (command == "full-heal")
+      for (int i = 0; i < 4; i++)
+      if (party->getUnit(i))
+        party->getUnit(i)->fullHeal();
+    }
+    else if (message.substr(0, strpos) == "LOAD-MAP")
+    {
+      strpos = message.find(' ', strpos);
+      size_t strposnew = message.find(' ', strpos + 1);
+      string destTerr = message.substr(strpos + 1, strposnew - strpos - 1);
+      strpos = strposnew;
+      strposnew = message.find(' ', strpos + 1);
+      int destX = stoi(message.substr(strpos + 1, strposnew - strpos - 1));
+      strpos = strposnew;
+      strposnew = message.find(' ', strpos + 1);
+      int destY = stoi(message.substr(strpos + 1, strposnew - strpos - 1));
+      changeTerr(destTerr);
+      terr->setSprite(party->getSprite(), terr->getTile(destX, destY));
+    }
+  }  // No colon found: do default behavior (nothing)
+}  // void interactMessageHandler(unique_ptr<Party> &party, string &message)
 
 
 void GameState::advance(SDL_Event &e)
@@ -48,7 +89,9 @@ void GameState::advance(SDL_Event &e)
 
 void GameState::changeTerr(const string& newTerr)
 {
-  terr->loadMap(newTerr);
+  party->getSprite()->setSpline(0);
+  party->getSprite()->clearActs();
+  terr->loadMap(newTerr, randNumGen);
 }  // void GameState::changeTerr(string& newTerr)
 
 
@@ -68,33 +111,6 @@ void GameState::incCursorPos(unsigned int max)
   else
     cursorPos++;
 }  // void GameState::incCursorPos(int max)
-
-
-void GameState::interactMessageHandler(string &message)
-{
-  size_t strpos = message.find(':');
-  if (strpos != string::npos)
-  {
-    if (message.substr(0, strpos) == "CHANGE-STATE")
-    {
-      strpos = message.find(' ', strpos);
-      size_t strposnew = message.find(' ', strpos + 1);
-      string state = message.substr(strpos + 1, strposnew - strpos - 1);
-      if (state == "BATTLE")
-        setState(BATTLE);
-    }
-    if (message.substr(0, strpos) == "PARTY")
-    {
-      strpos = message.find(' ', strpos);
-      size_t strposnew = message.find(' ', strpos + 1);
-      string command = message.substr(strpos + 1, strposnew - strpos - 1);
-      if (command == "full-heal")
-        for (int i = 0; i < 4; i++)
-          if (party->getUnit(i))
-            party->getUnit(i)->fullHeal();
-    }
-  }  // No colon found: do default behavior (nothing)
-}  // void interactMessageHandler(unique_ptr<Party> &party, string &message)
 
 
 void GameState::loopAnyState(SDL_Event &e)
@@ -241,11 +257,7 @@ void GameState::loopMap(SDL_Event &e)
   {
   case SDL_USEREVENT:
     if (e.user.type == eventTick)
-    {
       terr->tickSprites(randNumGen);
-      message = terr->actSprites(party->getSprite(), enemies);
-      interactMessageHandler(message);
-    }
     break;
   case SDL_MOUSEBUTTONDOWN:
     tile = tileClick(e.button);
@@ -278,8 +290,8 @@ void GameState::loopMap(SDL_Event &e)
     party->getSprite()->pushAct(action(get<0>(party->getSprite()->topAct()), MOVE));
   if (e.type != SDL_USEREVENT || e.user.type != eventTick)
   {
-    message = terr->actSprite(party->getSprite(), party->getSprite(), enemies);
-    interactMessageHandler(message);
+    message = terr->actSprites(party->getSprite(), enemies);
+    actionMessageHandler(message);
   }
 }  // void GameState::loopMap()
 

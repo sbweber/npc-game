@@ -50,8 +50,8 @@
     SDL_TimerID timerID;
     //!< Timer for regular events
 
-    void interactMessageHandler(string &message);
-    //!< Message handler for sprites interacting.
+    void actionMessageHandler(string &message);
+    //!< Message handler for sprites doing things.
     void loopAnyState(SDL_Event &e);
     //!< Loop to handle input that’s treated the same in all states.
     void loopBattle(SDL_Event &e);
