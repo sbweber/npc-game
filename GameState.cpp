@@ -269,14 +269,13 @@ void GameState::loopMap(SDL_Event &e)
       party->getSprite()->pushAct(action(UNDEFINED_DIRECTION, INTERACT));
     break;
   case SDL_KEYUP:
-    party->move(UNDEFINED_DIRECTION);
     party->getSprite()->clearActs();
     break;
   default:
     break;
   }
-  if (party->getMoveButtonHeld())
-    party->getSprite()->pushAct(action(party->getMoveButtonDir(), MOVE));
+  if (party->keepMoving())
+    party->getSprite()->pushAct(action(get<0>(party->getSprite()->topAct()), MOVE));
   if (e.type != SDL_USEREVENT || e.user.type != eventTick)
   {
     message = terr->actSprite(party->getSprite(), party->getSprite(), enemies);

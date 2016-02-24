@@ -52,6 +52,8 @@
     //!< Decrement ticks. Then, if it's zero, return true and reset it.
     dir getFacing();
     //!< Returns which direction the Sprite is currently facing.
+    int getQSize();
+    //!< Returns size of actionQ.
     int getSpline();
     //!< Returns the number of pixels left to spline.
     const string getPurpose();

@@ -13,25 +13,12 @@ Party::Party(SDL_Renderer *ren)
   passive.clear();
   sprite.reset(new Sprite(ren, 0, 0, "Hero.png", "Roland", "Hero"));
   sprite->clearActs();
-  moveButtonHeld = false;
 }  // Party::Party(SDL_Renderer *ren)
 
 
 Party::~Party()
 {
 }  // Party destructor
-
-
-dir Party::getMoveButtonDir()
-{
-  return moveButtonDir;
-}  // bool Party::getMoveButtonDir()
-
-
-bool Party::getMoveButtonHeld()
-{
-  return moveButtonHeld;
-}  // bool Party::getMoveButtonHeld()
 
 
 shared_ptr<Sprite> Party::getSprite()
@@ -48,13 +35,17 @@ shared_ptr<Unit> Party::getUnit(int i)
 }  // shared_ptr<Unit> Party::getUnit(int i)
 
 
+bool Party::keepMoving()
+{
+  if ((get<1>(sprite->topAct()) == MOVE) && (sprite->getQSize() == 1))
+    return true;
+  return false;
+}  // void Party::keepMoving()
+
+
 void Party::move(dir moveDir)
 {
-  if (moveDir == UNDEFINED_DIRECTION)
-    moveButtonHeld = false;
-  else
-    moveButtonHeld = true;
-  moveButtonDir = moveDir;
+  sprite->pushAct(action(moveDir, MOVE));
 }  // void Party::setMoveButtonHeld(bool mbh)
 
 

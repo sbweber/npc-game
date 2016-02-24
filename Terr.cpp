@@ -205,6 +205,7 @@ void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest,
   }  // while you haven't gotten back to dest
   if (getSprite(dest))
     sprite->pushAct(action(UNDEFINED_DIRECTION, INTERACT));
+  sprite->pushAct(action(UNDEFINED_DIRECTION, BAD_ACTION));
 }  // void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest, shared_ptr<Sprite> sprite)
 
 

@@ -103,6 +103,12 @@ dir Sprite::getFacing()
 }  // dir Sprite::getFacing()
 
 
+int Sprite::getQSize()
+{
+  return actionQ.size();
+}  // int Sprite::getQSize()
+
+
 int Sprite::getSpline()
 {
   return spline;
