@@ -42,8 +42,6 @@
   const int TILE_HEIGHT = 32;
   const int NUM_TILES_WIDTH = SCREEN_WIDTH / TILE_WIDTH;
   const int NUM_TILES_HEIGHT = SCREEN_HEIGHT / TILE_HEIGHT;
-  const int TICK_MS = 1000;
-  const double NUM_TICKS_SEC = 1000 / TICK_MS;
   const int NUM_FRAMES_SPLINE = 8;
 
   using namespace std;
@@ -51,20 +49,20 @@
 
   enum dir
   {
-    DIR_EAST,
-    DIR_NORTH,
-    DIR_SOUTH,
-    DIR_WEST,
-    DIR_UNDEFINED
+    EAST,
+    NORTH,
+    SOUTH,
+    WEST,
+    UNDEFINED_DIRECTION
   };
 
 
   enum gameState
   {
-    STATE_BATTLE,
-    STATE_MAP,
-    STATE_REBIND,
-    STATE_TITLE
+    BATTLE,
+    MAP,
+    REBIND,
+    TITLE
   };
 
 
@@ -83,7 +81,7 @@
           SDL_Renderer *ren = nullptr, SDL_Window *win = nullptr);
   //!< Quits the program, logging an error if given one.
   dir randDir(mt19937_64& rng);
-  //!< Returns a random direction (DIR_UNDEFINED if there's an error).
+  //!< Returns a random direction (UNDEFINED_DIRECTION if there's an error).
   long randNum(mt19937_64& rng, long min, long max);
   //!< Returns a random number from min to max, uniform distribution.
 
