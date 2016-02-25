@@ -12,7 +12,7 @@
   class GameState
   {
   public:
-    GameState(SDL_Renderer *ren, TTF_Font *f);
+    GameState(SDL_Renderer *ren, TTF_Font *f, Uint32 et);
     //!< GameState constructor.
     ~GameState();
     //!< GameState destructor.
@@ -35,6 +35,8 @@
     //!< Position of cursor in menus.
     vector<shared_ptr<Unit> > enemies;
     //!< Vector of enemy units for battle.
+    const Uint32 eventTick;
+    //!< ID of user event triggered by ticking.
     TTF_Font *font;
     //!< Primary font for regular usage.
     mt19937_64 randNumGen;
@@ -48,8 +50,8 @@
     SDL_TimerID timerID;
     //!< Timer for regular events
 
-    void interactMessageHandler(string &message);
-    //!< Message handler for sprites interacting.
+    void actionMessageHandler(string &message);
+    //!< Message handler for sprites doing things.
     void loopAnyState(SDL_Event &e);
     //!< Loop to handle input that’s treated the same in all states.
     void loopBattle(SDL_Event &e);

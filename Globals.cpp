@@ -57,19 +57,19 @@ dir randDir(mt19937_64& rng)
   switch (randomResult)
   {
   case 0:
-    return EAST;
+    return DIR_EAST;
     break;
   case 1:
-    return NORTH;
+    return DIR_NORTH;
     break;
   case 2:
-    return SOUTH;
+    return DIR_SOUTH;
     break;
   case 3:
-    return WEST;
+    return DIR_WEST;
     break;
   default:
-    return UNDEFINED_DIRECTION;
+    return DIR_UNDEFINED;
     break;
   }
 }  // dir randDir(mt19937_64& rng)

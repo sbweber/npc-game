@@ -23,6 +23,10 @@
     //!< Returns the Sprite representing the party by reference.
     shared_ptr<Unit> getUnit(int i);
     //!< Returns specified active unit in party.
+    bool keepMoving();
+    //!< Returns true if sprite's actionQ is size 1 and contains a ACT_MOVE.
+    void move(dir moveDir);
+    //!< Pushes a movement action to sprite.
     void setSprite(SDL_Renderer *ren, const string &str);
     //!< Resets the party’s Sprite to the one in the file named by str.
   protected:

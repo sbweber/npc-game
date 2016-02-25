@@ -12,19 +12,23 @@
   //! although some may end sooner than others.
   enum spriteType
   {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
+    SPRITE_UP = 0,
+    SPRITE_DOWN = 1,
+    SPRITE_LEFT = 2,
+    SPRITE_RIGHT = 3,
+    SPRITE_WALK_UP = 4,
+    SPRITE_WALK_DOWN = 5,
+    SPRITE_WALK_LEFT = 6,
+    SPRITE_WALK_RIGHT = 7
   };
 
 
   //! Action type. Movement, interaction, etc.
   enum actType
   {
-    MOVE,
-    INTERACT,
-    BAD_ACTION
+    ACT_MOVE,
+    ACT_INTERACT,
+    ACT_UNDEFINED
   };
 
 
@@ -37,7 +41,7 @@
   {
   public:
     Sprite(SDL_Renderer *ren, int min, int max, const string &spriteFile,
-            const string &n = "", const string &p = "",
+            int initTicks, const string &n = "", const string &p = "",
             const string &scriptFile = "");
     //!< All units MUST have a spritesheet specified. type string optional.
     ~Sprite();
@@ -46,12 +50,12 @@
     //!< Change what direction Sprite is facing. Usuallly part of movement.
     void clearActs();
     //!< Removes all elements from the action queue.
-    bool decSpline();
-    //!< If spline is non-zero, decrements it and returns true. Else false.
     void decTicks(mt19937_64& rng);
     //!< Decrement ticks. Then, if it's zero, return true and reset it.
     dir getFacing();
     //!< Returns which direction the Sprite is currently facing.
+    int getQSize();
+    //!< Returns size of actionQ.
     int getSpline();
     //!< Returns the number of pixels left to spline.
     const string getPurpose();
@@ -77,6 +81,10 @@
     //!< Manually sets the number of pixels to spline.
     void setSprite(spriteType st);
     //!< Manually change sprite type (facing, etc).
+    const action topAct();
+    //!< Returns the next action in the queue.
+    bool walk();
+    //!< If spline is non-zero, decrements it and returns true. Else false.
   protected:
     queue<action> actionQ;
     //!< Queue of upcoming moves to make.

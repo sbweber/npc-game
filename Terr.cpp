@@ -3,7 +3,7 @@
 #include "Terr.h"
 
 
-Terr::Terr(SDL_Renderer *r, const string &str)
+Terr::Terr(SDL_Renderer *r, mt19937_64 &randNumGen, const string &str)
 {
   w = 0;
   h = 0;
@@ -15,7 +15,7 @@ Terr::Terr(SDL_Renderer *r, const string &str)
   tileSS.emplace("Throne", loadTexture("Tiles-Throne.png", ren));
   tileSS.emplace("Wall", loadTexture("Tiles-Wall.png", ren));
   if (str.length())
-    loadMap(str);  // if string length is 0, there's no map to load.
+    loadMap(str, randNumGen);  // if string length is 0, there's no map to load.
 }  // Terr::Terr(string str)
 
 
@@ -29,76 +29,56 @@ Terr::~Terr()
 }  // Terr::~Terr()
 
 
+string Terr::actSprite(shared_ptr<Sprite> partySprite,
+        shared_ptr<Sprite> sprite, vector<shared_ptr<Unit> > &enemies)
+{
+  SDL_Event* wait = new SDL_Event();
+  string message;
+  if (sprite && !sprite->getSpline())
+  {
+    action act = sprite->popAct();
+    switch (get<1>(act))
+    {
+    case ACT_MOVE:
+      message = moveSprite(sprite, get<0>(act));
+      if (sprite == partySprite)
+        SDL_PushEvent(wait);
+      break;
+    case ACT_INTERACT:
+      if (sprite == partySprite)
+      {
+        message = interactSprite(partySprite, enemies);
+        SDL_PushEvent(wait);
+      }
+      break;
+    case ACT_UNDEFINED:
+    default:
+      break;
+    }
+  }
+  return message;
+}  // string Terr::actSprite()
+
+
 string Terr::actSprites(shared_ptr<Sprite> partySprite,
         vector<shared_ptr<Unit> > &enemies)
 {
   string message;
-  SDL_Event* wait = new SDL_Event();
-  shared_ptr<Sprite> sprite;
   vector<shared_ptr<Sprite> > spritesOnMap;
   for (int i = 0; i < w; i++)
     for (int j = 0; j < h; j++)
-      if (sprite = getSprite(map[i][j]))
-        spritesOnMap.push_back(sprite);
+    if (getSprite(map[i][j]))
+      spritesOnMap.push_back(getSprite(map[i][j]));
   for (vector<shared_ptr<Sprite> >::iterator itr = spritesOnMap.begin(); itr != spritesOnMap.end(); itr++)
   {
-    sprite = *itr;
-    if (sprite)
-    {
-      action act = sprite->popAct();
-      switch (get<1>(act))
-      {
-      case MOVE:
-        moveSprite(sprite, get<0>(act));
-        if (sprite == partySprite)
-          SDL_PushEvent(wait);
-        break;
-      case INTERACT:
-        if (sprite == partySprite)
-        {
-          message = interactSprite(partySprite, enemies);
-          SDL_PushEvent(wait);
-        }
-        break;
-      case BAD_ACTION:
-      default:
-        break;
-      }
-    }
+    string m = actSprite(partySprite, *itr, enemies);
+    if (*itr == partySprite)
+      message = m;
+    if ((*itr != partySprite) && (m.substr(0, m.find(':')) == "LOAD-STATE_MAP"))
+        setSprite(*itr, nullptr);
   }
   return message;
 }  // void Terr::actSprites(shared_ptr<Sprite> partySprite)
-
-
-void Terr::enterTileMessageHandler(const string &message, shared_ptr<Tile> tile)
-{
-  size_t strpos = message.find(':');
-  if (strpos != string::npos)
-  {
-    if (message.substr(0, strpos) == "LOAD-MAP")
-    {
-      shared_ptr<Sprite> sprite = getSprite(tile);
-      if (sprite->getPurpose() != "Hero")
-      {
-        setSprite(sprite, nullptr);
-        return;
-      }
-      sprite->setSpline(0);
-      sprite->clearActs();
-      strpos = message.find(' ', strpos);
-      size_t strposnew = message.find(' ', strpos + 1);
-      string destTerr = message.substr(strpos + 1, strposnew - strpos - 1);
-      strpos = strposnew;
-      strposnew = message.find(' ', strpos + 1);
-      int destX = stoi(message.substr(strpos + 1, strposnew - strpos - 1));
-      strpos = strposnew;
-      strposnew = message.find(' ', strpos + 1);
-      int destY = stoi(message.substr(strpos + 1, strposnew - strpos - 1));
-      loadMap(destTerr);
-      setSprite(sprite, getTile(destX, destY));
-    }
-  }  // No colon found: do default behavior (nothing)
-}  // Message Handler for entering a tile
 
 
 bool Terr::findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> &tiles,
@@ -159,10 +139,10 @@ void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest,
       found = true;
     else
     {
-      findEnqueue(EAST, searchQ, tiles, t, start);
-      findEnqueue(NORTH, searchQ, tiles, t, start);
-      findEnqueue(SOUTH, searchQ, tiles, t, start);
-      findEnqueue(WEST, searchQ, tiles, t, start);
+      findEnqueue(DIR_EAST, searchQ, tiles, t, start);
+      findEnqueue(DIR_NORTH, searchQ, tiles, t, start);
+      findEnqueue(DIR_SOUTH, searchQ, tiles, t, start);
+      findEnqueue(DIR_WEST, searchQ, tiles, t, start);
     }  // enqueue tile's neighbors with a distance 1 greater if valid and new
   }  // While search queue not empty and element not found
 
@@ -172,29 +152,30 @@ void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest,
   shared_ptr<Tile> tile = start;
   while (tile != dest)
   {
-    if (findCheckRoute(EAST, tiles, tile))
+    if (findCheckRoute(DIR_EAST, tiles, tile))
     {
-      sprite->pushAct(action(EAST, MOVE));
-      tile = tile->getTile(EAST);
+      sprite->pushAct(action(DIR_EAST, ACT_MOVE));
+      tile = tile->getTile(DIR_EAST);
     }
-    else if (findCheckRoute(NORTH, tiles, tile))
+    else if (findCheckRoute(DIR_NORTH, tiles, tile))
     {
-      sprite->pushAct(action(NORTH, MOVE));
-      tile = tile->getTile(NORTH);
+      sprite->pushAct(action(DIR_NORTH, ACT_MOVE));
+      tile = tile->getTile(DIR_NORTH);
     }
-    else if (findCheckRoute(SOUTH, tiles, tile))
+    else if (findCheckRoute(DIR_SOUTH, tiles, tile))
     {
-      sprite->pushAct(action(SOUTH, MOVE));
-      tile = tile->getTile(SOUTH);
+      sprite->pushAct(action(DIR_SOUTH, ACT_MOVE));
+      tile = tile->getTile(DIR_SOUTH);
     }
-    else if (findCheckRoute(WEST, tiles, tile))
+    else if (findCheckRoute(DIR_WEST, tiles, tile))
     {
-      sprite->pushAct(action(WEST, MOVE));
-      tile = tile->getTile(WEST);
+      sprite->pushAct(action(DIR_WEST, ACT_MOVE));
+      tile = tile->getTile(DIR_WEST);
     }
   }  // while you haven't gotten back to dest
   if (getSprite(dest))
-    sprite->pushAct(action(UNDEFINED_DIRECTION, INTERACT));
+    sprite->pushAct(action(DIR_UNDEFINED, ACT_INTERACT));
+  sprite->pushAct(action(DIR_UNDEFINED, ACT_UNDEFINED));
 }  // void Terr::findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest, shared_ptr<Sprite> sprite)
 
 
@@ -266,14 +247,14 @@ string Terr::interactSprites(shared_ptr<Sprite> sprite,
   else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "FightTest")
   {
     enemies.emplace_back(new Unit());
-    return "CHANGE-STATE: BATTLE";
+    return "CHANGE-STATE: STATE_BATTLE";
   }
   else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
   {
     shared_ptr<Tile> tile = nullptr;
     for (vector<shared_ptr<Tile> > tvec : map)
       for (shared_ptr<Tile> t : tvec)
-        if (t->enterTile().find("LOAD-MAP:") != string::npos)
+        if (t->enterTile().find("LOAD-STATE_MAP:") != string::npos)
           tile = t;
     findPath(getTile(target), tile, target);
     target->setMoveFreq(0, 0);
@@ -290,7 +271,7 @@ bool Terr::isOccupied(shared_ptr<Tile> tile)
 }  // bool Terr::isOccupied(shared_ptr<Tile> tile)
 
 
-void Terr::loadMap(const string &str)
+void Terr::loadMap(const string &str, mt19937_64 &randNumGen)
 {
   ifstream file;
   int c;
@@ -313,13 +294,13 @@ void Terr::loadMap(const string &str)
     {
       map[i][j]->setPos(i, j);
       if (i > 0)
-        map[i][j]->connectTile(WEST, map[i - 1][j]);
+        map[i][j]->connectTile(DIR_WEST, map[i - 1][j]);
       if (i < (w - 1))
-        map[i][j]->connectTile(EAST, map[i + 1][j]);
+        map[i][j]->connectTile(DIR_EAST, map[i + 1][j]);
       if (j > 0)
-        map[i][j]->connectTile(NORTH, map[i][j - 1]);
+        map[i][j]->connectTile(DIR_NORTH, map[i][j - 1]);
       if (j < (h - 1))
-        map[i][j]->connectTile(SOUTH, map[i][j + 1]);
+        map[i][j]->connectTile(DIR_SOUTH, map[i][j + 1]);
     }  // assumes a rectangular map
 
   // intentionally nesting like this, despite slower loop, because map is
@@ -370,26 +351,26 @@ void Terr::loadMap(const string &str)
     {
       adjacent = 0;
       N = S = E = W = false;
-      if (map[i][j]->getTile(EAST) &&
-              map[i][j]->getTex() == map[i][j]->getTile(EAST)->getTex())
+      if (map[i][j]->getTile(DIR_EAST) &&
+              map[i][j]->getTex() == map[i][j]->getTile(DIR_EAST)->getTex())
       {
         E = true;
         adjacent++;
       }
-      if (map[i][j]->getTile(NORTH) &&
-              map[i][j]->getTex() == map[i][j]->getTile(NORTH)->getTex())
+      if (map[i][j]->getTile(DIR_NORTH) &&
+              map[i][j]->getTex() == map[i][j]->getTile(DIR_NORTH)->getTex())
       {
         N = true;
         adjacent++;
       }
-      if (map[i][j]->getTile(SOUTH) &&
-              map[i][j]->getTex() == map[i][j]->getTile(SOUTH)->getTex())
+      if (map[i][j]->getTile(DIR_SOUTH) &&
+              map[i][j]->getTex() == map[i][j]->getTile(DIR_SOUTH)->getTex())
       {
         S = true;
         adjacent++;
       }
-      if (map[i][j]->getTile(WEST) &&
-              map[i][j]->getTex() == map[i][j]->getTile(WEST)->getTex())
+      if (map[i][j]->getTile(DIR_WEST) &&
+              map[i][j]->getTex() == map[i][j]->getTile(DIR_WEST)->getTex())
       {
         W = true;
         adjacent++;
@@ -443,7 +424,7 @@ void Terr::loadMap(const string &str)
     switch (instruction)
     {
     case 'N':
-      loadSprite(file);
+      loadSprite(file, randNumGen);
       break;
     case 'W':
       loadWarpTile(file);
@@ -456,20 +437,25 @@ void Terr::loadMap(const string &str)
 }  // void Terr::loadMap(string str)
 
 
-void Terr::loadSprite(ifstream &file)
+void Terr::loadSprite(ifstream &file, mt19937_64 &randNumGen)
 {
-  int x, y, moveFreqMin, moveFreqMax;
+  int x, y, moveFreqMin, moveFreqMax, initTicks;
+  string mfMin, mfMax;
   string spriteFile = "NPC.png", name = "I_AM_ERROR";
-  string purpose = "ERROR", scriptFile = "Silence.txt"; 
+  string purpose = "ERROR", scriptFile = "Silence.txt";
   file >> x;
   file >> y;
   file >> spriteFile;
   file >> name;
   file >> purpose;
   file >> scriptFile;
-  file >> moveFreqMin;
-  file >> moveFreqMax;
-  shared_ptr<Sprite> sprite(new Sprite(ren, moveFreqMin, moveFreqMax, spriteFile, name, purpose,
+  file >> mfMin;  // in secs
+  file >> mfMax;  // in secs
+  moveFreqMin = (int)(NUM_TICKS_SEC * stod(mfMin));
+  moveFreqMax = (int)(NUM_TICKS_SEC * stod(mfMax));
+  uniform_int_distribution<int> dist(moveFreqMin, moveFreqMax);
+  initTicks = dist(randNumGen);
+  shared_ptr<Sprite> sprite(new Sprite(ren, moveFreqMin, moveFreqMax, spriteFile, initTicks, name, purpose,
           scriptFile));
   setSprite(sprite, getTile(x, y));
 }  // void Terr::loadSprite(ifstream &file)
@@ -489,32 +475,32 @@ void Terr::loadWarpTile(ifstream &file)
     shared_ptr<Tile> tile = map[sourceX][sourceY];
     map[sourceX][sourceY].reset(new Warp(map[sourceX][sourceY], destTerr,
             destX, destY));
-    if (map[sourceX][sourceY]->getTile(EAST) &&
-            map[sourceX][sourceY]->getTile(EAST)->getTile(WEST) == tile)
-      map[sourceX][sourceY]->getTile(EAST)->connectTile(WEST,
+    if (map[sourceX][sourceY]->getTile(DIR_EAST) &&
+            map[sourceX][sourceY]->getTile(DIR_EAST)->getTile(DIR_WEST) == tile)
+      map[sourceX][sourceY]->getTile(DIR_EAST)->connectTile(DIR_WEST,
               map[sourceX][sourceY]);
-    if (map[sourceX][sourceY]->getTile(NORTH) &&
-            map[sourceX][sourceY]->getTile(NORTH)->getTile(SOUTH) == tile)
-      map[sourceX][sourceY]->getTile(NORTH)->connectTile(SOUTH,
+    if (map[sourceX][sourceY]->getTile(DIR_NORTH) &&
+            map[sourceX][sourceY]->getTile(DIR_NORTH)->getTile(DIR_SOUTH) == tile)
+      map[sourceX][sourceY]->getTile(DIR_NORTH)->connectTile(DIR_SOUTH,
               map[sourceX][sourceY]);
-    if (map[sourceX][sourceY]->getTile(SOUTH) &&
-            map[sourceX][sourceY]->getTile(SOUTH)->getTile(NORTH) == tile)
-      map[sourceX][sourceY]->getTile(SOUTH)->connectTile(NORTH,
+    if (map[sourceX][sourceY]->getTile(DIR_SOUTH) &&
+            map[sourceX][sourceY]->getTile(DIR_SOUTH)->getTile(DIR_NORTH) == tile)
+      map[sourceX][sourceY]->getTile(DIR_SOUTH)->connectTile(DIR_NORTH,
               map[sourceX][sourceY]);
-    if (map[sourceX][sourceY]->getTile(WEST) &&
-            map[sourceX][sourceY]->getTile(WEST)->getTile(EAST) == tile)
-      map[sourceX][sourceY]->getTile(WEST)->connectTile(EAST,
+    if (map[sourceX][sourceY]->getTile(DIR_WEST) &&
+            map[sourceX][sourceY]->getTile(DIR_WEST)->getTile(DIR_EAST) == tile)
+      map[sourceX][sourceY]->getTile(DIR_WEST)->connectTile(DIR_EAST,
               map[sourceX][sourceY]);
   }  // Tile doesn't upgrade if it's not on the map.
 }  // void Terr::loadWarpTile(ifstream &file)
 
 
-void Terr::moveSprite(shared_ptr<Sprite> sprite, dir d)
+string Terr::moveSprite(shared_ptr<Sprite> sprite, dir d)
 {
   if (!sprite)
   {
     logError("Asked to move Sprite that doesn't exist!");
-    return;
+    return "";
   }  // Make sure sprite exists!
 
   sprite->changeDir(d);
@@ -522,19 +508,19 @@ void Terr::moveSprite(shared_ptr<Sprite> sprite, dir d)
   if (!currTile)
   {
     logError("Asked to move Sprite that isn't on the map!");
-    return;
+    return "";
   }  // Make sure sprite has a tile!
 
   shared_ptr <Tile> targetTile(currTile->getTile(d));
   if (!targetTile || !targetTile->getIsPassable() || isOccupied(targetTile))
-    return;  // Not an error, just an invalid move.
+    return "";  // Not an error, just an invalid move.
 
   setSprite(sprite, targetTile);
-  if (d == NORTH || d == SOUTH)
+  if (d == DIR_NORTH || d == DIR_SOUTH)
     sprite->setSpline(TILE_HEIGHT);
   else
     sprite->setSpline(TILE_WIDTH);
-  enterTileMessageHandler(targetTile->enterTile(), targetTile);
+  return targetTile->enterTile();
 }  // void Terr::moveSprite(shared_ptr<Sprite> sprite, dir d)
 
 

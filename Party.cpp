@@ -11,7 +11,7 @@ Party::Party(SDL_Renderer *ren)
     active[i] = nullptr;
   active[0].reset(new Unit());
   passive.clear();
-  sprite.reset(new Sprite(ren, 0, 0, "Hero.png", "Roland", "Hero"));
+  sprite.reset(new Sprite(ren, 0, 0, "Hero.png", 0, "Roland", "Hero"));
   sprite->clearActs();
 }  // Party::Party(SDL_Renderer *ren)
 
@@ -35,8 +35,22 @@ shared_ptr<Unit> Party::getUnit(int i)
 }  // shared_ptr<Unit> Party::getUnit(int i)
 
 
+bool Party::keepMoving()
+{
+  if ((get<1>(sprite->topAct()) == ACT_MOVE) && (sprite->getQSize() == 1))
+    return true;
+  return false;
+}  // void Party::keepMoving()
+
+
+void Party::move(dir moveDir)
+{
+  sprite->pushAct(action(moveDir, ACT_MOVE));
+}  // void Party::setMoveButtonHeld(bool mbh)
+
+
 void Party::setSprite(SDL_Renderer *ren, const string &str)
 {
-  sprite.reset(new Sprite(ren, 0, 0, str));
+  sprite.reset(new Sprite(ren, 0, 0, str, 0));
 }  // void Party::setSprite(SDL_Renderer *ren, const string &str)
 
