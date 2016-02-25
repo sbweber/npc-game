@@ -25,30 +25,6 @@ void drawBattle(SDL_Renderer *ren, unique_ptr<Party> &party, TTF_Font* font,
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 
 
-void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack, bool playerIsAttacking)
-{
-  string str;
-  switch (attack.getAcc())
-  {
-  case -1:  // Weak hit
-    str = "A weak hit... ";
-    break;
-  case 1:  // Crit
-    str = "A critical hit! ";
-    break;
-  default:
-    break;  // should be impossible to reach here
-  }
-  if (playerIsAttacking)
-    str = str + "You attacked the enemy for " + to_string(attack.getDamage()) + " damage!";
-  else
-    str = str + "You were attacked for " + to_string(attack.getDamage()) + " damage!";
-  renderTextbox(ren, font, str);
-  SDL_RenderPresent(ren);
-  pressAnyKey();
-}  // void drawBattleAttackText(SDL_Renderer *ren, Attack attack)
-
-
 void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
         TTF_Font* font, vector<shared_ptr<Unit> > &enemies)
 {
@@ -76,10 +52,11 @@ void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
 }  // void drawBattleUpdate
 
 
-void drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party)
+bool drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party)
 {  // portion of map to be drawn based on position of hero
   SDL_RenderClear(terr->getRen());
   int tileClip = 0;
+  bool spriteMoved = false, cont = false;
   SDL_Rect tileClips[16];  // magic number (16): number of tile types. Currently five (black/impassable, white/passable, etc)
   getClips(tileClips, 16, 4, TILE_WIDTH, TILE_HEIGHT);  // magic number (4): number of rows in the tile spritesheet
 
@@ -105,24 +82,24 @@ void drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party)
         // tile spritesheet MUST be kept in the same order as the tileType enum
         switch (party->getSprite()->getFacing())
         {
-        case DIR_EAST:
+        case EAST:
           renderTexture(tilePtr->getTex(), terr->getRen(),
                   TILE_WIDTH * i + party->getSprite()->getSpline(),
                   TILE_HEIGHT * j, &tileClips[tileClip], tilePtr->getAngle());
           break;
-        case DIR_NORTH:
+        case NORTH:
           renderTexture(tilePtr->getTex(), terr->getRen(),
                   TILE_WIDTH * i,
                   TILE_HEIGHT * j - party->getSprite()->getSpline(),
                   &tileClips[tileClip], tilePtr->getAngle());
           break;
-        case DIR_SOUTH:
+        case SOUTH:
           renderTexture(tilePtr->getTex(), terr->getRen(),
                   TILE_WIDTH * i,
                   TILE_HEIGHT * j + party->getSprite()->getSpline(),
                   &tileClips[tileClip], tilePtr->getAngle());
           break;
-        case DIR_WEST:
+        case WEST:
           renderTexture(tilePtr->getTex(), terr->getRen(),
                   TILE_WIDTH * i - party->getSprite()->getSpline(),
                   TILE_HEIGHT * j, &tileClips[tileClip], tilePtr->getAngle());
@@ -138,17 +115,25 @@ void drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party)
   // are drawn on top of Sprites.
   for (int i = 0; i < (NUM_TILES_WIDTH); i++)
     for (int j = 0; j < (NUM_TILES_HEIGHT); j++)
-    {  // if Tile is on screen
+    {
       if (((x + i - hsw) >= 0) && ((x + i - hsw) < terr->getWidth()) &&
-              ((y + j - hsh) >= 0) && ((y + j - hsh) < terr->getHeight()))
+        ((y + j - hsh) >= 0) && ((y + j - hsh) < terr->getHeight()))
         tilePtr = terr->getTile((x + i - hsw), (j + y - hsh));
+      // if Tile in question exists
       else
         tilePtr = nullptr;
-      if (tilePtr && terr->isOccupied(tilePtr))  // Draw Sprite, if any
-        drawSprite(terr->getRen(), terr->getSprite(tilePtr),
-                party->getSprite(), i, j);
+      if (tilePtr)
+      {
+        if (terr->isOccupied(tilePtr))
+          cont = drawSprite(terr->getRen(), terr->getSprite(tilePtr),
+                  party, i, j);
+        // if the tile is occupied, draw the character
+        if (!spriteMoved && cont)
+          spriteMoved = true;
+      }
     }
   SDL_RenderPresent(terr->getRen());
+  return spriteMoved;
 }  // void drawMap()
 
 
@@ -186,48 +171,47 @@ void drawRebind(SDL_Renderer *ren, TTF_Font* font)
 }  // void drawRebind(SDL_Renderer *ren)
 
 
-void drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
-        shared_ptr<Sprite> partySprite, int i, int j)
+bool drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
+        unique_ptr<Party> &party, int i, int j)
 {
-  int vSpline = 0, hSpline = 0;
-  SDL_Rect spriteClips[8];
-  getClips(spriteClips, 8, 4, TILE_WIDTH, TILE_HEIGHT);
-  // magic number (8): number of unit sprite types
-  // magic number (4): number of rows on a unit's spritesheet
+  int sc = 0, vSpline = 0, hSpline = 0;
+  SDL_Rect spriteClips[4];
+  getClips(spriteClips, 4, 2, TILE_WIDTH, TILE_HEIGHT);
+  // magic number (4): number of unit sprite types
   switch (sprite->getSprite())
   {  // note the order -- clips are taken by column, not by row!
-  case SPRITE_UP:
-  case SPRITE_WALK_UP:
+  case UP:
+    sc = 0;
     vSpline += sprite->getSpline();
     break;
-  case SPRITE_DOWN:
-  case SPRITE_WALK_DOWN:
+  case DOWN:
+    sc = 1;
     vSpline -= sprite->getSpline();
     break;
-  case SPRITE_LEFT:
-  case SPRITE_WALK_LEFT:
+  case LEFT:
+    sc = 2;
     hSpline += sprite->getSpline();
     break;
-  case SPRITE_RIGHT:
-  case SPRITE_WALK_RIGHT:
+  case RIGHT:
+    sc = 3;
     hSpline -= sprite->getSpline();
     break;
   default:  // Reaching here should be impossible.
     break;
   }
-  switch (partySprite->getFacing())
+  switch (party->getSprite()->getFacing())
   {
-  case DIR_EAST:
-    hSpline += partySprite->getSpline();
+  case EAST:
+    hSpline += party->getSprite()->getSpline();
     break;
-  case DIR_NORTH:
-    vSpline -= partySprite->getSpline();
+  case NORTH:
+    vSpline -= party->getSprite()->getSpline();
     break;
-  case DIR_SOUTH:
-    vSpline += partySprite->getSpline();
+  case SOUTH:
+    vSpline += party->getSprite()->getSpline();
     break;
-  case DIR_WEST:
-    hSpline -= partySprite->getSpline();
+  case WEST:
+    hSpline -= party->getSprite()->getSpline();
     break;
   default:  // Should be impossible to be here.
     break;
@@ -236,8 +220,8 @@ void drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
   // spritesheet is kept in the same order as the enum
   renderTexture(sprite->getSpriteSheet(), ren,
           TILE_WIDTH * i + hSpline, TILE_HEIGHT * j + vSpline,
-          &spriteClips[sprite->getSprite()]);
-  sprite->walk();
+          &spriteClips[sc]);
+  return sprite->decSpline();
 }//void drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
 
 

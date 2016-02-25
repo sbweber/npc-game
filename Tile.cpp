@@ -24,16 +24,16 @@ void Tile::connectTile(dir d, shared_ptr<Tile> t)
 {
   switch (d)
   {
-  case DIR_NORTH:
+  case NORTH:
     N = t;
     break;
-  case DIR_SOUTH:
+  case SOUTH:
     S = t;
     break;
-  case DIR_WEST:
+  case WEST:
     W = t;
     break;
-  case DIR_EAST:
+  case EAST:
     E = t;
     break;
   default:
@@ -76,16 +76,16 @@ shared_ptr<Tile> Tile::getTile(dir d)
 {
   switch (d)
   {
-  case DIR_NORTH:
+  case NORTH:
     return N.lock();
     break;
-  case DIR_SOUTH:
+  case SOUTH:
     return S.lock();
     break;
-  case DIR_WEST:
+  case WEST:
     return W.lock();
     break;
-  case DIR_EAST:
+  case EAST:
     return E.lock();
     break;
   default:

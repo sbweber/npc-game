@@ -19,15 +19,15 @@
   class Terr
   {
   public:
-    Terr(SDL_Renderer *r, mt19937_64 &randNumGen, const string &str = "");
+    Terr(SDL_Renderer *r, const string &str = "");
     //!< Calls loadMap unless the string is empty.
     ~Terr();
     //!< Default destructor. Because Tiles use new, they must be deleted.
-    string actSprite(shared_ptr<Sprite> partySprite,
-            shared_ptr<Sprite> sprite, vector<shared_ptr<Unit> > &enemies);
     string actSprites(shared_ptr<Sprite> partySprite,
             vector<shared_ptr<Unit> > &enemies);
     //!< All sprites pop an action (if any) and enact it.
+    void enterTileMessageHandler(const string &message, shared_ptr<Tile> tile);
+    //!< Takes in a message from a Tile being entered, reacts accordingly.
     void findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest,
             shared_ptr<Sprite> sprite);
     //!< A* to find a path from start to dest, then enqueue in sprite.
@@ -51,9 +51,9 @@
     //!< Intelligently interact between two sprites.
     bool isOccupied(shared_ptr<Tile> tile);
     //!< Return true if the Tile has a Sprite associated with it.
-    void loadMap(const string &str, mt19937_64 &randNumGen);
+    void loadMap(const string &str);
     //!< Loads a map described in filename str.
-    string moveSprite(shared_ptr<Sprite> sprite, dir d);
+    void moveSprite(shared_ptr<Sprite> sprite, dir d);
     //!< Move specified Sprite in specified direction (if possible).
     void setSprite(shared_ptr<Sprite> sprite, shared_ptr<Tile> tile);
     //!< Sets a Sprite-Tile relationship.
@@ -90,7 +90,7 @@
     //!< Utility function for findPath(): marks/enqueues tiles.
     int findDistance(shared_ptr<Tile> start, shared_ptr<Tile> end);
     //!< Returns taxicab distance to get to end.
-    void loadSprite(ifstream &file, mt19937_64 &randNumGen);
+    void loadSprite(ifstream &file);
     //!< Loads a Sprite to the map.
     void loadWarpTile(ifstream &file);
     //!< Loads a Warp Tile to the map.
