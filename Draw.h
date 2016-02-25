@@ -25,7 +25,7 @@
   void drawRebind(SDL_Renderer *ren, TTF_Font* font);
   //!< Draws the screen for rebinding keys.
   void drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
-          unique_ptr<Party> &party, int i, int j);
+          shared_ptr<Sprite> partySprite, int i, int j);
   //!< Draws a single Sprite on the map without redrawing the map.
   void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons,
           int x, int y, int cursor);

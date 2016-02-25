@@ -8,8 +8,8 @@ Sprite::Sprite(SDL_Renderer *ren, int min, int max, const string &spriteFile,
         const string &scriptFile)
 {
   spriteSheet = loadTexture(spriteFile, ren);
-  sprite = DOWN;  // default all sprites as facing down
-  facing = SOUTH;
+  sprite = SPRITE_DOWN;  // default all sprites as facing down
+  facing = DIR_SOUTH;
   spline = 0;
   purpose = p;
   name = n;
@@ -43,17 +43,17 @@ void Sprite::changeDir(dir d)
   facing = d;
   switch (d)
   {
-  case NORTH:
-    sprite = UP;
+  case DIR_NORTH:
+    sprite = SPRITE_UP;
     break;
-  case SOUTH:
-    sprite = DOWN;
+  case DIR_SOUTH:
+    sprite = SPRITE_DOWN;
     break;
-  case WEST:
-    sprite = LEFT;
+  case DIR_WEST:
+    sprite = SPRITE_LEFT;
     break;
-  case EAST:
-    sprite = RIGHT;
+  case DIR_EAST:
+    sprite = SPRITE_RIGHT;
     break;
   default:
     break;  // default should be impossible
@@ -63,7 +63,7 @@ void Sprite::changeDir(dir d)
 
 void Sprite::clearActs()
 {
-  while (get<1>(popAct()) != BAD_ACTION);
+  while (get<1>(popAct()) != ACT_UNDEFINED);
 }  // void Sprite::clearMoves()
 
 
@@ -71,12 +71,43 @@ bool Sprite::decSpline()
 {
   if (spline > 0)
   {
-    if (facing == NORTH || facing == SOUTH)
+    if (facing == DIR_NORTH || facing == DIR_SOUTH)
       spline -= (TILE_HEIGHT / NUM_FRAMES_SPLINE);
     else
       spline -= (TILE_WIDTH / NUM_FRAMES_SPLINE);
     if (spline < 0)
       spline = 0;
+    switch (sprite)
+    {
+    case SPRITE_UP:
+    case SPRITE_WALK_UP:
+      if ((spline / NUM_FRAMES_SPLINE / 2) % 2)
+        sprite = SPRITE_WALK_UP;
+      else
+        sprite = SPRITE_UP;
+      break;
+    case SPRITE_DOWN:
+    case SPRITE_WALK_DOWN:
+      if ((spline / NUM_FRAMES_SPLINE / 2) % 2)
+        sprite = SPRITE_WALK_DOWN;
+      else
+        sprite = SPRITE_DOWN;
+      break;
+    case SPRITE_LEFT:
+    case SPRITE_WALK_LEFT:
+      if ((spline / NUM_FRAMES_SPLINE / 2) % 2)
+        sprite = SPRITE_WALK_LEFT;
+      else
+        sprite = SPRITE_LEFT;
+      break;
+    case SPRITE_RIGHT:
+    case SPRITE_WALK_RIGHT:
+      if ((spline / NUM_FRAMES_SPLINE / 2) % 2)
+        sprite = SPRITE_WALK_RIGHT;
+      else
+        sprite = SPRITE_RIGHT;
+      break;
+    }
     return true;
   }
   return false;
@@ -91,7 +122,7 @@ void Sprite::decTicks(mt19937_64& rng)
   {
     ticks = randNum(rng, moveFreqMin, moveFreqMax);
     if (actionQ.empty())
-      pushAct(action(randDir(rng), MOVE));
+      pushAct(action(randDir(rng), ACT_MOVE));
   }
 }  // void Sprite::decTicks(mt19937_64& rng)
 
@@ -140,7 +171,7 @@ const action Sprite::popAct()
     actionQ.pop();
     return retval;
   }  // If the queue isn't empty, pop the front off and return it.
-  return action(UNDEFINED_DIRECTION, BAD_ACTION);
+  return action(DIR_UNDEFINED, ACT_UNDEFINED);
 }  // const dir Sprite::popMove()
 
 
@@ -215,6 +246,6 @@ const action Sprite::topAct()
     action retval = actionQ.front();
     return retval;
   }  // If the queue isn't empty, pop the front off and return it.
-  return action(UNDEFINED_DIRECTION, BAD_ACTION);
+  return action(DIR_UNDEFINED, ACT_UNDEFINED);
 }  // const dir Sprite::topAct()
 

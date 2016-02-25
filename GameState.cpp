@@ -32,8 +32,8 @@ void GameState::actionMessageHandler(string &message)
       strpos = message.find(' ', strpos);
       size_t strposnew = message.find(' ', strpos + 1);
       string state = message.substr(strpos + 1, strposnew - strpos - 1);
-      if (state == "BATTLE")
-        setState(BATTLE);
+      if (state == "STATE_BATTLE")
+        setState(STATE_BATTLE);
     }
     else if (message.substr(0, strpos) == "PARTY")
     {
@@ -45,7 +45,7 @@ void GameState::actionMessageHandler(string &message)
       if (party->getUnit(i))
         party->getUnit(i)->fullHeal();
     }
-    else if (message.substr(0, strpos) == "LOAD-MAP")
+    else if (message.substr(0, strpos) == "LOAD-STATE_MAP")
     {
       strpos = message.find(' ', strpos);
       size_t strposnew = message.find(' ', strpos + 1);
@@ -68,17 +68,17 @@ void GameState::advance(SDL_Event &e)
   loopAnyState(e);
   switch (state)
   {
-  case BATTLE:
+  case STATE_BATTLE:
     loopBattle(e);
     break;
-  case MAP:
+  case STATE_MAP:
     loopMap(e);
     break;
-  case REBIND:
+  case STATE_REBIND:
     loopRebind(e);
-    setState(TITLE);
+    setState(STATE_TITLE);
     break;
-  case TITLE:
+  case STATE_TITLE:
     loopTitle(e);
     break;
   default:
@@ -119,23 +119,23 @@ void GameState::loopAnyState(SDL_Event &e)
   {
   case SDL_KEYDOWN:
     if (e.key.keysym == stateBattle)
-      setState(BATTLE);  // debug command startbattle
+      setState(STATE_BATTLE);  // debug command startbattle
     else if (e.key.keysym == stateMap1)
     {
       changeTerr("0,0.txt");
-      setState(MAP);
+      setState(STATE_MAP);
       terr->setSprite(party->getSprite(), terr->getTile(4, 3));
     }  // debug command map1
     else if (e.key.keysym == stateMap2)
     {
       changeTerr("0,1.txt");
-      setState(MAP);
+      setState(STATE_MAP);
       terr->setSprite(party->getSprite(), terr->getTile(1, 1));
     }  // debug command map2
     else if (e.key.keysym == stateRebind)
-      setState(REBIND);  // debug command go to rebind menu
+      setState(STATE_REBIND);  // debug command go to rebind menu
     else if (e.key.keysym == stateTitle)
-      setState(TITLE);
+      setState(STATE_TITLE);
     else if (e.key.keysym == stateQuit)
       eventQuit();
     break;
@@ -218,7 +218,7 @@ void GameState::loopBattleFight()
   }
   if (enemies.empty())
   {
-    setState(MAP);
+    setState(STATE_MAP);
     str = "You won the battle!";
     renderTextbox(terr->getRen(), font, str);
     SDL_RenderPresent(terr->getRen());
@@ -226,7 +226,7 @@ void GameState::loopBattleFight()
   }
   else if (party->getUnit(0)->isDead())
   {
-    setState(MAP);
+    setState(STATE_MAP);
     party->getUnit(0)->fullHeal();
     str = "You were defeated... but at least you fully healed afterwards!";
     renderTextbox(terr->getRen(), font, str);
@@ -243,14 +243,14 @@ void GameState::loopBattleRun()
   SDL_RenderPresent(terr->getRen());
   pressAnyKey();
   enemies.clear();
-  setState(MAP);
+  setState(STATE_MAP);
 }  // void GameState::loopBattleRun()
 
 
 void GameState::loopMap(SDL_Event &e)
 {
   shared_ptr<Tile> tile;
-  action act(UNDEFINED_DIRECTION, BAD_ACTION);
+  action act(DIR_UNDEFINED, ACT_UNDEFINED);
   string message;
   drawMap(terr, party);
   switch (e.type)
@@ -270,15 +270,15 @@ void GameState::loopMap(SDL_Event &e)
   case SDL_KEYDOWN:
     party->getSprite()->clearActs();
     if (e.key.keysym == dirRight)
-      party->move(EAST);
+      party->move(DIR_EAST);
     else if (e.key.keysym == dirUp)
-      party->move(NORTH);
+      party->move(DIR_NORTH);
     else if (e.key.keysym == dirDown)
-      party->move(SOUTH);
+      party->move(DIR_SOUTH);
     else if (e.key.keysym == dirLeft)
-      party->move(WEST);
+      party->move(DIR_WEST);
     else if (e.key.keysym == interact)
-      party->getSprite()->pushAct(action(UNDEFINED_DIRECTION, INTERACT));
+      party->getSprite()->pushAct(action(DIR_UNDEFINED, ACT_INTERACT));
     break;
   case SDL_KEYUP:
     party->getSprite()->clearActs();
@@ -287,7 +287,7 @@ void GameState::loopMap(SDL_Event &e)
     break;
   }
   if (party->keepMoving())
-    party->getSprite()->pushAct(action(get<0>(party->getSprite()->topAct()), MOVE));
+    party->getSprite()->pushAct(action(get<0>(party->getSprite()->topAct()), ACT_MOVE));
   if (e.type != SDL_USEREVENT || e.user.type != eventTick)
   {
     message = terr->actSprites(party->getSprite(), enemies);
@@ -333,7 +333,7 @@ void GameState::loopTitle(SDL_Event &e)
       if (cursorPos == 0)
       {
         changeTerr("0,0.txt");
-        setState(MAP);
+        setState(STATE_MAP);
         terr->setSprite(party->getSprite(), terr->getTile(6, 10));
       }
       else if (cursorPos == 1)
@@ -345,7 +345,7 @@ void GameState::loopTitle(SDL_Event &e)
     if (buttons[0]->buttonClick(terr->getRen(), e.button))
     {
       changeTerr("0,0.txt");
-      setState(MAP);
+      setState(STATE_MAP);
       terr->setSprite(party->getSprite(), terr->getTile(6, 10));
     }
     else if (buttons[1]->buttonClick(terr->getRen(), e.button))
@@ -368,9 +368,9 @@ long GameState::rng(long min, long max)
 
 void GameState::setState(gameState gs)
 {
-  if (gs == MAP)
+  if (gs == STATE_MAP)
     timerID = SDL_AddTimer(TICK_MS, mapTimerCallback, (void*)eventTick);
-  else if (state == MAP)
+  else if (state == STATE_MAP)
     SDL_RemoveTimer(timerID);
   state = gs;
 }  // void GameState::setState(gameState gs)

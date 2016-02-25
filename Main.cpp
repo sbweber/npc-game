@@ -37,7 +37,7 @@ int main(int argc, char **argv)
   if ((eventTick == ((Uint32)-1)) || (eventNoEvent == ((Uint32)-1)))
     quit("Insufficient events", 6);
   unique_ptr<GameState> state(new GameState(ren, font, eventTick));
-  state->setState(TITLE);
+  state->setState(STATE_TITLE);
 
   loadKeys();
 

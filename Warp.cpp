@@ -10,10 +10,10 @@ Warp::Warp(shared_ptr<Tile> tile, const string &dT, int dX, int dY) : Tile(tile-
   tex = tile->getTex();
   type = tile->getType();
   isPassable = tile->getIsPassable();
-  E = tile->getTile(EAST);
-  N = tile->getTile(NORTH);
-  S = tile->getTile(SOUTH);
-  W = tile->getTile(WEST);
+  E = tile->getTile(DIR_EAST);
+  N = tile->getTile(DIR_NORTH);
+  S = tile->getTile(DIR_SOUTH);
+  W = tile->getTile(DIR_WEST);
   angle = tile->getAngle();
   flip = tile->getFlip();
   
@@ -25,7 +25,7 @@ Warp::Warp(shared_ptr<Tile> tile, const string &dT, int dX, int dY) : Tile(tile-
 
 const string Warp::enterTile()
 {
-  return "LOAD-MAP: " + destTerr + " " + to_string(destX) + " " + to_string(destY);
+  return "LOAD-STATE_MAP: " + destTerr + " " + to_string(destX) + " " + to_string(destY);
 }  // const string Warp::enterTile()
 
 

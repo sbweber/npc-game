@@ -37,7 +37,7 @@ shared_ptr<Unit> Party::getUnit(int i)
 
 bool Party::keepMoving()
 {
-  if ((get<1>(sprite->topAct()) == MOVE) && (sprite->getQSize() == 1))
+  if ((get<1>(sprite->topAct()) == ACT_MOVE) && (sprite->getQSize() == 1))
     return true;
   return false;
 }  // void Party::keepMoving()
@@ -45,7 +45,7 @@ bool Party::keepMoving()
 
 void Party::move(dir moveDir)
 {
-  sprite->pushAct(action(moveDir, MOVE));
+  sprite->pushAct(action(moveDir, ACT_MOVE));
 }  // void Party::setMoveButtonHeld(bool mbh)
 
 

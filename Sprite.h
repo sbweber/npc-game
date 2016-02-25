@@ -12,19 +12,23 @@
   //! although some may end sooner than others.
   enum spriteType
   {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT
+    SPRITE_UP = 0,
+    SPRITE_DOWN = 1,
+    SPRITE_LEFT = 2,
+    SPRITE_RIGHT = 3,
+    SPRITE_WALK_UP = 4,
+    SPRITE_WALK_DOWN = 5,
+    SPRITE_WALK_LEFT = 6,
+    SPRITE_WALK_RIGHT = 7
   };
 
 
   //! Action type. Movement, interaction, etc.
   enum actType
   {
-    MOVE,
-    INTERACT,
-    BAD_ACTION
+    ACT_MOVE,
+    ACT_INTERACT,
+    ACT_UNDEFINED
   };
 
 
