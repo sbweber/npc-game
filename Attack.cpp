@@ -3,10 +3,9 @@
 #include "Attack.h"
 
 
-Attack::Attack(long dam, long a, damageType e, mt19937_64 &randNumGen)
+Attack::Attack(long dam, long a, damageType e)
 {
-  uniform_int_distribution<long> dist(-10, 10);
-  damage = long(dam * (1 + double(dist(randNumGen)) / 100));
+  damage = dam;
   acc = a;
   element = e;
 }  // Attack::Attack(long dam, long a, damageType e)

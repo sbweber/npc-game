@@ -17,7 +17,9 @@ Unit::Unit()
 
 Attack Unit::attack(mt19937_64 &randNumGen)
 {
-  return Attack(str * 20, agi, DAMAGE_PHYS, randNumGen);
+  uniform_int_distribution<long> dist(-10, 10);
+  long damage = long(str * 20 * (1 + double(dist(randNumGen)) / 100));
+  return Attack(damage, agi, DAMAGE_PHYS);
 }  // long Unit::attack()
 
 
@@ -70,7 +72,7 @@ void Unit::recalcStats()
 }  // void Unit::recalcStats()
 
 
-long Unit::receiveAttack(Attack attack, mt19937_64 &randNumGen)
+Attack Unit::receiveAttack(Attack attack, mt19937_64 &randNumGen)
 {
   uniform_int_distribution<long> dist(-10, 10);
   long defstat;
@@ -99,6 +101,6 @@ long Unit::receiveAttack(Attack attack, mt19937_64 &randNumGen)
     currHP = 0;
   else
     currHP -= damage;
-  return damage;
+  return Attack(damage, crit, attack.getElement());
 }  // void Unit::receiveAttack(long damage)
 

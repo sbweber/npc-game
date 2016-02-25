@@ -26,7 +26,7 @@
     //!< Returns true if currHP is less than or equal to zero.
     void recalcStats();
     //!< Recalculates HP and MP from stats.
-    long receiveAttack(Attack attack, mt19937_64 &randNumGen);
+    Attack receiveAttack(Attack attack, mt19937_64 &randNumGen);
     //!< Given an attack, takes damage based on stats. Returns damage taken.
   protected:
     long maxHP;

@@ -15,9 +15,9 @@
 
   enum critical
   {
-    HIT_WEAK,
-    HIT_AVG,
-    HIT_CRIT
+    HIT_WEAK = -1,
+    HIT_AVG = 0,
+    HIT_CRIT = 1
   };
 
 
@@ -25,7 +25,7 @@
   class Attack
   {
   public:
-    Attack(long dam, long a, damageType e, mt19937_64 &randNumGen);
+    Attack(long dam, long a, damageType e);
     //!< Attack constructor.
     long getAcc();
     //!< Returns accuracy of attack.

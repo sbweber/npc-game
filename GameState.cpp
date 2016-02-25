@@ -193,34 +193,26 @@ void GameState::loopBattle(SDL_Event &e)
 
 void GameState::loopBattleFight()
 {
-  long damage = enemies[0]->receiveAttack(party->getUnit(0)->attack(randNumGen), randNumGen);
-  string str = "You attacked the enemy for " + to_string(damage) + " damage!";
-  renderTextbox(terr->getRen(), font, str);
-  SDL_RenderPresent(terr->getRen());
-  pressAnyKey();
+  Attack attack = enemies[0]->receiveAttack(party->getUnit(0)->attack(randNumGen), randNumGen);
+  drawBattleAttackText(terr->getRen(), font, attack, true);
   drawBattleUpdate(terr->getRen(), party, font, enemies);
   if (enemies[0]->isDead())
   {
     enemies.pop_back();
-    str = "Enemy defeated!";
-    renderTextbox(terr->getRen(), font, str);
+    renderTextbox(terr->getRen(), font, "Enemy defeated!");
     SDL_RenderPresent(terr->getRen());
     pressAnyKey();
   }
   else
   {
-    damage = party->getUnit(0)->receiveAttack(enemies[0]->attack(randNumGen), randNumGen);
-    str = "You were attacked for " + to_string(damage) + " damage!";
-    renderTextbox(terr->getRen(), font, str);
-    SDL_RenderPresent(terr->getRen());
-    pressAnyKey();
+    attack = party->getUnit(0)->receiveAttack(enemies[0]->attack(randNumGen), randNumGen);
+    drawBattleAttackText(terr->getRen(), font, attack, false);
     drawBattleUpdate(terr->getRen(), party, font, enemies);
   }
   if (enemies.empty())
   {
     setState(STATE_MAP);
-    str = "You won the battle!";
-    renderTextbox(terr->getRen(), font, str);
+    renderTextbox(terr->getRen(), font, "You won the battle!");
     SDL_RenderPresent(terr->getRen());
     pressAnyKey();
   }
@@ -228,7 +220,7 @@ void GameState::loopBattleFight()
   {
     setState(STATE_MAP);
     party->getUnit(0)->fullHeal();
-    str = "You were defeated... but at least you fully healed afterwards!";
+    string str = "You were defeated... but at least you fully healed afterwards!";
     renderTextbox(terr->getRen(), font, str);
     SDL_RenderPresent(terr->getRen());
     pressAnyKey();

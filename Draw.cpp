@@ -25,6 +25,30 @@ void drawBattle(SDL_Renderer *ren, unique_ptr<Party> &party, TTF_Font* font,
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 
 
+void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack, bool playerIsAttacking)
+{
+  string str;
+  switch (attack.getAcc())
+  {
+  case -1:  // Weak hit
+    str = "A weak hit... ";
+    break;
+  case 1:  // Crit
+    str = "A critical hit! ";
+    break;
+  default:
+    break;  // should be impossible to reach here
+  }
+  if (playerIsAttacking)
+    str = str + "You attacked the enemy for " + to_string(attack.getDamage()) + " damage!";
+  else
+    str = str + "You were attacked for " + to_string(attack.getDamage()) + " damage!";
+  renderTextbox(ren, font, str);
+  SDL_RenderPresent(ren);
+  pressAnyKey();
+}  // void drawBattleAttackText(SDL_Renderer *ren, Attack attack)
+
+
 void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
         TTF_Font* font, vector<shared_ptr<Unit> > &enemies)
 {
