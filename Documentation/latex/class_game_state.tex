@@ -12,7 +12,7 @@ The game\textquotesingle{}s current state. Handles the main event loop.
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_game_state_a6075ad239ad5e9cbb08da3e7b97fe676}{Game\+State} (S\+D\+L\+\_\+\+Renderer $\ast$ren, T\+T\+F\+\_\+\+Font $\ast$f)\hypertarget{class_game_state_a6075ad239ad5e9cbb08da3e7b97fe676}{}\label{class_game_state_a6075ad239ad5e9cbb08da3e7b97fe676}
+\hyperlink{class_game_state_acef60be8af72e98d8e6cffb50616e272}{Game\+State} (S\+D\+L\+\_\+\+Renderer $\ast$ren, T\+T\+F\+\_\+\+Font $\ast$f, Uint32 et)\hypertarget{class_game_state_acef60be8af72e98d8e6cffb50616e272}{}\label{class_game_state_acef60be8af72e98d8e6cffb50616e272}
 
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_game_state}{Game\+State} constructor. \end{DoxyCompactList}\item 
 \hyperlink{class_game_state_ae623df5042cd0c17daa3394fdcb397b3}{$\sim$\+Game\+State} ()\hypertarget{class_game_state_ae623df5042cd0c17daa3394fdcb397b3}{}\label{class_game_state_ae623df5042cd0c17daa3394fdcb397b3}
@@ -42,9 +42,9 @@ shared\+\_\+ptr$<$ \hyperlink{class_tile}{Tile} $>$ \hyperlink{class_game_state_
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \hyperlink{class_game_state_ad80bf372b6f644a79b31e97fc4b61532}{interact\+Message\+Handler} (string \&message)\hypertarget{class_game_state_ad80bf372b6f644a79b31e97fc4b61532}{}\label{class_game_state_ad80bf372b6f644a79b31e97fc4b61532}
+void \hyperlink{class_game_state_aa306dcbd8b3ec33fbf9d41bd959fdbd4}{action\+Message\+Handler} (string \&message)\hypertarget{class_game_state_aa306dcbd8b3ec33fbf9d41bd959fdbd4}{}\label{class_game_state_aa306dcbd8b3ec33fbf9d41bd959fdbd4}
 
-\begin{DoxyCompactList}\small\item\em Message handler for sprites interacting. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Message handler for sprites doing things. \end{DoxyCompactList}\item 
 void \hyperlink{class_game_state_a6bcac85dc5a7ce95e58c32d0948b54df}{loop\+Any\+State} (S\+D\+L\+\_\+\+Event \&e)\hypertarget{class_game_state_a6bcac85dc5a7ce95e58c32d0948b54df}{}\label{class_game_state_a6bcac85dc5a7ce95e58c32d0948b54df}
 
 \begin{DoxyCompactList}\small\item\em Loop to handle input that’s treated the same in all states. \end{DoxyCompactList}\item 
@@ -75,6 +75,9 @@ unsigned int \hyperlink{class_game_state_a31555272335ffcfb24af67bc826e1521}{curs
 vector$<$ shared\+\_\+ptr$<$ \hyperlink{class_unit}{Unit} $>$ $>$ \hyperlink{class_game_state_a5a075a4ab1460fb1035c6b87c56e6c05}{enemies}\hypertarget{class_game_state_a5a075a4ab1460fb1035c6b87c56e6c05}{}\label{class_game_state_a5a075a4ab1460fb1035c6b87c56e6c05}
 
 \begin{DoxyCompactList}\small\item\em Vector of enemy units for battle. \end{DoxyCompactList}\item 
+const Uint32 \hyperlink{class_game_state_a27785a1da6711d7ec2d777bd029830b9}{event\+Tick}\hypertarget{class_game_state_a27785a1da6711d7ec2d777bd029830b9}{}\label{class_game_state_a27785a1da6711d7ec2d777bd029830b9}
+
+\begin{DoxyCompactList}\small\item\em ID of user event triggered by ticking. \end{DoxyCompactList}\item 
 T\+T\+F\+\_\+\+Font $\ast$ \hyperlink{class_game_state_a39f32585535aa7a90c2e66f1e6d474e0}{font}\hypertarget{class_game_state_a39f32585535aa7a90c2e66f1e6d474e0}{}\label{class_game_state_a39f32585535aa7a90c2e66f1e6d474e0}
 
 \begin{DoxyCompactList}\small\item\em Primary font for regular usage. \end{DoxyCompactList}\item 

@@ -25,7 +25,8 @@ void drawBattle(SDL_Renderer *ren, unique_ptr<Party> &party, TTF_Font* font,
 }  // void drawBattle(SDL_Renderer *ren, TTF_Font* font)
 
 
-void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack, bool playerIsAttacking)
+void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack,
+        bool playerIsAttacking)
 {
   string str;
   switch (attack.getAcc())

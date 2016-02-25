@@ -1,23 +1,10 @@
 var searchData=
 [
-  ['s',['S',['../class_tile.html#abf033f1e7b26d12afacad32dd5f44ea5',1,'Tile']]],
-  ['say',['say',['../class_sprite.html#a14a138e5acf82b97c052673dffb744f6',1,'Sprite']]],
-  ['setangle',['setAngle',['../class_tile.html#a94f9e2d35e55c1d1b9f56dbd7816f51a',1,'Tile']]],
-  ['setflip',['setFlip',['../class_tile.html#a801a349b0e7f7500b60af91e5e821f2e',1,'Tile']]],
-  ['setispassable',['setIsPassable',['../class_tile.html#aef0ce26fbd9688dababd9d66d8e604e7',1,'Tile']]],
-  ['setmovefreq',['setMoveFreq',['../class_sprite.html#add3d25cc26178af6a14c45ac958422f2',1,'Sprite']]],
-  ['setpos',['setPos',['../class_tile.html#a8a6429d2adbe3e45c519d86a57b514c3',1,'Tile']]],
-  ['setpurpose',['setPurpose',['../class_sprite.html#ac5cdeb3206d89719fc10af1146ebbaf6',1,'Sprite']]],
-  ['setspline',['setSpline',['../class_sprite.html#a1ce4def2f83442fd086e38568f93c6cd',1,'Sprite']]],
-  ['setsprite',['setSprite',['../class_party.html#abe069ffbbf3352f6b39246c8382dd26b',1,'Party::setSprite()'],['../class_sprite.html#aa9d0dd6123988d79c94a18f3e404d8d7',1,'Sprite::setSprite()'],['../class_terr.html#aaa2f0f8ba60f462070a0f7d40d1f4ed0',1,'Terr::setSprite()']]],
-  ['setstate',['setState',['../class_game_state.html#af81371645645ecd84d5d2a246e97d14d',1,'GameState']]],
-  ['settex',['setTex',['../class_tile.html#a2ec617aea3fcdfb023042e3712d3cdf3',1,'Tile']]],
-  ['settile',['setTile',['../class_terr.html#abd9bbf7cc0d7f0ef48a2198f5b2047ba',1,'Terr']]],
-  ['settype',['setType',['../class_tile.html#a2557595d030a43cf9b5334df3b7264f7',1,'Tile']]],
-  ['speech',['speech',['../class_sprite.html#af7fbb50aaa8f3586b9a41def56384d43',1,'Sprite']]],
-  ['spline',['spline',['../class_sprite.html#aa3a18aaf97a12edfced1b31f2323ae01',1,'Sprite']]],
-  ['sprite',['Sprite',['../class_sprite.html',1,'Sprite'],['../class_party.html#ae063baa6bfa6fe247ade34a135eb3552',1,'Party::sprite()'],['../class_sprite.html#afbd06de3c7cace1c741bbb609abfa119',1,'Sprite::sprite()'],['../class_sprite.html#af4c8022f3f3e17a232691bb82e58b5a2',1,'Sprite::Sprite(SDL_Renderer *ren, int min, int max, const string &amp;spriteFile, const string &amp;n=&quot;&quot;, const string &amp;p=&quot;&quot;, const string &amp;scriptFile=&quot;&quot;)']]],
-  ['sprites',['sprites',['../class_terr.html#a633f21d6e20c549f8006104ae4363bea',1,'Terr']]],
-  ['spritesheet',['spriteSheet',['../class_sprite.html#aec7102885a3ca3fdd5124f8677135013',1,'Sprite']]],
-  ['state',['state',['../class_game_state.html#a90969808e5db25eb4f0ae6b7be027c65',1,'GameState']]]
+  ['randnumgen',['randNumGen',['../class_game_state.html#a64e33a5deae96a673585c1a408abce5a',1,'GameState']]],
+  ['recalcstats',['recalcStats',['../class_unit.html#a4efc1e6aa3253a0d6fd4a39145287093',1,'Unit']]],
+  ['receiveattack',['receiveAttack',['../class_unit.html#ae8d9c7447cf51c11a7ef3ce8acbc6ae6',1,'Unit']]],
+  ['ren',['ren',['../class_terr.html#afb5f048d36c4633dffba85e9a959fc68',1,'Terr']]],
+  ['render',['render',['../class_button.html#a8afc12afd3beb237b7c17e7d00ce3a95',1,'Button']]],
+  ['renderspeech',['renderSpeech',['../class_sprite.html#a602e995adde51d155e2d0e83285f0643',1,'Sprite']]],
+  ['rng',['rng',['../class_game_state.html#a64caafde825c0fc890e41d24d12c3927',1,'GameState']]]
 ];

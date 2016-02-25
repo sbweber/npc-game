@@ -15,9 +15,12 @@ Backend of a character’s data. Visual depiction handled by \hyperlink{class_sp
 \hyperlink{class_unit_a8e46f663a95736c8002d85ab271a7581}{Unit} ()\hypertarget{class_unit_a8e46f663a95736c8002d85ab271a7581}{}\label{class_unit_a8e46f663a95736c8002d85ab271a7581}
 
 \begin{DoxyCompactList}\small\item\em \hyperlink{class_unit}{Unit} constructor. \end{DoxyCompactList}\item 
-long \hyperlink{class_unit_a005874f369a17842d2ecb42539dacca9}{attack} ()\hypertarget{class_unit_a005874f369a17842d2ecb42539dacca9}{}\label{class_unit_a005874f369a17842d2ecb42539dacca9}
+\hyperlink{class_attack}{Attack} \hyperlink{class_unit_af09235c061e2a98ab6fd74f99ecddc90}{attack} (mt19937\+\_\+64 \&rand\+Num\+Gen)\hypertarget{class_unit_af09235c061e2a98ab6fd74f99ecddc90}{}\label{class_unit_af09235c061e2a98ab6fd74f99ecddc90}
 
 \begin{DoxyCompactList}\small\item\em Returns the amount of damage the attack should deal (before defenses). \end{DoxyCompactList}\item 
+critical \hyperlink{class_unit_ae6bd745065885b5c3d46a2b7781571a4}{calc\+Crit} (long acc, mt19937\+\_\+64 \&rand\+Num\+Gen)\hypertarget{class_unit_ae6bd745065885b5c3d46a2b7781571a4}{}\label{class_unit_ae6bd745065885b5c3d46a2b7781571a4}
+
+\begin{DoxyCompactList}\small\item\em Calculates whether a hit is weak, avg, or a crit. \end{DoxyCompactList}\item 
 void \hyperlink{class_unit_a2a7293b325fbe8e73fece385b2a0970f}{full\+Heal} ()\hypertarget{class_unit_a2a7293b325fbe8e73fece385b2a0970f}{}\label{class_unit_a2a7293b325fbe8e73fece385b2a0970f}
 
 \begin{DoxyCompactList}\small\item\em Restores all HP. \end{DoxyCompactList}\item 
@@ -30,7 +33,10 @@ long \hyperlink{class_unit_a9aa287c4ed593378b03643b64c8481e5}{get\+Max\+HP} ()\h
 bool \hyperlink{class_unit_a563978d397e42981db23ada6b3c21664}{is\+Dead} ()\hypertarget{class_unit_a563978d397e42981db23ada6b3c21664}{}\label{class_unit_a563978d397e42981db23ada6b3c21664}
 
 \begin{DoxyCompactList}\small\item\em Returns true if curr\+HP is less than or equal to zero. \end{DoxyCompactList}\item 
-long \hyperlink{class_unit_a7869a9bab59e707208367b2cbeedb9b1}{receive\+Attack} (long damage)\hypertarget{class_unit_a7869a9bab59e707208367b2cbeedb9b1}{}\label{class_unit_a7869a9bab59e707208367b2cbeedb9b1}
+void \hyperlink{class_unit_a4efc1e6aa3253a0d6fd4a39145287093}{recalc\+Stats} ()\hypertarget{class_unit_a4efc1e6aa3253a0d6fd4a39145287093}{}\label{class_unit_a4efc1e6aa3253a0d6fd4a39145287093}
+
+\begin{DoxyCompactList}\small\item\em Recalculates HP and MP from stats. \end{DoxyCompactList}\item 
+\hyperlink{class_attack}{Attack} \hyperlink{class_unit_ae8d9c7447cf51c11a7ef3ce8acbc6ae6}{receive\+Attack} (\hyperlink{class_attack}{Attack} \hyperlink{class_unit_af09235c061e2a98ab6fd74f99ecddc90}{attack}, mt19937\+\_\+64 \&rand\+Num\+Gen)\hypertarget{class_unit_ae8d9c7447cf51c11a7ef3ce8acbc6ae6}{}\label{class_unit_ae8d9c7447cf51c11a7ef3ce8acbc6ae6}
 
 \begin{DoxyCompactList}\small\item\em Given an attack, takes damage based on stats. Returns damage taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
@@ -38,14 +44,40 @@ long \hyperlink{class_unit_a7869a9bab59e707208367b2cbeedb9b1}{receive\+Attack} (
 \item 
 long \hyperlink{class_unit_a331291f9274b46a302dc8307518531bb}{max\+HP}\hypertarget{class_unit_a331291f9274b46a302dc8307518531bb}{}\label{class_unit_a331291f9274b46a302dc8307518531bb}
 
-\begin{DoxyCompactList}\small\item\em \hyperlink{class_unit}{Unit}\textquotesingle{}s maximum HP. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_unit}{Unit}\textquotesingle{}s maximum HP. How much damage it can take. \end{DoxyCompactList}\item 
 long \hyperlink{class_unit_ae49498774522534a20fd57f66ab02139}{curr\+HP}\hypertarget{class_unit_ae49498774522534a20fd57f66ab02139}{}\label{class_unit_ae49498774522534a20fd57f66ab02139}
 
-\begin{DoxyCompactList}\small\item\em \hyperlink{class_unit}{Unit}\textquotesingle{}s current HP. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_unit}{Unit}\textquotesingle{}s current HP. \end{DoxyCompactList}\item 
+long \hyperlink{class_unit_a57ededefde2dabd71af319b47a3fb2b3}{max\+MP}\hypertarget{class_unit_a57ededefde2dabd71af319b47a3fb2b3}{}\label{class_unit_a57ededefde2dabd71af319b47a3fb2b3}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_unit}{Unit}\textquotesingle{}s maximum MP. Spent on magic. \end{DoxyCompactList}\item 
+long \hyperlink{class_unit_ad255c1831ff2c325fa440a1f75c32116}{curr\+MP}\hypertarget{class_unit_ad255c1831ff2c325fa440a1f75c32116}{}\label{class_unit_ad255c1831ff2c325fa440a1f75c32116}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_unit}{Unit}\textquotesingle{}s current MP. \end{DoxyCompactList}\item 
+long \hyperlink{class_unit_ae16d1afcf81a2f64275c0f04923df65a}{str}\hypertarget{class_unit_ae16d1afcf81a2f64275c0f04923df65a}{}\label{class_unit_ae16d1afcf81a2f64275c0f04923df65a}
+
+\begin{DoxyCompactList}\small\item\em Deal more physical damage. \end{DoxyCompactList}\item 
+long \hyperlink{class_unit_a91dbc8f2eb12f1b1ce62263e4e03dc02}{intl}\hypertarget{class_unit_a91dbc8f2eb12f1b1ce62263e4e03dc02}{}\label{class_unit_a91dbc8f2eb12f1b1ce62263e4e03dc02}
+
+\begin{DoxyCompactList}\small\item\em Deal more magical damage. \end{DoxyCompactList}\item 
+long \hyperlink{class_unit_acc22dc8845ffb44a9071ab9560704bbd}{agi}
+\item 
+long \hyperlink{class_unit_a16db72251b952028a99bee4afb1a6ad0}{vit}\hypertarget{class_unit_a16db72251b952028a99bee4afb1a6ad0}{}\label{class_unit_a16db72251b952028a99bee4afb1a6ad0}
+
+\begin{DoxyCompactList}\small\item\em Increase max\+HP, decrease physical damage taken. \end{DoxyCompactList}\item 
+long \hyperlink{class_unit_a86ac8a7ba67d41fb6c034cd814167b1d}{wis}\hypertarget{class_unit_a86ac8a7ba67d41fb6c034cd814167b1d}{}\label{class_unit_a86ac8a7ba67d41fb6c034cd814167b1d}
+
+\begin{DoxyCompactList}\small\item\em Increase max\+MP, decrease magical damage taken. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Backend of a character’s data. Visual depiction handled by \hyperlink{class_sprite}{Sprite} class. 
+
+\subsection{Member Data Documentation}
+\index{Unit@{Unit}!agi@{agi}}
+\index{agi@{agi}!Unit@{Unit}}
+\subsubsection[{\texorpdfstring{agi}{agi}}]{\setlength{\rightskip}{0pt plus 5cm}long Unit\+::agi\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{class_unit_acc22dc8845ffb44a9071ab9560704bbd}{}\label{class_unit_acc22dc8845ffb44a9071ab9560704bbd}
+Increase odds of getting a crit. Increase odds of acting earlier, decrease odds of being crit. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
