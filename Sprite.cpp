@@ -78,31 +78,32 @@ bool Sprite::decSpline()
     if (spline < 0)
       spline = 0;
     switch (sprite)
-    {
+    {  // Magic Number (/ 4): frames to hold each sprite in walk cycle.
+       // Magic Number (% 2): number of sprites in walk cycle.
     case SPRITE_UP:
     case SPRITE_WALK_UP:
-      if ((spline / NUM_FRAMES_SPLINE / 2) % 2)
+      if (((spline / (TILE_HEIGHT / NUM_FRAMES_SPLINE)) / 4) % 2)
         sprite = SPRITE_WALK_UP;
       else
         sprite = SPRITE_UP;
       break;
     case SPRITE_DOWN:
     case SPRITE_WALK_DOWN:
-      if ((spline / NUM_FRAMES_SPLINE / 2) % 2)
+      if (((spline / (TILE_HEIGHT / NUM_FRAMES_SPLINE)) / 4) % 2)
         sprite = SPRITE_WALK_DOWN;
       else
         sprite = SPRITE_DOWN;
       break;
     case SPRITE_LEFT:
     case SPRITE_WALK_LEFT:
-      if ((spline / NUM_FRAMES_SPLINE / 2) % 2)
+      if (((spline / (TILE_WIDTH / NUM_FRAMES_SPLINE)) / 4) % 2)
         sprite = SPRITE_WALK_LEFT;
       else
         sprite = SPRITE_LEFT;
       break;
     case SPRITE_RIGHT:
     case SPRITE_WALK_RIGHT:
-      if ((spline / NUM_FRAMES_SPLINE / 2) % 2)
+      if (((spline / (TILE_WIDTH / NUM_FRAMES_SPLINE)) / 4) % 2)
         sprite = SPRITE_WALK_RIGHT;
       else
         sprite = SPRITE_RIGHT;
