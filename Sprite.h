@@ -50,8 +50,6 @@
     //!< Change what direction Sprite is facing. Usuallly part of movement.
     void clearActs();
     //!< Removes all elements from the action queue.
-    bool decSpline();
-    //!< If spline is non-zero, decrements it and returns true. Else false.
     void decTicks(mt19937_64& rng);
     //!< Decrement ticks. Then, if it's zero, return true and reset it.
     dir getFacing();
@@ -85,6 +83,8 @@
     //!< Manually change sprite type (facing, etc).
     const action topAct();
     //!< Returns the next action in the queue.
+    bool walk();
+    //!< If spline is non-zero, decrements it and returns true. Else false.
   protected:
     queue<action> actionQ;
     //!< Queue of upcoming moves to make.

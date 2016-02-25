@@ -213,7 +213,7 @@ void drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
   renderTexture(sprite->getSpriteSheet(), ren,
           TILE_WIDTH * i + hSpline, TILE_HEIGHT * j + vSpline,
           &spriteClips[sprite->getSprite()]);
-  sprite->decSpline();
+  sprite->walk();
 }//void drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
 
 

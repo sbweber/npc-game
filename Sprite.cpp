@@ -67,7 +67,7 @@ void Sprite::clearActs()
 }  // void Sprite::clearMoves()
 
 
-bool Sprite::decSpline()
+bool Sprite::walk()
 {
   if (spline > 0)
   {

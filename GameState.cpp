@@ -193,7 +193,7 @@ void GameState::loopBattle(SDL_Event &e)
 
 void GameState::loopBattleFight()
 {
-  long damage = enemies[0]->receiveAttack(party->getUnit(0)->attack());
+  long damage = enemies[0]->receiveAttack(party->getUnit(0)->attack(randNumGen), randNumGen);
   string str = "You attacked the enemy for " + to_string(damage) + " damage!";
   renderTextbox(terr->getRen(), font, str);
   SDL_RenderPresent(terr->getRen());
@@ -209,7 +209,7 @@ void GameState::loopBattleFight()
   }
   else
   {
-    damage = party->getUnit(0)->receiveAttack(enemies[0]->attack());
+    damage = party->getUnit(0)->receiveAttack(enemies[0]->attack(randNumGen), randNumGen);
     str = "You were attacked for " + to_string(damage) + " damage!";
     renderTextbox(terr->getRen(), font, str);
     SDL_RenderPresent(terr->getRen());
