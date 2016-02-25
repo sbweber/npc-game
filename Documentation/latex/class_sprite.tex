@@ -12,7 +12,7 @@ Visual half of a \hyperlink{class_unit}{Unit}. Information on what to draw to pu
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_sprite_af4c8022f3f3e17a232691bb82e58b5a2}{Sprite} (S\+D\+L\+\_\+\+Renderer $\ast$ren, int min, int max, const string \&sprite\+File, const string \&n=\char`\"{}\char`\"{}, const string \&p=\char`\"{}\char`\"{}, const string \&script\+File=\char`\"{}\char`\"{})\hypertarget{class_sprite_af4c8022f3f3e17a232691bb82e58b5a2}{}\label{class_sprite_af4c8022f3f3e17a232691bb82e58b5a2}
+\hyperlink{class_sprite_a326bb7f3050e11b3ea1bd77802c4a6df}{Sprite} (S\+D\+L\+\_\+\+Renderer $\ast$ren, int min, int max, const string \&sprite\+File, int init\+Ticks, const string \&n=\char`\"{}\char`\"{}, const string \&p=\char`\"{}\char`\"{}, const string \&script\+File=\char`\"{}\char`\"{})\hypertarget{class_sprite_a326bb7f3050e11b3ea1bd77802c4a6df}{}\label{class_sprite_a326bb7f3050e11b3ea1bd77802c4a6df}
 
 \begin{DoxyCompactList}\small\item\em All units M\+U\+ST have a spritesheet specified. type string optional. \end{DoxyCompactList}\item 
 \hyperlink{class_sprite_a8accab430f9d90ae5117b57d67e32b84}{$\sim$\+Sprite} ()\hypertarget{class_sprite_a8accab430f9d90ae5117b57d67e32b84}{}\label{class_sprite_a8accab430f9d90ae5117b57d67e32b84}
@@ -24,15 +24,15 @@ void \hyperlink{class_sprite_a3eadf6ba2634a886862b6e2d9ca93b17}{change\+Dir} (di
 void \hyperlink{class_sprite_ad22d9f033c1414853cc3063ceae24598}{clear\+Acts} ()\hypertarget{class_sprite_ad22d9f033c1414853cc3063ceae24598}{}\label{class_sprite_ad22d9f033c1414853cc3063ceae24598}
 
 \begin{DoxyCompactList}\small\item\em Removes all elements from the action queue. \end{DoxyCompactList}\item 
-bool \hyperlink{class_sprite_af880e3cfcd03b6de68171eef82dc6a69}{dec\+Spline} ()\hypertarget{class_sprite_af880e3cfcd03b6de68171eef82dc6a69}{}\label{class_sprite_af880e3cfcd03b6de68171eef82dc6a69}
-
-\begin{DoxyCompactList}\small\item\em If spline is non-\/zero, decrements it and returns true. Else false. \end{DoxyCompactList}\item 
 void \hyperlink{class_sprite_a8f06e4e0ea4c640c0d9685a1bf53452b}{dec\+Ticks} (mt19937\+\_\+64 \&rng)\hypertarget{class_sprite_a8f06e4e0ea4c640c0d9685a1bf53452b}{}\label{class_sprite_a8f06e4e0ea4c640c0d9685a1bf53452b}
 
 \begin{DoxyCompactList}\small\item\em Decrement ticks. Then, if it\textquotesingle{}s zero, return true and reset it. \end{DoxyCompactList}\item 
 dir \hyperlink{class_sprite_a6bf9e87449da385e99c02586eadf5de6}{get\+Facing} ()\hypertarget{class_sprite_a6bf9e87449da385e99c02586eadf5de6}{}\label{class_sprite_a6bf9e87449da385e99c02586eadf5de6}
 
 \begin{DoxyCompactList}\small\item\em Returns which direction the \hyperlink{class_sprite}{Sprite} is currently facing. \end{DoxyCompactList}\item 
+int \hyperlink{class_sprite_aba8300207039d52feba12bafbe89f6df}{get\+Q\+Size} ()\hypertarget{class_sprite_aba8300207039d52feba12bafbe89f6df}{}\label{class_sprite_aba8300207039d52feba12bafbe89f6df}
+
+\begin{DoxyCompactList}\small\item\em Returns size of actionQ. \end{DoxyCompactList}\item 
 int \hyperlink{class_sprite_aad5e5beb45ec5eae6fe8d096d5ebef68}{get\+Spline} ()\hypertarget{class_sprite_aad5e5beb45ec5eae6fe8d096d5ebef68}{}\label{class_sprite_aad5e5beb45ec5eae6fe8d096d5ebef68}
 
 \begin{DoxyCompactList}\small\item\em Returns the number of pixels left to spline. \end{DoxyCompactList}\item 
@@ -68,7 +68,13 @@ void \hyperlink{class_sprite_a1ce4def2f83442fd086e38568f93c6cd}{set\+Spline} (in
 \begin{DoxyCompactList}\small\item\em Manually sets the number of pixels to spline. \end{DoxyCompactList}\item 
 void \hyperlink{class_sprite_aa9d0dd6123988d79c94a18f3e404d8d7}{set\+Sprite} (sprite\+Type st)\hypertarget{class_sprite_aa9d0dd6123988d79c94a18f3e404d8d7}{}\label{class_sprite_aa9d0dd6123988d79c94a18f3e404d8d7}
 
-\begin{DoxyCompactList}\small\item\em Manually change sprite type (facing, etc). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Manually change sprite type (facing, etc). \end{DoxyCompactList}\item 
+const action \hyperlink{class_sprite_a3514190934692b2e009f5b6f7d886112}{top\+Act} ()\hypertarget{class_sprite_a3514190934692b2e009f5b6f7d886112}{}\label{class_sprite_a3514190934692b2e009f5b6f7d886112}
+
+\begin{DoxyCompactList}\small\item\em Returns the next action in the queue. \end{DoxyCompactList}\item 
+bool \hyperlink{class_sprite_a8ba72650a5a849539d747eea98529d6b}{walk} ()\hypertarget{class_sprite_a8ba72650a5a849539d747eea98529d6b}{}\label{class_sprite_a8ba72650a5a849539d747eea98529d6b}
+
+\begin{DoxyCompactList}\small\item\em If spline is non-\/zero, decrements it and returns true. Else false. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 

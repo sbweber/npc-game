@@ -25,9 +25,10 @@
     //!< Default destructor. Because Tiles use new, they must be deleted.
     string actSprite(shared_ptr<Sprite> partySprite,
             shared_ptr<Sprite> sprite, vector<shared_ptr<Unit> > &enemies);
+    //!< A single, specific Sprite pops an action (if any) and enacts it.
     string actSprites(shared_ptr<Sprite> partySprite,
             vector<shared_ptr<Unit> > &enemies);
-    //!< All sprites pop an action (if any) and enact it.
+    //!< All Sprites pop an action (if any) and enact it.
     void findPath(shared_ptr<Tile> start, shared_ptr<Tile> dest,
             shared_ptr<Sprite> sprite);
     //!< A* to find a path from start to dest, then enqueue in sprite.

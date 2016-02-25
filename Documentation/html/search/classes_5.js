@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['unit',['Unit',['../class_unit.html',1,'']]]
+  ['terr',['Terr',['../class_terr.html',1,'']]],
+  ['tile',['Tile',['../class_tile.html',1,'']]]
 ];

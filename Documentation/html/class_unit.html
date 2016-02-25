@@ -103,10 +103,14 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a8e46f663a95736c8002d85ab271a7581">Unit</a> ()</td></tr>
 <tr class="memdesc:a8e46f663a95736c8002d85ab271a7581"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a> constructor. <br /></td></tr>
 <tr class="separator:a8e46f663a95736c8002d85ab271a7581"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a005874f369a17842d2ecb42539dacca9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a005874f369a17842d2ecb42539dacca9"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a005874f369a17842d2ecb42539dacca9">attack</a> ()</td></tr>
-<tr class="memdesc:a005874f369a17842d2ecb42539dacca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the amount of damage the attack should deal (before defenses). <br /></td></tr>
-<tr class="separator:a005874f369a17842d2ecb42539dacca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af09235c061e2a98ab6fd74f99ecddc90"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af09235c061e2a98ab6fd74f99ecddc90"></a>
+<a class="el" href="class_attack.html">Attack</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#af09235c061e2a98ab6fd74f99ecddc90">attack</a> (mt19937_64 &amp;randNumGen)</td></tr>
+<tr class="memdesc:af09235c061e2a98ab6fd74f99ecddc90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the amount of damage the attack should deal (before defenses). <br /></td></tr>
+<tr class="separator:af09235c061e2a98ab6fd74f99ecddc90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6bd745065885b5c3d46a2b7781571a4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae6bd745065885b5c3d46a2b7781571a4"></a>
+critical&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#ae6bd745065885b5c3d46a2b7781571a4">calcCrit</a> (long acc, mt19937_64 &amp;randNumGen)</td></tr>
+<tr class="memdesc:ae6bd745065885b5c3d46a2b7781571a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates whether a hit is weak, avg, or a crit. <br /></td></tr>
+<tr class="separator:ae6bd745065885b5c3d46a2b7781571a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a7293b325fbe8e73fece385b2a0970f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a7293b325fbe8e73fece385b2a0970f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a2a7293b325fbe8e73fece385b2a0970f">fullHeal</a> ()</td></tr>
 <tr class="memdesc:a2a7293b325fbe8e73fece385b2a0970f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restores all HP. <br /></td></tr>
@@ -123,25 +127,77 @@ long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a563978d397e42981db23ada6b3c21664">isDead</a> ()</td></tr>
 <tr class="memdesc:a563978d397e42981db23ada6b3c21664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if currHP is less than or equal to zero. <br /></td></tr>
 <tr class="separator:a563978d397e42981db23ada6b3c21664"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7869a9bab59e707208367b2cbeedb9b1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7869a9bab59e707208367b2cbeedb9b1"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a7869a9bab59e707208367b2cbeedb9b1">receiveAttack</a> (long damage)</td></tr>
-<tr class="memdesc:a7869a9bab59e707208367b2cbeedb9b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given an attack, takes damage based on stats. Returns damage taken. <br /></td></tr>
-<tr class="separator:a7869a9bab59e707208367b2cbeedb9b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4efc1e6aa3253a0d6fd4a39145287093"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4efc1e6aa3253a0d6fd4a39145287093"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a4efc1e6aa3253a0d6fd4a39145287093">recalcStats</a> ()</td></tr>
+<tr class="memdesc:a4efc1e6aa3253a0d6fd4a39145287093"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recalculates HP and MP from stats. <br /></td></tr>
+<tr class="separator:a4efc1e6aa3253a0d6fd4a39145287093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8d9c7447cf51c11a7ef3ce8acbc6ae6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8d9c7447cf51c11a7ef3ce8acbc6ae6"></a>
+<a class="el" href="class_attack.html">Attack</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#ae8d9c7447cf51c11a7ef3ce8acbc6ae6">receiveAttack</a> (<a class="el" href="class_attack.html">Attack</a> <a class="el" href="class_unit.html#af09235c061e2a98ab6fd74f99ecddc90">attack</a>, mt19937_64 &amp;randNumGen)</td></tr>
+<tr class="memdesc:ae8d9c7447cf51c11a7ef3ce8acbc6ae6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given an attack, takes damage based on stats. Returns damage taken. <br /></td></tr>
+<tr class="separator:ae8d9c7447cf51c11a7ef3ce8acbc6ae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a331291f9274b46a302dc8307518531bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a331291f9274b46a302dc8307518531bb"></a>
 long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a331291f9274b46a302dc8307518531bb">maxHP</a></td></tr>
-<tr class="memdesc:a331291f9274b46a302dc8307518531bb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>'s maximum HP. <br /></td></tr>
+<tr class="memdesc:a331291f9274b46a302dc8307518531bb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>'s maximum HP. How much damage it can take. <br /></td></tr>
 <tr class="separator:a331291f9274b46a302dc8307518531bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae49498774522534a20fd57f66ab02139"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae49498774522534a20fd57f66ab02139"></a>
 long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#ae49498774522534a20fd57f66ab02139">currHP</a></td></tr>
 <tr class="memdesc:ae49498774522534a20fd57f66ab02139"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>'s current HP. <br /></td></tr>
 <tr class="separator:ae49498774522534a20fd57f66ab02139"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57ededefde2dabd71af319b47a3fb2b3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57ededefde2dabd71af319b47a3fb2b3"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a57ededefde2dabd71af319b47a3fb2b3">maxMP</a></td></tr>
+<tr class="memdesc:a57ededefde2dabd71af319b47a3fb2b3"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>'s maximum MP. Spent on magic. <br /></td></tr>
+<tr class="separator:a57ededefde2dabd71af319b47a3fb2b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad255c1831ff2c325fa440a1f75c32116"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad255c1831ff2c325fa440a1f75c32116"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#ad255c1831ff2c325fa440a1f75c32116">currMP</a></td></tr>
+<tr class="memdesc:ad255c1831ff2c325fa440a1f75c32116"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_unit.html" title="Backend of a character’s data. Visual depiction handled by Sprite class. ">Unit</a>'s current MP. <br /></td></tr>
+<tr class="separator:ad255c1831ff2c325fa440a1f75c32116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae16d1afcf81a2f64275c0f04923df65a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae16d1afcf81a2f64275c0f04923df65a"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#ae16d1afcf81a2f64275c0f04923df65a">str</a></td></tr>
+<tr class="memdesc:ae16d1afcf81a2f64275c0f04923df65a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deal more physical damage. <br /></td></tr>
+<tr class="separator:ae16d1afcf81a2f64275c0f04923df65a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91dbc8f2eb12f1b1ce62263e4e03dc02"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91dbc8f2eb12f1b1ce62263e4e03dc02"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a91dbc8f2eb12f1b1ce62263e4e03dc02">intl</a></td></tr>
+<tr class="memdesc:a91dbc8f2eb12f1b1ce62263e4e03dc02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deal more magical damage. <br /></td></tr>
+<tr class="separator:a91dbc8f2eb12f1b1ce62263e4e03dc02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc22dc8845ffb44a9071ab9560704bbd"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#acc22dc8845ffb44a9071ab9560704bbd">agi</a></td></tr>
+<tr class="separator:acc22dc8845ffb44a9071ab9560704bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16db72251b952028a99bee4afb1a6ad0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16db72251b952028a99bee4afb1a6ad0"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a16db72251b952028a99bee4afb1a6ad0">vit</a></td></tr>
+<tr class="memdesc:a16db72251b952028a99bee4afb1a6ad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase maxHP, decrease physical damage taken. <br /></td></tr>
+<tr class="separator:a16db72251b952028a99bee4afb1a6ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86ac8a7ba67d41fb6c034cd814167b1d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86ac8a7ba67d41fb6c034cd814167b1d"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_unit.html#a86ac8a7ba67d41fb6c034cd814167b1d">wis</a></td></tr>
+<tr class="memdesc:a86ac8a7ba67d41fb6c034cd814167b1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase maxMP, decrease magical damage taken. <br /></td></tr>
+<tr class="separator:a86ac8a7ba67d41fb6c034cd814167b1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Backend of a character’s data. Visual depiction handled by <a class="el" href="class_sprite.html" title="Visual half of a Unit. Information on what to draw to put a sprite onscreen. ">Sprite</a> class. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="acc22dc8845ffb44a9071ab9560704bbd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long Unit::agi</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Increase odds of getting a crit. Increase odds of acting earlier, decrease odds of being crit. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_unit_8h_source.html">Unit.h</a></li>
 <li>Unit.cpp</li>
 </ul>

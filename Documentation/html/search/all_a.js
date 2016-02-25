@@ -1,9 +1,13 @@
 var searchData=
 [
-  ['map',['map',['../class_terr.html#a09bb829623ee8c32ab5ea1a41ccc9d1f',1,'Terr']]],
-  ['maxhp',['maxHP',['../class_unit.html#a331291f9274b46a302dc8307518531bb',1,'Unit']]],
-  ['mouseonbutton',['mouseOnButton',['../class_button.html#aecc3cba90d8121c6f673b600c13e4bc9',1,'Button::mouseOnButton(int x, int y)'],['../class_button.html#a92f3a17475a7a06b82779b1092a1952f',1,'Button::mouseOnButton(SDL_MouseButtonEvent &amp;mouse)'],['../class_button.html#a2b3d75341a6cc59a0a50730a977cd104',1,'Button::mouseOnButton(SDL_MouseMotionEvent &amp;mouse)']]],
-  ['movefreqmax',['moveFreqMax',['../class_sprite.html#a0834d9fd02051694b0412e6282354d8c',1,'Sprite']]],
-  ['movefreqmin',['moveFreqMin',['../class_sprite.html#a3a4228cece7d9e18b98e8b5397cd5183',1,'Sprite']]],
-  ['movesprite',['moveSprite',['../class_terr.html#aa0023b4af20266bb359b94dd21d96ff5',1,'Terr']]]
+  ['loadmap',['loadMap',['../class_terr.html#a323ebb2299dabdcb42607ba96549c700',1,'Terr']]],
+  ['loadsprite',['loadSprite',['../class_terr.html#aa852f49a6b3c0aeca839809f01dc6817',1,'Terr']]],
+  ['loadwarptile',['loadWarpTile',['../class_terr.html#ade4dc4c2e3c5746d7274ff7849b60e38',1,'Terr']]],
+  ['loopanystate',['loopAnyState',['../class_game_state.html#a6bcac85dc5a7ce95e58c32d0948b54df',1,'GameState']]],
+  ['loopbattle',['loopBattle',['../class_game_state.html#a78ccdca45d646c8bec157fb6207ada04',1,'GameState']]],
+  ['loopbattlefight',['loopBattleFight',['../class_game_state.html#a8eababbfcac6ae424541fb61e8534682',1,'GameState']]],
+  ['loopbattlerun',['loopBattleRun',['../class_game_state.html#ac3101f8eba8251f27acfcf082140908d',1,'GameState']]],
+  ['loopmap',['loopMap',['../class_game_state.html#a87291e60906c205c34fa84ea957fa898',1,'GameState']]],
+  ['looprebind',['loopRebind',['../class_game_state.html#abd3d3df0598dd6731117cab805fa0eef',1,'GameState']]],
+  ['looptitle',['loopTitle',['../class_game_state.html#a1fff6670e9d9ce3806d7261cfd829237',1,'GameState']]]
 ];

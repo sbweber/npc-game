@@ -6,5 +6,6 @@ var searchData=
   ['sprite',['sprite',['../class_party.html#ae063baa6bfa6fe247ade34a135eb3552',1,'Party::sprite()'],['../class_sprite.html#afbd06de3c7cace1c741bbb609abfa119',1,'Sprite::sprite()']]],
   ['sprites',['sprites',['../class_terr.html#a633f21d6e20c549f8006104ae4363bea',1,'Terr']]],
   ['spritesheet',['spriteSheet',['../class_sprite.html#aec7102885a3ca3fdd5124f8677135013',1,'Sprite']]],
-  ['state',['state',['../class_game_state.html#a90969808e5db25eb4f0ae6b7be027c65',1,'GameState']]]
+  ['state',['state',['../class_game_state.html#a90969808e5db25eb4f0ae6b7be027c65',1,'GameState']]],
+  ['str',['str',['../class_unit.html#ae16d1afcf81a2f64275c0f04923df65a',1,'Unit']]]
 ];
