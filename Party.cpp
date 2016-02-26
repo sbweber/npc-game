@@ -7,9 +7,7 @@ Party::Party(SDL_Renderer *ren)
 {
   if (!ren)
     quit("Renderer not found!", 3);
-  for (int i = 0; i < 4; i++)
-    active[i] = nullptr;
-  active[0].reset(new Unit());
+  active.emplace_back(new Unit("Roland"));
   passive.clear();
   sprite.reset(new Sprite(ren, 0, 0, "Hero.png", 0, "Roland", "Hero"));
   sprite->clearActs();
@@ -29,10 +27,19 @@ shared_ptr<Sprite> Party::getSprite()
 
 shared_ptr<Unit> Party::getUnit(int i)
 {
-  if (i >= 0 && i < 4)
-    return active[i];
+  if (i < 0)
+    return nullptr;
+  unsigned int j = i;
+  if (j < active.size())
+    return active[j];
   return nullptr;
 }  // shared_ptr<Unit> Party::getUnit(int i)
+
+
+vector<shared_ptr<Unit> >& Party::getUnits()
+{
+  return active;
+}  // vector<shared_ptr<Unit> >& Party::getUnits()
 
 
 bool Party::keepMoving()

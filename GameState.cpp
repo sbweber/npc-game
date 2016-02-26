@@ -8,7 +8,7 @@ eventTick(et)
 {
   if (!ren)
     quit("Renderer not found!", 3);
-  randNumGen.seed(chrono::system_clock::now().time_since_epoch().count());
+  randNumGen.seed(unsigned long(chrono::system_clock::now().time_since_epoch().count()));
   terr.reset(new Terr(ren, randNumGen, ""));
   cursorPos = 0;
   timerID = 0;
@@ -193,33 +193,58 @@ void GameState::loopBattle(SDL_Event &e)
 
 void GameState::loopBattleFight()
 {
-  Attack attack = enemies[0]->receiveAttack(party->getUnit(0)->attack(randNumGen), randNumGen);
-  drawBattleAttackText(terr->getRen(), font, attack, true);
-  drawBattleUpdate(terr->getRen(), party, font, enemies);
-  if (enemies[0]->isDead())
+  queue<shared_ptr<Unit> > units;
+  vector<shared_ptr<Unit> > liveParty;
+  vector<shared_ptr<Unit> > liveEnemies;
+  for (shared_ptr<Unit> unit : party->getUnits())
+    if (!unit->isDead())
+      liveParty.emplace_back(unit);
+  for (shared_ptr<Unit> unit : enemies)
+    if (!unit->isDead())
+      liveEnemies.emplace_back(unit);
+  turnOrder(units);
+  while (!units.empty())
   {
-    enemies.pop_back();
-    renderTextbox(terr->getRen(), font, "Enemy defeated!");
-    SDL_RenderPresent(terr->getRen());
-    pressAnyKey();
+    shared_ptr<Unit> attacker = units.front();
+    units.pop();
+    if (!attacker->isDead())
+    {
+      shared_ptr<Unit> target;
+      // have unit check its own team and choose a target on the other team
+      if (vectorFind(liveEnemies, attacker) != liveEnemies.end())
+        target = liveParty[rng(liveParty.size() - 1)];
+      else
+        target = liveEnemies[rng(liveParty.size() - 1)];
+      Attack result = target->receiveAttack(attacker->attack(randNumGen),
+              randNumGen);
+      drawBattleAttackText(terr->getRen(), font, result, attacker->getName(),
+              target->getName());
+      drawBattleUpdate(terr->getRen(), party, font, enemies);
+      if (target->isDead())
+      {
+        if (vectorFind(liveEnemies, target) != liveEnemies.end())
+          liveEnemies.erase(vectorFind(liveEnemies, target));
+        else if (vectorFind(liveParty, target) != liveParty.end())
+          liveParty.erase(vectorFind(liveParty, target));
+        string defeatString = target->getName() + " was defeated!";
+        renderTextbox(terr->getRen(), font, defeatString);
+        SDL_RenderPresent(terr->getRen());
+        pressAnyKey();
+      }
+    }
   }
-  else
-  {
-    attack = party->getUnit(0)->receiveAttack(enemies[0]->attack(randNumGen), randNumGen);
-    drawBattleAttackText(terr->getRen(), font, attack, false);
-    drawBattleUpdate(terr->getRen(), party, font, enemies);
-  }
-  if (enemies.empty())
+  if (liveEnemies.empty())
   {
     setState(STATE_MAP);
     renderTextbox(terr->getRen(), font, "You won the battle!");
     SDL_RenderPresent(terr->getRen());
     pressAnyKey();
   }
-  else if (party->getUnit(0)->isDead())
+  else if (liveParty.empty())
   {
     setState(STATE_MAP);
-    party->getUnit(0)->fullHeal();
+    for (shared_ptr<Unit> unit : party->getUnits())
+      unit->fullHeal();
     string str = "You were defeated... but at least you fully healed afterwards!";
     renderTextbox(terr->getRen(), font, str);
     SDL_RenderPresent(terr->getRen());
@@ -351,9 +376,16 @@ void GameState::loopTitle(SDL_Event &e)
 }  // GameState::void loopTitle()
 
 
-long GameState::rng(long min, long max)
+long long GameState::rng(long long min, long long max)
 {
-  uniform_int_distribution<long> randNum(min, max);
+  uniform_int_distribution<long long> randNum(min, max);
+  return randNum(randNumGen);
+}  // long GameState::rng(long min, long max)
+
+
+size_t GameState::rng(size_t max)
+{
+  uniform_int_distribution<size_t> randNum(0, max);
   return randNum(randNumGen);
 }  // long GameState::rng(long min, long max)
 
@@ -372,4 +404,34 @@ shared_ptr<Tile> GameState::tileClick(SDL_MouseButtonEvent &click)
 {
   return terr->tileClick(click, party->getSprite());
 }  // shared_ptr<Tile> GameState::tileClick(SDL_MouseButtonEvent &click)
+
+
+void GameState::turnOrder(queue<shared_ptr<Unit> > &order)
+{
+  long long max = 0;
+  vector<shared_ptr<Unit> > units;
+  for (shared_ptr<Unit> unit : party->getUnits())
+    if (!unit->isDead())
+      units.emplace_back(unit);
+  for (shared_ptr<Unit> unit : enemies)
+    if (!unit->isDead())
+      units.emplace_back(unit);
+  for (shared_ptr<Unit> unit : units)
+    max += unit->getAgi();
+  while (max)
+  {
+    long long roll = rng(0, max);
+    for (vector<shared_ptr<Unit> >::iterator uItr = units.begin(); uItr != units.end(); uItr++)
+    {
+      roll -= (*uItr)->getAgi();
+      if (roll <= 0)
+      {
+        order.push(*uItr);
+        max -= (*uItr)->getAgi();
+        units.erase(uItr);
+        break;
+      }
+    }
+  }
+}  // void GameState::turnOrder(queue<shared_ptr<Unit> > &order)
 

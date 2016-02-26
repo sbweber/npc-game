@@ -3,8 +3,9 @@
 #include "Unit.h"
 
 
-Unit::Unit()
+Unit::Unit(string n)
 {
+  name = n;
   str = 10;
   intl = 10;
   agi = 10;
@@ -18,16 +19,16 @@ Unit::Unit()
 Attack Unit::attack(mt19937_64 &randNumGen)
 {
   uniform_int_distribution<long> dist(-10, 10);
-  long damage = long(str * 20 * (1 + double(dist(randNumGen)) / 100));
+  long long damage = long(str * 20 * (1 + double(dist(randNumGen)) / 100));
   return Attack(damage, agi, DAMAGE_PHYS);
 }  // long Unit::attack()
 
 
 critical Unit::calcCrit(long acc, mt19937_64 &randNumGen)
 {
-  long max = (2 * acc) + (2 * agi);
-  uniform_int_distribution<long> dist(0, max);
-  long roll = dist(randNumGen);
+  long long max = (2 * acc) + (2 * agi);
+  uniform_int_distribution<long long> dist(0, max);
+  long long roll = dist(randNumGen);
   if (roll < acc)
     return HIT_CRIT;
   else if (roll > (2 * acc + agi))
@@ -42,16 +43,28 @@ void Unit::fullHeal()
 }  // void Unit::fullHeal()
 
 
-long Unit::getCurrHP()
+long Unit::getAgi()
+{
+  return agi;
+}  // long Unit::getAgi()
+
+
+long long Unit::getCurrHP()
 {
   return currHP;
 }  // long Unit::getCurrHP()
 
 
-long Unit::getMaxHP()
+long long Unit::getMaxHP()
 {
   return maxHP;
 }  // long Unit::getMaxHP()
+
+
+string Unit::getName()
+{
+  return name;
+}  // string Unit::getName()
 
 
 bool Unit::isDead()
@@ -64,7 +77,7 @@ bool Unit::isDead()
 
 void Unit::recalcStats()
 {
-  long lostHP = maxHP - currHP, lostMP = maxMP - currMP;
+  long long lostHP = maxHP - currHP, lostMP = maxMP - currMP;
   maxHP = vit * 50;
   currHP = maxHP - lostHP;
   maxMP = wis * 50;
@@ -88,14 +101,14 @@ Attack Unit::receiveAttack(Attack attack, mt19937_64 &randNumGen)
     defstat = 0;
     break;  // should be impossible to reach here
   }
-  long def = long(defstat * 10 * (1 + double(dist(randNumGen)) / 100));
-  long damage = attack.getDamage() - def;
+  long long def = long long(defstat * 10 * (1 + double(dist(randNumGen)) / 100));
+  long long damage = attack.getDamage() - def;
 
   critical crit = calcCrit(attack.getAcc(), randNumGen);
   if (crit == HIT_WEAK)
-    damage = long(double(damage) * 0.8);
+    damage = long long(double(damage) * 0.8);
   else if (crit == HIT_CRIT)
-    damage = long(double(damage) * 1.2);
+    damage = long long(double(damage) * 1.2);
 
   if (damage > currHP)
     currHP = 0;

@@ -26,7 +26,7 @@ void drawBattle(SDL_Renderer *ren, unique_ptr<Party> &party, TTF_Font* font,
 
 
 void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack,
-        bool playerIsAttacking)
+        string attacker, string target)
 {
   string str;
   switch (attack.getAcc())
@@ -40,10 +40,7 @@ void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack,
   default:
     break;  // should be impossible to reach here
   }
-  if (playerIsAttacking)
-    str = str + "You attacked the enemy for " + to_string(attack.getDamage()) + " damage!";
-  else
-    str = str + "You were attacked for " + to_string(attack.getDamage()) + " damage!";
+  str = str + attacker + " attacked " + target + " for " + to_string(attack.getDamage()) + " damage!";
   renderTextbox(ren, font, str);
   SDL_RenderPresent(ren);
   pressAnyKey();

@@ -23,6 +23,8 @@
     //!< Returns the Sprite representing the party by reference.
     shared_ptr<Unit> getUnit(int i);
     //!< Returns specified active unit in party.
+    vector<shared_ptr<Unit> >& getUnits();
+    //!< Returns a vector of the active Units in the party.
     bool keepMoving();
     //!< Returns true if sprite's actionQ is size 1 and contains a ACT_MOVE.
     void move(dir moveDir);
@@ -30,7 +32,7 @@
     void setSprite(SDL_Renderer *ren, const string &str);
     //!< Resets the party’s Sprite to the one in the file named by str.
   protected:
-    shared_ptr<Unit> active[4];
+    vector<shared_ptr<Unit> > active;
     //!< Pointers to the up to four active party members.
     vector<shared_ptr<Unit> > passive;
     //!< Vector of pointers to non-active party members.

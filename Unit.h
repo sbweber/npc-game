@@ -10,7 +10,7 @@
   class Unit
   {
   public:
-    Unit();
+    Unit(string n);
     //!< Unit constructor
     Attack attack(mt19937_64 &randNumGen);
     //!< Returns the amount of damage the attack should deal (before defenses).
@@ -18,10 +18,14 @@
     //!< Calculates whether a hit is weak, avg, or a crit.
     void fullHeal();
     //!< Restores all HP.
-    long getCurrHP();
+    long getAgi();
+    //!< returns agi.
+    long long getCurrHP();
     //!< Returns currHP.
-    long getMaxHP();
+    long long getMaxHP();
     //!< Returns maxHP.
+    string getName();
+    //!< Returns name.
     bool isDead();
     //!< Returns true if currHP is less than or equal to zero.
     void recalcStats();
@@ -29,21 +33,23 @@
     Attack receiveAttack(Attack attack, mt19937_64 &randNumGen);
     //!< Given an attack, takes damage based on stats. Returns damage taken.
   protected:
-    long maxHP;
-    //!< Unit's maximum HP. How much damage it can take.
-    long currHP;
-    //!< Unit's current HP.
-    long maxMP;
-    //!< Unit's maximum MP. Spent on magic.
-    long currMP;
-    //!< Unit's current MP.
-    long str;
-    //!< Deal more physical damage.
-    long intl;
-    //!< Deal more magical damage.
     long agi;
     //!< Increase odds of getting a crit.
     //!< Increase odds of acting earlier, decrease odds of being crit.
+    long long currHP;
+    //!< Unit's current HP.
+    long long currMP;
+    //!< Unit's current MP.
+    long intl;
+    //!< Deal more magical damage.
+    long long maxHP;
+    //!< Unit's maximum HP. How much damage it can take.
+    long long maxMP;
+    //!< Unit's maximum MP. Spent on magic.
+    string name;
+    //!< Unit's name. Used for saying who attacked who.
+    long str;
+    //!< Deal more physical damage.
     long vit;
     //!< Increase maxHP, decrease physical damage taken.
     long wis;

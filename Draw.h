@@ -19,7 +19,7 @@
           vector<shared_ptr<Unit> > &enemies);
   //!< Draws the battle screen.
   void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack,
-          bool playerIsAttacking);
+          string attacker, string target);
   //!< Draws textbox sequence for an Attack.
   void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
           TTF_Font* font, vector<shared_ptr<Unit> > &enemies);

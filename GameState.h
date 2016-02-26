@@ -24,8 +24,10 @@
     //!< subtracts one from cursorPos, looping to max if needed.
     void incCursorPos(unsigned int max);
     //!< Adds one to cursorPos, looping to zero if needed.
-    long rng(long min, long max);
+    long long rng(long long min, long long max);
     //!< Returns a uniformly distributed random number between min and max.
+    size_t rng(size_t max);
+    //!< Returns a uniformly distributed random number between 0 and max.
     void setState(gameState gs);
     //!< Sets gameState.
     shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click);
@@ -66,6 +68,8 @@
     //!< Loop to process inputs and events while in the key binding menu.
     void loopTitle(SDL_Event &e);
     //!< Loop to process inputs on the title screen.
+    void turnOrder(queue<shared_ptr<Unit> > &order);
+    //!< Takes party's Unit vector and enemies to fill order in turn order.
   };
 
 #endif

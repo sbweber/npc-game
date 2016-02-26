@@ -25,16 +25,16 @@
   class Attack
   {
   public:
-    Attack(long dam, long a, damageType e);
+    Attack(long long dam, long a, damageType e);
     //!< Attack constructor.
     long getAcc();
     //!< Returns accuracy of attack.
-    long getDamage();
+    long long getDamage();
     //!< Returns base damage of attack.
     damageType getElement();
     //!< Returns element of attack.
   protected:
-    long damage;
+    long long damage;
     //!< Attack's base damage.
     long acc;
     //!< Attack's accuracy.
