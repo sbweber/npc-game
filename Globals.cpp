@@ -44,8 +44,10 @@ void quit(const string err, int errtype, SDL_Renderer *ren, SDL_Window *win)
   if (win)
     SDL_DestroyWindow(win);
   SDL_Quit();
-  if (errtype)
+  if (errtype > 0)
     logSDLError(err);
+  else
+    logError(err);
   exit (errtype);
 }  // void quit()
 

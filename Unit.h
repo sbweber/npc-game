@@ -6,26 +6,41 @@
   #include "Attack.h"
 
 
+  enum growthType
+  {
+    GROWTH_STATIC,
+    GROWTH_HERO
+  };
+
+
   //! Backend of a character’s data. Visual depiction handled by Sprite class.
   class Unit
   {
   public:
-    Unit(string n);
-    //!< Unit constructor
+    Unit(string n, string g, long l);
+    //!< Unit constructor based on growth type.
+    Unit(string n, long s, long i, long a, long v, long w, long g, long x);
+    //!< Unit constructor with defined stats.
     Attack attack(mt19937_64 &randNumGen);
     //!< Returns the amount of damage the attack should deal (before defenses).
     critical calcCrit(long acc, mt19937_64 &randNumGen);
     //!< Calculates whether a hit is weak, avg, or a crit.
     void fullHeal();
     //!< Restores all HP.
+    void gainXP(long x);
+    //!< Gains XP, leveling as needed.
     long getAgi();
     //!< returns agi.
     long long getCurrHP();
     //!< Returns currHP.
+    long getGold();
+    //!< returns gold;
     long long getMaxHP();
     //!< Returns maxHP.
     string getName();
     //!< Returns name.
+    long getXP();
+    //!< returns XP.
     bool isDead();
     //!< Returns true if currHP is less than or equal to zero.
     void recalcStats();
@@ -40,8 +55,14 @@
     //!< Unit's current HP.
     long long currMP;
     //!< Unit's current MP.
+    long gold;
+    //!< How much loot the Unit grants when beaten. 0 for party.
+    growthType growth;
+    //!< Rate at which Unit's stats grow.
     long intl;
     //!< Deal more magical damage.
+    long level;
+    //!< Unit's level. Higher level means higher stats.
     long long maxHP;
     //!< Unit's maximum HP. How much damage it can take.
     long long maxMP;
@@ -54,6 +75,9 @@
     //!< Increase maxHP, decrease physical damage taken.
     long wis;
     //!< Increase maxMP, decrease magical damage taken.
+    long xp;
+    //!< For the party, growing one level takes 100 XP * level.
+    //!< For enemies, this is how much XP they given when defeated.
   };
 
 #endif

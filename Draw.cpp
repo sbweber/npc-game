@@ -41,9 +41,7 @@ void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack,
     break;  // should be impossible to reach here
   }
   str = str + attacker + " attacked " + target + " for " + to_string(attack.getDamage()) + " damage!";
-  renderTextbox(ren, font, str);
-  SDL_RenderPresent(ren);
-  pressAnyKey();
+  drawTextbox(ren, font, str);
 }  // void drawBattleAttackText(SDL_Renderer *ren, Attack attack)
 
 
@@ -177,9 +175,7 @@ void drawRebind(SDL_Renderer *ren, TTF_Font* font)
   str += "New key for interact button: ";
   str += newKey;
   SDL_RenderClear(ren);
-  renderTextbox(ren, font, str);
-  SDL_RenderPresent(ren);
-  pressAnyKey();
+  drawTextbox(ren, font, str);
   SDL_RenderPresent(ren);
 }  // void drawRebind(SDL_Renderer *ren)
 
@@ -237,6 +233,22 @@ void drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
           &spriteClips[sprite->getSprite()]);
   sprite->walk();
 }//void drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
+
+
+void drawTextbox(SDL_Renderer *ren, TTF_Font *font, const string &str,
+        SDL_Color color)
+{
+  string temp = str;
+  while (!temp.empty())
+  {
+    renderTextbox(ren, font, "");
+    temp = renderTextbox(ren, font, temp, color);
+    SDL_RenderPresent(ren);
+    SDL_Event e = pressAnyKey();
+    if (e.type == SDL_KEYDOWN && e.key.keysym == stateQuit)
+      eventQuit();
+  }
+}  // void drawTextbox()
 
 
 void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons,

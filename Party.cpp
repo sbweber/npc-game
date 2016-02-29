@@ -7,7 +7,7 @@ Party::Party(SDL_Renderer *ren)
 {
   if (!ren)
     quit("Renderer not found!", 3);
-  active.emplace_back(new Unit("Roland"));
+  active.emplace_back(new Unit("Roland", "Hero", 10));
   passive.clear();
   sprite.reset(new Sprite(ren, 0, 0, "Hero.png", 0, "Roland", "Hero"));
   sprite->clearActs();

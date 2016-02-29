@@ -210,7 +210,6 @@ void GameState::loopBattleFight()
     if (!attacker->isDead())
     {
       shared_ptr<Unit> target;
-      // have unit check its own team and choose a target on the other team
       if (vectorFind(liveEnemies, attacker) != liveEnemies.end())
         target = liveParty[rng(liveParty.size() - 1)];
       else
@@ -227,28 +226,42 @@ void GameState::loopBattleFight()
         else if (vectorFind(liveParty, target) != liveParty.end())
           liveParty.erase(vectorFind(liveParty, target));
         string defeatString = target->getName() + " was defeated!";
-        renderTextbox(terr->getRen(), font, defeatString);
-        SDL_RenderPresent(terr->getRen());
-        pressAnyKey();
+        drawTextbox(terr->getRen(), font, defeatString);
       }
-    }
+    }  // have unit check its own team and attack a target on the other team
   }
   if (liveEnemies.empty())
   {
     setState(STATE_MAP);
-    renderTextbox(terr->getRen(), font, "You won the battle!");
-    SDL_RenderPresent(terr->getRen());
-    pressAnyKey();
-  }
+    long gold = 0, xp = 0;
+    for (shared_ptr<Unit> unit : enemies)
+    {
+      gold += unit->getGold();
+      xp += unit->getXP();
+    }
+    string str = "You won the battle!";
+    str += "\nYou gained " + to_string(gold) + " gold, ";
+    str += "and a total of " + to_string(xp) + " experience points";
+    if (party->getUnits().size() > 1)
+    {
+      str += ", split " + to_string(party->getUnits().size()) + "ways for ";
+      str += to_string(xp / party->getUnits().size()) + " experience points ";
+      str += "to each party member!";
+    }
+    else
+      str += "!";
+    for (shared_ptr<Unit> unit : party->getUnits())
+      unit->gainXP(xp / party->getUnits().size());
+    drawTextbox(terr->getRen(), font, str);
+    enemies.clear();
+  }  // Announce victory, give party gold/xp
   else if (liveParty.empty())
   {
     setState(STATE_MAP);
     for (shared_ptr<Unit> unit : party->getUnits())
       unit->fullHeal();
     string str = "You were defeated... but at least you fully healed afterwards!";
-    renderTextbox(terr->getRen(), font, str);
-    SDL_RenderPresent(terr->getRen());
-    pressAnyKey();
+    drawTextbox(terr->getRen(), font, str);
   }
 }  // void GameState::loopBattleFight()
 
@@ -256,9 +269,7 @@ void GameState::loopBattleFight()
 void GameState::loopBattleRun()
 {
   string str = "Ran from battle!";
-  renderTextbox(terr->getRen(), font, str);
-  SDL_RenderPresent(terr->getRen());
-  pressAnyKey();
+  drawTextbox(terr->getRen(), font, str);
   enemies.clear();
   setState(STATE_MAP);
 }  // void GameState::loopBattleRun()
