@@ -50,10 +50,9 @@ void quit(const string err, int errtype, SDL_Renderer *ren, SDL_Window *win)
 }  // void quit()
 
 
-dir randDir(mt19937_64& rng)
+dir randDir(mt19937_64& randNumGen)
 {
-  uniform_int_distribution<int> dist(0, 3);
-  int randomResult = dist(rng);
+  int randomResult = int(rng(randNumGen, 0, 3));
   switch (randomResult)
   {
   case 0:
@@ -75,9 +74,9 @@ dir randDir(mt19937_64& rng)
 }  // dir randDir(mt19937_64& rng)
 
 
-long randNum(mt19937_64& rng, long min, long max)
+long long rng(mt19937_64& rng, long long min, long long max)
 {
-  uniform_int_distribution<long> randNum(min, max);
+  uniform_int_distribution<long long> randNum(min, max);
   return randNum(rng);
-}  // long rng(mt19937_64& rng, long min, long max)
+}  // long long rng(mt19937_64& rng, long long min, long long max)
 

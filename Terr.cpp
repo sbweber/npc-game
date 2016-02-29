@@ -451,12 +451,11 @@ void Terr::loadSprite(ifstream &file, mt19937_64 &randNumGen)
   file >> scriptFile;
   file >> mfMin;  // in secs
   file >> mfMax;  // in secs
-  moveFreqMin = (int)(NUM_TICKS_SEC * stod(mfMin));
-  moveFreqMax = (int)(NUM_TICKS_SEC * stod(mfMax));
-  uniform_int_distribution<int> dist(moveFreqMin, moveFreqMax);
-  initTicks = dist(randNumGen);
-  shared_ptr<Sprite> sprite(new Sprite(ren, moveFreqMin, moveFreqMax, spriteFile, initTicks, name, purpose,
-          scriptFile));
+  moveFreqMin = int(NUM_TICKS_SEC * stod(mfMin));
+  moveFreqMax = int(NUM_TICKS_SEC * stod(mfMax));
+  initTicks = int(rng(randNumGen, moveFreqMin, moveFreqMax));
+  shared_ptr<Sprite> sprite(new Sprite(ren, moveFreqMin, moveFreqMax,
+          spriteFile, initTicks, name, purpose, scriptFile));
   setSprite(sprite, getTile(x, y));
 }  // void Terr::loadSprite(ifstream &file)
 

@@ -378,15 +378,15 @@ void GameState::loopTitle(SDL_Event &e)
 
 long long GameState::rng(long long min, long long max)
 {
-  uniform_int_distribution<long long> randNum(min, max);
-  return randNum(randNumGen);
+  uniform_int_distribution<long long> dist(min, max);
+  return dist(randNumGen);
 }  // long GameState::rng(long min, long max)
 
 
 size_t GameState::rng(size_t max)
 {
-  uniform_int_distribution<size_t> randNum(0, max);
-  return randNum(randNumGen);
+  uniform_int_distribution<size_t> dist(0, max);
+  return dist(randNumGen);
 }  // long GameState::rng(long min, long max)
 
 

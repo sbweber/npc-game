@@ -18,17 +18,15 @@ Unit::Unit(string n)
 
 Attack Unit::attack(mt19937_64 &randNumGen)
 {
-  uniform_int_distribution<long> dist(-10, 10);
-  long long damage = long(str * 20 * (1 + double(dist(randNumGen)) / 100));
+  long long damage = long long(str * 20 *
+          (1 + double(rng(randNumGen, -10, 10)) / 100));
   return Attack(damage, agi, DAMAGE_PHYS);
 }  // long Unit::attack()
 
 
 critical Unit::calcCrit(long acc, mt19937_64 &randNumGen)
 {
-  long long max = (2 * acc) + (2 * agi);
-  uniform_int_distribution<long long> dist(0, max);
-  long long roll = dist(randNumGen);
+  long long roll = rng(randNumGen, 0, ((2 * acc) + (2 * agi)));
   if (roll < acc)
     return HIT_CRIT;
   else if (roll > (2 * acc + agi))
@@ -87,7 +85,6 @@ void Unit::recalcStats()
 
 Attack Unit::receiveAttack(Attack attack, mt19937_64 &randNumGen)
 {
-  uniform_int_distribution<long> dist(-10, 10);
   long defstat;
   switch (attack.getElement())
   {
@@ -101,7 +98,8 @@ Attack Unit::receiveAttack(Attack attack, mt19937_64 &randNumGen)
     defstat = 0;
     break;  // should be impossible to reach here
   }
-  long long def = long long(defstat * 10 * (1 + double(dist(randNumGen)) / 100));
+  long long def = long long(defstat * 10 *
+          (1 + double(rng(randNumGen, -10, 10)) / 100));
   long long damage = attack.getDamage() - def;
 
   critical crit = calcCrit(attack.getAcc(), randNumGen);

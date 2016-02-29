@@ -115,15 +115,15 @@ bool Sprite::walk()
 }  // void Sprite::decSpline()
 
 
-void Sprite::decTicks(mt19937_64& rng)
+void Sprite::decTicks(mt19937_64& randNumGen)
 {
   if (ticks)
     ticks--;
   if (!ticks && (moveFreqMin > 0))
   {
-    ticks = randNum(rng, moveFreqMin, moveFreqMax);
+    ticks = unsigned int(rng(randNumGen, moveFreqMin, moveFreqMax));
     if (actionQ.empty())
-      pushAct(action(randDir(rng), ACT_MOVE));
+      pushAct(action(randDir(randNumGen), ACT_MOVE));
   }
 }  // void Sprite::decTicks(mt19937_64& rng)
 

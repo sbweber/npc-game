@@ -84,18 +84,16 @@
   //!< Quits the program, logging an error if given one.
   dir randDir(mt19937_64& rng);
   //!< Returns a random direction (DIR_UNDEFINED if there's an error).
-  long randNum(mt19937_64& rng, long min, long max);
+  long long rng(mt19937_64& rng, long long min, long long max);
   //!< Returns a random number from min to max, uniform distribution.
   template <typename T>
-  typename vector<shared_ptr<T> >::iterator
-          vectorFind(vector<shared_ptr<T> > &vec, shared_ptr<T> element)
+  typename vector<T>::iterator vectorFind(vector<T> &vec, T &element)
   {
-    for (vector<shared_ptr<T> >::iterator itr = vec.begin(); itr != vec.end(); itr++)
-    if (*itr == element)
-      return itr;
+    for (vector<T>::iterator itr = vec.begin(); itr != vec.end(); itr++)
+      if (*itr == element)
+        return itr;
     return vec.end();
-  }  // vectorFind()
-  //!< Returns an iterator to element if found, or vec.end() if not found.
+  }  //!< Returns an iterator to element if found, or vec.end() if not found.
 
 #endif
 
