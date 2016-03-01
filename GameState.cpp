@@ -252,6 +252,7 @@ void GameState::loopBattleFight()
       str += "!";
     for (shared_ptr<Unit> unit : party->getUnits())
       unit->gainXP(xp / party->getUnits().size());
+    party->transactGold(gold);
     drawTextbox(terr->getRen(), font, str);
     enemies.clear();
   }  // Announce victory, give party gold/xp
