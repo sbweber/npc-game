@@ -6,8 +6,10 @@
 Unit::Unit(string n, string g, long l)
 {
   name = n;
-  if (!g.compare("Hero"))
-    growth = GROWTH_HERO;
+  if (!g.compare("King"))
+    growth = GROWTH_KING;
+  else if (!g.compare("Shopkeeper"))
+    growth = GROWTH_SHOPKEEPER;
   else
     growth = GROWTH_STATIC;
   str = 10;
@@ -134,12 +136,19 @@ void Unit::recalcStats(long long lostHP, long long lostMP)
 {
   switch (growth)
   {
-  case GROWTH_HERO:
+  case GROWTH_KING:
     str = 10 + level;
     intl = 10 + level;
     agi = 10 + level;
     vit = 10 + level;
     wis = 10 + level;
+    break;
+  case GROWTH_SHOPKEEPER:
+    str = 10 + long(floor(1.5 * level));
+    intl = 10;
+    agi = 10 + level;
+    vit = 10 + long(ceil(2.5 * level));
+    wis = 10;
     break;
   default:
     break;

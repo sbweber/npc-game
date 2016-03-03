@@ -7,7 +7,8 @@ Party::Party(SDL_Renderer *ren)
 {
   if (!ren)
     quit("Renderer not found!", 3);
-  active.emplace_back(new Unit("Roland", "Hero", 10));
+  active.emplace_back(new Unit("Roland", "King", 10));
+  active.emplace_back(new Unit("Alexandrite", "Shopkeeper", 5));
   passive.clear();
   sprite.reset(new Sprite(ren, 0, 0, "Hero.png", 0, "Roland", "Hero"));
   sprite->clearActs();
@@ -95,7 +96,7 @@ void Party::setSprite(SDL_Renderer *ren, const string &str)
 unsigned long Party::transactGold(long val)
 {
   if (val > 0)
-    if ((ULONG_MAX - val) > gold)
+    if ((ULONG_MAX - val) < gold)
       gold = ULONG_MAX;
     else
       gold += val;

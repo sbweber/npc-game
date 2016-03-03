@@ -259,6 +259,8 @@ void GameState::loopBattleFight()
       }
     }
     party->transactGold(gold);
+    str = "You gained " + to_string(gold) + " gold, giving you a total of ";
+    str += to_string(party->getGold()) + " gold.";
     drawTextbox(terr->getRen(), font, str);
     enemies.clear();
     setState(STATE_MAP);

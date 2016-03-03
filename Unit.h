@@ -9,7 +9,8 @@
   enum growthType
   {
     GROWTH_STATIC,
-    GROWTH_HERO
+    GROWTH_KING,
+    GROWTH_SHOPKEEPER
   };
 
 
