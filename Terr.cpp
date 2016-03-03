@@ -246,7 +246,10 @@ string Terr::interactSprites(shared_ptr<Sprite> sprite,
     return "PARTY: full-heal";
   else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "FightTest")
   {
-    enemies.emplace_back(new Unit("Guard", 10, 10, 10, 10, 10, 1000, 1000));
+    enemies.emplace_back(new Unit("Guard 1", 10, 10, 10, 10, 10, 1000, 1000));
+    enemies.emplace_back(new Unit("Guard 2", 10, 10, 10, 10, 10, 1000, 1000));
+    enemies.emplace_back(new Unit("Guard 3", 10, 10, 10, 10, 10, 1000, 1000));
+    enemies.emplace_back(new Unit("Guard 4", 10, 10, 10, 10, 10, 1000, 1000));
     return "CHANGE-STATE: STATE_BATTLE";
   }
   else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")

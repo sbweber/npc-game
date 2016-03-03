@@ -65,15 +65,18 @@ void Unit::fullHeal()
 }  // void Unit::fullHeal()
 
 
-void Unit::gainXP(long x)
+bool Unit::gainXP(long x)
 {
+  bool retval = false;
   xp += x;
   while (xp >= (level * 100))
   {
-    level++;
     xp -= (level * 100);
+    level++;
+    retval = true;
   }
-  recalcStats();
+  recalcStats((maxHP - currHP), (maxMP - currMP));
+  return retval;
 }  // void Unit::gainXP(long x)
 
 
@@ -93,6 +96,12 @@ long Unit::getGold()
 {
   return gold;
 }  // long Unit::getGold()
+
+
+long Unit::getLevel()
+{
+  return level;
+}  // long Unit::getLevel()
 
 
 long long Unit::getMaxHP()
@@ -121,7 +130,7 @@ bool Unit::isDead()
 }  // bool Unit::isDead()
 
 
-void Unit::recalcStats()
+void Unit::recalcStats(long long lostHP, long long lostMP)
 {
   switch (growth)
   {
@@ -136,7 +145,10 @@ void Unit::recalcStats()
     break;
   }
 
-  long long lostHP = maxHP - currHP, lostMP = maxMP - currMP;
+  if (!lostHP)
+    lostHP = maxHP - currHP;
+  if (!lostMP)
+    lostMP = maxMP - currMP;
   maxHP = vit * 50;
   currHP = maxHP - lostHP;
   maxMP = wis * 50;

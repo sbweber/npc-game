@@ -14,6 +14,7 @@ eventTick(et)
   timerID = 0;
   party.reset(new Party(ren));
   font = f;
+  lineNum = 0;
 }  // GameState::GameState(SDL_Renderer *ren)
 
 
@@ -213,7 +214,7 @@ void GameState::loopBattleFight()
       if (vectorFind(liveEnemies, attacker) != liveEnemies.end())
         target = liveParty[rng(liveParty.size() - 1)];
       else
-        target = liveEnemies[rng(liveParty.size() - 1)];
+        target = liveEnemies[rng(liveEnemies.size() - 1)];
       Attack result = target->receiveAttack(attacker->attack(randNumGen),
               randNumGen);
       drawBattleAttackText(terr->getRen(), font, result, attacker->getName(),
@@ -232,7 +233,6 @@ void GameState::loopBattleFight()
   }
   if (liveEnemies.empty())
   {
-    setState(STATE_MAP);
     long gold = 0, xp = 0;
     for (shared_ptr<Unit> unit : enemies)
     {
@@ -251,10 +251,19 @@ void GameState::loopBattleFight()
     else
       str += "!";
     for (shared_ptr<Unit> unit : party->getUnits())
-      unit->gainXP(xp / party->getUnits().size());
+    {
+      int oldLvl = unit->getLevel();
+      if(unit->gainXP(xp / party->getUnits().size()))
+      {
+        str = unit->getName() + " grew to from level " + to_string(oldLvl);
+        str += " to level " + to_string(unit->getLevel()) + "!";
+        drawTextbox(terr->getRen(), font, str);
+      }
+    }
     party->transactGold(gold);
     drawTextbox(terr->getRen(), font, str);
     enemies.clear();
+    setState(STATE_MAP);
   }  // Announce victory, give party gold/xp
   else if (liveParty.empty())
   {

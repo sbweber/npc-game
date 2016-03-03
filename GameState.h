@@ -41,6 +41,8 @@
     //!< ID of user event triggered by ticking.
     TTF_Font *font;
     //!< Primary font for regular usage.
+    unsigned int lineNum;
+    //!< Line of text in textbox. For adding text to existing textboxes.
     mt19937_64 randNumGen;
     //!< Random Number Generator.
     unique_ptr<Party> party;

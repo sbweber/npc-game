@@ -27,14 +27,16 @@
     //!< Calculates whether a hit is weak, avg, or a crit.
     void fullHeal();
     //!< Restores all HP.
-    void gainXP(long x);
-    //!< Gains XP, leveling as needed.
+    bool gainXP(long x);
+    //!< Gains XP, leveling as needed. Returns true if a level was gained.
     long getAgi();
     //!< returns agi.
     long long getCurrHP();
     //!< Returns currHP.
     long getGold();
-    //!< returns gold;
+    //!< returns gold.
+    long getLevel();
+    //!< returns level.
     long long getMaxHP();
     //!< Returns maxHP.
     string getName();
@@ -43,7 +45,7 @@
     //!< returns XP.
     bool isDead();
     //!< Returns true if currHP is less than or equal to zero.
-    void recalcStats();
+    void recalcStats(long long lostHP = 0, long long lostMP = 0);
     //!< Recalculates HP and MP from stats.
     Attack receiveAttack(Attack attack, mt19937_64 &randNumGen);
     //!< Given an attack, takes damage based on stats. Returns damage taken.

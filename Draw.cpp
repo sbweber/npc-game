@@ -48,27 +48,40 @@ void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack,
 void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
         TTF_Font* font, vector<shared_ptr<Unit> > &enemies)
 {
-  SDL_Texture* partyHP[4];
+  int i = 0;
   SDL_Texture* black = loadTexture("Black.png", ren);
   renderTexture(black, ren, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 4 / 5);
-  string HPstr = to_string(party->getUnit(0)->getCurrHP()) + "/" + to_string(party->getUnit(0)->getMaxHP());
-  string HPLabel = "Your HP:";
-  SDL_Texture* partyHPLabel = renderText(ren, font, HPLabel);
-  partyHP[0] = renderText(ren, font, HPstr);
-  HPstr = to_string(enemies[0]->getCurrHP()) + "/" + to_string(enemies[0]->getMaxHP());
-  HPLabel = "Enemy HP:";
-  SDL_Texture* enemyHPLabel = renderText(ren, font, HPLabel);
-  SDL_Texture* enemyHP = renderText(ren, font, HPstr);
-  renderTexture(partyHPLabel, ren, 800, 70);
-  renderTexture(partyHP[0], ren, 800, 100);
-  renderTexture(enemyHPLabel, ren, 24, 70);
-  renderTexture(enemyHP, ren, 24, 100);
-  SDL_RenderPresent(ren);
-  SDL_DestroyTexture(partyHP[0]);
-  SDL_DestroyTexture(enemyHP);
   SDL_DestroyTexture(black);
-  SDL_DestroyTexture(partyHPLabel);
-  SDL_DestroyTexture(enemyHPLabel);
+  for (shared_ptr<Unit> unit : party->getUnits())
+  {
+    string HPstr = to_string(unit->getCurrHP()) + "/";
+    HPstr += to_string(unit->getMaxHP());
+    string HPLabel = unit->getName() + "'s HP:";
+    SDL_Texture* HPLabelTex = renderText(ren, font, HPLabel);
+    SDL_Texture* HPTex = renderText(ren, font, HPstr);
+    renderTexture(HPLabelTex, ren, 800, (70 + (30 * i)));
+    i++;
+    renderTexture(HPTex, ren, 800, (70 + (30 * i)));
+    i++;
+    SDL_DestroyTexture(HPTex);
+    SDL_DestroyTexture(HPLabelTex);
+  }  // Render party HPs
+  i = 0;
+  for (shared_ptr<Unit> unit : enemies)
+  {
+    string HPstr = to_string(unit->getCurrHP()) + "/";
+    HPstr += to_string(unit->getMaxHP());
+    string HPLabel = unit->getName() + "'s HP:";
+    SDL_Texture* HPLabelTex = renderText(ren, font, HPLabel);
+    SDL_Texture* HPTex = renderText(ren, font, HPstr);
+    renderTexture(HPLabelTex, ren, 24, (70 + (30 * i)));
+    i++;
+    renderTexture(HPTex, ren, 24, (70 + (30 * i)));
+    i++;
+    SDL_DestroyTexture(HPTex);
+    SDL_DestroyTexture(HPLabelTex);
+  }  // Render enemy HPs
+  SDL_RenderPresent(ren);
 }  // void drawBattleUpdate
 
 
