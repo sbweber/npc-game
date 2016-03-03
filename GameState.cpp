@@ -119,9 +119,7 @@ void GameState::loopAnyState(SDL_Event &e)
   switch (e.type)
   {
   case SDL_KEYDOWN:
-    if (e.key.keysym == stateBattle)
-      setState(STATE_BATTLE);  // debug command startbattle
-    else if (e.key.keysym == stateMap1)
+    if (e.key.keysym == stateMap1)
     {
       changeTerr("0,0.txt");
       setState(STATE_MAP);
@@ -204,7 +202,7 @@ void GameState::loopBattleFight()
     if (!unit->isDead())
       liveEnemies.emplace_back(unit);
   turnOrder(units);
-  while (!units.empty())
+  while (!units.empty() && !liveEnemies.empty() && !liveParty.empty())
   {
     shared_ptr<Unit> attacker = units.front();
     units.pop();
@@ -212,9 +210,9 @@ void GameState::loopBattleFight()
     {
       shared_ptr<Unit> target;
       if (vectorFind(liveEnemies, attacker) != liveEnemies.end())
-        target = liveParty[rng(liveParty.size() - 1)];
+        target = liveParty[rng(liveParty.size())];
       else
-        target = liveEnemies[rng(liveEnemies.size() - 1)];
+        target = liveEnemies[rng(liveEnemies.size())];
       Attack result = target->receiveAttack(attacker->attack(randNumGen),
               randNumGen);
       drawBattleAttackText(terr->getRen(), font, result, attacker->getName(),
@@ -406,7 +404,7 @@ long long GameState::rng(long long min, long long max)
 
 size_t GameState::rng(size_t max)
 {
-  uniform_int_distribution<size_t> dist(0, max);
+  uniform_int_distribution<size_t> dist(0, (max - 1));
   return dist(randNumGen);
 }  // long GameState::rng(long min, long max)
 

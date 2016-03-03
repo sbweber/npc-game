@@ -6,7 +6,6 @@
   #include "Globals.h"
 
   // debug key commands
-  extern SDL_Keysym stateBattle;
   extern SDL_Keysym stateMap1;
   extern SDL_Keysym stateMap2;
   extern SDL_Keysym stateRebind;
@@ -21,7 +20,7 @@
   extern SDL_Keysym interact;
 
   // Keybind.cpp
-  bool operator==(const SDL_Keysym &lhs, const SDL_Keysym &rhs);
+  bool operator==(SDL_Keysym lhs, SDL_Keysym rhs);
   //!< Returns true if the two keys are the same.
   void loadKeys();
   //!< Loads the default set of keys.

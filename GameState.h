@@ -25,9 +25,9 @@
     void incCursorPos(unsigned int max);
     //!< Adds one to cursorPos, looping to zero if needed.
     long long rng(long long min, long long max);
-    //!< Returns a uniformly distributed random number between min and max.
+    //!< Returns a uniformly distributed random long long from min to max.
     size_t rng(size_t max);
-    //!< Returns a uniformly distributed random number between 0 and max.
+    //!< Returns a uniformly distributed random integer from 0 to (max-1).
     void setState(gameState gs);
     //!< Sets gameState.
     shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click);
