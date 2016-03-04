@@ -62,8 +62,15 @@
     //!< Loop to process actions in battle state.
     void loopBattleFight();
     //!< Subloop for the 'fight' command in battle.
-    void loopBattleRun();
+    void loopBattleFlee();
     //!< Subloop for the 'run' command in battle.
+    void loopBattleResolve(vector<shared_ptr<Unit> > &liveParty,
+            vector<shared_ptr<Unit> > &liveEnemies);
+    //!< Subloop for determining who won the battle and what to do next.
+    void loopBattleTurn(shared_ptr<Unit> attacker,
+            vector<shared_ptr<Unit> > &liveParty,
+            vector<shared_ptr<Unit> > &liveEnemies);
+    //!< Subloop for an individual unit attacking during a round.
     void loopMap(SDL_Event &e);
     //!< Loop to process inputs while on overworld map.
     void loopRebind(SDL_Event &e);

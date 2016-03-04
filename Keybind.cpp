@@ -23,7 +23,7 @@ bool operator==(SDL_Keysym lhs, SDL_Keysym rhs)
   lhs.mod |= (KMOD_NONE | KMOD_NUM | KMOD_CAPS | KMOD_MODE);
   rhs.mod |= (KMOD_NONE | KMOD_NUM | KMOD_CAPS | KMOD_MODE);
   if ((lhs.sym == rhs.sym) && (lhs.mod == rhs.mod))
-      return true;
+    return true;
   return false;
 }  // bool operator==(const SDL_Keysym &lhs, const SDL_Keysym &rhs)
 
@@ -40,8 +40,16 @@ void loadKeys()
   // permanent key commands
   stateTitle.sym = SDLK_F12;
   stateTitle.mod = (KMOD_NONE | KMOD_NUM | KMOD_CAPS | KMOD_MODE);
-  stateQuit.sym = SDLK_F4;
-  stateQuit.mod = KMOD_ALT;
+  #ifdef __APPLE__
+    stateQuit.sym = SDLK_q;
+    stateQuit.mod = KMOD_GUI;
+  #elif WIN32
+    stateQuit.sym = SDLK_F4;
+    stateQuit.mod = KMOD_ALT;
+  #else
+    stateQuit.sym = SDLK_c;
+    stateQuit.mod = KMOD_CTRL;
+  #endif
   back.sym = SDLK_ESCAPE;
   back.mod = (KMOD_NONE | KMOD_NUM | KMOD_CAPS | KMOD_MODE);
   dirUp.sym = SDLK_UP;

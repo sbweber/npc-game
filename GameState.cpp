@@ -172,7 +172,7 @@ void GameState::loopBattle(SDL_Event &e)
       if (cursorPos == 0)
         loopBattleFight();
       else if (cursorPos == 1)
-        loopBattleRun();
+        loopBattleFlee();
     }
     SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
@@ -180,8 +180,7 @@ void GameState::loopBattle(SDL_Event &e)
     if (buttons[0]->buttonClick(terr->getRen(), e.button))
       loopBattleFight();
     else if (buttons[1]->buttonClick(terr->getRen(), e.button))
-      loopBattleRun();
-    // click on button to depress button
+      loopBattleFlee();
     SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   default:
@@ -202,33 +201,55 @@ void GameState::loopBattleFight()
     if (!unit->isDead())
       liveEnemies.emplace_back(unit);
   turnOrder(units);
-  while (!units.empty() && !liveEnemies.empty() && !liveParty.empty())
+  while (!units.empty())
   {
     shared_ptr<Unit> attacker = units.front();
     units.pop();
-    if (!attacker->isDead())
-    {
-      shared_ptr<Unit> target;
-      if (vectorFind(liveEnemies, attacker) != liveEnemies.end())
-        target = liveParty[rng(liveParty.size())];
-      else
-        target = liveEnemies[rng(liveEnemies.size())];
-      Attack result = target->receiveAttack(attacker->attack(randNumGen),
-              randNumGen);
-      drawBattleAttackText(terr->getRen(), font, result, attacker->getName(),
-              target->getName());
-      drawBattleUpdate(terr->getRen(), party, font, enemies);
-      if (target->isDead())
-      {
-        if (vectorFind(liveEnemies, target) != liveEnemies.end())
-          liveEnemies.erase(vectorFind(liveEnemies, target));
-        else if (vectorFind(liveParty, target) != liveParty.end())
-          liveParty.erase(vectorFind(liveParty, target));
-        string defeatString = target->getName() + " was defeated!";
-        drawTextbox(terr->getRen(), font, defeatString);
-      }
-    }  // have unit check its own team and attack a target on the other team
+    if (!attacker->isDead() && !liveParty.empty() && !liveEnemies.empty())
+      loopBattleTurn(attacker, liveParty, liveEnemies);
   }
+  loopBattleResolve(liveParty, liveEnemies);
+}  // void GameState::loopBattleFight()
+
+
+void GameState::loopBattleFlee()
+{
+  queue<shared_ptr<Unit> > units;
+  turnOrder(units);
+  shared_ptr<Unit> unit = units.front();
+  if (vectorFind(party->getUnits(), unit) != party->getUnits().end())
+  {
+    drawTextbox(terr->getRen(), font, "Ran from battle!");
+    enemies.clear();
+    setState(STATE_MAP);
+  }
+  else
+  {
+    drawTextbox(terr->getRen(), font, "Failed to get away!");
+    vector<shared_ptr<Unit> > liveParty;
+    vector<shared_ptr<Unit> > liveEnemies;
+    for (shared_ptr<Unit> unit : party->getUnits())
+    if (!unit->isDead())
+      liveParty.emplace_back(unit);
+    for (shared_ptr<Unit> unit : enemies)
+    if (!unit->isDead())
+      liveEnemies.emplace_back(unit);
+    while (!units.empty() && !liveParty.empty() && !liveEnemies.empty())
+    {
+      shared_ptr<Unit> attacker = units.front();
+      units.pop();
+      if (!attacker->isDead() &&
+        (vectorFind(liveEnemies, attacker) != liveEnemies.end()))
+        loopBattleTurn(attacker, liveParty, liveEnemies);
+    }
+    loopBattleResolve(liveParty, liveEnemies);
+  }
+}  // void GameState::loopBattleFlee()
+
+
+void GameState::loopBattleResolve(vector<shared_ptr<Unit> > &liveParty,
+        vector<shared_ptr<Unit> > &liveEnemies)
+{
   if (liveEnemies.empty())
   {
     long gold = 0, xp = 0;
@@ -248,18 +269,18 @@ void GameState::loopBattleFight()
     }
     else
       str += "!";
+    str.clear();
     for (shared_ptr<Unit> unit : party->getUnits())
     {
       int oldLvl = unit->getLevel();
-      if(unit->gainXP(xp / party->getUnits().size()))
+      if (unit->gainXP(xp / party->getUnits().size()))
       {
-        str = unit->getName() + " grew to from level " + to_string(oldLvl);
-        str += " to level " + to_string(unit->getLevel()) + "!";
-        drawTextbox(terr->getRen(), font, str);
+        str += unit->getName() + " grew to from level " + to_string(oldLvl);
+        str += " to level " + to_string(unit->getLevel()) + "!\n";
       }
     }
     party->transactGold(gold);
-    str = "You gained " + to_string(gold) + " gold, giving you a total of ";
+    str += "You gained " + to_string(gold) + " gold, giving you a total of ";
     str += to_string(party->getGold()) + " gold.";
     drawTextbox(terr->getRen(), font, str);
     enemies.clear();
@@ -273,16 +294,33 @@ void GameState::loopBattleFight()
     string str = "You were defeated... but at least you fully healed afterwards!";
     drawTextbox(terr->getRen(), font, str);
   }
-}  // void GameState::loopBattleFight()
+}  // loopBattleResolve()
 
 
-void GameState::loopBattleRun()
+void GameState::loopBattleTurn(shared_ptr<Unit> attacker,
+        vector<shared_ptr<Unit> > &liveParty,
+        vector<shared_ptr<Unit> > &liveEnemies)
 {
-  string str = "Ran from battle!";
-  drawTextbox(terr->getRen(), font, str);
-  enemies.clear();
-  setState(STATE_MAP);
-}  // void GameState::loopBattleRun()
+  shared_ptr<Unit> target;
+  if (vectorFind(liveEnemies, attacker) != liveEnemies.end())
+    target = liveParty[rng(liveParty.size())];
+  else
+    target = liveEnemies[rng(liveEnemies.size())];
+  Attack result = target->receiveAttack(attacker->attack(randNumGen),
+          randNumGen);
+  drawBattleAttackText(terr->getRen(), font, result, attacker->getName(),
+          target->getName());
+  drawBattleUpdate(terr->getRen(), party, font, enemies);
+  if (target->isDead())
+  {
+    if (vectorFind(liveEnemies, target) != liveEnemies.end())
+      liveEnemies.erase(vectorFind(liveEnemies, target));
+    else if (vectorFind(liveParty, target) != liveParty.end())
+      liveParty.erase(vectorFind(liveParty, target));
+    string defeatString = target->getName() + " was defeated!";
+    drawTextbox(terr->getRen(), font, defeatString);
+  }
+}  // have unit check its own team and attack a target on the other team
 
 
 void GameState::loopMap(SDL_Event &e)
