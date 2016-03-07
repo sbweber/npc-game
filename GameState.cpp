@@ -174,14 +174,12 @@ void GameState::loopBattle(SDL_Event &e)
       else if (cursorPos == 1)
         loopBattleFlee();
     }
-    SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   case SDL_MOUSEBUTTONDOWN:
     if (buttons[0]->buttonClick(terr->getRen(), e.button))
       loopBattleFight();
     else if (buttons[1]->buttonClick(terr->getRen(), e.button))
       loopBattleFlee();
-    SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   default:
     break;
@@ -415,7 +413,6 @@ void GameState::loopTitle(SDL_Event &e)
       else if (cursorPos == 1)
         eventQuit();
     }
-    SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   case SDL_MOUSEBUTTONDOWN:
     if (buttons[0]->buttonClick(terr->getRen(), e.button))
@@ -427,7 +424,6 @@ void GameState::loopTitle(SDL_Event &e)
     else if (buttons[1]->buttonClick(terr->getRen(), e.button))
       eventQuit();
     // click on button to depress button
-    SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   default:
     break;

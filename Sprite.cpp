@@ -116,6 +116,15 @@ const string Sprite::getPurpose()
 }  // const string Sprite::getType()
 
 
+bool Sprite::keepMoving()
+{
+  if ((get<1>(topAct()) == ACT_MOVE) && (actionQ.size() == 1) &&
+          (get<0>(topAct()) == facing))
+    return true;
+  return false;
+}  // bool Sprite::keepMoving()
+
+
 const action Sprite::popAct()
 {
   if (!actionQ.empty())

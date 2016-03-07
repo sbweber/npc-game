@@ -75,9 +75,7 @@ vector<shared_ptr<Unit> >& Party::getUnits()
 
 bool Party::keepMoving()
 {
-  if ((get<1>(sprite->topAct()) == ACT_MOVE) && (sprite->getQSize() == 1))
-    return true;
-  return false;
+  return sprite->keepMoving();
 }  // void Party::keepMoving()
 
 

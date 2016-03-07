@@ -34,7 +34,7 @@
     vector<shared_ptr<Unit> >& getUnits();
     //!< Returns a vector of the active Units in the party.
     bool keepMoving();
-    //!< Returns true if sprite's actionQ is size 1 and contains a ACT_MOVE.
+    //!< Returns true if sprite's actionQ is size 1 and contains an ACT_MOVE.
     void move(dir moveDir);
     //!< Pushes a movement action to sprite.
     void setSprite(SDL_Renderer *ren, const string &str);

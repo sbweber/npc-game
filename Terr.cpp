@@ -32,7 +32,6 @@ Terr::~Terr()
 string Terr::actSprite(shared_ptr<Sprite> partySprite,
         shared_ptr<Sprite> sprite, vector<shared_ptr<Unit> > &enemies)
 {
-  SDL_Event* wait = new SDL_Event();
   string message;
   if (sprite && !sprite->getSpline())
   {
@@ -41,17 +40,17 @@ string Terr::actSprite(shared_ptr<Sprite> partySprite,
     {
     case ACT_MOVE:
       if (sprite == partySprite)
-        SDL_PushEvent(wait);
+      {
+        if (get<0>(act) != sprite->getFacing() && sprite->getQSize())
+          moveSprite(sprite, get<0>(act));
+      }
       else if (get<0>(act) != sprite->getFacing())
         moveSprite(sprite, get<0>(act));
       message = moveSprite(sprite, get<0>(act));
       break;
     case ACT_INTERACT:
       if (sprite == partySprite)
-      {
         message = interactSprite(partySprite, enemies);
-        SDL_PushEvent(wait);
-      }
       break;
     case ACT_UNDEFINED:
     default:
@@ -512,11 +511,11 @@ string Terr::moveSprite(shared_ptr<Sprite> sprite, dir d)
     logError("Asked to move Sprite that isn't on the map!");
     return "";
   }  // Make sure sprite has a tile!
+
   shared_ptr <Tile> targetTile(currTile->getTile(d));
   if (!targetTile || !targetTile->getIsPassable() || isOccupied(targetTile))
-    return "";  // Not an error, just an invalid move.
-
-  if (d == sprite->getFacing())
+    sprite->changeDir(d);  // Not an error, just an invalid move.
+  else if (d == sprite->getFacing())
   {
     setSprite(sprite, targetTile);
     if (d == DIR_NORTH || d == DIR_SOUTH)
