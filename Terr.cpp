@@ -40,9 +40,11 @@ string Terr::actSprite(shared_ptr<Sprite> partySprite,
     switch (get<1>(act))
     {
     case ACT_MOVE:
-      message = moveSprite(sprite, get<0>(act));
       if (sprite == partySprite)
         SDL_PushEvent(wait);
+      else if (get<0>(act) != sprite->getFacing())
+        moveSprite(sprite, get<0>(act));
+      message = moveSprite(sprite, get<0>(act));
       break;
     case ACT_INTERACT:
       if (sprite == partySprite)
@@ -504,25 +506,27 @@ string Terr::moveSprite(shared_ptr<Sprite> sprite, dir d)
     logError("Asked to move Sprite that doesn't exist!");
     return "";
   }  // Make sure sprite exists!
-
-  sprite->changeDir(d);
   shared_ptr <Tile> currTile(getTile(sprite));
   if (!currTile)
   {
     logError("Asked to move Sprite that isn't on the map!");
     return "";
   }  // Make sure sprite has a tile!
-
   shared_ptr <Tile> targetTile(currTile->getTile(d));
   if (!targetTile || !targetTile->getIsPassable() || isOccupied(targetTile))
     return "";  // Not an error, just an invalid move.
 
-  setSprite(sprite, targetTile);
-  if (d == DIR_NORTH || d == DIR_SOUTH)
-    sprite->setSpline(TILE_HEIGHT);
-  else
-    sprite->setSpline(TILE_WIDTH);
-  return targetTile->enterTile();
+  if (d == sprite->getFacing())
+  {
+    setSprite(sprite, targetTile);
+    if (d == DIR_NORTH || d == DIR_SOUTH)
+      sprite->setSpline(TILE_HEIGHT);
+    else
+      sprite->setSpline(TILE_WIDTH);
+    return targetTile->enterTile();
+  }
+  sprite->changeDir(d);
+  return "";
 }  // void Terr::moveSprite(shared_ptr<Sprite> sprite, dir d)
 
 
