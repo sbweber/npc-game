@@ -32,28 +32,29 @@ Terrain::~Terrain()
 string Terrain::actSprite(shared_ptr<Sprite> partySprite,
         shared_ptr<Sprite> sprite, vector<shared_ptr<Unit> > &enemies)
 {
-  SDL_Event* wait = new SDL_Event();
   string message;
   if (sprite && !sprite->getSpline())
   {
     action act = sprite->popAct();
     switch (get<1>(act))
     {
-      case ACT_MOVE:
-        message = moveSprite(sprite, get<0>(act));
-        if (sprite == partySprite)
-          SDL_PushEvent(wait);
-        break;
-      case ACT_INTERACT:
-        if (sprite == partySprite)
-        {
-          message = interactSprite(partySprite, enemies);
-          SDL_PushEvent(wait);
-        }
-        break;
-      case ACT_UNDEFINED:
-      default:
-        break;
+    case ACT_MOVE:
+      if (sprite == partySprite)
+      {
+        if (get<0>(act) != sprite->getFacing() && sprite->getQSize())
+          moveSprite(sprite, get<0>(act));
+      }
+      else if (get<0>(act) != sprite->getFacing())
+        moveSprite(sprite, get<0>(act));
+      message = moveSprite(sprite, get<0>(act));
+      break;
+    case ACT_INTERACT:
+      if (sprite == partySprite)
+        message = interactSprite(partySprite, enemies);
+      break;
+    case ACT_UNDEFINED:
+    default:
+      break;
     }
   }
   return message;
@@ -246,7 +247,10 @@ string Terrain::interactSprites(shared_ptr<Sprite> sprite,
     return "PARTY: full-heal";
   else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "FightTest")
   {
-    enemies.emplace_back(new Unit());
+    enemies.emplace_back(new Unit("Guard 1", 10, 10, 10, 10, 10, 1000, 1000));
+    enemies.emplace_back(new Unit("Guard 2", 10, 10, 10, 10, 10, 1000, 1000));
+    enemies.emplace_back(new Unit("Guard 3", 10, 10, 10, 10, 10, 1000, 1000));
+    enemies.emplace_back(new Unit("Guard 4", 10, 10, 10, 10, 10, 1000, 1000));
     return "CHANGE-STATE: STATE_BATTLE";
   }
   else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
@@ -448,14 +452,13 @@ void Terrain::loadSprite(ifstream &file, mt19937_64 &randNumGen)
   file >> name;
   file >> purpose;
   file >> scriptFile;
-  file >> mfMin; // in secs
-  file >> mfMax; // in secs
-  moveFreqMin = (int) (NUM_TICKS_SEC * stod(mfMin));
-  moveFreqMax = (int) (NUM_TICKS_SEC * stod(mfMax));
-  uniform_int_distribution<int> dist(moveFreqMin, moveFreqMax);
-  initTicks = dist(randNumGen);
-  shared_ptr<Sprite> sprite(new Sprite(ren, moveFreqMin, moveFreqMax, spriteFile, initTicks, name, purpose,
-          scriptFile));
+  file >> mfMin;  // in secs
+  file >> mfMax;  // in secs
+  moveFreqMin = int(NUM_TICKS_SEC * stod(mfMin));
+  moveFreqMax = int(NUM_TICKS_SEC * stod(mfMax));
+  initTicks = int(rng(randNumGen, moveFreqMin, moveFreqMax));
+  shared_ptr<Sprite> sprite(new Sprite(ren, moveFreqMin, moveFreqMax,
+          spriteFile, initTicks, name, purpose, scriptFile));
   setSprite(sprite, getTile(x, y));
 } // void Terr::loadSprite(ifstream &file)
 
@@ -500,9 +503,7 @@ string Terrain::moveSprite(shared_ptr<Sprite> sprite, dir d)
   {
     logError("Asked to move Sprite that doesn't exist!");
     return "";
-  } // Make sure sprite exists!
-
-  sprite->changeDir(d);
+  }  // Make sure sprite exists!
   shared_ptr <Tile> currTile(getTile(sprite));
   if (!currTile)
   {
@@ -512,15 +513,19 @@ string Terrain::moveSprite(shared_ptr<Sprite> sprite, dir d)
 
   shared_ptr <Tile> targetTile(currTile->getTile(d));
   if (!targetTile || !targetTile->getIsPassable() || isOccupied(targetTile))
-    return ""; // Not an error, just an invalid move.
-
-  currTile->clearTile();
-  // Remove sprite from previous tile
-  setSprite(sprite, targetTile);
-  if (d == DIR_NORTH || d == DIR_SOUTH)
-    sprite->setSpline(TILE_HEIGHT);
-  else
-    sprite->setSpline(TILE_WIDTH);
+    sprite->changeDir(d);  // Not an error, just an invalid move.
+  else if (d == sprite->getFacing())
+  {
+    currTile->clearTile();
+    // Remove sprite from previous tile
+    setSprite(sprite, targetTile);
+    if (d == DIR_NORTH || d == DIR_SOUTH)
+      sprite->setSpline(TILE_HEIGHT);
+    else
+      sprite->setSpline(TILE_WIDTH);
+    return targetTile->enterTile();
+  }
+  sprite->changeDir(d);
   return targetTile->enterTile();
 } // void Terr::moveSprite(shared_ptr<Sprite> sprite, dir d)
 

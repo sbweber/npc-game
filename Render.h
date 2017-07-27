@@ -19,6 +19,10 @@
   string renderTextbox(SDL_Renderer *ren, TTF_Font *font, const string &str,
           SDL_Color color = {255, 255, 255, 255});
   //!< Draws a textbox with text on the screen. Text is white by default.
+  string renderTextboxLine(SDL_Renderer *ren, TTF_Font *font,
+          SDL_Color color, string &line, string &word, int &lineNum);
+  //!< Handles drawing a line of a textbox to screen when whitespace happens.
+  //!< Should only ever be called by renderTextbox().
   void renderTexture(SDL_Texture *tex, SDL_Renderer *ren, int x,
           int y, SDL_Rect *clip = nullptr, const double angle = 0,
           const SDL_RendererFlip flip = SDL_FLIP_NONE);

@@ -19,7 +19,7 @@
           vector<shared_ptr<Unit> > &enemies);
   //!< Draws the battle screen.
   void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack,
-          bool playerIsAttacking);
+          string attacker, string target);
   //!< Draws textbox sequence for an Attack.
   void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
           TTF_Font* font, vector<shared_ptr<Unit> > &enemies);
@@ -31,6 +31,9 @@
   void drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
           shared_ptr<Sprite> partySprite, int i, int j);
   //!< Draws a single Sprite on the map without redrawing the map.
+  void drawTextbox(SDL_Renderer *ren, TTF_Font *font, const string &str,
+          SDL_Color color = { 255, 255, 255, 255 });
+  //!< Draws as many textboxes as needed to display a text string.
   void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons,
           int x, int y, int cursor);
   //!< Draws the title screen.

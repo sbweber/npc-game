@@ -8,12 +8,13 @@ eventTick(et)
 {
   if (!ren)
     quit("Renderer not found!", 3);
-  randNumGen.seed(chrono::system_clock::now().time_since_epoch().count());
+  randNumGen.seed(unsigned long(chrono::system_clock::now().time_since_epoch().count()));
   terr.reset(new Terrain(ren, randNumGen, ""));
   cursorPos = 0;
   timerID = 0;
   party.reset(new Party(ren));
   font = f;
+  lineNum = 0;
 }  // GameState::GameState(SDL_Renderer *ren)
 
 
@@ -118,9 +119,7 @@ void GameState::loopAnyState(SDL_Event &e)
   switch (e.type)
   {
   case SDL_KEYDOWN:
-    if (e.key.keysym == stateBattle)
-      setState(STATE_BATTLE);  // debug command startbattle
-    else if (e.key.keysym == stateMap1)
+    if (e.key.keysym == stateMap1)
     {
       changeTerr("0,0.txt");
       setState(STATE_MAP);
@@ -173,17 +172,14 @@ void GameState::loopBattle(SDL_Event &e)
       if (cursorPos == 0)
         loopBattleFight();
       else if (cursorPos == 1)
-        loopBattleRun();
+        loopBattleFlee();
     }
-    SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   case SDL_MOUSEBUTTONDOWN:
     if (buttons[0]->buttonClick(terr->getRen(), e.button))
       loopBattleFight();
     else if (buttons[1]->buttonClick(terr->getRen(), e.button))
-      loopBattleRun();
-    // click on button to depress button
-    SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
+      loopBattleFlee();
     break;
   default:
     break;
@@ -193,50 +189,136 @@ void GameState::loopBattle(SDL_Event &e)
 
 void GameState::loopBattleFight()
 {
-  Attack attack = enemies[0]->receiveAttack(party->getUnit(0)->attack(randNumGen), randNumGen);
-  drawBattleAttackText(terr->getRen(), font, attack, true);
-  drawBattleUpdate(terr->getRen(), party, font, enemies);
-  if (enemies[0]->isDead())
+  queue<shared_ptr<Unit> > units;
+  vector<shared_ptr<Unit> > liveParty;
+  vector<shared_ptr<Unit> > liveEnemies;
+  for (shared_ptr<Unit> unit : party->getUnits())
+    if (!unit->isDead())
+      liveParty.emplace_back(unit);
+  for (shared_ptr<Unit> unit : enemies)
+    if (!unit->isDead())
+      liveEnemies.emplace_back(unit);
+  turnOrder(units);
+  while (!units.empty())
   {
-    enemies.pop_back();
-    renderTextbox(terr->getRen(), font, "Enemy defeated!");
-    SDL_RenderPresent(terr->getRen());
-    pressAnyKey();
+    shared_ptr<Unit> attacker = units.front();
+    units.pop();
+    if (!attacker->isDead() && !liveParty.empty() && !liveEnemies.empty())
+      loopBattleTurn(attacker, liveParty, liveEnemies);
   }
-  else
-  {
-    attack = party->getUnit(0)->receiveAttack(enemies[0]->attack(randNumGen), randNumGen);
-    drawBattleAttackText(terr->getRen(), font, attack, false);
-    drawBattleUpdate(terr->getRen(), party, font, enemies);
-  }
-  if (enemies.empty())
-  {
-    setState(STATE_MAP);
-    renderTextbox(terr->getRen(), font, "You won the battle!");
-    SDL_RenderPresent(terr->getRen());
-    pressAnyKey();
-  }
-  else if (party->getUnit(0)->isDead())
-  {
-    setState(STATE_MAP);
-    party->getUnit(0)->fullHeal();
-    string str = "You were defeated... but at least you fully healed afterwards!";
-    renderTextbox(terr->getRen(), font, str);
-    SDL_RenderPresent(terr->getRen());
-    pressAnyKey();
-  }
+  loopBattleResolve(liveParty, liveEnemies);
 }  // void GameState::loopBattleFight()
 
 
-void GameState::loopBattleRun()
+void GameState::loopBattleFlee()
 {
-  string str = "Ran from battle!";
-  renderTextbox(terr->getRen(), font, str);
-  SDL_RenderPresent(terr->getRen());
-  pressAnyKey();
-  enemies.clear();
-  setState(STATE_MAP);
-}  // void GameState::loopBattleRun()
+  queue<shared_ptr<Unit> > units;
+  turnOrder(units);
+  shared_ptr<Unit> unit = units.front();
+  if (vectorFind(party->getUnits(), unit) != party->getUnits().end())
+  {
+    drawTextbox(terr->getRen(), font, "Ran from battle!");
+    enemies.clear();
+    setState(STATE_MAP);
+  }
+  else
+  {
+    drawTextbox(terr->getRen(), font, "Failed to get away!");
+    vector<shared_ptr<Unit> > liveParty;
+    vector<shared_ptr<Unit> > liveEnemies;
+    for (shared_ptr<Unit> unit : party->getUnits())
+    if (!unit->isDead())
+      liveParty.emplace_back(unit);
+    for (shared_ptr<Unit> unit : enemies)
+    if (!unit->isDead())
+      liveEnemies.emplace_back(unit);
+    while (!units.empty() && !liveParty.empty() && !liveEnemies.empty())
+    {
+      shared_ptr<Unit> attacker = units.front();
+      units.pop();
+      if (!attacker->isDead() &&
+        (vectorFind(liveEnemies, attacker) != liveEnemies.end()))
+        loopBattleTurn(attacker, liveParty, liveEnemies);
+    }
+    loopBattleResolve(liveParty, liveEnemies);
+  }
+}  // void GameState::loopBattleFlee()
+
+
+void GameState::loopBattleResolve(vector<shared_ptr<Unit> > &liveParty,
+        vector<shared_ptr<Unit> > &liveEnemies)
+{
+  if (liveEnemies.empty())
+  {
+    long gold = 0, xp = 0;
+    for (shared_ptr<Unit> unit : enemies)
+    {
+      gold += unit->getGold();
+      xp += unit->getXP();
+    }
+    string str = "You won the battle!";
+    str += "\nYou gained " + to_string(gold) + " gold, ";
+    str += "and a total of " + to_string(xp) + " experience points";
+    if (party->getUnits().size() > 1)
+    {
+      str += ", split " + to_string(party->getUnits().size()) + "ways for ";
+      str += to_string(xp / party->getUnits().size()) + " experience points ";
+      str += "to each party member!";
+    }
+    else
+      str += "!";
+    str.clear();
+    for (shared_ptr<Unit> unit : party->getUnits())
+    {
+      int oldLvl = unit->getLevel();
+      if (unit->gainXP(xp / party->getUnits().size()))
+      {
+        str += unit->getName() + " grew to from level " + to_string(oldLvl);
+        str += " to level " + to_string(unit->getLevel()) + "!\n";
+      }
+    }
+    party->transactGold(gold);
+    str += "You gained " + to_string(gold) + " gold, giving you a total of ";
+    str += to_string(party->getGold()) + " gold.";
+    drawTextbox(terr->getRen(), font, str);
+    enemies.clear();
+    setState(STATE_MAP);
+  }  // Announce victory, give party gold/xp
+  else if (liveParty.empty())
+  {
+    setState(STATE_MAP);
+    for (shared_ptr<Unit> unit : party->getUnits())
+      unit->fullHeal();
+    string str = "You were defeated... but at least you fully healed afterwards!";
+    drawTextbox(terr->getRen(), font, str);
+  }
+}  // loopBattleResolve()
+
+
+void GameState::loopBattleTurn(shared_ptr<Unit> attacker,
+        vector<shared_ptr<Unit> > &liveParty,
+        vector<shared_ptr<Unit> > &liveEnemies)
+{
+  shared_ptr<Unit> target;
+  if (vectorFind(liveEnemies, attacker) != liveEnemies.end())
+    target = liveParty[rng(liveParty.size())];
+  else
+    target = liveEnemies[rng(liveEnemies.size())];
+  Attack result = target->receiveAttack(attacker->attack(randNumGen),
+          randNumGen);
+  drawBattleAttackText(terr->getRen(), font, result, attacker->getName(),
+          target->getName());
+  drawBattleUpdate(terr->getRen(), party, font, enemies);
+  if (target->isDead())
+  {
+    if (vectorFind(liveEnemies, target) != liveEnemies.end())
+      liveEnemies.erase(vectorFind(liveEnemies, target));
+    else if (vectorFind(liveParty, target) != liveParty.end())
+      liveParty.erase(vectorFind(liveParty, target));
+    string defeatString = target->getName() + " was defeated!";
+    drawTextbox(terr->getRen(), font, defeatString);
+  }
+}  // have unit check its own team and attack a target on the other team
 
 
 void GameState::loopMap(SDL_Event &e)
@@ -331,7 +413,6 @@ void GameState::loopTitle(SDL_Event &e)
       else if (cursorPos == 1)
         eventQuit();
     }
-    SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   case SDL_MOUSEBUTTONDOWN:
     if (buttons[0]->buttonClick(terr->getRen(), e.button))
@@ -343,7 +424,6 @@ void GameState::loopTitle(SDL_Event &e)
     else if (buttons[1]->buttonClick(terr->getRen(), e.button))
       eventQuit();
     // click on button to depress button
-    SDL_PushEvent(new SDL_Event());  // push empty event to cause immediate state update
     break;
   default:
     break;
@@ -351,10 +431,17 @@ void GameState::loopTitle(SDL_Event &e)
 }  // GameState::void loopTitle()
 
 
-long GameState::rng(long min, long max)
+long long GameState::rng(long long min, long long max)
 {
-  uniform_int_distribution<long> randNum(min, max);
-  return randNum(randNumGen);
+  uniform_int_distribution<long long> dist(min, max);
+  return dist(randNumGen);
+}  // long GameState::rng(long min, long max)
+
+
+size_t GameState::rng(size_t max)
+{
+  uniform_int_distribution<size_t> dist(0, (max - 1));
+  return dist(randNumGen);
 }  // long GameState::rng(long min, long max)
 
 
@@ -372,4 +459,34 @@ shared_ptr<Tile> GameState::tileClick(SDL_MouseButtonEvent &click)
 {
   return terr->tileClick(click, party->getSprite());
 }  // shared_ptr<Tile> GameState::tileClick(SDL_MouseButtonEvent &click)
+
+
+void GameState::turnOrder(queue<shared_ptr<Unit> > &order)
+{
+  long long max = 0;
+  vector<shared_ptr<Unit> > units;
+  for (shared_ptr<Unit> unit : party->getUnits())
+    if (!unit->isDead())
+      units.emplace_back(unit);
+  for (shared_ptr<Unit> unit : enemies)
+    if (!unit->isDead())
+      units.emplace_back(unit);
+  for (shared_ptr<Unit> unit : units)
+    max += unit->getAgi();
+  while (max)
+  {
+    long long roll = rng(0, max);
+    for (vector<shared_ptr<Unit> >::iterator uItr = units.begin(); uItr != units.end(); uItr++)
+    {
+      roll -= (*uItr)->getAgi();
+      if (roll <= 0)
+      {
+        order.push(*uItr);
+        max -= (*uItr)->getAgi();
+        units.erase(uItr);
+        break;
+      }
+    }
+  }
+}  // void GameState::turnOrder(queue<shared_ptr<Unit> > &order)
 

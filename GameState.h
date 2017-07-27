@@ -24,8 +24,10 @@
     //!< subtracts one from cursorPos, looping to max if needed.
     void incCursorPos(unsigned int max);
     //!< Adds one to cursorPos, looping to zero if needed.
-    long rng(long min, long max);
-    //!< Returns a uniformly distributed random number between min and max.
+    long long rng(long long min, long long max);
+    //!< Returns a uniformly distributed random long long from min to max.
+    size_t rng(size_t max);
+    //!< Returns a uniformly distributed random integer from 0 to (max-1).
     void setState(gameState gs);
     //!< Sets gameState.
     shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click);
@@ -39,6 +41,8 @@
     //!< ID of user event triggered by ticking.
     TTF_Font *font;
     //!< Primary font for regular usage.
+    unsigned int lineNum;
+    //!< Line of text in textbox. For adding text to existing textboxes.
     mt19937_64 randNumGen;
     //!< Random Number Generator.
     unique_ptr<Party> party;
@@ -58,14 +62,23 @@
     //!< Loop to process actions in battle state.
     void loopBattleFight();
     //!< Subloop for the 'fight' command in battle.
-    void loopBattleRun();
+    void loopBattleFlee();
     //!< Subloop for the 'run' command in battle.
+    void loopBattleResolve(vector<shared_ptr<Unit> > &liveParty,
+            vector<shared_ptr<Unit> > &liveEnemies);
+    //!< Subloop for determining who won the battle and what to do next.
+    void loopBattleTurn(shared_ptr<Unit> attacker,
+            vector<shared_ptr<Unit> > &liveParty,
+            vector<shared_ptr<Unit> > &liveEnemies);
+    //!< Subloop for an individual unit attacking during a round.
     void loopMap(SDL_Event &e);
     //!< Loop to process inputs while on overworld map.
     void loopRebind(SDL_Event &e);
     //!< Loop to process inputs and events while in the key binding menu.
     void loopTitle(SDL_Event &e);
     //!< Loop to process inputs on the title screen.
+    void turnOrder(queue<shared_ptr<Unit> > &order);
+    //!< Takes party's Unit vector and enemies to fill order in turn order.
   };
 
 #endif

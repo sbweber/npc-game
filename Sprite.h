@@ -64,6 +64,8 @@
     //!< Returns the type of sprite (facing, etc) currently being used.
     SDL_Texture* getSpriteSheet();
     //!< Returns the spritesheet for this Sprite.
+    bool keepMoving();
+    //!< Returns true if actionQ is size 1 and contains an ACT_MOVE.
     const action popAct();
     //!< Returns the next action in the queue and pops it off the queue.
     void pushAct(action act);

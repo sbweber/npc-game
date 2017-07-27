@@ -11,19 +11,19 @@ npc-game.rar contains a playable, self-contained, current Windows release build 
 
 Default Controls:  
 Arrow keys: Move around the map.  
-z: Interact with things on the map.  
+z: Interact with things on the map. Select highlighted option in menus.  
 esc: Go back/up a layer. Currently unused.  
-F4: Quit the program from anywhere.  
+Alt-F4: Quit the program from anywhere.  
 F12: Go to the title screen.  
 Click on a tile on the map to move to it.  
 Click on a sprite to interact with it.  
+Click on a button to use it.  
 To advance text, press any key or click anywhere in the window.  
 
 Debug Controls:  
 1: Load map "0,0.txt".  
 2: Load map "0,1.txt".  
 9: Go to the key rebind menu.  
-f: Go to the test case for battles. Currently locks you into the battle state with no way out except the debug controls.  
 
 Explanation of Licenses:  
 LICENSE is the (MIT) license for this project itself.  

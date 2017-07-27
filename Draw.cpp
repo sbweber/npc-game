@@ -26,7 +26,7 @@ void drawBattle(SDL_Renderer *ren, unique_ptr<Party> &party, TTF_Font* font,
 
 
 void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack,
-        bool playerIsAttacking)
+        string attacker, string target)
 {
   string str;
   switch (attack.getAcc())
@@ -40,40 +40,48 @@ void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack,
   default:
     break;  // should be impossible to reach here
   }
-  if (playerIsAttacking)
-    str = str + "You attacked the enemy for " + to_string(attack.getDamage()) + " damage!";
-  else
-    str = str + "You were attacked for " + to_string(attack.getDamage()) + " damage!";
-  renderTextbox(ren, font, str);
-  SDL_RenderPresent(ren);
-  pressAnyKey();
+  str = str + attacker + " attacked " + target + " for " + to_string(attack.getDamage()) + " damage!";
+  drawTextbox(ren, font, str);
 }  // void drawBattleAttackText(SDL_Renderer *ren, Attack attack)
 
 
 void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
         TTF_Font* font, vector<shared_ptr<Unit> > &enemies)
 {
-  SDL_Texture* partyHP[4];
+  int i = 0;
   SDL_Texture* black = loadTexture("Black.png", ren);
   renderTexture(black, ren, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 4 / 5);
-  string HPstr = to_string(party->getUnit(0)->getCurrHP()) + "/" + to_string(party->getUnit(0)->getMaxHP());
-  string HPLabel = "Your HP:";
-  SDL_Texture* partyHPLabel = renderText(ren, font, HPLabel);
-  partyHP[0] = renderText(ren, font, HPstr);
-  HPstr = to_string(enemies[0]->getCurrHP()) + "/" + to_string(enemies[0]->getMaxHP());
-  HPLabel = "Enemy HP:";
-  SDL_Texture* enemyHPLabel = renderText(ren, font, HPLabel);
-  SDL_Texture* enemyHP = renderText(ren, font, HPstr);
-  renderTexture(partyHPLabel, ren, 800, 70);
-  renderTexture(partyHP[0], ren, 800, 100);
-  renderTexture(enemyHPLabel, ren, 24, 70);
-  renderTexture(enemyHP, ren, 24, 100);
-  SDL_RenderPresent(ren);
-  SDL_DestroyTexture(partyHP[0]);
-  SDL_DestroyTexture(enemyHP);
   SDL_DestroyTexture(black);
-  SDL_DestroyTexture(partyHPLabel);
-  SDL_DestroyTexture(enemyHPLabel);
+  for (shared_ptr<Unit> unit : party->getUnits())
+  {
+    string HPstr = to_string(unit->getCurrHP()) + "/";
+    HPstr += to_string(unit->getMaxHP());
+    string HPLabel = unit->getName() + "'s HP:";
+    SDL_Texture* HPLabelTex = renderText(ren, font, HPLabel);
+    SDL_Texture* HPTex = renderText(ren, font, HPstr);
+    renderTexture(HPLabelTex, ren, 800, (70 + (30 * i)));
+    i++;
+    renderTexture(HPTex, ren, 800, (70 + (30 * i)));
+    i++;
+    SDL_DestroyTexture(HPTex);
+    SDL_DestroyTexture(HPLabelTex);
+  }  // Render party HPs
+  i = 0;
+  for (shared_ptr<Unit> unit : enemies)
+  {
+    string HPstr = to_string(unit->getCurrHP()) + "/";
+    HPstr += to_string(unit->getMaxHP());
+    string HPLabel = unit->getName() + "'s HP:";
+    SDL_Texture* HPLabelTex = renderText(ren, font, HPLabel);
+    SDL_Texture* HPTex = renderText(ren, font, HPstr);
+    renderTexture(HPLabelTex, ren, 24, (70 + (30 * i)));
+    i++;
+    renderTexture(HPTex, ren, 24, (70 + (30 * i)));
+    i++;
+    SDL_DestroyTexture(HPTex);
+    SDL_DestroyTexture(HPLabelTex);
+  }  // Render enemy HPs
+  SDL_RenderPresent(ren);
 }  // void drawBattleUpdate
 
 
@@ -180,9 +188,7 @@ void drawRebind(SDL_Renderer *ren, TTF_Font* font)
   str += "New key for interact button: ";
   str += newKey;
   SDL_RenderClear(ren);
-  renderTextbox(ren, font, str);
-  SDL_RenderPresent(ren);
-  pressAnyKey();
+  drawTextbox(ren, font, str);
   SDL_RenderPresent(ren);
 }  // void drawRebind(SDL_Renderer *ren)
 
@@ -240,6 +246,22 @@ void drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,
           &spriteClips[sprite->getSprite()]);
   sprite->walk();
 }//void drawSprite(SDL_Renderer *ren, shared_ptr<Tile> tile, int i, int j)
+
+
+void drawTextbox(SDL_Renderer *ren, TTF_Font *font, const string &str,
+        SDL_Color color)
+{
+  string temp = str;
+  while (!temp.empty())
+  {
+    renderTextbox(ren, font, "");
+    temp = renderTextbox(ren, font, temp, color);
+    SDL_RenderPresent(ren);
+    SDL_Event e = pressAnyKey();
+    if (e.type == SDL_KEYDOWN && e.key.keysym == stateQuit)
+      eventQuit();
+  }
+}  // void drawTextbox()
 
 
 void drawTitle(SDL_Renderer *ren, vector<unique_ptr<Button> > &buttons,
