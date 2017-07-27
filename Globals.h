@@ -4,6 +4,7 @@
   #define INCLUDE_H
 
   // c++ core includes
+  #include <algorithm>
   #include <chrono>
   #include <cstddef>  // implicitly added on non-windows machines
   #include <cstdlib>
@@ -28,11 +29,6 @@
     #include <SDL_image.h>
     #include <SDL_ttf.h>
   #endif
-
-  // Boost includes
-  #include <boost/bimap.hpp>
-  #include <boost/bimap/unordered_set_of.hpp>
-  #include <boost/bimap/list_of.hpp>
 
 
   // global constants

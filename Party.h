@@ -5,7 +5,7 @@
 
   #include "Globals.h"
   #include "Sprite.h"
-  #include "Terr.h"
+  #include "Terrain.h"
   #include "Timer.h"
   #include "Unit.h"
 

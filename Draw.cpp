@@ -77,7 +77,7 @@ void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
 }  // void drawBattleUpdate
 
 
-void drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party)
+void drawMap(unique_ptr<Terrain> &terr, unique_ptr<Party> &party)
 {  // portion of map to be drawn based on position of hero
   SDL_RenderClear(terr->getRen());
   int tileClip = 0;

@@ -14,7 +14,7 @@
   void renderBackground(SDL_Texture *bg, SDL_Renderer *ren);
   //!< Renders an image, stretched to fit the entire screen.
   SDL_Texture* renderText(SDL_Renderer *ren, TTF_Font *font,
-          const string &str, SDL_Color color = {255, 255, 255, 255});
+          const string &str, SDL_Color color = {255, 255, 255, 255 });
   //!< Renders text into a picture. Text is white by default.
   string renderTextbox(SDL_Renderer *ren, TTF_Font *font, const string &str,
           SDL_Color color = {255, 255, 255, 255});

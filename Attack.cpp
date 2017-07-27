@@ -3,7 +3,7 @@
 #include "Attack.h"
 
 
-Attack::Attack(long dam, long a, damageType e)
+Attack::Attack(long dam, long a, DAMAGE_TYPE e)
 {
   damage = dam;
   acc = a;
@@ -23,7 +23,7 @@ long Attack::getDamage()
 }  // long Attack::getDamage()
 
 
-damageType Attack::getElement()
+DAMAGE_TYPE Attack::getElement()
 {
   return element;
 }  // damageType Attack::getElement()

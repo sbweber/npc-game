@@ -35,7 +35,7 @@
     //!< Position of cursor in menus.
     vector<shared_ptr<Unit> > enemies;
     //!< Vector of enemy units for battle.
-    const Uint32 eventTick;
+    const Uint64 eventTick;
     //!< ID of user event triggered by ticking.
     TTF_Font *font;
     //!< Primary font for regular usage.
@@ -45,7 +45,7 @@
     //!< The player's party.
     gameState state;
     //!< State of game.
-    unique_ptr<Terr> terr;
+    unique_ptr<Terrain> terr;
     //!< Currently loaded terr.
     SDL_TimerID timerID;
     //!< Timer for regular events

@@ -9,7 +9,7 @@ eventTick(et)
   if (!ren)
     quit("Renderer not found!", 3);
   randNumGen.seed(chrono::system_clock::now().time_since_epoch().count());
-  terr.reset(new Terr(ren, randNumGen, ""));
+  terr.reset(new Terrain(ren, randNumGen, ""));
   cursorPos = 0;
   timerID = 0;
   party.reset(new Party(ren));

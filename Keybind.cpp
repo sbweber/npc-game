@@ -24,7 +24,7 @@ bool operator==(const SDL_Keysym &lhs, const SDL_Keysym &rhs)
   if (lhs.sym == rhs.sym /*&& lhs.mod == rhs.mod*/)
     return true; //only checks keycode and keymod, and currently ignores keymod
   return false;
-}  // bool operator==(const SDL_Keysym &lhs, const SDL_Keysym &rhs)
+} // bool operator==(const SDL_Keysym &lhs, const SDL_Keysym &rhs)
 
 
 void loadKeys()
@@ -36,19 +36,24 @@ void loadKeys()
   stateRebind.sym = SDLK_9;
   // permanent key commands
   stateTitle.sym = SDLK_F12;
+  #ifdef __APPLE__
+  stateQuit.sym = SDLK_w;
+  stateQuit.mod = KMOD_GUI;
+  #else
   stateQuit.sym = SDLK_F4;
   stateQuit.mod = KMOD_ALT;
+  #endif
   back.sym = SDLK_ESCAPE;
   dirUp.sym = SDLK_UP;
   dirDown.sym = SDLK_DOWN;
   dirLeft.sym = SDLK_LEFT;
   dirRight.sym = SDLK_RIGHT;
   interact.sym = SDLK_z;
-}  // void loadKeys()
+} // void loadKeys()
 
 
 void rebind(SDL_Keysym &keytype, SDL_Keysym newkey)
 {
   keytype = newkey;
-}  // void rebind(SDL_Keycode &keytype, SDL_Keycode newkey)
+} // void rebind(SDL_Keycode &keytype, SDL_Keycode newkey)
 

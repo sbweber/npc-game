@@ -23,7 +23,7 @@ Attack Unit::attack(mt19937_64 &randNumGen)
 }  // long Unit::attack()
 
 
-critical Unit::calcCrit(long acc, mt19937_64 &randNumGen)
+CRITICAL Unit::calcCrit(long acc, mt19937_64 &randNumGen)
 {
   long max = (2 * acc) + (2 * agi);
   uniform_int_distribution<long> dist(0, max);
@@ -91,7 +91,7 @@ Attack Unit::receiveAttack(Attack attack, mt19937_64 &randNumGen)
   long def = long(defstat * 10 * (1 + double(dist(randNumGen)) / 100));
   long damage = attack.getDamage() - def;
 
-  critical crit = calcCrit(attack.getAcc(), randNumGen);
+  CRITICAL crit = calcCrit(attack.getAcc(), randNumGen);
   if (crit == HIT_WEAK)
     damage = long(double(damage) * 0.8);
   else if (crit == HIT_CRIT)

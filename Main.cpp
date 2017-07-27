@@ -5,7 +5,7 @@
   #include "Keybind.h"
   #include "Globals.h"
   #include "Party.h"
-  #include "Terr.h"
+  #include "Terrain.h"
 
 
 int main(int argc, char **argv)

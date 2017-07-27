@@ -24,7 +24,7 @@
   void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
           TTF_Font* font, vector<shared_ptr<Unit> > &enemies);
   //!< Draws changes to the battle screen as the turn progresses.
-  void drawMap(unique_ptr<Terr> &terr, unique_ptr<Party> &party);
+  void drawMap(unique_ptr<Terrain> &terr, unique_ptr<Party> &party);
   //!< Draws the overworld map for exploration. Returns true if splining.
   void drawRebind(SDL_Renderer *ren, TTF_Font* font);
   //!< Draws the screen for rebinding keys.
