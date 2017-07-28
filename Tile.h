@@ -39,7 +39,7 @@ public:
   //!< Virtual Tile destructor.
   void clearTile();
   //!< Remove Sprite from this Tile
-  void connectTile(dir d, shared_ptr<Tile> t);
+  void connectTile(DIR d, shared_ptr<Tile> t);
   //!< Specifies an adjacent Tile. Not reciprocal -- may be one-way!
   virtual const string enterTile();
   //!< Overridable base function for derived tiles doing something special
@@ -54,7 +54,7 @@ public:
   //!< Returns Sprite* on Tile
   SDL_Texture* getTex();
   //!< Returns the spritesheet for this Tile
-  shared_ptr<Tile> getTile(dir d);
+  shared_ptr<Tile> getTile(DIR d);
   //!< Returns pointer to adjacent tile in specified direction. May be nullptr.
   tileType getType();
   //!< Returns the Tile’s type.
@@ -83,7 +83,7 @@ protected:
   //!< Adjacent Tile to the East/Right.
   SDL_RendererFlip flip;
   //!< Flip status of Tile’s sprite
-  weak_ptr<Sprite> sprite;
+  shared_ptr<Sprite> sprite;
   //!< Sprite on tile. nullptr if none.
   bool isPassable;
   //!< True if tile can be entered.

@@ -79,7 +79,7 @@ bool Party::keepMoving()
 }  // void Party::keepMoving()
 
 
-void Party::move(dir moveDir)
+void Party::move(DIR moveDir)
 {
   sprite->pushAct(action(moveDir, ACT_MOVE));
 }  // void Party::setMoveButtonHeld(bool mbh)

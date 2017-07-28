@@ -36,7 +36,7 @@ int main(int argc, char **argv)
   Uint32 eventNoEvent = SDL_RegisterEvents(1);
   if ((eventTick == ((Uint32)-1)) || (eventNoEvent == ((Uint32)-1)))
     quit("Insufficient events", 6);
-  unique_ptr<GameState> state(new GameState(ren, font, eventTick));
+  unique_ptr<GameState> state(new GameState(ren, font, eventTick, eventNoEvent));
   state->setState(STATE_TITLE);
 
   loadKeys();

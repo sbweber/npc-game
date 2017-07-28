@@ -27,7 +27,7 @@ void Tile::clearTile()
 } // void Tile::clearTile()
 
 
-void Tile::connectTile(dir d, shared_ptr<Tile> t)
+void Tile::connectTile(DIR d, shared_ptr<Tile> t)
 {
   switch (d)
   {
@@ -75,7 +75,7 @@ bool Tile::getIsPassable()
 
 shared_ptr<Sprite> Tile::getSprite()
 {
-  return sprite.lock();
+  return sprite;
 } // shared_ptr<Sprite> Tile::getSprite()
 
 
@@ -85,7 +85,7 @@ SDL_Texture* Tile::getTex()
 } // SDL_Texture* Tile::getTex()
 
 
-shared_ptr<Tile> Tile::getTile(dir d)
+shared_ptr<Tile> Tile::getTile(DIR d)
 {
   switch (d)
   {

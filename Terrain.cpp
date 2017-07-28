@@ -38,23 +38,23 @@ string Terrain::actSprite(shared_ptr<Sprite> partySprite,
     action act = sprite->popAct();
     switch (get<1>(act))
     {
-    case ACT_MOVE:
-      if (sprite == partySprite)
-      {
-        if (get<0>(act) != sprite->getFacing() && sprite->getQSize())
+      case ACT_MOVE:
+        if (sprite == partySprite)
+        {
+          if (get<0>(act) != sprite->getFacing() && sprite->getQSize())
+            moveSprite(sprite, get<0>(act));
+        }
+        else if (get<0>(act) != sprite->getFacing())
           moveSprite(sprite, get<0>(act));
-      }
-      else if (get<0>(act) != sprite->getFacing())
-        moveSprite(sprite, get<0>(act));
-      message = moveSprite(sprite, get<0>(act));
-      break;
-    case ACT_INTERACT:
-      if (sprite == partySprite)
-        message = interactSprite(partySprite, enemies);
-      break;
-    case ACT_UNDEFINED:
-    default:
-      break;
+        message = moveSprite(sprite, get<0>(act));
+        break;
+      case ACT_INTERACT:
+        if (sprite == partySprite)
+          message = interactSprite(partySprite, enemies);
+        break;
+      case ACT_UNDEFINED:
+      default:
+        break;
     }
   }
   return message;
@@ -65,24 +65,26 @@ string Terrain::actSprites(shared_ptr<Sprite> partySprite,
         vector<shared_ptr<Unit> > &enemies)
 {
   string message;
-  vector<shared_ptr<Sprite> > spritesOnMap;
+  queue<shared_ptr<Sprite> > spritesOnMap;
   for (int i = 0; i < w; i++)
     for (int j = 0; j < h; j++)
       if (getSprite(map[i][j]))
-        spritesOnMap.push_back(getSprite(map[i][j]));
-  for (vector<shared_ptr<Sprite> >::iterator itr = spritesOnMap.begin(); itr != spritesOnMap.end(); itr++)
+        spritesOnMap.push(getSprite(map[i][j]));
+  while (!spritesOnMap.empty())
   {
-    string m = actSprite(partySprite, *itr, enemies);
-    if (*itr == partySprite)
+    shared_ptr<Sprite> actingSprite = spritesOnMap.front();
+    spritesOnMap.pop();
+    string m = actSprite(partySprite, actingSprite, enemies);
+    if (actingSprite == partySprite)
       message = m;
-    if ((*itr != partySprite) && (m.substr(0, m.find(':')) == "LOAD-STATE_MAP"))
-      setSprite(*itr, nullptr);
+    if ((actingSprite != partySprite) && (m.substr(0, m.find(':')) == "LOAD-STATE_MAP"))
+      setSprite(nullptr, getTile(actingSprite));
   }
   return message;
 } // void Terr::actSprites(shared_ptr<Sprite> partySprite)
 
 
-bool Terrain::findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> &tiles,
+bool Terrain::findCheckRoute(DIR d, unordered_map<shared_ptr<Tile>, int> &tiles,
         shared_ptr<Tile> tile)
 {
   if (tile->getTile(d) &&
@@ -94,7 +96,7 @@ bool Terrain::findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> &tiles,
 } // if tile in dir exists, might be on a route, and is closer, return true.
 
 
-void Terrain::findEnqueue(dir d, priority_queue<tuple<int, shared_ptr<Tile>>,
+void Terrain::findEnqueue(DIR d, priority_queue<tuple<int, shared_ptr<Tile>>,
         vector<tuple<int, shared_ptr<Tile>> >,
         greater<tuple<int, shared_ptr<Tile>> > > &searchQ,
         unordered_map<shared_ptr<Tile>, int> &tiles,
@@ -452,8 +454,8 @@ void Terrain::loadSprite(ifstream &file, mt19937_64 &randNumGen)
   file >> name;
   file >> purpose;
   file >> scriptFile;
-  file >> mfMin;  // in secs
-  file >> mfMax;  // in secs
+  file >> mfMin; // in secs
+  file >> mfMax; // in secs
   moveFreqMin = int(NUM_TICKS_SEC * stod(mfMin));
   moveFreqMax = int(NUM_TICKS_SEC * stod(mfMax));
   initTicks = int(rng(randNumGen, moveFreqMin, moveFreqMax));
@@ -497,13 +499,13 @@ void Terrain::loadWarpTile(ifstream &file)
 } // void Terr::loadWarpTile(ifstream &file)
 
 
-string Terrain::moveSprite(shared_ptr<Sprite> sprite, dir d)
+string Terrain::moveSprite(shared_ptr<Sprite> sprite, DIR d)
 {
   if (!sprite)
   {
     logError("Asked to move Sprite that doesn't exist!");
     return "";
-  }  // Make sure sprite exists!
+  } // Make sure sprite exists!
   shared_ptr <Tile> currTile(getTile(sprite));
   if (!currTile)
   {
@@ -513,7 +515,7 @@ string Terrain::moveSprite(shared_ptr<Sprite> sprite, dir d)
 
   shared_ptr <Tile> targetTile(currTile->getTile(d));
   if (!targetTile || !targetTile->getIsPassable() || isOccupied(targetTile))
-    sprite->changeDir(d);  // Not an error, just an invalid move.
+    sprite->changeDir(d); // Not an error, just an invalid move.
   else if (d == sprite->getFacing())
   {
     currTile->clearTile();
