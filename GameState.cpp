@@ -329,7 +329,7 @@ void GameState::loopMap(SDL_Event &e)
       if (e.user.type == eventTick)
         terr->tickSprites(randNumGen);
       break;
-    case SDL_MOUSEBUTTONDOWN:
+    case SDL_MOUSEBUTTONUP:
       party->getSprite()->clearActs();
       tile = tileClick(e.button);
       if (tile && tile->getIsPassable())
