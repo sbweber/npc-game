@@ -30,6 +30,8 @@
     //!< Returns a uniformly distributed random integer from 0 to (max-1).
     void setState(GAME_STATE gs);
     //!< Sets gameState.
+    void startBattle();
+    //!< Utility function to begin a battle
     shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click);
     //!< Used when clicking on the map. Returns a pointer to the Tile clicked.
   protected:

@@ -33,7 +33,7 @@ void GameState::actionMessageHandler(string &message)
       size_t strposnew = message.find(' ', strpos + 1);
       string state = message.substr(strpos + 1, strposnew - strpos - 1);
       if (state == "STATE_BATTLE")
-        setState(STATE_BATTLE);
+        startBattle();
     }
     else if (message.substr(0, strpos) == "PARTY")
     {
@@ -272,7 +272,7 @@ void GameState::loopBattleResolve(vector<shared_ptr<Unit> > &liveParty,
       int oldLvl = unit->getLevel();
       if (unit->gainXP(xp / party->getUnits().size()))
       {
-        str += unit->getName() + " grew to from level " + to_string(oldLvl);
+        str += unit->getName() + " grew from level " + to_string(oldLvl);
         str += " to level " + to_string(unit->getLevel()) + "!\n";
       }
     }
@@ -307,7 +307,6 @@ void GameState::loopBattleTurn(shared_ptr<Unit> attacker,
           randNumGen);
   drawBattleAttackText(terr->getRen(), font, result, attacker->getName(),
           target->getName());
-  drawBattleUpdate(terr->getRen(), party, font, enemies);
   if (target->isDead())
   {
     if (find(liveEnemies.begin(), liveEnemies.end(), target) != liveEnemies.end())
@@ -448,6 +447,7 @@ size_t GameState::rng(size_t max)
 
 void GameState::setState(GAME_STATE gs)
 {
+  party->getSprite()->clearActs();
   if (gs == STATE_MAP)
   {
     SDL_Event event;
@@ -465,6 +465,13 @@ shared_ptr<Tile> GameState::tileClick(SDL_MouseButtonEvent &click)
 {
   return terr->tileClick(click, party->getSprite());
 } // shared_ptr<Tile> GameState::tileClick(SDL_MouseButtonEvent &click)
+
+
+void GameState::startBattle()
+{
+  setState(STATE_BATTLE);
+  drawBattleInit(terr->getRen(), party, font, enemies);
+}
 
 
 void GameState::turnOrder(queue<shared_ptr<Unit> > &order)
