@@ -24,6 +24,7 @@
   void drawBattleInit(SDL_Renderer *ren, unique_ptr<Party> &party,
           TTF_Font* font, vector<shared_ptr<Unit> > &enemies);
   //!< Draws the initial battle screen on battle start.
+  //!< NEITHER CLEARS NOR PRESENTS RENDERER! UTILITY FUNCTION!
   void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
           TTF_Font* font, vector<shared_ptr<Unit> > &enemies);
   //!< Draws changes to the battle screen as the turn progresses.

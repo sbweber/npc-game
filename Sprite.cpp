@@ -118,8 +118,7 @@ const string Sprite::getPurpose()
 
 bool Sprite::keepMoving()
 {
-  if ((get<1>(topAct()) == ACT_MOVE) && (actionQ.size() == 1) &&
-          (get<0>(topAct()) == facing))
+  if ((get<1>(topAct()) == ACT_MOVE) && (actionQ.size() == 1))
     return true;
   return false;
 } // bool Sprite::keepMoving()

@@ -330,6 +330,7 @@ void GameState::loopMap(SDL_Event &e)
         terr->tickSprites(randNumGen);
       break;
     case SDL_MOUSEBUTTONDOWN:
+      party->getSprite()->clearActs();
       tile = tileClick(e.button);
       if (tile && tile->getIsPassable())
       {
@@ -349,10 +350,6 @@ void GameState::loopMap(SDL_Event &e)
         party->move(DIR_WEST);
       else if (e.key.keysym == interact)
         party->getSprite()->pushAct(action(DIR_UNDEFINED, ACT_INTERACT));
-      SDL_Event e;
-      e.type = SDL_USEREVENT;
-      e.user.type = Uint32(eventNoEvent);
-      SDL_PushEvent(&e);
       break;
     case SDL_KEYUP:
       party->getSprite()->clearActs();
@@ -361,12 +358,9 @@ void GameState::loopMap(SDL_Event &e)
       break;
   }
   if (party->keepMoving())
-    party->getSprite()->pushAct(action(get<0>(party->getSprite()->topAct()), ACT_MOVE));
-  if (e.type != SDL_USEREVENT || e.user.type != eventTick)
-  {
-    string message = terr->actSprites(party->getSprite(), enemies);
-    actionMessageHandler(message);
-  }
+    party->move(get<0>(party->getSprite()->topAct()));
+  string message = terr->actSprites(party->getSprite(), enemies);
+  actionMessageHandler(message);
 } // void GameState::loopMap()
 
 

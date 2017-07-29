@@ -1,11 +1,11 @@
 // Samuel Weber
 
-  #include "Draw.h"
-  #include "GameState.h"
-  #include "Keybind.h"
-  #include "Globals.h"
-  #include "Party.h"
-  #include "Terrain.h"
+#include "Draw.h"
+#include "GameState.h"
+#include "Keybind.h"
+#include "Globals.h"
+#include "Party.h"
+#include "Terrain.h"
 
 
 int main(int argc, char **argv)
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
   // backend vars
   Uint32 eventTick = SDL_RegisterEvents(1);
   Uint32 eventNoEvent = SDL_RegisterEvents(1);
-  if ((eventTick == ((Uint32)-1)) || (eventNoEvent == ((Uint32)-1)))
+  if ((eventTick == ((Uint32) - 1)) || (eventNoEvent == ((Uint32) - 1)))
     quit("Insufficient events", 6);
   unique_ptr<GameState> state(new GameState(ren, font, eventTick, eventNoEvent));
   state->setState(STATE_TITLE);
@@ -62,5 +62,5 @@ int main(int argc, char **argv)
   IMG_Quit();
   SDL_Quit();
   return 0;
-}  // int main(int argc, char **argv)
+} // int main(int argc, char **argv)
 
