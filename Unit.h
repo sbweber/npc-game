@@ -6,7 +6,7 @@
   #include "Attack.h"
 
 
-  enum growthType
+  enum GROWTH_TYPE
   {
     GROWTH_STATIC,
     GROWTH_KING,
@@ -24,7 +24,7 @@
     //!< Unit constructor with defined stats.
     Attack attack(mt19937_64 &randNumGen);
     //!< Returns the amount of damage the attack should deal (before defenses).
-    critical calcCrit(long acc, mt19937_64 &randNumGen);
+    CRITICAL calcCrit(long acc, mt19937_64 &randNumGen);
     //!< Calculates whether a hit is weak, avg, or a crit.
     void fullHeal();
     //!< Restores all HP.
@@ -60,7 +60,7 @@
     //!< Unit's current MP.
     long gold;
     //!< How much loot the Unit grants when beaten. 0 for party.
-    growthType growth;
+    GROWTH_TYPE growth;
     //!< Rate at which Unit's stats grow.
     long intl;
     //!< Deal more magical damage.

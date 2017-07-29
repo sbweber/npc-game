@@ -15,17 +15,22 @@
 
   // Draw.cpp
   void drawBattle(SDL_Renderer *ren, unique_ptr<Party> &party, TTF_Font* font,
-          vector<unique_ptr<Button> > &buttons, int x, int y, int cursor,
-          vector<shared_ptr<Unit> > &enemies);
+        vector<unique_ptr<Button> > &buttons, int x, int y, int cursor,
+        vector<shared_ptr<Unit> > &enemies);
   //!< Draws the battle screen.
   void drawBattleAttackText(SDL_Renderer *ren, TTF_Font *font, Attack attack,
           string attacker, string target);
   //!< Draws textbox sequence for an Attack.
+  void drawBattleInit(SDL_Renderer *ren, unique_ptr<Party> &party,
+          TTF_Font* font, vector<shared_ptr<Unit> > &enemies);
+  //!< Draws the initial battle screen on battle start.
+  //!< NEITHER CLEARS NOR PRESENTS RENDERER! UTILITY FUNCTION!
   void drawBattleUpdate(SDL_Renderer *ren, unique_ptr<Party> &party,
           TTF_Font* font, vector<shared_ptr<Unit> > &enemies);
   //!< Draws changes to the battle screen as the turn progresses.
+  //!< Currently redraws Party/Enemy HPs.
   void drawMap(unique_ptr<Terrain> &terr, unique_ptr<Party> &party);
-  //!< Draws the overworld map for exploration. Returns true if splining.
+  //!< Draws the overworld map for exploration.
   void drawRebind(SDL_Renderer *ren, TTF_Font* font);
   //!< Draws the screen for rebinding keys.
   void drawSprite(SDL_Renderer *ren, shared_ptr<Sprite> sprite,

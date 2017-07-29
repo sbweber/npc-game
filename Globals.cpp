@@ -52,7 +52,7 @@ void quit(const string err, int errtype, SDL_Renderer *ren, SDL_Window *win)
 }  // void quit()
 
 
-dir randDir(mt19937_64& randNumGen)
+DIR randDir(mt19937_64& randNumGen)
 {
   int randomResult = int(rng(randNumGen, 0, 3));
   switch (randomResult)

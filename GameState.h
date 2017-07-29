@@ -12,7 +12,7 @@
   class GameState
   {
   public:
-    GameState(SDL_Renderer *ren, TTF_Font *f, Uint32 et);
+    GameState(SDL_Renderer *ren, TTF_Font *f, Uint32 et, Uint32 ene);
     //!< GameState constructor.
     ~GameState();
     //!< GameState destructor.
@@ -28,8 +28,10 @@
     //!< Returns a uniformly distributed random long long from min to max.
     size_t rng(size_t max);
     //!< Returns a uniformly distributed random integer from 0 to (max-1).
-    void setState(gameState gs);
+    void setState(GAME_STATE gs);
     //!< Sets gameState.
+    void startBattle();
+    //!< Utility function to begin a battle
     shared_ptr<Tile> tileClick(SDL_MouseButtonEvent &click);
     //!< Used when clicking on the map. Returns a pointer to the Tile clicked.
   protected:
@@ -37,8 +39,10 @@
     //!< Position of cursor in menus.
     vector<shared_ptr<Unit> > enemies;
     //!< Vector of enemy units for battle.
-    const Uint64 eventTick;
+    const Uint32 eventTick;
     //!< ID of user event triggered by ticking.
+    const Uint32 eventNoEvent;
+    //!< ID of user event triggered manually.
     TTF_Font *font;
     //!< Primary font for regular usage.
     unsigned int lineNum;
@@ -47,7 +51,7 @@
     //!< Random Number Generator.
     unique_ptr<Party> party;
     //!< The player's party.
-    gameState state;
+    GAME_STATE state;
     //!< State of game.
     unique_ptr<Terrain> terr;
     //!< Currently loaded terr.

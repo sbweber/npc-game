@@ -1,4 +1,4 @@
-﻿// Samuel Weber
+// Samuel Weber
 
 #ifndef PARTY_H
   #define PARTY_H
@@ -35,7 +35,7 @@
     //!< Returns a vector of the active Units in the party.
     bool keepMoving();
     //!< Returns true if sprite's actionQ is size 1 and contains an ACT_MOVE.
-    void move(dir moveDir);
+    void move(DIR moveDir);
     //!< Pushes a movement action to sprite.
     void setSprite(SDL_Renderer *ren, const string &str);
     //!< Resets the party’s Sprite to the one in the file named by str.

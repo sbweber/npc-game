@@ -23,7 +23,7 @@
   class Attack
   {
   public:
-    Attack(long long dam, long a, damageType e);
+    Attack(long long dam, long a, DAMAGE_TYPE e);
     //!< Attack constructor.
     long getAcc();
     //!< Returns accuracy of attack.

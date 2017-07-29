@@ -49,7 +49,7 @@ public:
   //!< Return true if the Tile has a Sprite associated with it.
   void loadMap(const string &str, mt19937_64 &randNumGen);
   //!< Loads a map described in filename str.
-  string moveSprite(shared_ptr<Sprite> sprite, dir d);
+  string moveSprite(shared_ptr<Sprite> sprite, DIR d);
   //!< Move specified Sprite in specified direction (if possible).
   void setSprite(shared_ptr<Sprite> sprite, shared_ptr<Tile> tile);
   //!< Sets a Sprite-Tile relationship.
@@ -72,11 +72,11 @@ protected:
   int w;
   //!< map width (in Tiles)
 
-  bool findCheckRoute(dir d, unordered_map<shared_ptr<Tile>, int> &tiles, shared_ptr<Tile> tile);
+  bool findCheckRoute(DIR d, unordered_map<shared_ptr<Tile>, int> &tiles, shared_ptr<Tile> tile);
   //!< Returns true if a tile in dir d exists and gets you closer on your
   //!< route. Requires a fully loaded table of tuples showing how close the
   //!< tiles are on potential routes.
-  void findEnqueue(dir d, priority_queue<tuple<int, shared_ptr<Tile> >,
+  void findEnqueue(DIR d, priority_queue<tuple<int, shared_ptr<Tile> >,
           vector<tuple<int, shared_ptr<Tile> > >,
           greater<tuple<int, shared_ptr<Tile> > > > &searchQ,
           unordered_map<shared_ptr<Tile>, int> &tiles,

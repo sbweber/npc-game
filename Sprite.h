@@ -10,7 +10,7 @@
 
   //! Spritesheets for characters always arranged in the same manner,
   //! although some may end sooner than others.
-  enum spriteType
+  enum SPRITE_TYPE
   {
     SPRITE_UP = 0,
     SPRITE_DOWN = 1,
@@ -24,7 +24,7 @@
 
 
   //! Action type. Movement, interaction, etc.
-  enum actType
+  enum ACT_TYPE
   {
     ACT_MOVE,
     ACT_INTERACT,
@@ -33,7 +33,7 @@
 
 
   //! Action direction and type.
-  typedef tuple<dir, actType> action;
+  typedef tuple<DIR, ACT_TYPE> action;
 
 
   //! Visual half of a Unit. Information on what to draw to put a sprite onscreen.
@@ -46,13 +46,13 @@
     //!< All units MUST have a spritesheet specified. type string optional.
     ~Sprite();
     //!< Default destructor
-    void changeDir(dir d);
+    void changeDir(DIR d);
     //!< Change what direction Sprite is facing. Usuallly part of movement.
     void clearActs();
     //!< Removes all elements from the action queue.
     void decTicks(mt19937_64& rng);
     //!< Decrement ticks. Then, if it's zero, return true and reset it.
-    dir getFacing();
+    DIR getFacing();
     //!< Returns which direction the Sprite is currently facing.
     int getQSize();
     //!< Returns size of actionQ.
@@ -60,7 +60,7 @@
     //!< Returns the number of pixels left to spline.
     const string getPurpose();
     //!< Returns the purpose string for this NPC.
-    spriteType getSprite();
+    SPRITE_TYPE getSprite();
     //!< Returns the type of sprite (facing, etc) currently being used.
     SDL_Texture* getSpriteSheet();
     //!< Returns the spritesheet for this Sprite.
@@ -81,7 +81,7 @@
     //!< Set the descriptive string describing Sprite
     void setSpline(int s);
     //!< Manually sets the number of pixels to spline.
-    void setSprite(spriteType st);
+    void setSprite(SPRITE_TYPE st);
     //!< Manually change sprite type (facing, etc).
     const action topAct();
     //!< Returns the next action in the queue.
@@ -90,7 +90,7 @@
   protected:
     queue<action> actionQ;
     //!< Queue of upcoming moves to make.
-    dir facing;
+    DIR facing;
     //!< Direction Sprite is currently facing.
     TTF_Font *font;
     //!< Font the Sprite uses to 'speak'.
@@ -106,7 +106,7 @@
     //!< Circular queue of everything this Sprite says.
     int spline;
     //!< Number of pixels left to be splined towards destination.
-    spriteType sprite;
+    SPRITE_TYPE sprite;
     //!< Which sprite on the spritesheet is currently being used.
     SDL_Texture *spriteSheet;
     //!< The spritesheet used to draw this Sprite.
