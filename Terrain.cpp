@@ -12,6 +12,7 @@ Terrain::Terrain(SDL_Renderer *r, mt19937_64 &randNumGen, const string &str)
 
   tileSS.emplace("Carpet", loadTexture("Tiles-Carpet.png", ren));
   tileSS.emplace("Floor", loadTexture("Tiles-Floor.png", ren));
+  tileSS.emplace("Forest", loadTexture("Tiles-Forest.png", ren));
   tileSS.emplace("Throne", loadTexture("Tiles-Throne.png", ren));
   tileSS.emplace("Wall", loadTexture("Tiles-Wall.png", ren));
   if (str.length())
@@ -23,6 +24,7 @@ Terrain::~Terrain()
 {
   SDL_DestroyTexture(tileSS["Carpet"]);
   SDL_DestroyTexture(tileSS["Floor"]);
+  SDL_DestroyTexture(tileSS["Forest"]);
   SDL_DestroyTexture(tileSS["Throne"]);
   SDL_DestroyTexture(tileSS["Wall"]);
   tileSS.clear();
@@ -319,21 +321,25 @@ void Terrain::loadMap(const string &str, mt19937_64 &randNumGen)
         return; // file read error
       switch (c)
       {
-        case 'x':
-          map[i][j]->setTex(tileSS["Wall"]);
-          map[i][j]->setIsPassable(false);
+        case 'c':
+          map[i][j]->setTex(tileSS["Carpet"]);
+          map[i][j]->setIsPassable(true);
           break;
         case ' ':
           map[i][j]->setTex(tileSS["Floor"]);
           map[i][j]->setIsPassable(true);
           break;
-        case 'c':
-          map[i][j]->setTex(tileSS["Carpet"]);
+        case 'f':
+          map[i][j]->setTex(tileSS["Forest"]);
           map[i][j]->setIsPassable(true);
           break;
         case 't':
           map[i][j]->setTex(tileSS["Throne"]);
           map[i][j]->setIsPassable(true);
+          break;
+        case 'x':
+          map[i][j]->setTex(tileSS["Wall"]);
+          map[i][j]->setIsPassable(false);
           break;
         case '\r':
         case '\f':
