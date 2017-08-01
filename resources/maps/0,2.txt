@@ -5,13 +5,13 @@ x ff           x
 x  ff        ffx
 x  ff  ff    ffx
 x ff  fff     fx
-x  ff   f   fffx
-x      ffff f fx
+x fff   f   fffx
+x fff  ffff f fx
 xffff  f ffff  x
-x ff           x
+xffff          x
 xfffffff ffff  x
 x  ff  fff     x
 xxxxxxxxxxxxxxxx
 
-W 7 0 0,1.txt 7 11
-W 8 0 0,1.txt 8 11
+W 7 0 0,1.txt 7 10
+W 8 0 0,1.txt 8 10
