@@ -1,0 +1,17 @@
+16
+12
+xxxxxxxccxxxxxxx
+x ff           x
+x  ff        ffx
+x  ff  ff    ffx
+x ff  fff     fx
+x fff   f   fffx
+x fff  ffff f fx
+xffff  f ffff  x
+xffff          x
+xfffffff ffff  x
+x  ff  fff     x
+xxxxxxxxxxxxxxxx
+
+W 7 0 0,1.txt 7 10
+W 8 0 0,1.txt 8 10

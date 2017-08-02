@@ -1,7 +1,7 @@
 16
 12
 xxxxxxxxcccxxxxx
-xxxxxxxxcccxxxxx
+xxxxxxxx   xxxxx
 xxxxxxxx    xxxx
 xxxx     xx xxxx
 xxxx     xx xxxx
@@ -10,9 +10,11 @@ xxxx     xx xxxx
 xxxx xxxxxx xxxx
 xxxx xxxxxx xxxx
 xxxx        xxxx
-xxxxxxxxxxxxxxxx
-xxxxxxxxxxxxxxxx
+xxxxxxx  xxxxxxx
+xxxxxxxccxxxxxxx
 
 W 8 0 0,0.txt 7 10
 W 9 0 0,0.txt 8 10
 W 10 0 0,0.txt 9 10
+W 7 11 0,2.txt 7 1
+W 8 11 0,2.txt 8 1
