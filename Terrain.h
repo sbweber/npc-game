@@ -86,6 +86,8 @@ protected:
   //!< Returns taxicab distance to get to end.
   void loadSprite(ifstream &file, mt19937_64 &randNumGen);
   //!< Loads a Sprite to the map.
+  shared_ptr<Unit> loadUnit(const string &filename, const string &unitName);
+  //!< Returns a Unit described in filename file.
   void loadWarpTile(ifstream &file);
   //!< Loads a Warp Tile to the map.
 }; // class Terr

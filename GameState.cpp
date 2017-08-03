@@ -285,6 +285,7 @@ void GameState::loopBattleResolve(vector<shared_ptr<Unit> > &liveParty,
   } // Announce victory, give party gold/xp
   else if (liveParty.empty())
   {
+    enemies.clear();
     setState(STATE_MAP);
     for (shared_ptr<Unit> unit : party->getUnits())
       unit->fullHeal();
@@ -448,9 +449,9 @@ void GameState::setState(GAME_STATE gs)
     event.type = SDL_USEREVENT;
     event.user.type = Uint32(eventTick);
     timerID = SDL_AddTimer(TICK_MS, mapTimerCallback, (void*) &event);
-  }
+  } // changing to map
   else if (state == STATE_MAP)
-    SDL_RemoveTimer(timerID);
+    SDL_RemoveTimer(timerID); // changing from map
   state = gs;
 } // void GameState::setState(gameState gs)
 

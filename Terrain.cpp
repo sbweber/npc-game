@@ -245,19 +245,28 @@ string Terrain::interactSprite(shared_ptr<Sprite> sprite,
 string Terrain::interactSprites(shared_ptr<Sprite> sprite,
         shared_ptr<Sprite> target, vector<shared_ptr<Unit> > &enemies)
 {
+  string targetCommand = target->getPurpose();
+  targetCommand = targetCommand.substr(0, targetCommand.find(';'));
   if (sprite->getPurpose() == "Hero")
     target->say(ren);
-  if (sprite->getPurpose() == "Hero" && target->getPurpose() == "HealTest")
+  if (sprite->getPurpose() == "Hero" && targetCommand == "HealTest")
     return "PARTY: full-heal";
-  else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "FightTest")
+  else if (sprite->getPurpose() == "Hero" && targetCommand == "Fight")
   {
-    enemies.emplace_back(new Unit("Guard 1", 10, 10, 10, 10, 10, 1000, 1000));
-    enemies.emplace_back(new Unit("Guard 2", 10, 10, 10, 10, 10, 1000, 1000));
-    enemies.emplace_back(new Unit("Guard 3", 10, 10, 10, 10, 10, 1000, 1000));
-    enemies.emplace_back(new Unit("Guard 4", 10, 10, 10, 10, 10, 1000, 1000));
+    string enemyString = target->getPurpose().substr(target->getPurpose().find(';'));
+    for (size_t strpos = 0, strposnew = enemyString.find(';', strpos + 1);
+            strpos != string::npos;
+            strpos = strposnew, strposnew = enemyString.find(';', strpos + 1))
+    {
+      string substr = enemyString.substr(strpos + 1, strposnew - strpos - 1);
+      string enemyFile = substr.substr(0, substr.find(','));
+      string enemyName = substr.substr(substr.find(',') + 1);
+      replace(enemyName.begin(), enemyName.end(), '_', ' ');
+      enemies.push_back(loadUnit(enemyFile, enemyName));
+    } //parse which enemy Units to load from target
     return "CHANGE-STATE: STATE_BATTLE";
   }
-  else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
+  else if (sprite->getPurpose() == "Hero" && targetCommand == "KillTest")
   {
     shared_ptr<Tile> tile = nullptr;
     for (vector<shared_ptr<Tile> > tvec : map)
@@ -458,6 +467,7 @@ void Terrain::loadSprite(ifstream &file, mt19937_64 &randNumGen)
   file >> y;
   file >> spriteFile;
   file >> name;
+  replace(name.begin(), name.end(), '_', ' ');
   file >> purpose;
   file >> scriptFile;
   file >> mfMin; // in secs
@@ -469,6 +479,30 @@ void Terrain::loadSprite(ifstream &file, mt19937_64 &randNumGen)
           spriteFile, initTicks, name, purpose, scriptFile));
   setSprite(sprite, getTile(x, y));
 } // void Terr::loadSprite(ifstream &file)
+
+
+shared_ptr<Unit> Terrain::loadUnit(const string &filename, const string &unitName)
+{
+  ifstream file;
+  file.open(("resources/enemies/" + filename), ifstream::in);
+  if (!file.good())
+  {
+    logError("Enemy file not found: " + filename); // error, probably bad filename
+    shared_ptr<Unit> unit(new Unit("Error", 1, 1, 1, 1, 1, 0, 0));
+    return unit;
+  } // try to fail-safe instead of crashing here
+
+  long str, intl, agi, vit, wis, gold, xp;
+  file >> str;
+  file >> intl;
+  file >> agi;
+  file >> vit;
+  file >> wis;
+  file >> gold;
+  file >> xp;
+  shared_ptr<Unit> unit(new Unit(unitName, str, intl, agi, vit, wis, gold, xp));
+  return unit;
+} // shared_ptr<Unit> Terrain::loadUnit(const string &filename, const string &unitName)
 
 
 void Terrain::loadWarpTile(ifstream &file)
