@@ -249,12 +249,13 @@ string Terrain::interactSprites(shared_ptr<Sprite> sprite,
     target->say(ren);
   if (sprite->getPurpose() == "Hero" && target->getPurpose() == "HealTest")
     return "PARTY: full-heal";
-  else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "FightTest")
+  else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "Fight")
   {
-    enemies.emplace_back(new Unit("Guard 1", 10, 10, 10, 10, 10, 1000, 1000));
-    enemies.emplace_back(new Unit("Guard 2", 10, 10, 10, 10, 10, 1000, 1000));
-    enemies.emplace_back(new Unit("Guard 3", 10, 10, 10, 10, 10, 1000, 1000));
-    enemies.emplace_back(new Unit("Guard 4", 10, 10, 10, 10, 10, 1000, 1000));
+    //parse which enemy Units to load from map
+    enemies.push_back(loadUnit("Guard.txt", "Guard 1"));
+    enemies.push_back(loadUnit("Guard.txt", "Guard 2"));
+    enemies.push_back(loadUnit("Guard.txt", "Guard 3"));
+    enemies.push_back(loadUnit("Guard.txt", "Guard 4"));
     return "CHANGE-STATE: STATE_BATTLE";
   }
   else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
@@ -446,6 +447,30 @@ void Terrain::loadMap(const string &str, mt19937_64 &randNumGen)
   } // Until EOF hit, all remaining info is warps
   file.close();
 } // void Terr::loadMap(string str)
+
+
+shared_ptr<Unit> Terrain::loadUnit(const string &filename, const string &unitName)
+{
+  ifstream file;
+  file.open(("resources/enemies/" + filename), ifstream::in);
+  if (!file.good())
+  {
+    logError("Enemy file not found: " + filename); // error, probably bad filename
+    shared_ptr<Unit> unit(new Unit("Error", 1, 1, 1, 1, 1, 0, 0));
+    return unit;
+  } // try to fail-safe instead of crashing here
+
+  long str, intl, agi, vit, wis, gold, xp;
+  file >> str;
+  file >> intl;
+  file >> agi;
+  file >> vit;
+  file >> wis;
+  file >> gold;
+  file >> xp;
+  shared_ptr<Unit> unit(new Unit(unitName, str, intl, agi, vit, wis, gold, xp));
+  return unit;
+} // unique_ptr<Unit> loadUnit(const string &file)
 
 
 void Terrain::loadSprite(ifstream &file, mt19937_64 &randNumGen)

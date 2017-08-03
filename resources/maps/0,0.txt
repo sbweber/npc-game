@@ -18,5 +18,5 @@ W 8 11 0,1.txt 9 1
 W 9 11 0,1.txt 10 1
 N 5 4 NPC.png Kenny KillTest Silence.txt 1 5
 N 11 4 NPC.png Homer SpeechTest SpeechTest.txt 1 5
-N 8 5 NPC.png Soldier_A FightTest FightTest.txt 1 5
+N 8 5 NPC.png Soldier_A Fight FightTest.txt 1 5
 N 3 9 NPC.png Medic HealTest HealTest.txt 0 0

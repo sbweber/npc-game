@@ -49,6 +49,8 @@ public:
   //!< Return true if the Tile has a Sprite associated with it.
   void loadMap(const string &str, mt19937_64 &randNumGen);
   //!< Loads a map described in filename str.
+  shared_ptr<Unit> loadUnit(const string &filename, const string &unitName);
+  //!< Returns a Unit described in filename file.
   string moveSprite(shared_ptr<Sprite> sprite, DIR d);
   //!< Move specified Sprite in specified direction (if possible).
   void setSprite(shared_ptr<Sprite> sprite, shared_ptr<Tile> tile);
