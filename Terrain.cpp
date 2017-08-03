@@ -364,76 +364,84 @@ void Terrain::loadMap(const string &str, mt19937_64 &randNumGen)
 
   // intelligent sprite selection from correct spritesheet,
   // based on adjacent tiles (corner piece? edge? etc)
-  bool N = false, S = false, E = false, W = false;
-  int adjacent = 0;
   for (int i = 0; i < w; i++)
     for (int j = 0; j < h; j++)
     {
-      adjacent = 0;
-      N = S = E = W = false;
+      int adjacent = 0;
       if (map[i][j]->getTile(DIR_EAST) &&
               map[i][j]->getTex() == map[i][j]->getTile(DIR_EAST)->getTex())
       {
-        E = true;
-        adjacent++;
+        adjacent += 1;
       }
       if (map[i][j]->getTile(DIR_NORTH) &&
               map[i][j]->getTex() == map[i][j]->getTile(DIR_NORTH)->getTex())
       {
-        N = true;
-        adjacent++;
+        adjacent += 2;
       }
       if (map[i][j]->getTile(DIR_SOUTH) &&
               map[i][j]->getTex() == map[i][j]->getTile(DIR_SOUTH)->getTex())
       {
-        S = true;
-        adjacent++;
+        adjacent += 4;
       }
       if (map[i][j]->getTile(DIR_WEST) &&
               map[i][j]->getTex() == map[i][j]->getTile(DIR_WEST)->getTex())
       {
-        W = true;
-        adjacent++;
+        adjacent += 8;
       }
-      if (adjacent == 3)
+
+      switch (adjacent)
       {
-        if (!N)
-          map[i][j]->setType(TILE_EDGE_N);
-        else if (!E)
-          map[i][j]->setType(TILE_EDGE_E);
-        else if (!S)
-          map[i][j]->setType(TILE_EDGE_S);
-        else if (!W)
-          map[i][j]->setType(TILE_EDGE_W);
-      }
-      else if (adjacent == 2)
-      {
-        if (S && W)
-          map[i][j]->setType(TILE_CORNER_NE);
-        else if (E && S)
-          map[i][j]->setType(TILE_CORNER_NW);
-        else if (W && N)
-          map[i][j]->setType(TILE_CORNER_SE);
-        else if (N && E)
-          map[i][j]->setType(TILE_CORNER_SW);
-        else if (E && W)
-          map[i][j]->setType(TILE_THIN_EW);
-        else if (N && S)
-          map[i][j]->setType(TILE_THIN_NS);
-      }
-      else if (adjacent == 1)
-      {
-        if (E)
+        case 0:
+          map[i][j]->setType(TILE_ISOLATED);
+          break;
+        case 1:
           map[i][j]->setType(TILE_END_E);
-        else if (N)
+          break;
+        case 2:
           map[i][j]->setType(TILE_END_N);
-        else if (S)
+          break;
+        case 3:
+          map[i][j]->setType(TILE_CORNER_SW);
+          break;
+        case 4:
           map[i][j]->setType(TILE_END_S);
-        else if (W)
+          break;
+        case 5:
+          map[i][j]->setType(TILE_CORNER_NW);
+          break;
+        case 6:
+          map[i][j]->setType(TILE_THIN_NS);
+          break;
+        case 7:
+          map[i][j]->setType(TILE_EDGE_W);
+          break;
+        case 8:
           map[i][j]->setType(TILE_END_W);
+          break;
+        case 9:
+          map[i][j]->setType(TILE_THIN_EW);
+          break;
+        case 10:
+          map[i][j]->setType(TILE_CORNER_SE);
+          break;
+        case 11:
+          map[i][j]->setType(TILE_EDGE_S);
+          break;
+        case 12:
+          map[i][j]->setType(TILE_CORNER_NE);
+          break;
+        case 13:
+          map[i][j]->setType(TILE_EDGE_N);
+          break;
+        case 14:
+          map[i][j]->setType(TILE_EDGE_E);
+          break;
+        case 15:
+          map[i][j]->setType(TILE_CORE);
+          break;
+        default:
+          map[i][j]->setType(TILE_ISOLATED); // Should be impossible
       }
-      else if (adjacent == 0)
-        map[i][j]->setType(TILE_ISOLATED);
     }
 
   // Set up special Tiles
