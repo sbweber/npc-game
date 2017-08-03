@@ -245,20 +245,28 @@ string Terrain::interactSprite(shared_ptr<Sprite> sprite,
 string Terrain::interactSprites(shared_ptr<Sprite> sprite,
         shared_ptr<Sprite> target, vector<shared_ptr<Unit> > &enemies)
 {
+  string targetCommand = target->getPurpose();
+  targetCommand = targetCommand.substr(0, targetCommand.find(';'));
   if (sprite->getPurpose() == "Hero")
     target->say(ren);
-  if (sprite->getPurpose() == "Hero" && target->getPurpose() == "HealTest")
+  if (sprite->getPurpose() == "Hero" && targetCommand == "HealTest")
     return "PARTY: full-heal";
-  else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "Fight")
+  else if (sprite->getPurpose() == "Hero" && targetCommand == "Fight")
   {
-    //parse which enemy Units to load from map
-    enemies.push_back(loadUnit("Guard.txt", "Guard 1"));
-    enemies.push_back(loadUnit("Guard.txt", "Guard 2"));
-    enemies.push_back(loadUnit("Guard.txt", "Guard 3"));
-    enemies.push_back(loadUnit("Guard.txt", "Guard 4"));
+    string enemyString = target->getPurpose().substr(target->getPurpose().find(';'));
+    for (size_t strpos = 0, strposnew = enemyString.find(';', strpos + 1);
+            strpos != string::npos;
+            strpos = strposnew, strposnew = enemyString.find(';', strpos + 1))
+    {
+      string substr = enemyString.substr(strpos + 1, strposnew - strpos - 1);
+      string enemyFile = substr.substr(0, substr.find(','));
+      string enemyName = substr.substr(substr.find(',') + 1);
+      replace(enemyName.begin(), enemyName.end(), '_', ' ');
+      enemies.push_back(loadUnit(enemyFile, enemyName));
+    } //parse which enemy Units to load from target
     return "CHANGE-STATE: STATE_BATTLE";
   }
-  else if (sprite->getPurpose() == "Hero" && target->getPurpose() == "KillTest")
+  else if (sprite->getPurpose() == "Hero" && targetCommand == "KillTest")
   {
     shared_ptr<Tile> tile = nullptr;
     for (vector<shared_ptr<Tile> > tvec : map)
@@ -449,6 +457,30 @@ void Terrain::loadMap(const string &str, mt19937_64 &randNumGen)
 } // void Terr::loadMap(string str)
 
 
+void Terrain::loadSprite(ifstream &file, mt19937_64 &randNumGen)
+{
+  int x, y, moveFreqMin, moveFreqMax, initTicks;
+  string mfMin, mfMax;
+  string spriteFile = "NPC.png", name = "I_AM_ERROR";
+  string purpose = "ERROR", scriptFile = "Silence.txt";
+  file >> x;
+  file >> y;
+  file >> spriteFile;
+  file >> name;
+  replace(name.begin(), name.end(), '_', ' ');
+  file >> purpose;
+  file >> scriptFile;
+  file >> mfMin; // in secs
+  file >> mfMax; // in secs
+  moveFreqMin = int(NUM_TICKS_SEC * stod(mfMin));
+  moveFreqMax = int(NUM_TICKS_SEC * stod(mfMax));
+  initTicks = int(rng(randNumGen, moveFreqMin, moveFreqMax));
+  shared_ptr<Sprite> sprite(new Sprite(ren, moveFreqMin, moveFreqMax,
+          spriteFile, initTicks, name, purpose, scriptFile));
+  setSprite(sprite, getTile(x, y));
+} // void Terr::loadSprite(ifstream &file)
+
+
 shared_ptr<Unit> Terrain::loadUnit(const string &filename, const string &unitName)
 {
   ifstream file;
@@ -470,30 +502,7 @@ shared_ptr<Unit> Terrain::loadUnit(const string &filename, const string &unitNam
   file >> xp;
   shared_ptr<Unit> unit(new Unit(unitName, str, intl, agi, vit, wis, gold, xp));
   return unit;
-} // unique_ptr<Unit> loadUnit(const string &file)
-
-
-void Terrain::loadSprite(ifstream &file, mt19937_64 &randNumGen)
-{
-  int x, y, moveFreqMin, moveFreqMax, initTicks;
-  string mfMin, mfMax;
-  string spriteFile = "NPC.png", name = "I_AM_ERROR";
-  string purpose = "ERROR", scriptFile = "Silence.txt";
-  file >> x;
-  file >> y;
-  file >> spriteFile;
-  file >> name;
-  file >> purpose;
-  file >> scriptFile;
-  file >> mfMin; // in secs
-  file >> mfMax; // in secs
-  moveFreqMin = int(NUM_TICKS_SEC * stod(mfMin));
-  moveFreqMax = int(NUM_TICKS_SEC * stod(mfMax));
-  initTicks = int(rng(randNumGen, moveFreqMin, moveFreqMax));
-  shared_ptr<Sprite> sprite(new Sprite(ren, moveFreqMin, moveFreqMax,
-          spriteFile, initTicks, name, purpose, scriptFile));
-  setSprite(sprite, getTile(x, y));
-} // void Terr::loadSprite(ifstream &file)
+} // shared_ptr<Unit> Terrain::loadUnit(const string &filename, const string &unitName)
 
 
 void Terrain::loadWarpTile(ifstream &file)
